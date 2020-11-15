@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Hamburger from "components/Navbar/Hamburger";
 import LightLogo from "../../public/logos/lettermark/light.svg";
 
