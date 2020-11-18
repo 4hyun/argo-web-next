@@ -19,8 +19,8 @@ const Container = styled.div`
   width: 100%;
   height: 64px;
   max-height: 64px;
-  box-shadow: 0 2px 8px #222;
-  box-shadow: 0 2px 16px #2222220f;
+  /* box-shadow: 0 2px 8px #222;
+  box-shadow: 0 2px 16px #2222220f; */
   background-color: var(--argo-blue);
 `;
 
