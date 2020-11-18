@@ -13,6 +13,7 @@ const Logo = styled(LightLogo)`
 `;
 
 const Container = styled.div`
+  position: fixed;
   display: flex;
   align-items: center;
   width: 100%;
