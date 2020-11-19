@@ -5,10 +5,12 @@ import LightLogo from "../../public/logos/lettermark/light.svg";
 
 const Logo = styled(LightLogo)`
   width: auto;
-  padding: 0 2rem;
   &,
   & > * {
     height: 35px;
+  }
+  @media (min-width: 1200px) {
+    padding: 0 2rem;
   }
 `;
 
@@ -22,6 +24,10 @@ const Container = styled.div`
   /* box-shadow: 0 2px 8px #222;
   box-shadow: 0 2px 16px #2222220f; */
   background-color: var(--argo-blue);
+  padding: 0 1rem;
+  @media (min-width: 1200px) {
+    padding: unset;
+  }
 `;
 
 const MobileNavbarContainer = styled.nav`

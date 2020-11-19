@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const Button = styled.button`
-  padding: 0 2rem;
   cursor: pointer;
   border: 0;
   margin: 0;
@@ -25,6 +24,9 @@ const Button = styled.button`
     
   }`) ||
     ""}
+  @media(min-width: 1200px) {
+    padding: 0 2rem;
+  }
 `;
 
 const Box = styled.div`
