@@ -4,6 +4,7 @@ import styles from "../styles/Home.module.css";
 import ArgoComingSoon from "../public/logos/lettermark/dark.svg";
 import { At } from "components/Icons";
 import trads from "../translations";
+import WaveAnimBg from "components/WaveAnimBg";
 
 const ArgoComingSoonLogo = styled(ArgoComingSoon)`
   --w: 367.63px;
@@ -104,12 +105,12 @@ const EmailInputSubmit = styled.button`
   font-weight: bold;
   font-size: 12px;
   line-height: 31px;
-  border-radius: 8px;
-  padding: 0 8px;
+  /* border-radius: 8px; */
+  /* padding: 0 8px; */
   color: #fff;
   @media (min-width: 1200px) {
-    padding: 10px 16px;
-    border-radius: 16px;
+    /* padding: 10px 16px; */
+    /* border-radius: 16px; */
     font-size: 24px;
   }
 `;
@@ -180,8 +181,8 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <ArgoComingSoonLogo />
-        <ComingSoonMessageContainer>
+        {/* <ArgoComingSoonLogo /> */}
+        <ComingSoonMessageContainer className="ml-10">
           <Slogan>{trads.en["comingsoon.components.Slogan.tyk"]}</Slogan>
           <Heading>{trads.en["comingsoon.components.Heading.main"]}</Heading>
           <CtaMessage>
@@ -200,14 +201,14 @@ export default function Home() {
             </EmailInputWIconWrapper>
           </EmailInputContainer> */}
           <div className="flex space-x-4 mt-2">
-            <EmailInputSubmit>
+            <EmailInputSubmit className="rounded-3xl py-2 px-6">
               {
                 trads.en[
                   "comingsoon.components.EmailInputContainer.button.getintouch"
                 ]
               }
             </EmailInputSubmit>
-            <LearnMoreButton>
+            <LearnMoreButton className="rounded-3xl py-2 px-6">
               {
                 trads.en[
                   "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
@@ -218,6 +219,7 @@ export default function Home() {
         </ComingSoonMessageContainer>
         {/* TODO: ComingsoonAutoplayFooterMessage inside a light Carousel */}
       </main>
+      <WaveAnimBg />
     </div>
   );
 }
