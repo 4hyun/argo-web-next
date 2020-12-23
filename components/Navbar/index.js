@@ -1,7 +1,8 @@
 import React from "react";
+import Link from "next/link";
 import styled from "styled-components";
 import Hamburger from "components/Navbar/Hamburger";
-import DarkLogo from "../../public/logos/lettermark/dark.svg";
+import DarkLogo from "../../public/logos/lettermark/logo-full_white-long-sm.svg";
 
 const Logo = styled(DarkLogo)`
   width: auto;
@@ -45,7 +46,11 @@ const DektopNavbarContainer = styled.nav`
 const DesktopNavbar = () => {
   return (
     <DektopNavbarContainer>
-      <Logo />
+      <Link href="/">
+        <a>
+          <Logo />
+        </a>
+      </Link>
       <Hamburger />
     </DektopNavbarContainer>
   );
