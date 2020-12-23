@@ -30,7 +30,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   /* Scrollbar custom style */
   -ms-overflow-style: none; /* IE and Edge */
-  background-color: #333;
+  background-color: #fff;
   scrollbar-width: none; /* Firefox */
   overflow-x: hidden;
 }

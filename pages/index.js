@@ -224,7 +224,6 @@ export default function Home() {
           </div>
         </ComingSoonMessageContainer>
         {/* TODO: ComingsoonAutoplayFooterMessage inside a light Carousel */}
-        {/* <WaveAnimBg /> */}
       </main>
       <WaveAnimBg />
     </div>

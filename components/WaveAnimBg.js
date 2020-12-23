@@ -9,7 +9,7 @@ const WaveAnimBg = () => {
     var c = canvasRef.current,
       $ = c.getContext("2d"),
       w = (c.width = window.innerWidth),
-      h = (c.height = window.innerHeight / 3.5),
+      h = (c.height = window.innerHeight / 4),
       minX = 20,
       minY = 20,
       varX = w / 10 - minX / 10,
@@ -84,7 +84,7 @@ const WaveAnimBg = () => {
       "resize",
       function () {
         c.width = window.innerWidth;
-        c.height = window.innerHeight / 3.5;
+        c.height = window.innerHeight / 4;
         ready();
       },
       false
@@ -93,7 +93,7 @@ const WaveAnimBg = () => {
     var ready = function () {
       console.log("ready called");
       (w = c.width = window.innerWidth),
-        (h = c.height = window.innerHeight / 3.5),
+        (h = c.height = window.innerHeight / 4),
         (varX = w / 10 - minX / 10),
         (varY = h - minY * 2),
         (w1 = (w - minX * 2 - varX) / 4),
@@ -406,11 +406,15 @@ const WaveAnimBg = () => {
       }
     }
 
-    function getCurvePoints(ptsa, tension, isClosed, numOfSegments) {
+    function getCurvePoints(
+      ptsa,
+      tension = 0.5,
+      isClosed = false,
+      numOfSegments = 16
+    ) {
       // use input value if provided, or use a default value
-      tension = typeof tension != "undefined" ? tension : 0.5;
-      isClosed = isClosed ? isClosed : false;
-      numOfSegments = numOfSegments ? numOfSegments : 16;
+      //   isClosed = isClosed ? isClosed : false;
+      //   numOfSegments = numOfSegments ? numOfSegments : 16;
 
       var _pts = [],
         res = [], // clone array
@@ -633,7 +637,12 @@ const WaveAnimBg = () => {
       cancelAnimationFrame(requestAnimationFrameRef.current);
     };
   }, []);
-  return <canvas ref={canvasRef} className="absolute top-1/3 h-1/3"></canvas>;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="absolute top-1/3 h-1/3 opacity-30"
+    ></canvas>
+  );
 };
 
 export default WaveAnimBg;
