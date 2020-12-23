@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
         <title>Argo Pacific Inc. | Tyk API Gateway in South Korea</title>
         <link rel="preconnect" href="https://fonts.gstatic.com"></link>
         <link
-          href="https://fonts.googleapis.com/css2?family=Abel&family=Hind+Siliguri:wght@300;400;700&family=PT+Sans:ital,wght@0,700;1,400;1,700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Abel&family=Open+Sans:wght@300;400;600;800&family=Poppins:wght@300;400;700&family=PT+Sans:ital,wght@0,700;1,400;1,700&display=swap"
           rel="stylesheet"
         ></link>
         <link rel="icon" href="/favicon.ico" />

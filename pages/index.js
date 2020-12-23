@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styled from "styled-components";
 import styles from "../styles/Home.module.css";
-import ArgoComingSoon from "../public/logos/lettermark/light.svg";
+import ArgoComingSoon from "../public/logos/lettermark/dark.svg";
 import { At } from "components/Icons";
 import trads from "../translations";
 
@@ -24,9 +24,9 @@ const ComingSoonMessageContainer = styled.div`
     margin-top: 12px;
   }
   @media (min-width: 1200px) {
-    & > * {
+    /* & > * {
       margin-top: unset;
-    }
+    } */
     padding: unset;
     height: 338px;
     width: 770px;
@@ -37,23 +37,28 @@ const ComingSoonMessageContainer = styled.div`
 `;
 
 const Slogan = styled.p`
-  font-family: Hind Siliguri;
+  font-family: "Open Sans", sans-serif;
   font-style: normal;
-  font-weight: bold;
   font-size: 1rem;
   display: flex;
   align-items: center;
-  color: #ffffff;
+  color: #111;
   @media (min-width: 1200px) {
     line-height: 57px;
     margin-top: 2rem;
     margin-bottom: 0;
-    font-size: 35px;
+    font-size: 24px;
+  }
+`;
+
+const CtaMessage = styled(Slogan)`
+  @media (min-width: 1200px) {
+    margin-top: 0;
   }
 `;
 
 const Heading = styled.h2`
-  font-family: Hind Siliguri;
+  font-family: Poppins;
   font-style: normal;
   font-weight: bold;
   font-size: 1.75rem;
@@ -64,7 +69,7 @@ const Heading = styled.h2`
   align-items: center;
   letter-spacing: -0.01em;
 
-  color: #ffffff;
+  color: #111;
   @media (min-width: 1200px) {
     font-size: 60px;
     margin: 0;
@@ -93,7 +98,7 @@ const EmailInputSubmit = styled.button`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  background: #ffffff;
+  background: var(--argo-blue);
   font-family: PT Sans;
   font-style: normal;
   font-weight: bold;
@@ -101,6 +106,7 @@ const EmailInputSubmit = styled.button`
   line-height: 31px;
   border-radius: 8px;
   padding: 0 8px;
+  color: #fff;
   @media (min-width: 1200px) {
     padding: 10px 16px;
     border-radius: 16px;
@@ -108,13 +114,15 @@ const EmailInputSubmit = styled.button`
   }
 `;
 
+const LearnMoreButton = EmailInputSubmit;
+
 const EmailInputWIconWrapper = styled.div`
   /* Auto Layout */
   position: static;
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: #ffffff;
+  background: #fff;
   border-radius: 8px;
   width: 100%;
   padding: 0 10px;
@@ -176,7 +184,10 @@ export default function Home() {
         <ComingSoonMessageContainer>
           <Slogan>{trads.en["comingsoon.components.Slogan.tyk"]}</Slogan>
           <Heading>{trads.en["comingsoon.components.Heading.main"]}</Heading>
-          <EmailInputContainer>
+          <CtaMessage>
+            {trads.en["comingsoon.components.Slogan.ctamessage"]}
+          </CtaMessage>
+          {/* <EmailInputContainer>
             <EmailInputWIconWrapper>
               <EmailIcon></EmailIcon>
               <EmailInput
@@ -187,14 +198,23 @@ export default function Home() {
                 }
               ></EmailInput>
             </EmailInputWIconWrapper>
+          </EmailInputContainer> */}
+          <div className="flex space-x-4 mt-2">
             <EmailInputSubmit>
               {
                 trads.en[
-                  "comingsoon.components.EmailInputContainer.button.submit"
+                  "comingsoon.components.EmailInputContainer.button.getintouch"
                 ]
               }
             </EmailInputSubmit>
-          </EmailInputContainer>
+            <LearnMoreButton>
+              {
+                trads.en[
+                  "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
+                ]
+              }
+            </LearnMoreButton>
+          </div>
         </ComingSoonMessageContainer>
         {/* TODO: ComingsoonAutoplayFooterMessage inside a light Carousel */}
       </main>

@@ -41,13 +41,13 @@ const Line = styled.div`
   display: block;
   width: inherit;
   --h: 3px;
-  /* --dark: #333; */
-  --dark: #fff;
+  /* --dark-blue: #333; */
+  --dark-blue: #0a29ca;
   height: var(--h);
   left: 0;
   top: 50%;
   margin-top: calc(var(--h) / -2);
-  background-color: var(--dark);
+  background-color: var(--dark-blue);
   transition: background-color 0.1s ease-in;
   &:after,
   &:before {
@@ -56,7 +56,7 @@ const Line = styled.div`
     width: 100%;
     height: var(--h);
     left: 0;
-    background-color: var(--dark);
+    background-color: var(--dark-blue);
     transition: transform 0.15s ease-in;
     transform-origin: left;
   }

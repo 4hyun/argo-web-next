@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import Hamburger from "components/Navbar/Hamburger";
-import LightLogo from "../../public/logos/lettermark/light.svg";
+import DarkLogo from "../../public/logos/lettermark/dark.svg";
 
-const Logo = styled(LightLogo)`
+const Logo = styled(DarkLogo)`
   width: auto;
   &,
   & > * {
@@ -23,7 +23,7 @@ const Container = styled.div`
   max-height: 64px;
   /* box-shadow: 0 2px 8px #222;
   box-shadow: 0 2px 16px #2222220f; */
-  background-color: var(--argo-blue);
+  background-color: var(--nav-bg);
   padding: 0 1rem;
   @media (min-width: 1200px) {
     padding: unset;
