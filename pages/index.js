@@ -184,7 +184,7 @@ export default function Home() {
       <main className={styles.main}>
         {/* <ArgoComingSoonLogo /> */}
 
-        <ComingSoonMessageContainer className="xl:ml-10 space-y-4">
+        <ComingSoonMessageContainer className="xl:ml-10 space-y-4 select-none">
           <Slogan className="leading-none font-normal">
             {trads.en["comingsoon.components.Slogan.tyk"]}
           </Slogan>
