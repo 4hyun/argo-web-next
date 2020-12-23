@@ -188,9 +188,7 @@ export default function Home() {
           <Slogan className="leading-none font-normal">
             {trads.en["comingsoon.components.Slogan.tyk"]}
           </Slogan>
-          <Heading className="leading-none">
-            {trads.en["comingsoon.components.Heading.main"]}
-          </Heading>
+          <Heading>{trads.en["comingsoon.components.Heading.main"]}</Heading>
           <CtaMessage className="leading-none font-normal">
             {trads.en["comingsoon.components.Slogan.ctamessage"]}
           </CtaMessage>

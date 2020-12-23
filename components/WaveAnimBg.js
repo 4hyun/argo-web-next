@@ -640,7 +640,7 @@ const WaveAnimBg = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute top-1/3 h-1/3 opacity-30"
+      className="absolute top-1/3 h-1/3 opacity-30 max-w-full"
     ></canvas>
   );
 };
