@@ -8,15 +8,16 @@
     "start": "next start"
   },
   "dependencies": {
-    "autoprefixer": "^10.0.2",
+    "autoprefixer": "^10.1.0",
     "gsap": "^3.5.1",
     "next": "10.0.1",
+    "postcss": "^8.2.1",
     "postcss-import": "^13.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "styled-components": "^5.2.1",
     "styled-icons": "^10.22.0",
-    "tailwindcss": "^1.9.6"
+    "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
     "@zeit/next-css": "^1.0.1",

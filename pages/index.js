@@ -21,9 +21,6 @@ const ArgoComingSoonLogo = styled(ArgoComingSoon)`
 const ComingSoonMessageContainer = styled.div`
   width: 100%;
   padding: 0 1rem;
-  & > * {
-    margin-top: 12px;
-  }
   @media (min-width: 1200px) {
     /* & > * {
       margin-top: unset;
@@ -69,6 +66,7 @@ const Heading = styled.h2`
   display: flex;
   align-items: center;
   letter-spacing: -0.01em;
+  text-shadow: 0px 0px 20px white;
 
   color: #111;
   @media (min-width: 1200px) {
@@ -95,7 +93,7 @@ const EmailInputContainer = styled.div`
   }
 `;
 
-const EmailInputSubmit = styled.button`
+const EmailInputSubmitButton = styled.button`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -103,19 +101,19 @@ const EmailInputSubmit = styled.button`
   font-family: PT Sans;
   font-style: normal;
   font-weight: bold;
-  font-size: 12px;
-  line-height: 31px;
-  /* border-radius: 8px; */
-  /* padding: 0 8px; */
+  font-size: 0.8rem;
+  line-height: 1.75;
   color: #fff;
+  text-shadow: 3px 3px 0 #0500ff;
+  @media (min-width: 401px) {
+    font-size: 1rem;
+  }
   @media (min-width: 1200px) {
-    /* padding: 10px 16px; */
-    /* border-radius: 16px; */
     font-size: 24px;
   }
 `;
 
-const LearnMoreButton = EmailInputSubmit;
+const LearnMoreButton = EmailInputSubmitButton;
 
 const EmailInputWIconWrapper = styled.div`
   /* Auto Layout */
@@ -177,15 +175,23 @@ const ComingsoonAutoplayFooterMessage = styled.div`
   overflow: hidden;
 `;
 
+const buttonClassName =
+  "rounded-full py-2 px-6 hover:border-solid border-2 border-transparent hover:border-homebuttonhoverborder transition-all focus:outline-none transform active:translate-x-1 active:translate-y-1 ";
+
 export default function Home() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         {/* <ArgoComingSoonLogo /> */}
-        <ComingSoonMessageContainer className="ml-10">
-          <Slogan>{trads.en["comingsoon.components.Slogan.tyk"]}</Slogan>
-          <Heading>{trads.en["comingsoon.components.Heading.main"]}</Heading>
-          <CtaMessage>
+
+        <ComingSoonMessageContainer className="xl:ml-10 space-y-4">
+          <Slogan className="leading-none font-normal">
+            {trads.en["comingsoon.components.Slogan.tyk"]}
+          </Slogan>
+          <Heading className="leading-none">
+            {trads.en["comingsoon.components.Heading.main"]}
+          </Heading>
+          <CtaMessage className="leading-none font-normal">
             {trads.en["comingsoon.components.Slogan.ctamessage"]}
           </CtaMessage>
           {/* <EmailInputContainer>
@@ -201,14 +207,14 @@ export default function Home() {
             </EmailInputWIconWrapper>
           </EmailInputContainer> */}
           <div className="flex space-x-4 mt-2">
-            <EmailInputSubmit className="rounded-3xl py-2 px-6">
+            <EmailInputSubmitButton className={buttonClassName}>
               {
                 trads.en[
                   "comingsoon.components.EmailInputContainer.button.getintouch"
                 ]
               }
-            </EmailInputSubmit>
-            <LearnMoreButton className="rounded-3xl py-2 px-6">
+            </EmailInputSubmitButton>
+            <LearnMoreButton className={buttonClassName}>
               {
                 trads.en[
                   "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
@@ -218,6 +224,7 @@ export default function Home() {
           </div>
         </ComingSoonMessageContainer>
         {/* TODO: ComingsoonAutoplayFooterMessage inside a light Carousel */}
+        {/* <WaveAnimBg /> */}
       </main>
       <WaveAnimBg />
     </div>

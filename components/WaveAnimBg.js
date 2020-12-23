@@ -1,32 +1,30 @@
 import React, { useEffect, useRef } from "react";
+import styled from "styled-components";
 import gsap from "gsap";
 
 const WaveAnimBg = () => {
+  const requestAnimationFrameRef = useRef();
   const canvasRef = useRef();
   useEffect(() => {
-    function getRandomInt(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
     var c = canvasRef.current,
       $ = c.getContext("2d"),
       w = (c.width = window.innerWidth),
-      h = (c.height = window.innerHeight),
+      h = (c.height = window.innerHeight / 3.5),
       minX = 20,
       minY = 20,
       varX = w / 10 - minX / 10,
       varY = h - minY * 2,
       w1 = (w - minX * 2 - varX) / 4,
-      piRatio = Math.PI / 180,
+      //   piRatio = Math.PI / 180,
       debug = false,
       clearTheFrame = true,
       tension = 0.5,
       numberOfCurves = 50,
       TimeOnCurve = 1 / numberOfCurves,
-      minTime = 8,
-      maxTime = 15,
-      minDelay = 0,
-      maxDelay = 5,
+      //   minTime = 8,
+      //   maxTime = 15,
+      //   minDelay = 0,
+      //   maxDelay = 5,
       CurvesArray = [],
       alpha = 1,
       yellowStart = "hsla(45, 100%, 60%, 0)",
@@ -86,7 +84,7 @@ const WaveAnimBg = () => {
       "resize",
       function () {
         c.width = window.innerWidth;
-        c.height = window.innerHeight;
+        c.height = window.innerHeight / 3.5;
         ready();
       },
       false
@@ -95,7 +93,7 @@ const WaveAnimBg = () => {
     var ready = function () {
       console.log("ready called");
       (w = c.width = window.innerWidth),
-        (h = c.height = window.innerHeight),
+        (h = c.height = window.innerHeight / 3.5),
         (varX = w / 10 - minX / 10),
         (varY = h - minY * 2),
         (w1 = (w - minX * 2 - varX) / 4),
@@ -165,30 +163,33 @@ const WaveAnimBg = () => {
       let Curve1y1 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve1y1.to(curve1, getRandomInt(minTime, maxTime), {
+      Curve1y1.to(curve1, {
+        duration: 8,
         y1: h - minY,
         ease: "power2.inOut",
       });
       let Curve1y2 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve1y2.to(curve1, getRandomInt(minTime, maxTime), {
+      Curve1y2.to(curve1, {
+        duration: 8,
         y2: minY - varY / 2,
         ease: "power2.inOut",
       });
       let Curve1y3 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve1y3.to(curve1, getRandomInt(minTime, maxTime), {
+      Curve1y3.to(curve1, {
+        duration: 8,
         y3: h - minY,
         ease: "power2.inOut",
       });
@@ -206,30 +207,33 @@ const WaveAnimBg = () => {
       let Curve2y1 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve2y1.to(curve2, getRandomInt(minTime, maxTime), {
+      Curve2y1.to(curve2, {
+        duration: 8,
         y1: minY,
         ease: "power2.inOut",
       });
       let Curve2y2 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve2y2.to(curve2, getRandomInt(minTime, maxTime), {
+      Curve2y2.to(curve2, {
+        duration: 8,
         y2: minY + varY * (4 / 3),
         ease: "power2.inOut",
       });
       let Curve2y3 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve2y3.to(curve2, getRandomInt(minTime, maxTime), {
+      Curve2y3.to(curve2, {
+        duration: 8,
         y3: minY,
         ease: "power2.inOut",
       });
@@ -247,30 +251,33 @@ const WaveAnimBg = () => {
       let Curve3y1 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve3y1.to(curve3, getRandomInt(minTime, maxTime), {
+      Curve3y1.to(curve3, {
+        duration: 8,
         y1: h - minY,
         ease: "power2.inOut",
       });
       let Curve3y2 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve3y2.to(curve3, getRandomInt(minTime, maxTime), {
+      Curve3y2.to(curve3, {
+        duration: 8,
         y2: minY - varY / 2,
         ease: "power2.inOut",
       });
       let Curve3y3 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve3y3.to(curve3, getRandomInt(minTime, maxTime), {
+      Curve3y3.to(curve3, {
+        duration: 8,
         y3: h - minY,
         ease: "power2.inOut",
       });
@@ -288,30 +295,33 @@ const WaveAnimBg = () => {
       let Curve4y1 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve4y1.to(curve4, getRandomInt(minTime, maxTime), {
+      Curve4y1.to(curve4, {
+        duration: 8,
         y1: minY,
         ease: "power2.inOut",
       });
       let Curve4y2 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve4y2.to(curve4, getRandomInt(minTime, maxTime), {
+      Curve4y2.to(curve4, {
+        duration: 8,
         y2: minY + varY * (4 / 3),
         ease: "power2.inOut",
       });
       let Curve4y3 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve4y3.to(curve4, getRandomInt(minTime, maxTime), {
+      Curve4y3.to(curve4, {
+        duration: 8,
         y3: minY,
         ease: "power2.inOut",
       });
@@ -329,30 +339,33 @@ const WaveAnimBg = () => {
       let Curve5y1 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve5y1.to(curve5, getRandomInt(minTime, maxTime), {
+      Curve5y1.to(curve5, {
+        duration: 8,
         y1: h - minY,
         ease: "power2.inOut",
       });
       let Curve5y2 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve5y2.to(curve5, getRandomInt(minTime, maxTime), {
+      Curve5y2.to(curve5, {
+        duration: 8,
         y2: minY - varY / 2,
         ease: "power2.inOut",
       });
       let Curve5y3 = gsap.timeline({
         paused: false,
         yoyo: true,
-        delay: getRandomInt(minDelay, maxDelay),
         repeat: -1,
+        delay: 1.5,
       });
-      Curve5y3.to(curve5, getRandomInt(minTime, maxTime), {
+      Curve5y3.to(curve5, {
+        duration: 8,
         y3: h - minY,
         ease: "power2.inOut",
       });
@@ -611,13 +624,16 @@ const WaveAnimBg = () => {
         drawCurve($, CurvesArray[j], tension);
       }
 
-      requestAnimationFrame(animate);
+      requestAnimationFrameRef.current = requestAnimationFrame(animate);
     };
     ready();
     tweenCurves();
-    animate();
+    requestAnimationFrameRef.current = requestAnimationFrame(animate);
+    return () => {
+      cancelAnimationFrame(requestAnimationFrameRef.current);
+    };
   }, []);
-  return <canvas ref={canvasRef}></canvas>;
+  return <canvas ref={canvasRef} className="absolute top-1/3 h-1/3"></canvas>;
 };
 
 export default WaveAnimBg;
