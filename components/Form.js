@@ -42,6 +42,21 @@ const Form = () => {
                 className="mt-1 focus:ring-indigo-500 border focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md px-2 py-3"
               />
             </div>
+            <div className="col-span-6 sm:col-span-6">
+              <label
+                for="message"
+                class="block text-sm font-medium text-gray-700"
+              >
+                Drop us a line
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="3"
+                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                placeholder=" message here"
+              ></textarea>
+            </div>
           </div>
         </div>
         <div className="form-button__wrapper px-4 py-3 bg-gray-50 text-right sm:px-6">
