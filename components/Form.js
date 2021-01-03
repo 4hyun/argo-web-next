@@ -3,12 +3,12 @@ import React from "react";
 const Form = () => {
   return (
     <form
-      name="tyk-inquiry"
+      name="contact"
       method="POST"
       className="bg-white shadow overflow-hidden sm:rounded-md my-auto"
       netlify
     >
-      <input type="hidden" name="tyk-inquiry" value="contact"></input>
+      <input type="hidden" name="form-name" value="contact"></input>
       <div className="outer bg-white">
         <div className="form-body__wrapper px-4 py-5 bg-white sm:p-6">
           <div className="grid grid-cols-6 gap-6">
