@@ -182,7 +182,9 @@ const buttonClassName =
 
 export default function Home() {
   const router = useRouter();
-  const { locale } = router;
+  const locale = router.locale;
+  // const locale = "ko";
+  console.log(locale);
   return (
     <div className={styles.container}>
       <main className={styles.main}>
