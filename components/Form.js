@@ -2,7 +2,13 @@ import React from "react";
 
 const Form = () => {
   return (
-    <form className="bg-white shadow overflow-hidden sm:rounded-md my-auto">
+    <form
+      name="tyk-inquiry"
+      method="POST"
+      className="bg-white shadow overflow-hidden sm:rounded-md my-auto"
+      netlify
+    >
+      <input type="hidden" name="tyk-inquiry" value="contact"></input>
       <div className="outer bg-white">
         <div className="form-body__wrapper px-4 py-5 bg-white sm:p-6">
           <div className="grid grid-cols-6 gap-6">
@@ -39,7 +45,10 @@ const Form = () => {
           </div>
         </div>
         <div className="form-button__wrapper px-4 py-3 bg-gray-50 text-right sm:px-6">
-          <button className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium text-white bg-argo-blue-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full">
+          <button
+            type="submit"
+            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium text-white bg-argo-blue-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full"
+          >
             Send
           </button>
         </div>
