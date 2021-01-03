@@ -1,4 +1,5 @@
 import Head from "next/head";
+import GetInTouchForm from "components/Form";
 import styled from "styled-components";
 import styles from "../styles/Home.module.css";
 import ArgoComingSoon from "../public/logos/lettermark/dark.svg";
@@ -104,7 +105,7 @@ const EmailInputSubmitButton = styled.button`
   font-size: 0.8rem;
   line-height: 1.75;
   color: #fff;
-  text-shadow: 3px 3px 0 #0500ff;
+  /* text-shadow: 3px 3px 0 #0500ff; */
   @media (min-width: 401px) {
     font-size: 1rem;
   }
@@ -176,23 +177,23 @@ const ComingsoonAutoplayFooterMessage = styled.div`
 `;
 
 const buttonClassName =
-  "rounded-full py-2 px-6 hover:border-solid border-2 border-transparent hover:border-homebuttonhoverborder transition-all focus:outline-none transform active:translate-x-1 active:translate-y-1 ";
+  "rounded-full py-1 px-6 hover:border-solid border-2 border-transparent hover:border-argo-blue-500 transition-all focus:outline-none transform active:translate-x-1 active:translate-y-1 ";
 
 export default function Home() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         {/* <ArgoComingSoonLogo /> */}
-
-        <ComingSoonMessageContainer className="xl:ml-10 space-y-4 select-none">
-          <Slogan className="leading-none font-normal">
-            {trads.en["comingsoon.components.Slogan.tyk"]}
-          </Slogan>
-          <Heading>{trads.en["comingsoon.components.Heading.main"]}</Heading>
-          <CtaMessage className="leading-none font-normal">
-            {trads.en["comingsoon.components.Slogan.ctamessage"]}
-          </CtaMessage>
-          {/* <EmailInputContainer>
+        <div className={styles.header__container}>
+          <ComingSoonMessageContainer className="xl:ml-10 space-y-4 select-none">
+            <Slogan className="leading-none font-normal">
+              {trads.en["comingsoon.components.Slogan.tyk"]}
+            </Slogan>
+            <Heading>{trads.en["comingsoon.components.Heading.main"]}</Heading>
+            <CtaMessage className="leading-none font-normal">
+              {trads.en["comingsoon.components.Slogan.ctamessage"]}
+            </CtaMessage>
+            {/* <EmailInputContainer>
             <EmailInputWIconWrapper>
               <EmailIcon></EmailIcon>
               <EmailInput
@@ -204,23 +205,25 @@ export default function Home() {
               ></EmailInput>
             </EmailInputWIconWrapper>
           </EmailInputContainer> */}
-          <div className="flex space-x-4 mt-2">
-            <EmailInputSubmitButton className={buttonClassName}>
-              {
-                trads.en[
-                  "comingsoon.components.EmailInputContainer.button.getintouch"
-                ]
-              }
-            </EmailInputSubmitButton>
-            <LearnMoreButton className={buttonClassName}>
-              {
-                trads.en[
-                  "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
-                ]
-              }
-            </LearnMoreButton>
-          </div>
-        </ComingSoonMessageContainer>
+            <div className="flex space-x-4 mt-2">
+              <EmailInputSubmitButton className={buttonClassName}>
+                {
+                  trads.en[
+                    "comingsoon.components.EmailInputContainer.button.getintouch"
+                  ]
+                }
+              </EmailInputSubmitButton>
+              <LearnMoreButton className={buttonClassName}>
+                {
+                  trads.en[
+                    "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
+                  ]
+                }
+              </LearnMoreButton>
+            </div>
+          </ComingSoonMessageContainer>
+          <GetInTouchForm />
+        </div>
         {/* TODO: ComingsoonAutoplayFooterMessage inside a light Carousel */}
       </main>
       <WaveAnimBg />

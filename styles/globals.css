@@ -2,6 +2,8 @@
   --argo-blue: #0a29ca;
   --argo-black: #111111;
   --nav-bg: #fff;
+  --footer-bg-grad-button-left: linear-gradient(to right, #43cea2, #185a9d);
+  --footer-bg-blue-grad: linear-gradient(to right, #0575e6, #021b79);
 }
 
 /* Scrollbar custom style */
@@ -46,4 +48,9 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+footer {
+  /* Gradient Blue Style */
+  /* background: var(--footer-bg-blue-grad); */
 }

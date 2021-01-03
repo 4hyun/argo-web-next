@@ -1,11 +1,19 @@
 module.exports = {
   theme: {
-    colors: {
-      homebuttonhoverborder: "#0500FF",
+    extend: {
+      colors: {
+        "argo-blue": {
+          400: "#0a29ca",
+          500: "#0500FF",
+          600: "#1E0AD4",
+          700: "#250FAB",
+        },
+        white: "#fff",
+      },
+      borderColor: (theme) => ({
+        ...theme("colors"),
+      }),
     },
-    borderColor: (theme) => ({
-      ...theme("colors"),
-    }),
   },
   variants: {
     extend: {
