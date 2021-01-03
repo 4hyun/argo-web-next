@@ -1,4 +1,6 @@
 import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import GetInTouchForm from "components/Form";
 import styled from "styled-components";
 import styles from "../styles/Home.module.css";
@@ -95,7 +97,6 @@ const EmailInputContainer = styled.div`
 `;
 
 const EmailInputSubmitButton = styled.button`
-  display: flex;
   flex-direction: row;
   align-items: flex-start;
   background: var(--argo-blue);
@@ -177,9 +178,11 @@ const ComingsoonAutoplayFooterMessage = styled.div`
 `;
 
 const buttonClassName =
-  "rounded-full py-1 px-6 hover:border-solid border-2 border-transparent hover:border-argo-blue-500 transition-all focus:outline-none transform active:translate-x-1 active:translate-y-1 ";
+  "flex rounded-full py-1 px-6 hover:border-solid border-2 border-transparent hover:border-argo-blue-500 transition-all focus:outline-none transform active:translate-x-1 active:translate-y-1 ";
 
 export default function Home() {
+  const router = useRouter();
+  const { locale } = router;
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -187,39 +190,47 @@ export default function Home() {
         <div className={styles.header__container}>
           <ComingSoonMessageContainer className="xl:ml-10 space-y-4 select-none">
             <Slogan className="leading-none font-normal">
-              {trads.en["comingsoon.components.Slogan.tyk"]}
+              {trads[locale]["comingsoon.components.Slogan.tyk"]}
             </Slogan>
-            <Heading>{trads.en["comingsoon.components.Heading.main"]}</Heading>
+            <Heading>
+              {trads[locale]["comingsoon.components.Heading.main"]}
+            </Heading>
             <CtaMessage className="leading-none font-normal">
-              {trads.en["comingsoon.components.Slogan.ctamessage"]}
+              {trads[locale]["comingsoon.components.Slogan.ctamessage"]}
             </CtaMessage>
             {/* <EmailInputContainer>
             <EmailInputWIconWrapper>
               <EmailIcon></EmailIcon>
               <EmailInput
                 placeholder={
-                  trads.en[
+                  trads[locale][
                     "en.comingsoon.components.EmailInputContainer.placeholder"
                   ]
                 }
               ></EmailInput>
             </EmailInputWIconWrapper>
           </EmailInputContainer> */}
-            <div className="flex space-x-4 mt-2">
-              <EmailInputSubmitButton className={buttonClassName}>
+            <div className="flex space-x-4 lg:space-x-0 mt-2">
+              <EmailInputSubmitButton
+                className={`${buttonClassName} md:hidden`}
+              >
                 {
-                  trads.en[
+                  trads[locale][
                     "comingsoon.components.EmailInputContainer.button.getintouch"
                   ]
                 }
               </EmailInputSubmitButton>
-              <LearnMoreButton className={buttonClassName}>
-                {
-                  trads.en[
-                    "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
-                  ]
-                }
-              </LearnMoreButton>
+              <Link href="https://tyk.io/docs/getting-started/tyk-components/gateway/">
+                <a target="_blank">
+                  <LearnMoreButton className={`${buttonClassName} lg:ml-0`}>
+                    {
+                      trads[locale][
+                        "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
+                      ]
+                    }
+                  </LearnMoreButton>
+                </a>
+              </Link>
             </div>
           </ComingSoonMessageContainer>
           <GetInTouchForm />

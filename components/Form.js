@@ -14,7 +14,7 @@ const Form = () => {
           <div className="grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:col-span-3">
               <label
-                for="full_name"
+                htmlFor="full_name"
                 className="block text-sm font-medium text-gray-700"
               >
                 Full name
@@ -29,7 +29,7 @@ const Form = () => {
             </div>
             <div className="col-span-6 sm:col-span-6">
               <label
-                for="email_address"
+                htmlFor="email_address"
                 className="block text-sm font-medium text-gray-700"
               >
                 Email address
@@ -44,8 +44,8 @@ const Form = () => {
             </div>
             <div className="col-span-6 sm:col-span-6">
               <label
-                for="message"
-                class="block text-sm font-medium text-gray-700"
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700"
               >
                 Drop us a line
               </label>
@@ -53,7 +53,7 @@ const Form = () => {
                 id="message"
                 name="message"
                 rows="3"
-                class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                 placeholder=" message here"
               ></textarea>
             </div>
