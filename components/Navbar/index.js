@@ -3,6 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import Hamburger from "components/Navbar/Hamburger";
 import DarkLogo from "../../public/logos/lettermark/logo-full_white-long-sm.svg";
+import { useTranslationsContext, supportedLang } from "contexts/Translations";
 
 const Logo = styled(DarkLogo)`
   width: auto;
@@ -44,7 +45,7 @@ const DektopNavbarContainer = styled.nav`
   background-color: transparent;
 `;
 
-const DesktopNavbar = () => {
+const DesktopNavbar = ({ renderLangSwitch }) => {
   return (
     <DektopNavbarContainer>
       <Link href="/">
@@ -52,24 +53,64 @@ const DesktopNavbar = () => {
           <Logo />
         </a>
       </Link>
+      {renderLangSwitch()}
       <Hamburger />
     </DektopNavbarContainer>
   );
 };
 
-const MobileNavbar = () => {
+const MobileNavbar = ({ renderLangSwitch }) => {
   return (
     <MobileNavbarContainer>
+      {renderLangSwitch()}
       <Hamburger />
     </MobileNavbarContainer>
   );
 };
 
+const LangButton = styled.span`
+  padding: 0 0.5rem;
+  cursor: pointer;
+  :hover {
+    line-height: 120%;
+    text-decoration: underline;
+    color: var(--argo-blue);
+    font-weight: bold;
+    transition: all 0.2 cubic-bezier(0.42, 0, 1, 1);
+  }
+`;
+
+const LangSwitch = () => {
+  const { switchLang } = useTranslationsContext();
+  return (
+    <div className="lang-switch ml-auto mr-4 flex items-center">
+      <LangButton
+        onClick={() => {
+          switchLang(supportedLang.en);
+        }}
+      >
+        ENG
+      </LangButton>
+      |
+      <LangButton
+        onClick={() => {
+          switchLang(supportedLang.ko);
+        }}
+      >
+        KOR
+      </LangButton>
+    </div>
+  );
+};
+
 const Navbar = () => {
+  const { lang } = useTranslationsContext();
+  console.log("lang : ", lang);
+
   return (
     <Container>
-      <DesktopNavbar />
-      <MobileNavbar />
+      <DesktopNavbar renderLangSwitch={LangSwitch} />
+      <MobileNavbar renderLangSwitch={LangSwitch} />
     </Container>
   );
 };
