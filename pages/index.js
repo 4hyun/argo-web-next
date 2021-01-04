@@ -113,9 +113,6 @@ const GetInTouchButton = styled.button`
   @media (min-width: 401px) {
     font-size: 1rem;
   }
-  @media (min-width: 1200px) {
-    font-size: 24px;
-  }
 `;
 
 const LearnMoreButton = GetInTouchButton;

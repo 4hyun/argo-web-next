@@ -26,7 +26,7 @@ const Form = () => {
                 name="full_name"
                 id="full_name"
                 autoComplete="given-name"
-                className={`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-3 ${inputFocusClassnames}`}
+                className={`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-2 ${inputFocusClassnames}`}
               />
             </div>
             <div className="col-span-12">
@@ -41,7 +41,7 @@ const Form = () => {
                 name="email_address"
                 id="email_address"
                 autoComplete="email"
-                className={`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-3 ${inputFocusClassnames}`}
+                className={`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-2 ${inputFocusClassnames}`}
               />
             </div>
             <div className="col-span-12">
@@ -55,7 +55,7 @@ const Form = () => {
                 id="message"
                 name="message"
                 rows="3"
-                className={`shadow-sm mt-1 block w-full sm:text-sm border border-gray-300 rounded-md px-2 py-3 ${inputFocusClassnames}`}
+                className={`shadow-sm mt-1 block w-full sm:text-sm border border-gray-300 rounded-md px-2 py-2 ${inputFocusClassnames}`}
                 placeholder="for Tyk inquiries and others"
               ></textarea>
             </div>
