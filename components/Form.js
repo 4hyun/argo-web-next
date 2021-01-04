@@ -5,14 +5,14 @@ const Form = () => {
     <form
       name="contact"
       method="POST"
-      className="bg-white shadow overflow-hidden sm:rounded-md my-auto"
+      className="bg-white shadow overflow-hidden rounded-md lg:my-auto"
       data-netlify="true"
     >
       <input type="hidden" name="form-name" value="contact"></input>
       <div className="outer bg-white">
-        <div className="form-body__wrapper px-4 py-5 bg-white sm:p-6">
-          <div className="grid grid-cols-6 gap-6">
-            <div className="col-span-6 sm:col-span-3">
+        <div className="form-body__wrapper px-4 md:px-3 py-4 bg-white">
+          <div className="grid lg:grid-cols-6 grid-cols-12 gap-6">
+            <div className="col-span-8">
               <label
                 htmlFor="full_name"
                 className="block text-sm font-medium text-gray-700"
@@ -27,7 +27,7 @@ const Form = () => {
                 className="mt-1 focus:ring-indigo-500 border focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md px-2 py-3"
               />
             </div>
-            <div className="col-span-6 sm:col-span-6">
+            <div className="col-span-12">
               <label
                 htmlFor="email_address"
                 className="block text-sm font-medium text-gray-700"
@@ -42,7 +42,7 @@ const Form = () => {
                 className="mt-1 focus:ring-indigo-500 border focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md px-2 py-3"
               />
             </div>
-            <div className="col-span-6 sm:col-span-6">
+            <div className="col-span-12">
               <label
                 htmlFor="message"
                 className="block text-sm font-medium text-gray-700"

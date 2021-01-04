@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -5,9 +6,10 @@ import GetInTouchForm from "components/Form";
 import styled from "styled-components";
 import styles from "../styles/Home.module.css";
 import ArgoComingSoon from "../public/logos/lettermark/dark.svg";
-import { At } from "components/Icons";
+import { At, Close } from "components/Icons";
 import trads from "../translations";
 import WaveAnimBg from "components/WaveAnimBg";
+import { delay } from "utils/delay";
 
 const ArgoComingSoonLogo = styled(ArgoComingSoon)`
   --w: 367.63px;
@@ -96,7 +98,7 @@ const EmailInputContainer = styled.div`
   }
 `;
 
-const EmailInputSubmitButton = styled.button`
+const GetInTouchButton = styled.button`
   flex-direction: row;
   align-items: flex-start;
   background: var(--argo-blue);
@@ -115,7 +117,7 @@ const EmailInputSubmitButton = styled.button`
   }
 `;
 
-const LearnMoreButton = EmailInputSubmitButton;
+const LearnMoreButton = GetInTouchButton;
 
 const EmailInputWIconWrapper = styled.div`
   /* Auto Layout */
@@ -177,20 +179,45 @@ const ComingsoonAutoplayFooterMessage = styled.div`
   overflow: hidden;
 `;
 
-const buttonClassName =
-  "flex rounded-full py-1 px-6 hover:border-solid border-2 border-transparent hover:border-argo-blue-500 transition-all focus:outline-none transform active:translate-x-1 active:translate-y-1 ";
+const MobileFormCloseBar = styled.div`
+  /* position: absolute; */
+  /* subtract px-4 from width */
+  width: calc(100%-2rem);
+  height: 62px;
+  /* TODO: apply padding as tailwindcss */
+  padding: 12px 16px;
+`;
+
+const buttonActiveClassname =
+  "transform active:translate-x-1 active:translate-y-1";
+
+const buttonClassName = `flex rounded-full py-1 px-6 hover:border-solid border-2 border-transparent hover:border-argo-blue-500 transition-all focus:outline-none ${buttonActiveClassname}`;
 
 export default function Home() {
   const router = useRouter();
+  const [formOpen, openForm] = useState();
   const locale = router.locale;
-  // const locale = "ko";
-  console.log(locale);
+  const formWrapperClassnames = {
+    open: "flex",
+    close: "hidden",
+    desktop: "md:relative md:flex md:bg-transparent md:w-5/12",
+    mobile:
+      "form-wrapper absolute left-0 top-0 w-screen h-full flex justify-center px-4 flex-col bg-argo-blue-400",
+  };
+  const closeForm = () => {
+    openForm(false);
+  };
+
+  const showForm = () => {
+    openForm(true);
+  };
+
   return (
     <div className={styles.container}>
-      <main className={styles.main}>
+      <main className={`absolute flex items-center w-screen h-full z-10`}>
         {/* <ArgoComingSoonLogo /> */}
-        <div className={styles.header__container}>
-          <ComingSoonMessageContainer className="xl:ml-10 space-y-4 select-none">
+        <div className={`flex my-0 mx-auto md:px-8 md:max-w-full`}>
+          <ComingSoonMessageContainer className="xl:ml-10 space-y-4 select-none flex flex-col justify-center xl:justify-start">
             <Slogan className="leading-none font-normal">
               {trads[locale]["comingsoon.components.Slogan.tyk"]}
             </Slogan>
@@ -213,15 +240,16 @@ export default function Home() {
             </EmailInputWIconWrapper>
           </EmailInputContainer> */}
             <div className="flex space-x-4 lg:space-x-0 mt-2">
-              <EmailInputSubmitButton
+              <GetInTouchButton
                 className={`${buttonClassName} md:hidden`}
+                onClick={delay(showForm, 800)}
               >
                 {
                   trads[locale][
                     "comingsoon.components.EmailInputContainer.button.getintouch"
                   ]
                 }
-              </EmailInputSubmitButton>
+              </GetInTouchButton>
               <Link href="https://tyk.io/docs/getting-started/tyk-components/gateway/">
                 <a target="_blank">
                   <LearnMoreButton className={`${buttonClassName} lg:ml-0`}>
@@ -235,7 +263,24 @@ export default function Home() {
               </Link>
             </div>
           </ComingSoonMessageContainer>
-          <GetInTouchForm />
+
+          <div
+            className={`${formWrapperClassnames.mobile} ${
+              formWrapperClassnames.desktop
+            } ${
+              formOpen
+                ? formWrapperClassnames.open
+                : formWrapperClassnames.close
+            }`}
+          >
+            <MobileFormCloseBar className="bg-argo-blue-400 md:hidden">
+              <Close
+                className={`w-8 bg-white float-right cursor-pointer rounded-md transform transition-all ${buttonActiveClassname}`}
+                onClick={delay(closeForm)}
+              ></Close>
+            </MobileFormCloseBar>
+            <GetInTouchForm />
+          </div>
         </div>
         {/* TODO: ComingsoonAutoplayFooterMessage inside a light Carousel */}
       </main>

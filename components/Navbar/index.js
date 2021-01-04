@@ -29,7 +29,7 @@ const Container = styled.div`
   @media (min-width: 1200px) {
     padding: unset;
   }
-  z-index: 10;
+  z-index: 20;
 `;
 
 const MobileNavbarContainer = styled.nav`
