@@ -74,7 +74,7 @@ function Hamburger(props) {
     setActive(!isActive);
   };
   return (
-    <Button isActive={isActive} onClick={onClick}>
+    <Button className="select-none" isActive={isActive} onClick={onClick}>
       <Box>
         <Line />
       </Box>

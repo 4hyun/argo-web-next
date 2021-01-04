@@ -5,7 +5,7 @@ const Form = () => {
     <form
       name="contact"
       method="POST"
-      className="bg-white shadow overflow-hidden rounded-md lg:my-auto"
+      className="bg-white shadow overflow-hidden rounded-md lg:my-auto select-none"
       data-netlify="true"
     >
       <input type="hidden" name="form-name" value="contact"></input>

@@ -83,7 +83,7 @@ const LangButton = styled.span`
 const LangSwitch = () => {
   const { switchLang } = useTranslationsContext();
   return (
-    <div className="lang-switch ml-auto mr-4 flex items-center">
+    <div className="lang-switch ml-auto mr-auto md:mr-4 flex items-center select-none text-xs md:text-base">
       <LangButton
         onClick={() => {
           switchLang(supportedLang.en);
@@ -91,7 +91,7 @@ const LangSwitch = () => {
       >
         ENG
       </LangButton>
-      |
+      <span className="font-bold">|</span>
       <LangButton
         onClick={() => {
           switchLang(supportedLang.ko);
