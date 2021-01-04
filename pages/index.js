@@ -239,7 +239,7 @@ export default function Home() {
               ></EmailInput>
             </EmailInputWIconWrapper>
           </EmailInputContainer> */}
-            <div className="flex space-x-4 lg:space-x-0 mt-2">
+            <div className="flex space-x-4 md:space-x-0 mt-2">
               <GetInTouchButton
                 className={`${buttonClassName} md:hidden`}
                 onClick={delay(showForm, 800)}
@@ -252,7 +252,7 @@ export default function Home() {
               </GetInTouchButton>
               <Link href="https://tyk.io/docs/getting-started/tyk-components/gateway/">
                 <a target="_blank">
-                  <LearnMoreButton className={`${buttonClassName} lg:ml-0`}>
+                  <LearnMoreButton className={`${buttonClassName} md:ml-0`}>
                     {
                       trads[locale][
                         "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
