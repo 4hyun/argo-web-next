@@ -213,7 +213,9 @@ export default function Home() {
     <div className={styles.container}>
       <main className={`absolute flex items-center w-screen h-full z-10`}>
         {/* <ArgoComingSoonLogo /> */}
-        <div className={`flex my-0 mx-auto md:px-8 md:max-w-full`}>
+        <div
+          className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center`}
+        >
           <ComingSoonMessageContainer className="xl:ml-10 space-y-4 select-none flex flex-col justify-center xl:justify-start">
             <Slogan className="leading-none font-normal">
               {trads[locale]["comingsoon.components.Slogan.tyk"]}

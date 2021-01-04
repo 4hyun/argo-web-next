@@ -71,12 +71,14 @@ const MobileNavbar = ({ renderLangSwitch }) => {
 const LangButton = styled.span`
   padding: 0 0.5rem;
   cursor: pointer;
+  min-width: 40px;
+  font-weight: 400;
   :hover {
     line-height: 120%;
     text-decoration: underline;
     color: var(--argo-blue);
-    font-weight: bold;
-    transition: all 0.2 cubic-bezier(0.42, 0, 1, 1);
+    font-weight: 800;
+    transition: all 0.8 cubic-bezier(0.42, 0, 1, 1);
   }
 `;
 
