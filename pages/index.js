@@ -12,32 +12,17 @@ import WaveAnimBg from "components/WaveAnimBg";
 import { delay } from "utils/delay";
 import { useTranslationsContext } from "contexts/Translations";
 
-const ArgoComingSoonLogo = styled(ArgoComingSoon)`
-  --w: 367.63px;
-  --h: 158.22px;
-  margin-top: 15vh;
-  width: calc(var(--h) / 2);
-  @media (min-width: 1200px) {
-    margin-top: calc(295 / (1024-64) * 100vh);
-    height: var(--h);
-    width: var(--w);
-  }
-`;
-
 const ComingSoonMessageContainer = styled.div`
-  width: 100%;
+  width: 90%;
   padding: 0 1rem;
+  margin: 0 auto;
+  @media (min-width: 400px) {
+    width: 85%;
+  }
   @media (min-width: 1200px) {
-    /* & > * {
-      margin-top: unset;
-    } */
     padding: unset;
     height: 338px;
-    width: 770px;
   }
-
-  /* left: 335px;
-  top: 548px; */
 `;
 
 const Slogan = styled.p`
@@ -76,26 +61,9 @@ const Heading = styled.h2`
 
   color: #111;
   @media (min-width: 1200px) {
-    font-size: 60px;
+    font-size: 48px;
     margin: 0;
-    line-height: 66px;
-  }
-`;
-
-const EmailInputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  & > *:not(:first-child) {
-    margin-top: 12px;
-  }
-  width: 100%;
-  @media (min-width: 1200px) {
-    width: unset;
-    & > *:not(:first-child) {
-      margin-left: 10px;
-      flex-direction: row;
-    }
+    line-height: 56px;
   }
 `;
 
@@ -116,66 +84,6 @@ const GetInTouchButton = styled.button`
 `;
 
 const LearnMoreButton = GetInTouchButton;
-
-const EmailInputWIconWrapper = styled.div`
-  /* Auto Layout */
-  position: static;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background: #fff;
-  border-radius: 8px;
-  width: 100%;
-  padding: 0 10px;
-  @media (min-width: 1200px) {
-    & > *:not(:first-child) {
-      padding: 10px;
-      margin-left: 10px;
-    }
-  }
-`;
-
-const EmailInput = styled.input`
-  --w: 506px;
-  --h: 31px;
-  position: static;
-  left: 44px;
-  top: 10px;
-  font-family: Abel;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 31px;
-  @media (min-width: 1200px) {
-    width: var(--w);
-    height: var(--h);
-  }
-`;
-
-const EmailIcon = styled(At)`
-  --w: 31px;
-  --h: 24px;
-  position: static;
-  width: 24px;
-  height: 31px;
-  left: 10px;
-  top: 10px;
-  display: flex;
-  align-items: center;
-  color: rgba(0, 0, 0, 0.28);
-  height: auto;
-  width: 0.75rem;
-  @media (min-width: 1200px) {
-    width: var(--w);
-    height: var(--h);
-    font-size: 24px;
-    line-height: 31px;
-  }
-`;
-
-const ComingsoonAutoplayFooterMessage = styled.div`
-  width: 100%;
-  overflow: hidden;
-`;
 
 const MobileFormCloseBar = styled.div`
   /* position: absolute; */
@@ -212,33 +120,20 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <main className={`absolute flex items-center w-screen h-full z-10`}>
-        {/* <ArgoComingSoonLogo /> */}
         <div
           className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center`}
         >
-          <ComingSoonMessageContainer className="xl:ml-10 space-y-4 select-none flex flex-col justify-center xl:justify-start">
-            <Slogan className="leading-none font-normal">
+          <ComingSoonMessageContainer className="xl:ml-10 select-none flex flex-col justify-center xl:justify-start xl:mr-4">
+            <Slogan className="leading-none font-normal mt-4">
               {trads[locale]["comingsoon.components.Slogan.tyk"]}
             </Slogan>
-            <Heading>
+            <Heading className="mt-4">
               {trads[locale]["comingsoon.components.Heading.main"]}
             </Heading>
-            <CtaMessage className="leading-none font-normal">
+            <CtaMessage className="leading-none font-normal mt-4">
               {trads[locale]["comingsoon.components.Slogan.ctamessage"]}
             </CtaMessage>
-            {/* <EmailInputContainer>
-            <EmailInputWIconWrapper>
-              <EmailIcon></EmailIcon>
-              <EmailInput
-                placeholder={
-                  trads[locale][
-                    "en.comingsoon.components.EmailInputContainer.placeholder"
-                  ]
-                }
-              ></EmailInput>
-            </EmailInputWIconWrapper>
-          </EmailInputContainer> */}
-            <div className="flex space-x-4 md:space-x-0 mt-2">
+            <div className="coming-soon-action-button-container flex space-x-4 md:space-x-0 mt-5">
               <GetInTouchButton
                 className={`${buttonClassName} md:hidden`}
                 onClick={delay(showForm, 800)}
@@ -281,7 +176,6 @@ export default function Home() {
             <GetInTouchForm />
           </div>
         </div>
-        {/* TODO: ComingsoonAutoplayFooterMessage inside a light Carousel */}
       </main>
       <WaveAnimBg />
     </div>
