@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -100,11 +100,14 @@ const buttonClassName = `flex rounded-full py-1 px-4 md:px-6 hover:border-solid 
 
 export default function Home() {
   const [formOpen, openForm] = useState();
-  const { lang: locale } = useTranslationsContext();
+  const [bgCanvasLoaded, setBgCanvasLoaded] = useState();
+  const {
+    lang: { locale },
+  } = useTranslationsContext();
   const formWrapperClassnames = {
     open: "flex",
     close: "hidden",
-    desktop: "md:relative md:flex md:bg-transparent md:w-5/12",
+    desktop: "lg:relative lg:flex lg:bg-transparent lg:w-5/12",
     mobile:
       "form-wrapper absolute left-0 top-0 w-screen h-full flex justify-center px-4 flex-col bg-argo-blue-400",
   };
@@ -115,6 +118,11 @@ export default function Home() {
   const showForm = () => {
     openForm(true);
   };
+
+  /* Load canvas once the component mounted */
+  useEffect(() => {
+    setBgCanvasLoaded(true);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -132,9 +140,9 @@ export default function Home() {
             <CtaMessage className="leading-none font-normal mt-4">
               {trads[locale]["comingsoon.components.Slogan.ctamessage"]}
             </CtaMessage>
-            <div className="coming-soon-action-button-container flex space-x-4 md:space-x-0 mt-5">
+            <div className="coming-soon-action-button-container flex space-x-4 lg:space-x-0 mt-5">
               <GetInTouchButton
-                className={`${buttonClassName} md:hidden`}
+                className={`${buttonClassName} lg:hidden`}
                 onClick={delay(showForm, 800)}
               >
                 {
@@ -166,7 +174,7 @@ export default function Home() {
                 : formWrapperClassnames.close
             }`}
           >
-            <MobileFormCloseBar className="bg-argo-blue-400 md:hidden">
+            <MobileFormCloseBar className="bg-argo-blue-400 lg:hidden">
               <Close
                 className={`w-8 bg-white float-right cursor-pointer rounded-md transform transition-all ${buttonActiveClassname}`}
                 onClick={delay(closeForm)}
@@ -176,7 +184,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <WaveAnimBg />
+      {bgCanvasLoaded && <WaveAnimBg />}
     </div>
   );
 }

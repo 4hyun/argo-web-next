@@ -71,39 +71,50 @@ const MobileNavbar = ({ renderLangSwitch }) => {
 const LangButton = styled.span`
   padding: 0 0.5rem;
   cursor: pointer;
-  min-width: 40px;
+  min-width: 45px;
   font-weight: 400;
-  :hover {
-    line-height: 120%;
+  transition: all 0.1s ease;
+  text-align: center;
+  :hover,
+  & > .lang-button.active {
+    /* line-height: 120%; */
     text-decoration: underline;
     color: var(--argo-blue);
     font-weight: 800;
-    transition: all 0.8 cubic-bezier(0.42, 0, 1, 1);
+    transition: all 0.1s ease;
+  }
+  :first-child {
+    border-right: 2px solid #333;
   }
   @media (min-width: 1200px) {
-    min-width: 50px;
+    min-width: 55px;
   }
 `;
 
+const LangButtonLabel = ({ currentLang, thisLang: { locale, label } }) => {
+  const activeClassname = currentLang.locale === locale ? "active" : "";
+  return <span className={`lang-button ${activeClassname}`}>{label}</span>;
+};
+
 const LangSwitch = () => {
-  const { switchLang } = useTranslationsContext();
+  const { switchLang, lang } = useTranslationsContext();
+
   return (
-    <div className="lang-switch ml-auto mr-auto md:mr-4 flex items-center select-none text-xs md:text-base">
-      <LangButton
-        onClick={() => {
-          switchLang(supportedLang.en);
-        }}
-      >
-        ENG
-      </LangButton>
-      <span className="font-bold">|</span>
-      <LangButton
-        onClick={() => {
-          switchLang(supportedLang.ko);
-        }}
-      >
-        KOR
-      </LangButton>
+    <div className="lang-switch ml-auto mr-auto md:mr-4 flex items-center select-none text-xs">
+      {Object.keys(supportedLang).map((supportedLangKey) => {
+        return (
+          <LangButton
+            onClick={() => {
+              switchLang(supportedLang[supportedLangKey].locale);
+            }}
+          >
+            <LangButtonLabel
+              currentLang={lang}
+              thisLang={supportedLang[supportedLangKey]}
+            />
+          </LangButton>
+        );
+      })}
     </div>
   );
 };
