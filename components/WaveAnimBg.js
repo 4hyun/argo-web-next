@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import gsap from "gsap";
 
 const WaveAnimBg = () => {
   const requestAnimationFrameRef = useRef();
   const canvasRef = useRef();
+  const OPACITY_START = "opacity-0";
+  const OPACITY_END = "opacity-30";
+  const [opacity, setOpacity] = useState(OPACITY_START);
+
   useEffect(() => {
     var c = canvasRef.current,
       $ = c.getContext("2d"),
@@ -633,14 +637,16 @@ const WaveAnimBg = () => {
     ready();
     tweenCurves();
     requestAnimationFrameRef.current = requestAnimationFrame(animate);
+    /* set opacity on component mount */
+    setOpacity(OPACITY_END);
     return () => {
       cancelAnimationFrame(requestAnimationFrameRef.current);
     };
-  }, []);
+  }, []); /* useEffect END */
   return (
     <canvas
       ref={canvasRef}
-      className="absolute top-1/3 h-1/3 opacity-30 max-w-full"
+      className={`absolute top-1/3 h-1/3 max-w-full transition-opacity duration-1000 ${opacity}`}
     ></canvas>
   );
 };

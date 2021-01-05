@@ -9,7 +9,7 @@ import ArgoComingSoon from "../public/logos/lettermark/dark.svg";
 import { At, Close } from "components/Icons";
 import trads from "../translations";
 import WaveAnimBg from "components/WaveAnimBg";
-import { delay } from "utils/delay";
+import { delay, delayed } from "utils/delay";
 import { useTranslationsContext } from "contexts/Translations";
 
 const ComingSoonMessageContainer = styled.div`
@@ -121,7 +121,7 @@ export default function Home() {
 
   /* Load canvas once the component mounted */
   useEffect(() => {
-    setBgCanvasLoaded(true);
+    delayed(() => setBgCanvasLoaded(true), 2000);
   }, []);
 
   return (
@@ -151,17 +151,18 @@ export default function Home() {
                   ]
                 }
               </GetInTouchButton>
-              <Link href="https://tyk.io/docs/getting-started/tyk-components/gateway/">
-                <a target="_blank">
-                  <LearnMoreButton className={`${buttonClassName} md:ml-0`}>
-                    {
-                      trads[locale][
-                        "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
-                      ]
-                    }
-                  </LearnMoreButton>
-                </a>
-              </Link>
+              <a
+                href="https://tyk.io/docs/getting-started/tyk-components/gateway/"
+                target="_blank"
+              >
+                <LearnMoreButton className={`${buttonClassName} md:ml-0`}>
+                  {
+                    trads[locale][
+                      "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
+                    ]
+                  }
+                </LearnMoreButton>
+              </a>
             </div>
           </ComingSoonMessageContainer>
 
@@ -177,7 +178,7 @@ export default function Home() {
             <MobileFormCloseBar className="bg-argo-blue-400 lg:hidden">
               <Close
                 className={`w-8 bg-white float-right cursor-pointer rounded-md transform transition-all ${buttonActiveClassname}`}
-                onClick={delay(closeForm)}
+                onClick={delay(closeForm, 800)}
               ></Close>
             </MobileFormCloseBar>
             <GetInTouchForm />
