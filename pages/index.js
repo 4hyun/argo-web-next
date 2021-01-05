@@ -100,7 +100,7 @@ const buttonClassName = `flex rounded-full py-1 px-4 md:px-6 hover:border-solid 
 
 export default function Home() {
   const [formOpen, openForm] = useState();
-  const [bgCanvasLoaded, setBgCanvasLoaded] = useState();
+  // const [bgCanvasLoaded, setBgCanvasLoaded] = useState();
   const {
     lang: { locale },
   } = useTranslationsContext();
@@ -120,9 +120,9 @@ export default function Home() {
   };
 
   /* Load canvas once the component mounted */
-  useEffect(() => {
-    delayed(() => setBgCanvasLoaded(true), 4000);
-  }, []);
+  // useEffect(() => {
+  //   delayed(() => setBgCanvasLoaded(true), 4000);
+  // }, []);
 
   return (
     <div className={styles.container}>
@@ -189,7 +189,8 @@ export default function Home() {
           </div>
         </div>
       </main>
-      {bgCanvasLoaded && <WaveAnimBg />}
+      {/* {bgCanvasLoaded && <WaveAnimBg />} */}
+      <WaveAnimBg />
     </div>
   );
 }
