@@ -646,7 +646,7 @@ const WaveAnimBg = () => {
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute top-1/3 h-1/3 max-w-full transition-opacity duration-1000 ${opacity}`}
+      className={`absolute h-1/5 top-2/5 lg:h-1/3 lg:top-1/3 w-screen transition-opacity duration-1000 ${opacity}`}
     ></canvas>
   );
 };

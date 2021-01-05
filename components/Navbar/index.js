@@ -75,6 +75,7 @@ const LangButton = styled.span`
   font-weight: 400;
   transition: all 0.1s ease;
   text-align: center;
+  line-height: 0.8;
   :hover,
   & > .lang-button.active {
     /* line-height: 120%; */
@@ -93,14 +94,20 @@ const LangButton = styled.span`
 
 const LangButtonLabel = ({ currentLang, thisLang: { locale, label } }) => {
   const activeClassname = currentLang.locale === locale ? "active" : "";
-  return <span className={`lang-button ${activeClassname}`}>{label}</span>;
+  return (
+    <span
+      className={`lang-button ${activeClassname} flex justify-center items-start`}
+    >
+      {label}
+    </span>
+  );
 };
 
 const LangSwitch = () => {
   const { switchLang, lang } = useTranslationsContext();
 
   return (
-    <div className="lang-switch ml-auto mr-auto md:mr-4 flex items-center select-none text-xs">
+    <div className="lang-switch ml-auto mr-auto md:mr-4 flex items-center select-none text-xs lg:text-base">
       {Object.keys(supportedLang).map((supportedLangKey) => {
         return (
           <LangButton

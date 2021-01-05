@@ -13,6 +13,10 @@ module.exports = {
       borderColor: (theme) => ({
         ...theme("colors"),
       }),
+      inset: {
+        "1/5": "20%",
+        "2/5": "40%",
+      },
     },
   },
   variants: {
