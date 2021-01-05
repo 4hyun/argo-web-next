@@ -189,7 +189,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      {bgCanvasLoaded && <WaveAnimBg />}
+      {false && <WaveAnimBg />}
     </div>
   );
 }
