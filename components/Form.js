@@ -13,7 +13,7 @@ const Form = () => {
       <input type="hidden" name="form-name" value="contact"></input>
       <div className="outer bg-white">
         <div className="form-body__wrapper px-4 md:px-3 py-4 bg-white">
-          <div className="grid lg:grid-cols-6 grid-cols-12 gap-6">
+          <div className="grid lg:grid-cols-6 grid-cols-12 gap-4">
             <div className="col-span-8">
               <label
                 htmlFor="full_name"

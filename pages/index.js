@@ -88,7 +88,6 @@ const LearnMoreButton = GetInTouchButton;
 const MobileFormCloseBar = styled.div`
   /* position: absolute; */
   /* subtract px-4 from width */
-  width: calc(100%-2rem);
   height: 62px;
   /* TODO: apply padding as tailwindcss */
   padding: 12px 16px;
