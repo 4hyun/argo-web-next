@@ -97,7 +97,7 @@ const MobileFormCloseBar = styled.div`
 const buttonActiveClassname =
   "transition-all transform active:translate-x-1 active:translate-y-1";
 
-const buttonClassName = `flex rounded-full py-1 px-6 hover:border-solid border-2 border-transparent hover:border-argo-blue-500 focus:outline-none ${buttonActiveClassname}`;
+const buttonClassName = `flex rounded-full py-1 px-4 md:px-6 hover:border-solid border-2 border-transparent hover:border-argo-blue-500 focus:outline-none ${buttonActiveClassname}`;
 
 export default function Home() {
   const [formOpen, openForm] = useState();

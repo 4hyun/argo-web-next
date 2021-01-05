@@ -80,6 +80,9 @@ const LangButton = styled.span`
     font-weight: 800;
     transition: all 0.8 cubic-bezier(0.42, 0, 1, 1);
   }
+  @media (min-width: 1200px) {
+    min-width: 50px;
+  }
 `;
 
 const LangSwitch = () => {
