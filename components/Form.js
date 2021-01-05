@@ -66,6 +66,7 @@ const Form = () => {
         <div className="form-button__wrapper px-4 py-3 bg-gray-50 text-right sm:px-6">
           <button
             type="submit"
+            aria-label="submit"
             className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium text-white bg-argo-blue-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full"
           >
             Send

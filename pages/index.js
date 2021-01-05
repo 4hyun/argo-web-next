@@ -121,7 +121,7 @@ export default function Home() {
 
   /* Load canvas once the component mounted */
   useEffect(() => {
-    delayed(() => setBgCanvasLoaded(true), 2000);
+    delayed(() => setBgCanvasLoaded(true), 4000);
   }, []);
 
   return (
@@ -144,6 +144,7 @@ export default function Home() {
               <GetInTouchButton
                 className={`${buttonClassName} lg:hidden`}
                 onClick={delay(showForm, 800)}
+                aria-label="Inquire about Tyk API Gateway"
               >
                 {
                   trads[locale][
@@ -155,7 +156,10 @@ export default function Home() {
                 href="https://tyk.io/docs/getting-started/tyk-components/gateway/"
                 target="_blank"
               >
-                <LearnMoreButton className={`${buttonClassName} md:ml-0`}>
+                <LearnMoreButton
+                  className={`${buttonClassName} md:ml-0`}
+                  aria-label="Learn More about Tyk API Gateway"
+                >
                   {
                     trads[locale][
                       "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
