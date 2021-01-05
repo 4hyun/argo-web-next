@@ -636,7 +636,7 @@ const WaveAnimBg = () => {
     };
     ready();
     tweenCurves();
-    requestAnimationFrameRef.current = requestAnimationFrame(animate);
+    animate();
     /* set opacity on component mount */
     setOpacity(OPACITY_END);
     return () => {
