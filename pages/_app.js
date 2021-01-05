@@ -10,9 +10,9 @@ function MyApp({ Component, pageProps }) {
         <title>Argo Pacific Inc. | Tyk API Gateway in South Korea</title>
         <link rel="preconnect" href="https://fonts.gstatic.com"></link>
         <link
-          href="https://fonts.googleapis.com/css2?family=Abel&family=Open+Sans:wght@300;400;600;800&family=Poppins:wght@300;400;700&family=PT+Sans:ital,wght@0,700;1,400;1,700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&family=Poppins:wght@300;400;700&display=swap"
           rel="stylesheet"
-        ></link>
+        />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#0a29ca" />
         <meta name="apple-mobile-web-app-status-bar" content="#0a29ca" />

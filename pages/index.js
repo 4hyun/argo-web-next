@@ -71,7 +71,7 @@ const GetInTouchButton = styled.button`
   flex-direction: row;
   align-items: flex-start;
   background: var(--argo-blue);
-  font-family: PT Sans;
+  font-family: Open sans;
   font-style: normal;
   font-weight: bold;
   font-size: 0.8rem;
@@ -189,7 +189,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      {false && <WaveAnimBg />}
+      {bgCanvasLoaded && <WaveAnimBg />}
     </div>
   );
 }

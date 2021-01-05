@@ -21,7 +21,7 @@ const WaveAnimBg = () => {
       w1 = (w - minX * 2 - varX) / 4,
       //   piRatio = Math.PI / 180,
       debug = false,
-      clearTheFrame = true,
+      // clearTheFrame = true,
       tension = 0.5,
       numberOfCurves = 50,
       TimeOnCurve = 1 / numberOfCurves,
@@ -124,31 +124,31 @@ const WaveAnimBg = () => {
     };
 
     var clearFrame = function () {
-      if (clearTheFrame == true) {
-        $.clearRect(minX - 1, 0, w - minX * 2 + 2, h); // only clear the bits we draw on
-      }
+      // if (clearTheFrame == true) {
+      $.clearRect(minX - 1, 0, w - minX * 2 + 2, h); // only clear the bits we draw on
+      // }
 
       //draw quadratic curves that contain the points for the animation
-      if (debug == true) {
-        $.strokeStyle = "grey";
-        $.beginPath();
-        $.moveTo(curve1.x1, curve1.y1);
-        $.quadraticCurveTo(curve1.x2, curve1.y2, curve1.x3, curve1.y3);
+      // if (debug == true) {
+      //   $.strokeStyle = "grey";
+      //   $.beginPath();
+      //   $.moveTo(curve1.x1, curve1.y1);
+      //   $.quadraticCurveTo(curve1.x2, curve1.y2, curve1.x3, curve1.y3);
 
-        $.moveTo(curve2.x1, curve2.y1);
-        $.quadraticCurveTo(curve2.x2, curve2.y2, curve2.x3, curve2.y3);
+      //   $.moveTo(curve2.x1, curve2.y1);
+      //   $.quadraticCurveTo(curve2.x2, curve2.y2, curve2.x3, curve2.y3);
 
-        $.moveTo(curve3.x1, curve3.y1);
-        $.quadraticCurveTo(curve3.x2, curve3.y2, curve3.x3, curve3.y3);
+      //   $.moveTo(curve3.x1, curve3.y1);
+      //   $.quadraticCurveTo(curve3.x2, curve3.y2, curve3.x3, curve3.y3);
 
-        $.moveTo(curve4.x1, curve4.y1);
-        $.quadraticCurveTo(curve4.x2, curve4.y2, curve4.x3, curve4.y3);
+      //   $.moveTo(curve4.x1, curve4.y1);
+      //   $.quadraticCurveTo(curve4.x2, curve4.y2, curve4.x3, curve4.y3);
 
-        $.moveTo(curve5.x1, curve5.y1);
-        $.quadraticCurveTo(curve5.x2, curve5.y2, curve5.x3, curve5.y3);
-        $.stroke();
-        $.closePath();
-      }
+      //   $.moveTo(curve5.x1, curve5.y1);
+      //   $.quadraticCurveTo(curve5.x2, curve5.y2, curve5.x3, curve5.y3);
+      //   $.stroke();
+      //   $.closePath();
+      // }
     };
 
     var tweenCurves = function () {
@@ -596,8 +596,8 @@ const WaveAnimBg = () => {
     var animate = function () {
       clearFrame();
 
-      $.lineWidth = 2;
-      $.globalAlpha = 0.4;
+      $.lineWidth = 1;
+      // $.globalAlpha = 0.4;
 
       CurvesArray[0] = [
         curve1.x1,
@@ -646,7 +646,7 @@ const WaveAnimBg = () => {
   return (
     <canvas
       ref={canvasRef}
-      className={`absolute h-1/5 top-2/5 lg:h-1/3 lg:top-1/3 w-screen transition-opacity duration-1000 ${opacity}`}
+      className={`absolute h-1/5 top-2/5 w-screen transition-opacity duration-1000 ${opacity}`}
     ></canvas>
   );
 };
