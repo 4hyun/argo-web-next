@@ -129,7 +129,6 @@ const LangSwitch = () => {
 
 const Navbar = () => {
   const { lang } = useTranslationsContext();
-  console.log("lang : ", lang);
 
   return (
     <Container>

@@ -54,17 +54,29 @@ const CardHeading = styled.h3`
   ${tw`leading-tight w-full text-3xl font-black whitespace-pre-line`}
 `;
 
-const LicenseFeatureList = ({ featureList, twClasses }) => (
+const LicenseFeatureHighlightList = ({ featureList, twClasses }) => (
   <ul className={`space-y-0.5 ${twClasses} ff-open-sans text-base`}>
-    {featureList.map((featureItem) => (
-      <li className="text-center whitespace-pre">{featureItem}</li>
+    {featureList.map((featureItem, i) => (
+      <li className="text-center whitespace-pre" key={i}>
+        {featureItem}
+      </li>
     ))}
   </ul>
 );
-const DesktopLicenseFeatureList = (props) => <LicenseFeatureList {...props} />;
+const DesktopLicenseFeatureHighlightList = (props) => (
+  <LicenseFeatureHighlightList {...props} />
+);
 
-const Card = ({ priceData }) => {
+const AllFeatureList = styled.ul`
+  ${tw`font-bold ml-2 xl:ml-0`}
+`;
+const FeatureItem = styled.li`
+  ${tw`mb-2 flex items-center space-x-2`}
+`;
+
+const Card = ({ priceData, addInquiryItem, removeInquiryItem }) => {
   const {
+    id,
     price,
     price_unit,
     heading,
@@ -81,33 +93,41 @@ const Card = ({ priceData }) => {
         <CardHeading>{heading && specialHeadingParser(heading)}</CardHeading>
         <MobilePriceInquireButton>{cta_text}</MobilePriceInquireButton>
       </CardHeadingContainer>
-      <DesktopLicenseFeatureList
+      <DesktopLicenseFeatureHighlightList
         featureList={featureList}
         twClasses="hidden xl:block"
       />
-      <ul className="desc-list font-bold ml-2 xl:ml-0">
-        {desc_list.map((desc_item) => (
-          <li className="mb-2 flex items-center space-x-2">
+      <AllFeatureList>
+        {desc_list.map((desc_item, i) => (
+          <FeatureItem key={i}>
             <GreenCheck size="20" />
             <span>{desc_item}</span>
-          </li>
+          </FeatureItem>
         ))}
-      </ul>
+      </AllFeatureList>
       {cta_text && (
         <DesktopInquireButtonWrapper>
-          <DesktopPriceInquireButton>{cta_text}</DesktopPriceInquireButton>
+          <DesktopPriceInquireButton onClick={() => addInquiryItem(id)}>
+            {cta_text}
+          </DesktopPriceInquireButton>
         </DesktopInquireButtonWrapper>
       )}
     </CardWrapper>
   );
 };
 
-const PricingCards = ({ priceModels }) => {
+const PricingCards = ({ priceModels, addInquiryItem, removeInquiryItem }) => {
   return (
     <Container>
       {priceModels &&
         priceModels.map((priceData) => {
-          return <Card priceData={priceData} />;
+          return (
+            <Card
+              priceData={priceData}
+              addInquiryItem={addInquiryItem}
+              removeInquiryItem={removeInquiryItem}
+            />
+          );
         })}
     </Container>
   );

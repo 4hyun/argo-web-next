@@ -13,6 +13,7 @@ module.exports = {
           600: "#1E0AD4",
           700: "#250FAB",
         },
+        "tyk-green": "rgba(5, 217, 187, 1)",
         white: "#fff",
       },
       boxShadow: {

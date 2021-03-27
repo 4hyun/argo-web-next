@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { Close } from "components/Icons";
+import styled from "styled-components";
+import tw from "twin.macro";
 
-const Form = () => {
+const InquiryItemsContainer = styled.div`
+  ${tw`flex flex-col pt-4 px-4 space-y-2`}
+`;
+const InquiryItem = styled.div`
+  ${tw`flex py-4 pl-3 pr-2 flex-grow-0 items-center rounded-lg text-white font-bold space-x-2`}
+  /* tyk-green */
+  max-width: fit-content;
+  box-shadow: 0px 1px 4px 0px rgba(5, 217, 187, 1);
+  height: 27px;
+  background: #05d9bb;
+  /* border-radius: 8px; */
+  /* Inside Auto Layout */
+  /*
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: 8px 0px;
+  */
+`;
+
+const Form = ({ inquiryItems, priceModelsMap, removeInquiryItem }) => {
+  useEffect(() => {
+    console.log("inquiryItems : ", inquiryItems);
+  });
   const inputFocusClassnames =
     "focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500";
   return (
@@ -10,6 +36,14 @@ const Form = () => {
       className="bg-white shadow-md overflow-hidden rounded-md lg:my-auto select-none"
       data-netlify="true"
     >
+      <InquiryItemsContainer>
+        {inquiryItems.map((inquiryItemId) => (
+          <InquiryItem key={inquiryItemId}>
+            <span>{priceModelsMap[inquiryItemId]}</span>
+            <Close size="20" onClick={() => removeInquiryItem(inquiryItemId)} />
+          </InquiryItem>
+        ))}
+      </InquiryItemsContainer>
       <input type="hidden" name="form-name" value="contact"></input>
       <div className="outer bg-white">
         <div className="form-body__wrapper px-4 md:px-3 py-4 bg-white">

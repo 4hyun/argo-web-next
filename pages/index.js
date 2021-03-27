@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,7 +16,12 @@ import { PricingCards } from "components/PricingCards";
 import { fetchStrapi } from "configs";
 import tw from "twin.macro";
 
+const CloseButton = styled(Close)`
+  ${tw`w-8 bg-white float-right cursor-pointer rounded-md transition-all transform active:translate-x-1 active:translate-y-1`}
+`;
+
 const ComingSoonMessageContainer = styled.div`
+  ${tw`xl:ml-10 select-none flex flex-col justify-center xl:justify-start xl:mr-4`}
   width: 90%;
   padding: 0 1rem;
   margin: 0 auto;
@@ -36,6 +41,7 @@ const Slogan = styled.p`
   display: flex;
   align-items: center;
   color: #111;
+  ${tw`leading-none font-normal mt-4`}
   @media (min-width: 1200px) {
     line-height: 57px;
     margin-top: 2rem;
@@ -51,6 +57,7 @@ const CtaMessage = styled(Slogan)`
 `;
 
 const Heading = styled.h2`
+  ${tw`mt-4`}
   font-family: Poppins;
   font-style: normal;
   font-weight: bold;
@@ -90,6 +97,7 @@ const MobileFormCloseBar = styled.div`
 `;
 
 const PricingSection = styled.div`
+  ${tw`flex my-0 mx-auto md:px-12 md:max-w-full justify-center relative h-3/6`}
   min-height: 500px;
   margin-bottom: 200px;
 `;
@@ -103,6 +111,12 @@ const FormWrapper = styled.div(({ formOpen }) => [
 
 export default function Home(props) {
   const { priceModels } = props;
+  const priceModelsMap = useMemo(() =>
+    priceModels.reduce((acc, cur) => (acc[cur.id] = cur.heading) && acc, {})
+  );
+  // console.log("priceModels :", priceModels);
+  // console.log("priceModelsMap : ", priceModelsMap);
+  const [inquiryItems, setInquiryItems] = useState([]);
   const [formOpen, openForm] = useState();
   // const [bgCanvasLoaded, setBgCanvasLoaded] = useState();
   const {
@@ -117,10 +131,20 @@ export default function Home(props) {
     openForm(true);
   };
 
-  /* Load canvas once the component mounted */
-  // useEffect(() => {
-  //   delayed(() => setBgCanvasLoaded(true), 4000);
-  // }, []);
+  const removeInquiryItem = (inquiryItemId) => {
+    inquiryItems.includes(inquiryItemId) &&
+      setInquiryItems((prevState) => {
+        prevState.splice(inquiryItemId.indexOf(inquiryItemId, 1));
+        console.log("prevState after delete : ", prevState);
+        return [...prevState];
+      });
+  };
+
+  const addInquiryItem = (inquiryItemId) => {
+    console.log(!!inquiryItems.includes(inquiryItemId));
+    if (inquiryItems.includes(inquiryItemId)) return;
+    setInquiryItems((prevState) => [...prevState, inquiryItemId]);
+  };
 
   return (
     <>
@@ -129,11 +153,11 @@ export default function Home(props) {
           <div
             className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center`}
           >
-            <ComingSoonMessageContainer className="xl:ml-10 select-none flex flex-col justify-center xl:justify-start xl:mr-4">
-              <Slogan className="leading-none font-normal mt-4">
+            <ComingSoonMessageContainer>
+              <Slogan>
                 {trads[locale]["comingsoon.components.Slogan.tyk"]}
               </Slogan>
-              <Heading className="mt-4">
+              <Heading>
                 {trads[locale]["comingsoon.components.Heading.main"]}
               </Heading>
               <CtaMessage className="leading-none font-normal mt-4">
@@ -166,22 +190,25 @@ export default function Home(props) {
             </ComingSoonMessageContainer>
             <FormWrapper formOpen={formOpen}>
               <MobileFormCloseBar>
-                <Close
-                  className={`w-8 bg-white float-right cursor-pointer rounded-md transition-all transform active:translate-x-1 active:translate-y-1`}
-                  onClick={delay(closeForm, 800)}
-                ></Close>
+                <CloseButton onClick={delay(closeForm, 800)}></CloseButton>
               </MobileFormCloseBar>
-              <GetInTouchForm />
+              <GetInTouchForm
+                inquiryItems={inquiryItems}
+                removeInquiryItem={removeInquiryItem}
+                priceModelsMap={priceModelsMap}
+              />
             </FormWrapper>
           </div>
         </main>
         {/* {bgCanvasLoaded && <WaveAnimBg />} */}
         <WaveAnimBg />
       </div>
-      <PricingSection
-        className={`flex my-0 mx-auto md:px-12 md:max-w-full justify-center relative h-3/6`}
-      >
-        <PricingCards priceModels={priceModels}></PricingCards>
+      <PricingSection>
+        <PricingCards
+          priceModels={priceModels}
+          addInquiryItem={addInquiryItem}
+          removeInquiryItem={removeInquiryItem}
+        ></PricingCards>
       </PricingSection>
     </>
   );
