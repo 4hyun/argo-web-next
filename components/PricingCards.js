@@ -55,7 +55,7 @@ const CardHeading = styled.h3`
 `;
 
 const LicenseFeatureList = ({ featureList, twClasses }) => (
-  <ul className={`space-y-0.5 ${twClasses}`}>
+  <ul className={`space-y-0.5 ${twClasses} ff-open-sans text-base`}>
     {featureList.map((featureItem) => (
       <li className="text-center whitespace-pre">{featureItem}</li>
     ))}
