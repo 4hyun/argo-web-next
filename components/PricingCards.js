@@ -59,7 +59,7 @@ const MobilePriceInquireButton = styled(InquireButton)`
 `;
 
 const CardHeadingContainer = styled.div`
-  ${tw`flex flex-col flex-grow xl:flex-grow-0 xl:block space-y-4`}
+  ${tw`flex flex-col flex-grow xl:flex-grow-0 xl:block space-y-3`}
 `;
 const CardHeading = styled.h3`
   ${tw`leading-tight w-full text-3xl font-black whitespace-pre-line`}

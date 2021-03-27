@@ -15,8 +15,11 @@ const InquiryItem = styled.div`
   background: #05d9bb;
 `;
 const Label = tw.label`block text-sm font-medium text-gray-700`;
+const HiddenLabel = styled(Label)`
+  ${tw`hidden`}
+`;
 
-const HiddenCheckbox = tw.input`hidden`;
+const HiddenInput = tw.input`hidden`;
 
 const Input = tw.input`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`;
 
@@ -76,6 +79,7 @@ const Form = ({
       return;
     }
     let formData = new FormData(ref.current);
+    // console.log(">>DEBUG : ", new URLSearchParams(formData).toString());
     try {
       await fetch("/", {
         method: "POST",
@@ -100,6 +104,7 @@ const Form = ({
       onSubmit={netlifyFormSubmit}
       ref={ref}
     >
+      <input type="hidden" name="form-name" value="contact"></input>
       <InquiryItemsContainer>
         {inquiryItems.map((inquiryItemId) => (
           <>
@@ -110,19 +115,17 @@ const Form = ({
                 onClick={() => removeInquiryItem(inquiryItemId)}
               />
             </InquiryItem>
-            <HiddenCheckbox
+            <HiddenLabel htmlFor={inquiryItemId}>Drop us a line</HiddenLabel>
+            <HiddenInput
               key={`${inquiryItemId}_h`}
-              type="checkbox"
+              type="hidden"
               name={priceModelsMap[inquiryItemId]}
               id={inquiryItemId}
-              value="selected"
-              readOnly
-              checked
-            />
+              value="inquiring"
+            ></HiddenInput>
           </>
         ))}
       </InquiryItemsContainer>
-      <input type="hidden" name="form-name" value="contact"></input>
       <div className="outer bg-white">
         <div className="form-body__wrapper px-4 md:px-3 py-4 bg-white">
           <div className="grid lg:grid-cols-6 grid-cols-12 gap-4">
