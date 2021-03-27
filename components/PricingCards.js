@@ -13,17 +13,27 @@ const featureParser = (feature) => {
 
 const specialHeadingParser = (heading) => heading.replace(/ /g, "\n");
 
-const GreenCheck = styled(Check)`
+const GreenCheckWrapper = styled.div`
   width: 22px;
+  height: 22px;
+  max-width: 22px;
+  max-height: 22px;
+`;
+const GreenCheck = styled(Check)`
   color: #04cdb8;
 `;
 
 const Container = styled.div`
   ${tw`flex flex-col px-6 xl:px-0 xl:flex-row space-y-8 xl:space-y-0 xl:space-x-8`}
+  @media (max-width: 1024px) {
+    & {
+      justify-content: space-between;
+    }
+  }
 `;
 
 const CardWrapper = styled.div`
-  ${tw`flex flex-row xl:flex-col flex-grow shadow-lg xl:space-y-5 p-10 rounded-xl focus:outline-none`}
+  ${tw`flex flex-row xl:flex-col flex-grow shadow-lg xl:space-y-5 px-8 xl:px-10 py-10 rounded-xl focus:outline-none`}
   & {
     flex-basis: 0;
   }
@@ -102,7 +112,9 @@ const Card = ({ priceData, addInquiryItem, removeInquiryItem }) => {
       <AllFeatureList>
         {desc_list.map((desc_item, i) => (
           <FeatureItem key={i}>
-            <GreenCheck size="20" />
+            <GreenCheckWrapper>
+              <GreenCheck size={20} />
+            </GreenCheckWrapper>
             <span>{desc_item}</span>
           </FeatureItem>
         ))}
