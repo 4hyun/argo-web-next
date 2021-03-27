@@ -14,6 +14,7 @@ import { delay, delayed } from "utils/delay";
 import { useTranslationsContext } from "contexts/Translations";
 import { PricingCards } from "components/PricingCards";
 import { fetchStrapi } from "configs";
+import tw from "twin.macro";
 
 const ComingSoonMessageContainer = styled.div`
   width: 90%;
@@ -70,29 +71,35 @@ const Heading = styled.h2`
   }
 `;
 
-const BlueButton = styled(Button)`
+const StyledButton = styled(Button)`
+  ${tw`flex rounded-full py-2 px-4 md:px-6 md:ml-0 hover:border-solid border-2 border-transparent focus:outline-none whitespace-nowrap transition-all transform active:translate-x-1 active:translate-y-1`}
   @media (min-width: 401px) {
     font-size: 1rem;
   }
 `;
 
-const MobileFormCloseBar = styled.div`
-  /* position: absolute; */
-  /* subtract px-4 from width */
-  height: 62px;
-  /* TODO: apply padding as tailwindcss */
-  padding: 12px 16px;
+const GetInTouchButton = styled(StyledButton)`
+  ${tw`lg:hidden`}
 `;
 
-const buttonActiveClassname =
-  "transition-all transform active:translate-x-1 active:translate-y-1";
+const LearnMoreButton = styled(StyledButton)``;
 
-const buttonClassName = `flex rounded-full py-1 px-4 md:px-6 hover:border-solid border-2 border-transparent hover:border-argo-blue-500 focus:outline-none whitespace-nowrap ${buttonActiveClassname}`;
+const MobileFormCloseBar = styled.div`
+  ${tw`bg-argo-blue-400 lg:hidden py-3 px-4`}
+  height: 62px;
+`;
 
 const PricingSection = styled.div`
   min-height: 500px;
   margin-bottom: 200px;
 `;
+
+const FormWrapper = styled.div(({ formOpen }) => [
+  tw`lg:relative lg:flex lg:bg-transparent lg:w-5/12 `,
+  tw`absolute left-0 top-0 w-screen h-full flex justify-center px-4 flex-col bg-argo-blue-400`,
+  formOpen && tw`flex`,
+  !formOpen && tw`hidden`,
+]);
 
 export default function Home(props) {
   const { priceModels } = props;
@@ -102,18 +109,14 @@ export default function Home(props) {
   const {
     lang: { locale },
   } = useTranslationsContext();
-  const formWrapperClassnames = {
-    open: "flex",
-    close: "hidden",
-    desktop: "lg:relative lg:flex lg:bg-transparent lg:w-5/12",
-    mobile:
-      "form-wrapper absolute left-0 top-0 w-screen h-full flex justify-center px-4 flex-col bg-argo-blue-400",
-  };
+
   const closeForm = () => {
+    console.log("closeForm");
     openForm(false);
   };
 
   const showForm = () => {
+    console.log("showForm");
     openForm(true);
   };
 
@@ -140,8 +143,7 @@ export default function Home(props) {
                 {trads[locale]["comingsoon.components.Slogan.ctamessage"]}
               </CtaMessage>
               <div className="coming-soon-action-button-container flex space-x-4 lg:space-x-0 mt-5">
-                <BlueButton
-                  className={`get-in-touch-btn ${buttonClassName} lg:hidden`}
+                <GetInTouchButton
                   onClick={delay(showForm, 800)}
                   aria-label="Inquire about Tyk API Gateway"
                 >
@@ -150,49 +152,37 @@ export default function Home(props) {
                       "comingsoon.components.EmailInputContainer.button.getintouch"
                     ]
                   }
-                </BlueButton>
+                </GetInTouchButton>
                 <a
                   href="https://tyk.io/docs/getting-started/tyk-components/gateway/"
                   target="_blank"
                 >
-                  <BlueButton
-                    className={`learn-more-btn ${buttonClassName} md:ml-0`}
-                    aria-label="Learn More about Tyk API Gateway"
-                  >
+                  <LearnMoreButton aria-label="Learn More about Tyk API Gateway">
                     {
                       trads[locale][
                         "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
                       ]
                     }
-                  </BlueButton>
+                  </LearnMoreButton>
                 </a>
               </div>
             </ComingSoonMessageContainer>
-
-            <div
-              className={`${formWrapperClassnames.mobile} ${
-                formWrapperClassnames.desktop
-              } ${
-                formOpen
-                  ? formWrapperClassnames.open
-                  : formWrapperClassnames.close
-              }`}
-            >
-              <MobileFormCloseBar className="bg-argo-blue-400 lg:hidden">
+            <FormWrapper formOpen={formOpen}>
+              <MobileFormCloseBar>
                 <Close
-                  className={`w-8 bg-white float-right cursor-pointer rounded-md transform transition-all ${buttonActiveClassname}`}
+                  className={`w-8 bg-white float-right cursor-pointer rounded-md transition-all transform active:translate-x-1 active:translate-y-1`}
                   onClick={delay(closeForm, 800)}
                 ></Close>
               </MobileFormCloseBar>
               <GetInTouchForm />
-            </div>
+            </FormWrapper>
           </div>
         </main>
         {/* {bgCanvasLoaded && <WaveAnimBg />} */}
         <WaveAnimBg />
       </div>
       <PricingSection
-        className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center relative h-3/6`}
+        className={`flex my-0 mx-auto md:px-12 md:max-w-full justify-center relative h-3/6`}
       >
         <PricingCards priceModels={priceModels}></PricingCards>
       </PricingSection>
