@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Close } from "components/Icons";
 import styled from "styled-components";
 import tw from "twin.macro";
+import useDeviceDetect from "hooks/useDeviceDetect";
 
 const InquiryItemsContainer = styled.div`
   ${tw`flex flex-col pt-4 px-4 space-y-2`}
@@ -19,21 +20,49 @@ const Input = tw.input`mt-1 block w-full shadow-sm sm:text-sm border border-gray
 
 const Textarea = tw.textarea`shadow-sm mt-1 block w-full sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`;
 
-const SubmitButton = tw.button`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-base font-medium text-white bg-argo-blue-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full`;
+const SubmitButton = tw.button`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-base font-medium text-white bg-argo-blue-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full relative`;
+
+const Ping = ({ on }) => (
+  <span
+    class={`flex absolute h-3 w-3 top-1 right-1 -mt-1 -mr-1 ${
+      on ? "opacity-100" : "opacity-0"
+    }`}
+  >
+    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+    <span class="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
+  </span>
+);
 
 const SUBMIT_DEFAULT_MESSAGE = "Send";
 const SUBMIT_SUCCESS_MESSAGE = "Message Sent!";
 const SUBMIT_ERROR_MESSAGE = "Please click to retry.";
+const PING_ON = true;
+const PING_OFF = false;
 
-const Form = ({ inquiryItems, priceModelsMap, removeInquiryItem }) => {
+const Form = ({
+  inquiryItems,
+  priceModelsMap,
+  removeInquiryItem,
+  closeForm,
+}) => {
   const ref = useRef();
+  const { isMobile } = useDeviceDetect();
+  const [pingOn, setPing] = useState(PING_OFF);
   const [submitButtonMessage, setSubmitButtonMessage] = useState(
     SUBMIT_DEFAULT_MESSAGE
   );
-  const handleFormSubmitStatus = (statusMessage) =>
+  const handleFormSubmitStatus = (statusMessage) => {
     setSubmitButtonMessage(statusMessage);
+    if (isMobile) {
+      setPing(PING_ON);
+    }
+  };
   const netlifyFormSubmit = async (e) => {
     e.preventDefault();
+    if (isMobile && submitButtonMessage === SUBMIT_SUCCESS_MESSAGE) {
+      setPing(PING_OFF);
+      closeForm();
+    }
     if (submitButtonMessage === SUBMIT_SUCCESS_MESSAGE) {
       ref.current.reset();
       removeInquiryItem("all");
@@ -57,6 +86,9 @@ const Form = ({ inquiryItems, priceModelsMap, removeInquiryItem }) => {
         body: new URLSearchParams(formData).toString(),
       });
       handleFormSubmitStatus(SUBMIT_SUCCESS_MESSAGE);
+      // isMobile && setTimeout(() => {
+      //   closeForm()
+      // }, 1000);
     } catch (error) {
       handleFormSubmitStatus(SUBMIT_ERROR_MESSAGE);
     }
@@ -114,10 +146,13 @@ const Form = ({ inquiryItems, priceModelsMap, removeInquiryItem }) => {
             </div>
           </div>
         </div>
-        <div className="form-button__wrapper px-4 py-3 bg-gray-50 text-right sm:px-6">
-          <SubmitButton type="submit" aria-label="submit">
-            {submitButtonMessage}
-          </SubmitButton>
+        <div className="form-footer px-4 py-3 bg-gray-50 text-right sm:px-6 ">
+          <div className="form-button-wrapper relative">
+            <SubmitButton type="submit" aria-label="submit">
+              {submitButtonMessage}
+            </SubmitButton>
+            <Ping on={pingOn} />
+          </div>
         </div>
       </div>
     </form>

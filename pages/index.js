@@ -17,7 +17,7 @@ import { fetchStrapi } from "configs";
 import tw from "twin.macro";
 
 const CloseButton = styled(Close)`
-  ${tw`w-8 bg-white float-right cursor-pointer rounded-md transition-all transform active:translate-x-1 active:translate-y-1`}
+  ${tw`w-8 h-8 bg-white float-right cursor-pointer rounded-md transition-all transform active:translate-x-1 active:translate-y-1`}
 `;
 
 const ComingSoonMessageContainer = styled.div`
@@ -92,7 +92,7 @@ const GetInTouchButton = styled(StyledButton)`
 const LearnMoreButton = styled(StyledButton)``;
 
 const MobileFormCloseBar = styled.div`
-  ${tw`bg-argo-blue-400 lg:hidden py-3 px-4`}
+  ${tw`flex justify-between bg-argo-blue-400 lg:hidden py-3 px-4`}
   height: 62px;
 `;
 
@@ -104,7 +104,7 @@ const PricingSection = styled.div`
 
 const FormWrapper = styled.div(({ formOpen }) => [
   tw`lg:relative lg:flex lg:bg-transparent lg:w-5/12 `,
-  tw`absolute left-0 top-0 w-screen h-full flex justify-center px-4 flex-col bg-argo-blue-400`,
+  tw`fixed inset-0 w-screen h-full flex justify-center px-4 flex-col bg-argo-blue-400`,
   formOpen && tw`flex`,
   !formOpen && tw`hidden`,
 ]);
@@ -114,8 +114,6 @@ export default function Home(props) {
   const priceModelsMap = useMemo(() =>
     priceModels.reduce((acc, cur) => (acc[cur.id] = cur.heading) && acc, {})
   );
-  // console.log("priceModels :", priceModels);
-  // console.log("priceModelsMap : ", priceModelsMap);
   const [inquiryItems, setInquiryItems] = useState([]);
   const [formOpen, openForm] = useState();
   // const [bgCanvasLoaded, setBgCanvasLoaded] = useState();
@@ -194,12 +192,16 @@ export default function Home(props) {
             </ComingSoonMessageContainer>
             <FormWrapper formOpen={formOpen}>
               <MobileFormCloseBar>
+                <div className="text-white text-lg ff-open-sans font-bold ">
+                  Let's get in touch
+                </div>
                 <CloseButton onClick={delay(closeForm, 800)}></CloseButton>
               </MobileFormCloseBar>
               <GetInTouchForm
                 inquiryItems={inquiryItems}
                 removeInquiryItem={removeInquiryItem}
                 priceModelsMap={priceModelsMap}
+                closeForm={closeForm}
               />
             </FormWrapper>
           </div>
