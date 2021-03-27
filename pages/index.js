@@ -132,6 +132,10 @@ export default function Home(props) {
   };
 
   const removeInquiryItem = (inquiryItemId) => {
+    if (inquiryItemId === "all") {
+      setInquiryItems([]);
+      return;
+    }
     inquiryItems.includes(inquiryItemId) &&
       setInquiryItems((prevState) => {
         prevState.splice(inquiryItemId.indexOf(inquiryItemId, 1));

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Check } from "components/Icons";
 import RoundedBlueButton from "components/Button";
 import tw from "twin.macro";
+import { scroll, animateScroll } from "react-scroll";
 
 /* Utils */
 const featureParser = (feature) => {
@@ -73,7 +74,7 @@ const AllFeatureList = styled.ul`
 const FeatureItem = styled.li`
   ${tw`mb-2 flex items-center space-x-2`}
 `;
-
+const scrollToTop = () => animateScroll.scrollToTop();
 const Card = ({ priceData, addInquiryItem, removeInquiryItem }) => {
   const {
     id,
@@ -86,6 +87,7 @@ const Card = ({ priceData, addInquiryItem, removeInquiryItem }) => {
     desc_list,
   } = priceData;
   const featureList = feature ? featureParser(feature) : null;
+
   return (
     <CardWrapper>
       {/* <h6 className="type">Awesome</h6> */}
@@ -107,7 +109,12 @@ const Card = ({ priceData, addInquiryItem, removeInquiryItem }) => {
       </AllFeatureList>
       {cta_text && (
         <DesktopInquireButtonWrapper>
-          <DesktopPriceInquireButton onClick={() => addInquiryItem(id)}>
+          <DesktopPriceInquireButton
+            onClick={() => {
+              addInquiryItem(id);
+              scrollToTop();
+            }}
+          >
             {cta_text}
           </DesktopPriceInquireButton>
         </DesktopInquireButtonWrapper>
@@ -120,9 +127,10 @@ const PricingCards = ({ priceModels, addInquiryItem, removeInquiryItem }) => {
   return (
     <Container>
       {priceModels &&
-        priceModels.map((priceData) => {
+        priceModels.map((priceData, i) => {
           return (
             <Card
+              key={i}
               priceData={priceData}
               addInquiryItem={addInquiryItem}
               removeInquiryItem={removeInquiryItem}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useRef, useState } from "react";
 import { Close } from "components/Icons";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -8,33 +8,68 @@ const InquiryItemsContainer = styled.div`
 `;
 const InquiryItem = styled.div`
   ${tw`flex py-4 pl-3 pr-2 flex-grow-0 items-center rounded-lg text-white font-bold space-x-2`}
-  /* tyk-green */
   max-width: fit-content;
   box-shadow: 0px 1px 4px 0px rgba(5, 217, 187, 1);
   height: 27px;
   background: #05d9bb;
-  /* border-radius: 8px; */
-  /* Inside Auto Layout */
-  /*
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 8px 0px;
-  */
 `;
+const Label = tw.label`block text-sm font-medium text-gray-700`;
+
+const Input = tw.input`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`;
+
+const Textarea = tw.textarea`shadow-sm mt-1 block w-full sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`;
+
+const SubmitButton = tw.button`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-base font-medium text-white bg-argo-blue-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full`;
+
+const SUBMIT_DEFAULT_MESSAGE = "Send";
+const SUBMIT_SUCCESS_MESSAGE = "Message Sent!";
+const SUBMIT_ERROR_MESSAGE = "Please click to retry.";
 
 const Form = ({ inquiryItems, priceModelsMap, removeInquiryItem }) => {
-  useEffect(() => {
-    console.log("inquiryItems : ", inquiryItems);
-  });
-  const inputFocusClassnames =
-    "focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500";
+  const ref = useRef();
+  const [submitButtonMessage, setSubmitButtonMessage] = useState(
+    SUBMIT_DEFAULT_MESSAGE
+  );
+  const handleFormSubmitStatus = (statusMessage) =>
+    setSubmitButtonMessage(statusMessage);
+  const netlifyFormSubmit = async (e) => {
+    e.preventDefault();
+    if (submitButtonMessage === SUBMIT_SUCCESS_MESSAGE) {
+      ref.current.reset();
+      removeInquiryItem("all");
+      setSubmitButtonMessage(SUBMIT_DEFAULT_MESSAGE);
+      return;
+    }
+    if (submitButtonMessage === SUBMIT_ERROR_MESSAGE) {
+      setSubmitButtonMessage(SUBMIT_DEFAULT_MESSAGE);
+      return;
+    }
+    let formData = new FormData(ref.current);
+    let inquiryItemsSelected = inquiryItems.length > 0;
+    inquiryItemsSelected &&
+      inquiryItems.forEach((inquiryItemId) => {
+        formData.append("inquiry_list", priceModelsMap[inquiryItemId]);
+      });
+    try {
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      });
+      handleFormSubmitStatus(SUBMIT_SUCCESS_MESSAGE);
+    } catch (error) {
+      handleFormSubmitStatus(SUBMIT_ERROR_MESSAGE);
+    }
+  };
+
   return (
     <form
       name="contact"
       method="POST"
       className="bg-white shadow-md overflow-hidden rounded-md lg:my-auto select-none"
       data-netlify="true"
+      onSubmit={netlifyFormSubmit}
+      ref={ref}
     >
       <InquiryItemsContainer>
         {inquiryItems.map((inquiryItemId) => (
@@ -49,62 +84,40 @@ const Form = ({ inquiryItems, priceModelsMap, removeInquiryItem }) => {
         <div className="form-body__wrapper px-4 md:px-3 py-4 bg-white">
           <div className="grid lg:grid-cols-6 grid-cols-12 gap-4">
             <div className="col-span-8">
-              <label
-                htmlFor="full_name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Full name
-              </label>
-              <input
+              <Label htmlFor="full_name">Full name</Label>
+              <Input
                 type="text"
                 name="full_name"
                 id="full_name"
                 autoComplete="given-name"
-                className={`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-2 ${inputFocusClassnames}`}
                 required
               />
             </div>
             <div className="col-span-12">
-              <label
-                htmlFor="email_address"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email address
-              </label>
-              <input
+              <Label htmlFor="email_address">Email address</Label>
+              <Input
                 type="text"
                 name="email_address"
                 id="email_address"
                 autoComplete="email"
-                className={`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-2 ${inputFocusClassnames}`}
                 required
               />
             </div>
             <div className="col-span-12">
-              <label
-                htmlFor="message"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Drop us a line
-              </label>
-              <textarea
+              <Label htmlFor="message">Drop us a line</Label>
+              <Textarea
                 id="message"
                 name="message"
                 rows="3"
-                className={`shadow-sm mt-1 block w-full sm:text-sm border border-gray-300 rounded-md px-2 py-2 ${inputFocusClassnames}`}
                 placeholder="for Tyk inquiries and others"
-              ></textarea>
+              ></Textarea>
             </div>
           </div>
         </div>
         <div className="form-button__wrapper px-4 py-3 bg-gray-50 text-right sm:px-6">
-          <button
-            type="submit"
-            aria-label="submit"
-            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-base font-medium text-white bg-argo-blue-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full"
-          >
-            Send
-          </button>
+          <SubmitButton type="submit" aria-label="submit">
+            {submitButtonMessage}
+          </SubmitButton>
         </div>
       </div>
     </form>
