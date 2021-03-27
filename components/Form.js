@@ -16,6 +16,8 @@ const InquiryItem = styled.div`
 `;
 const Label = tw.label`block text-sm font-medium text-gray-700`;
 
+const HiddenCheckbox = tw.input`hidden`;
+
 const Input = tw.input`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`;
 
 const Textarea = tw.textarea`shadow-sm mt-1 block w-full sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`;
@@ -74,11 +76,6 @@ const Form = ({
       return;
     }
     let formData = new FormData(ref.current);
-    let inquiryItemsSelected = inquiryItems.length > 0;
-    inquiryItemsSelected &&
-      inquiryItems.forEach((inquiryItemId) => {
-        formData.append("inquiry_list", priceModelsMap[inquiryItemId]);
-      });
     try {
       await fetch("/", {
         method: "POST",
@@ -105,10 +102,24 @@ const Form = ({
     >
       <InquiryItemsContainer>
         {inquiryItems.map((inquiryItemId) => (
-          <InquiryItem key={inquiryItemId}>
-            <span>{priceModelsMap[inquiryItemId]}</span>
-            <Close size="20" onClick={() => removeInquiryItem(inquiryItemId)} />
-          </InquiryItem>
+          <>
+            <InquiryItem key={inquiryItemId}>
+              <span>{priceModelsMap[inquiryItemId]}</span>
+              <Close
+                size="20"
+                onClick={() => removeInquiryItem(inquiryItemId)}
+              />
+            </InquiryItem>
+            <HiddenCheckbox
+              key={`${inquiryItemId}_h`}
+              type="checkbox"
+              name={priceModelsMap[inquiryItemId]}
+              id={inquiryItemId}
+              value="selected"
+              readOnly
+              checked
+            />
+          </>
         ))}
       </InquiryItemsContainer>
       <input type="hidden" name="form-name" value="contact"></input>
@@ -121,7 +132,7 @@ const Form = ({
                 type="text"
                 name="full_name"
                 id="full_name"
-                autoComplete="given-name"
+                autoComplete="on"
                 required
               />
             </div>
@@ -131,7 +142,7 @@ const Form = ({
                 type="text"
                 name="email_address"
                 id="email_address"
-                autoComplete="email"
+                autoComplete="on"
                 required
               />
             </div>
