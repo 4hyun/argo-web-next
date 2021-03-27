@@ -103,7 +103,6 @@ const FormWrapper = styled.div(({ formOpen }) => [
 
 export default function Home(props) {
   const { priceModels } = props;
-  console.log("priceModels : ", priceModels);
   const [formOpen, openForm] = useState();
   // const [bgCanvasLoaded, setBgCanvasLoaded] = useState();
   const {
@@ -111,12 +110,10 @@ export default function Home(props) {
   } = useTranslationsContext();
 
   const closeForm = () => {
-    console.log("closeForm");
     openForm(false);
   };
 
   const showForm = () => {
-    console.log("showForm");
     openForm(true);
   };
 
