@@ -15,9 +15,7 @@ const InquiryItem = styled.div`
   background: #05d9bb;
 `;
 const Label = tw.label`block text-sm font-medium text-gray-700`;
-const HiddenLabel = styled(Label)`
-  ${tw`hidden`}
-`;
+const HiddenLabel = tw(Label)`hidden`;
 
 const HiddenInput = tw.input`hidden`;
 
@@ -79,7 +77,7 @@ const Form = ({
       return;
     }
     let formData = new FormData(ref.current);
-    // console.log(">>DEBUG : ", new URLSearchParams(formData).toString());
+    console.log(">>DEBUG : ", new URLSearchParams(formData).toString());
     try {
       await fetch("/", {
         method: "POST",
@@ -115,11 +113,13 @@ const Form = ({
                 onClick={() => removeInquiryItem(inquiryItemId)}
               />
             </InquiryItem>
-            <HiddenLabel htmlFor={inquiryItemId}>Drop us a line</HiddenLabel>
+            <HiddenLabel htmlFor={inquiryItemId}>
+              {priceModelsMap[inquiryItemId]}
+            </HiddenLabel>
             <HiddenInput
               key={`${inquiryItemId}_h`}
               type="hidden"
-              name={priceModelsMap[inquiryItemId]}
+              name={inquiryItemId}
               id={inquiryItemId}
               value="inquiring"
             ></HiddenInput>

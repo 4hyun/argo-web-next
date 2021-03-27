@@ -214,6 +214,7 @@ export default function Home(props) {
           priceModels={priceModels}
           addInquiryItem={addInquiryItem}
           removeInquiryItem={removeInquiryItem}
+          showForm={showForm}
         ></PricingCards>
       </PricingSection>
     </>

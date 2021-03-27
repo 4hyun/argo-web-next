@@ -85,7 +85,7 @@ const FeatureItem = styled.li`
   ${tw`mb-2 flex items-center space-x-2`}
 `;
 const scrollToTop = () => animateScroll.scrollToTop();
-const Card = ({ priceData, addInquiryItem, removeInquiryItem }) => {
+const Card = ({ priceData, addInquiryItem, showForm }) => {
   const {
     id,
     price,
@@ -103,7 +103,14 @@ const Card = ({ priceData, addInquiryItem, removeInquiryItem }) => {
       {/* <h6 className="type">Awesome</h6> */}
       <CardHeadingContainer>
         <CardHeading>{heading && specialHeadingParser(heading)}</CardHeading>
-        <MobilePriceInquireButton>{cta_text}</MobilePriceInquireButton>
+        <MobilePriceInquireButton
+          onClick={() => {
+            addInquiryItem(id);
+            showForm();
+          }}
+        >
+          {cta_text}
+        </MobilePriceInquireButton>
       </CardHeadingContainer>
       <DesktopLicenseFeatureHighlightList
         featureList={featureList}
@@ -135,7 +142,12 @@ const Card = ({ priceData, addInquiryItem, removeInquiryItem }) => {
   );
 };
 
-const PricingCards = ({ priceModels, addInquiryItem, removeInquiryItem }) => {
+const PricingCards = ({
+  priceModels,
+  addInquiryItem,
+  removeInquiryItem,
+  showForm,
+}) => {
   return (
     <Container>
       {priceModels &&
@@ -146,6 +158,7 @@ const PricingCards = ({ priceModels, addInquiryItem, removeInquiryItem }) => {
               priceData={priceData}
               addInquiryItem={addInquiryItem}
               removeInquiryItem={removeInquiryItem}
+              showForm={showForm}
             />
           );
         })}
