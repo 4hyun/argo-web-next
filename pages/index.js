@@ -8,9 +8,12 @@ import styles from "../styles/Home.module.css";
 import ArgoComingSoon from "../public/logos/lettermark/dark.svg";
 import { At, Close } from "components/Icons";
 import trads from "../translations";
+import Button from "components/Button";
 import WaveAnimBg from "components/WaveAnimBg";
 import { delay, delayed } from "utils/delay";
 import { useTranslationsContext } from "contexts/Translations";
+import { PricingCards } from "components/PricingCards";
+import { fetchStrapi } from "configs";
 
 const ComingSoonMessageContainer = styled.div`
   width: 90%;
@@ -67,23 +70,11 @@ const Heading = styled.h2`
   }
 `;
 
-const GetInTouchButton = styled.button`
-  flex-direction: row;
-  align-items: flex-start;
-  background: var(--argo-blue);
-  font-family: Open sans;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 0.8rem;
-  line-height: 1.75;
-  color: #fff;
-  /* text-shadow: 3px 3px 0 #0500ff; */
+const BlueButton = styled(Button)`
   @media (min-width: 401px) {
     font-size: 1rem;
   }
 `;
-
-const LearnMoreButton = GetInTouchButton;
 
 const MobileFormCloseBar = styled.div`
   /* position: absolute; */
@@ -98,7 +89,14 @@ const buttonActiveClassname =
 
 const buttonClassName = `flex rounded-full py-1 px-4 md:px-6 hover:border-solid border-2 border-transparent hover:border-argo-blue-500 focus:outline-none whitespace-nowrap ${buttonActiveClassname}`;
 
-export default function Home() {
+const PricingSection = styled.div`
+  min-height: 500px;
+  margin-bottom: 200px;
+`;
+
+export default function Home(props) {
+  const { priceModels } = props;
+  console.log("priceModels : ", priceModels);
   const [formOpen, openForm] = useState();
   // const [bgCanvasLoaded, setBgCanvasLoaded] = useState();
   const {
@@ -125,72 +123,95 @@ export default function Home() {
   // }, []);
 
   return (
-    <div className={styles.container}>
-      <main className={`absolute flex items-center w-screen h-full z-10`}>
-        <div
-          className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center`}
-        >
-          <ComingSoonMessageContainer className="xl:ml-10 select-none flex flex-col justify-center xl:justify-start xl:mr-4">
-            <Slogan className="leading-none font-normal mt-4">
-              {trads[locale]["comingsoon.components.Slogan.tyk"]}
-            </Slogan>
-            <Heading className="mt-4">
-              {trads[locale]["comingsoon.components.Heading.main"]}
-            </Heading>
-            <CtaMessage className="leading-none font-normal mt-4">
-              {trads[locale]["comingsoon.components.Slogan.ctamessage"]}
-            </CtaMessage>
-            <div className="coming-soon-action-button-container flex space-x-4 lg:space-x-0 mt-5">
-              <GetInTouchButton
-                className={`${buttonClassName} lg:hidden`}
-                onClick={delay(showForm, 800)}
-                aria-label="Inquire about Tyk API Gateway"
-              >
-                {
-                  trads[locale][
-                    "comingsoon.components.EmailInputContainer.button.getintouch"
-                  ]
-                }
-              </GetInTouchButton>
-              <a
-                href="https://tyk.io/docs/getting-started/tyk-components/gateway/"
-                target="_blank"
-              >
-                <LearnMoreButton
-                  className={`${buttonClassName} md:ml-0`}
-                  aria-label="Learn More about Tyk API Gateway"
+    <>
+      <div className={styles.container}>
+        <main className={`absolute flex items-center w-screen h-full z-10`}>
+          <div
+            className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center`}
+          >
+            <ComingSoonMessageContainer className="xl:ml-10 select-none flex flex-col justify-center xl:justify-start xl:mr-4">
+              <Slogan className="leading-none font-normal mt-4">
+                {trads[locale]["comingsoon.components.Slogan.tyk"]}
+              </Slogan>
+              <Heading className="mt-4">
+                {trads[locale]["comingsoon.components.Heading.main"]}
+              </Heading>
+              <CtaMessage className="leading-none font-normal mt-4">
+                {trads[locale]["comingsoon.components.Slogan.ctamessage"]}
+              </CtaMessage>
+              <div className="coming-soon-action-button-container flex space-x-4 lg:space-x-0 mt-5">
+                <BlueButton
+                  className={`get-in-touch-btn ${buttonClassName} lg:hidden`}
+                  onClick={delay(showForm, 800)}
+                  aria-label="Inquire about Tyk API Gateway"
                 >
                   {
                     trads[locale][
-                      "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
+                      "comingsoon.components.EmailInputContainer.button.getintouch"
                     ]
                   }
-                </LearnMoreButton>
-              </a>
-            </div>
-          </ComingSoonMessageContainer>
+                </BlueButton>
+                <a
+                  href="https://tyk.io/docs/getting-started/tyk-components/gateway/"
+                  target="_blank"
+                >
+                  <BlueButton
+                    className={`learn-more-btn ${buttonClassName} md:ml-0`}
+                    aria-label="Learn More about Tyk API Gateway"
+                  >
+                    {
+                      trads[locale][
+                        "comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"
+                      ]
+                    }
+                  </BlueButton>
+                </a>
+              </div>
+            </ComingSoonMessageContainer>
 
-          <div
-            className={`${formWrapperClassnames.mobile} ${
-              formWrapperClassnames.desktop
-            } ${
-              formOpen
-                ? formWrapperClassnames.open
-                : formWrapperClassnames.close
-            }`}
-          >
-            <MobileFormCloseBar className="bg-argo-blue-400 lg:hidden">
-              <Close
-                className={`w-8 bg-white float-right cursor-pointer rounded-md transform transition-all ${buttonActiveClassname}`}
-                onClick={delay(closeForm, 800)}
-              ></Close>
-            </MobileFormCloseBar>
-            <GetInTouchForm />
+            <div
+              className={`${formWrapperClassnames.mobile} ${
+                formWrapperClassnames.desktop
+              } ${
+                formOpen
+                  ? formWrapperClassnames.open
+                  : formWrapperClassnames.close
+              }`}
+            >
+              <MobileFormCloseBar className="bg-argo-blue-400 lg:hidden">
+                <Close
+                  className={`w-8 bg-white float-right cursor-pointer rounded-md transform transition-all ${buttonActiveClassname}`}
+                  onClick={delay(closeForm, 800)}
+                ></Close>
+              </MobileFormCloseBar>
+              <GetInTouchForm />
+            </div>
           </div>
-        </div>
-      </main>
-      {/* {bgCanvasLoaded && <WaveAnimBg />} */}
-      <WaveAnimBg />
-    </div>
+        </main>
+        {/* {bgCanvasLoaded && <WaveAnimBg />} */}
+        <WaveAnimBg />
+      </div>
+      <PricingSection
+        className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center relative h-3/6`}
+      >
+        <PricingCards priceModels={priceModels}></PricingCards>
+      </PricingSection>
+    </>
   );
+}
+
+export async function getStaticProps() {
+  const path = "/price-models";
+  const res = await fetchStrapi(path);
+  const priceModels = await res.json();
+
+  return {
+    props: {
+      priceModels,
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every second
+    revalidate: 1, // In seconds
+  };
 }

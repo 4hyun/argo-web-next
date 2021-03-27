@@ -111,6 +111,7 @@ const LangSwitch = () => {
       {Object.keys(supportedLang).map((supportedLangKey) => {
         return (
           <LangButton
+            key={supportedLangKey}
             onClick={() => {
               switchLang(supportedLang[supportedLangKey].locale);
             }}
