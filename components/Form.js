@@ -17,7 +17,7 @@ const InquiryItem = styled.div`
 const Label = tw.label`block text-sm font-medium text-gray-700`;
 const HiddenLabel = tw(Label)`hidden`;
 
-const HiddenInput = tw.input`hidden`;
+const HiddenInput = tw.input``;
 
 const Input = tw.input`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`;
 
