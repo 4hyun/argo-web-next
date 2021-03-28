@@ -118,7 +118,6 @@ const Form = ({
             </HiddenLabel>
             <HiddenInput
               key={`${inquiryItemId}_h`}
-              type="hidden"
               name={inquiryItemId}
               id={inquiryItemId}
               value="inquiring"
