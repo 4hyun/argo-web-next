@@ -114,6 +114,7 @@ const Form = ({
           {priceModelsMap["6052083fcc2ae60d2498da6c"]}
         </HiddenLabel>
         <HiddenInput
+          type="hidden"
           key={`6052083fcc2ae60d2498da6c_h`}
           name={"6052083fcc2ae60d2498da6c"}
           id={"6052083fcc2ae60d2498da6c"}
