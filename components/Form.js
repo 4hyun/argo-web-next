@@ -15,7 +15,7 @@ const InquiryItem = styled.div`
   background: #05d9bb;
 `;
 const Label = tw.label`block text-sm font-medium text-gray-700`;
-const HiddenLabel = tw(Label)``;
+const HiddenLabel = tw(Label)`hidden`;
 
 const HiddenInput = tw.input``;
 
@@ -110,16 +110,15 @@ const Form = ({
             <Close size="20" onClick={() => removeInquiryItem(inquiryItemId)} />
           </InquiryItem>
         ))}
-        {["6052083fcc2ae60d2498da6c"].map((inquiryItemId) => (
+        {Object.entries(priceModelsMap).map(([inquiryItemId, heading]) => (
           <>
-            <HiddenLabel htmlFor={inquiryItemId}>
-              {priceModelsMap[inquiryItemId]}
-            </HiddenLabel>
+            <HiddenLabel htmlFor={inquiryItemId}>{heading}</HiddenLabel>
             <HiddenInput
+              type="hidden"
               key={`${inquiryItemId}_h`}
               name={inquiryItemId}
               id={inquiryItemId}
-              value="inquiring"
+              value={inquiryItems.includes(inquiryItemId) ? "inquiry" : ""}
             ></HiddenInput>
           </>
         ))}
