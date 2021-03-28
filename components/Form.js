@@ -105,26 +105,25 @@ const Form = ({
       <input type="hidden" name="form-name" value="contact"></input>
       <InquiryItemsContainer>
         {inquiryItems.map((inquiryItemId) => (
-          <>
-            <InquiryItem key={inquiryItemId}>
-              <span>{priceModelsMap[inquiryItemId]}</span>
-              <Close
-                size="20"
-                onClick={() => removeInquiryItem(inquiryItemId)}
-              />
-            </InquiryItem>
-          </>
+          <InquiryItem key={inquiryItemId}>
+            <span>{priceModelsMap[inquiryItemId]}</span>
+            <Close size="20" onClick={() => removeInquiryItem(inquiryItemId)} />
+          </InquiryItem>
+        ))}
+        {inquiryItems.map((inquiryItemId) => (
+          <div className="hidden">
+            <HiddenLabel htmlFor={inquiryItemId}>
+              {priceModelsMap[inquiryItemId]}
+            </HiddenLabel>
+            <HiddenInput
+              key={`${inquiryItemId}_h`}
+              name={inquiryItemId}
+              id={inquiryItemId}
+              value="inquiring"
+            ></HiddenInput>
+          </div>
         ))}
       </InquiryItemsContainer>
-      <HiddenLabel htmlFor="6052083fcc2ae60d2498da6c">
-        "Testing Tyk"
-      </HiddenLabel>
-      <HiddenInput
-        key="h_6052083fcc2ae60d2498da6c"
-        name="6052083fcc2ae60d2498da6c"
-        id="6052083fcc2ae60d2498da6c"
-        value="inquiring"
-      ></HiddenInput>
       <div className="outer bg-white">
         <div className="form-body__wrapper px-4 md:px-3 py-4 bg-white">
           <div className="grid lg:grid-cols-6 grid-cols-12 gap-4">
