@@ -110,19 +110,15 @@ const Form = ({
             <Close size="20" onClick={() => removeInquiryItem(inquiryItemId)} />
           </InquiryItem>
         ))}
-        {inquiryItems.map((inquiryItemId) => (
-          <div className="hidden">
-            <HiddenLabel htmlFor={inquiryItemId}>
-              {priceModelsMap[inquiryItemId]}
-            </HiddenLabel>
-            <HiddenInput
-              key={`${inquiryItemId}_h`}
-              name={inquiryItemId}
-              id={inquiryItemId}
-              value="inquiring"
-            ></HiddenInput>
-          </div>
-        ))}
+        <HiddenLabel htmlFor="6052083fcc2ae60d2498da6c">
+          {priceModelsMap["6052083fcc2ae60d2498da6c"]}
+        </HiddenLabel>
+        <HiddenInput
+          key={`6052083fcc2ae60d2498da6c_h`}
+          name={"6052083fcc2ae60d2498da6c"}
+          id={"6052083fcc2ae60d2498da6c"}
+          value="inquiring"
+        ></HiddenInput>
       </InquiryItemsContainer>
       <div className="outer bg-white">
         <div className="form-body__wrapper px-4 md:px-3 py-4 bg-white">
