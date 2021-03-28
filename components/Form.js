@@ -15,7 +15,7 @@ const InquiryItem = styled.div`
   background: #05d9bb;
 `;
 const Label = tw.label`block text-sm font-medium text-gray-700`;
-const HiddenLabel = tw(Label)``;
+const HiddenLabel = tw(Label)`hidden`;
 
 const HiddenInput = tw.input``;
 
@@ -118,7 +118,7 @@ const Form = ({
           key={`6052083fcc2ae60d2498da6c_h`}
           name={"6052083fcc2ae60d2498da6c"}
           id={"6052083fcc2ae60d2498da6c"}
-          value="inquiring"
+          value="inquiring2"
         ></HiddenInput>
       </InquiryItemsContainer>
       <div className="outer bg-white">
