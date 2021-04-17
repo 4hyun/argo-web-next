@@ -2,5 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "es6"
-  }
+  },
+  "exclude": ["node_modules"]
 }

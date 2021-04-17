@@ -9,9 +9,15 @@ const STRAPI_AUTH_TOKEN =
     : process.env.DEV_STRAPI_AUTH;
 const headers = { Authorization: `Bearer ${STRAPI_AUTH_TOKEN}` };
 
-const fetchStrapi = (path) =>
-  fetch(`${BASE_URL}${path}`, {
-    headers,
-  });
+export const getStrapiURL = (path = "") => {
+  return `${
+    process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337"
+  }${path}`;
+};
 
-export { fetchStrapi };
+export const fetchStrapi = async (path) => {
+  const requestUrl = getStrapiURL(path);
+  const response = await fetch(requestUrl, headers);
+  const data = await response.json();
+  return data;
+};

@@ -10,7 +10,7 @@ import { At, Close } from "components/Icons";
 import trads from "../translations";
 import Button from "components/Button";
 import WaveAnimBg from "components/WaveAnimBg";
-import { delay, delayed } from "utils/delay";
+import { delay, delayed } from "lib/delay";
 import { useTranslationsContext } from "contexts/Translations";
 import { PricingCards } from "components/PricingCards";
 import { fetchStrapi } from "configs";
