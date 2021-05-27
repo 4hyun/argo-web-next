@@ -10,14 +10,15 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(null)
 
   const toggleMenu = () => setMenuOpen(!menuOpen)
+  const closeMenu = () => setMenuOpen(null)
   return (
     <Wrapper id="argo-elastic-menu">
-      <Menu isOpen={menuOpen} onClose={toggleMenu}>
+      <Menu isOpen={menuOpen} onClose={closeMenu}>
         <MenuList>
           {/* <Logo /> */}
           {menuData.map(({ item: { mid, title, slug } }) => (
             <Link key={mid} href={`/${slug}`} passHref>
-              <MenuItemA>{title}</MenuItemA>
+              <MenuItemA onClick={closeMenu}>{title}</MenuItemA>
             </Link>
           ))}
         </MenuList>
