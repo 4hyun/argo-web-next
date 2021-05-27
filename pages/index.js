@@ -13,7 +13,7 @@ import WaveAnimBg from "components/WaveAnimBg";
 import { delay, delayed } from "lib/delay";
 import { useTranslationsContext } from "contexts/Translations";
 import { PricingCards } from "components/PricingCards";
-import { fetchStrapi } from "configs";
+import { fetchStrapi } from "lib/api";
 import tw from "twin.macro";
 
 const CloseButton = styled(Close)`
