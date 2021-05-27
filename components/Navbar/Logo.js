@@ -1,7 +1,7 @@
 import tw, { styled } from "twin.macro"
-import DarkLogo from "../../public/logos/lettermark/logo-full_white-long-sm.svg"
+import { LogoFullDarkHorizontal } from "components/Brand"
 
-const Logo = styled(DarkLogo)`
+const Logo = styled(LogoFullDarkHorizontal)`
   ${tw`w-auto`}
   ${tw`lg:(h-full px-0)`}
 `

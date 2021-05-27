@@ -20,6 +20,7 @@ const Container = styled.div`
 `
 
 const MobileNavbarContainer = styled.nav`
+  ${tw`backdrop-filter backdrop-blur-md`}
   display: none;
   width: 100%;
 `
@@ -40,7 +41,7 @@ const DektopNavbarContainer = styled.nav`
   ${tw`flex w-full mx-auto justify-between bg-transparent`}
 `
 
-const DesktopNavbar = ({ renderLangSwitch }) => {
+const DesktopNavbar = ({ renderLangSwitch, toggleMenu, menuOpen }) => {
   return (
     <DektopNavbarContainer>
       <Link href="/">
@@ -49,16 +50,16 @@ const DesktopNavbar = ({ renderLangSwitch }) => {
         </LogoA>
       </Link>
       {renderLangSwitch()}
-      <Hamburger />
+      <Hamburger toggled={menuOpen} toggle={toggleMenu} />
     </DektopNavbarContainer>
   )
 }
 
-const MobileNavbar = ({ renderLangSwitch }) => {
+const MobileNavbar = ({ renderLangSwitch, toggleMenu, menuOpen }) => {
   return (
     <MobileNavbarContainer>
       {renderLangSwitch()}
-      <Hamburger />
+      <Hamburger toggled={menuOpen} toggle={toggleMenu} />
     </MobileNavbarContainer>
   )
 }
@@ -89,13 +90,13 @@ const LangSwitch = () => {
   )
 }
 
-const Navbar = () => {
+const Navbar = ({ menuOpen, toggleMenu }) => {
   const { lang } = useTranslationsContext()
 
   return (
     <Container>
-      <DesktopNavbar renderLangSwitch={LangSwitch} />
-      <MobileNavbar renderLangSwitch={LangSwitch} />
+      <DesktopNavbar renderLangSwitch={LangSwitch} toggleMenu={toggleMenu} menuOpen={menuOpen} />
+      <MobileNavbar renderLangSwitch={LangSwitch} toggleMenu={toggleMenu} menuOpen={menuOpen} />
     </Container>
   )
 }
