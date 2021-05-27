@@ -10,7 +10,7 @@ const PublishedAt = styled.span`
   ${tw`text-xs`}
 `
 
-const Wrapper = styled.div`
+const Wrapper = styled.article`
   ${tw`rounded-lg bg-white p-4 shadow-lg`}
   ${AuthorLabel},${PublishedAt} {
     ${tw`leading-tight`}
