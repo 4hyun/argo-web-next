@@ -1,93 +1,82 @@
-import React, { useRef, useState } from "react";
-import { Close } from "components/Icons";
-import styled from "styled-components";
-import tw from "twin.macro";
-import useDeviceDetect from "hooks/useDeviceDetect";
+import React, { useRef, useState } from "react"
+import { Close } from "components/Icons"
+import styled from "styled-components"
+import tw from "twin.macro"
+import useDeviceDetect from "hooks/useDeviceDetect"
 
 const InquiryItemsContainer = styled.div`
   ${tw`flex flex-col pt-4 px-4 space-y-2`}
-`;
+`
 const InquiryItem = styled.div`
   ${tw`flex py-4 pl-3 pr-2 flex-grow-0 items-center rounded-lg text-white font-bold space-x-2`}
   max-width: fit-content;
   box-shadow: 0px 1px 4px 0px rgba(5, 217, 187, 1);
   height: 27px;
   background: #05d9bb;
-`;
-const Label = tw.label`block text-sm font-medium text-gray-700`;
+`
+const Label = tw.label`block text-sm font-medium text-gray-700`
 
-const Input = tw.input`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`;
+const Input = tw.input`mt-1 block w-full shadow-sm sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`
 
-const Textarea = tw.textarea`shadow-sm mt-1 block w-full sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`;
+const Textarea = tw.textarea`shadow-sm mt-1 block w-full sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`
 
-const SubmitButton = tw.button`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-base font-medium text-white bg-argo-blue-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full relative`;
+const SubmitButton = tw.button`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-base font-medium text-white bg-argo-blue-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full relative`
 
 const Ping = ({ on }) => (
-  <span
-    className={`flex absolute h-3 w-3 top-1 right-1 -mt-1 -mr-1 ${
-      on ? "opacity-100" : "opacity-0"
-    }`}
-  >
+  <span className={`flex absolute h-3 w-3 top-1 right-1 -mt-1 -mr-1 ${on ? "opacity-100" : "opacity-0"}`}>
     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
     <span className="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
   </span>
-);
+)
 
-const SUBMIT_DEFAULT_MESSAGE = "Send";
-const SUBMIT_SUCCESS_MESSAGE = "Message Sent!";
-const SUBMIT_ERROR_MESSAGE = "Please click to retry.";
-const PING_ON = true;
-const PING_OFF = false;
+const SUBMIT_DEFAULT_MESSAGE = "Send"
+const SUBMIT_SUCCESS_MESSAGE = "Message Sent!"
+const SUBMIT_ERROR_MESSAGE = "Please click to retry."
+const PING_ON = true
+const PING_OFF = false
 
-const Form = ({
-  inquiryItems,
-  priceModelsMap,
-  removeInquiryItem,
-  closeForm,
-}) => {
-  const ref = useRef();
-  const { isMobile } = useDeviceDetect();
-  const [pingOn, setPing] = useState(PING_OFF);
-  const [submitButtonMessage, setSubmitButtonMessage] = useState(
-    SUBMIT_DEFAULT_MESSAGE
-  );
+const Form = ({ inquiryItems, priceModelsMap, removeInquiryItem, closeForm }) => {
+  const ref = useRef()
+  const { isMobile } = useDeviceDetect()
+  const [pingOn, setPing] = useState(PING_OFF)
+  const [submitButtonMessage, setSubmitButtonMessage] = useState(SUBMIT_DEFAULT_MESSAGE)
   const handleFormSubmitStatus = (statusMessage) => {
-    setSubmitButtonMessage(statusMessage);
+    setSubmitButtonMessage(statusMessage)
     if (isMobile) {
-      setPing(PING_ON);
+      setPing(PING_ON)
     }
-  };
+  }
   const netlifyFormSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     if (isMobile && submitButtonMessage === SUBMIT_SUCCESS_MESSAGE) {
-      setPing(PING_OFF);
-      closeForm();
+      setPing(PING_OFF)
+      closeForm()
     }
     if (submitButtonMessage === SUBMIT_SUCCESS_MESSAGE) {
-      ref.current.reset();
-      removeInquiryItem("all");
-      setSubmitButtonMessage(SUBMIT_DEFAULT_MESSAGE);
-      return;
+      ref.current.reset()
+      removeInquiryItem("all")
+      setSubmitButtonMessage(SUBMIT_DEFAULT_MESSAGE)
+      return
     }
     if (submitButtonMessage === SUBMIT_ERROR_MESSAGE) {
-      setSubmitButtonMessage(SUBMIT_DEFAULT_MESSAGE);
-      return;
+      setSubmitButtonMessage(SUBMIT_DEFAULT_MESSAGE)
+      return
     }
-    let formData = new FormData(ref.current);
+    let formData = new FormData(ref.current)
     try {
       await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams(formData).toString(),
-      });
-      handleFormSubmitStatus(SUBMIT_SUCCESS_MESSAGE);
+      })
+      handleFormSubmitStatus(SUBMIT_SUCCESS_MESSAGE)
       // isMobile && setTimeout(() => {
       //   closeForm()
       // }, 1000);
     } catch (error) {
-      handleFormSubmitStatus(SUBMIT_ERROR_MESSAGE);
+      handleFormSubmitStatus(SUBMIT_ERROR_MESSAGE)
     }
-  };
+  }
 
   return (
     <form
@@ -107,7 +96,7 @@ const Form = ({
           </InquiryItem>
         ))}
         {Object.entries(priceModelsMap).map(([inquiryItemId, heading]) => (
-          <div className="hidden">
+          <div className="hidden" key={`a-${inquiryItemId}`}>
             <Label htmlFor={inquiryItemId}>{heading}</Label>
             <Input
               type="hidden"
@@ -124,32 +113,15 @@ const Form = ({
           <div className="grid lg:grid-cols-6 grid-cols-12 gap-4">
             <div className="col-span-8">
               <Label htmlFor="full_name">Full name</Label>
-              <Input
-                type="text"
-                name="full_name"
-                id="full_name"
-                autoComplete="on"
-                required
-              />
+              <Input type="text" name="full_name" id="full_name" autoComplete="on" required />
             </div>
             <div className="col-span-12">
               <Label htmlFor="email_address">Email address</Label>
-              <Input
-                type="text"
-                name="email_address"
-                id="email_address"
-                autoComplete="on"
-                required
-              />
+              <Input type="text" name="email_address" id="email_address" autoComplete="on" required />
             </div>
             <div className="col-span-12">
               <Label htmlFor="message">Drop us a line</Label>
-              <Textarea
-                id="message"
-                name="message"
-                rows="3"
-                placeholder="for Tyk inquiries and others"
-              ></Textarea>
+              <Textarea id="message" name="message" rows="3" placeholder="for Tyk inquiries and others"></Textarea>
             </div>
           </div>
         </div>
@@ -163,7 +135,7 @@ const Form = ({
         </div>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default Form;
+export default Form

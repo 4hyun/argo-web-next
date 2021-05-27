@@ -1,33 +1,19 @@
 import React from "react"
-import Link from "next/link"
-import styled from "styled-components"
-import tw from "twin.macro"
+import tw, { styled } from "twin.macro"
+import LangButton from "./LanguageButton"
+import { Link, LogoA } from "./Link"
 import Hamburger from "components/Navbar/Hamburger"
-import DarkLogo from "../../public/logos/lettermark/logo-full_white-long-sm.svg"
+import Logo from "./Logo"
+
 import { useTranslationsContext, supportedLang } from "contexts/Translations"
 
-const LogoA = tw.a`flex items-center`
-const Logo = styled(DarkLogo)`
-  width: auto;
-  &,
-  & > * {
-    ${tw`h-8`}
-  }
-  ${tw`lg:(px-0)`}
-`
-
 const Container = styled.div`
-  position: fixed;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 105px;
-  max-height: 105px;
-  /* box-shadow: 0 2px 8px #222;
-  box-shadow: 0 2px 16px #2222220f; */
+  ${tw`fixed flex items-center h-16 max-h-16 lg:(absolute items-end) w-full`};
   background-color: var(--nav-bg);
   padding: 0 1rem;
   @media (min-width: 1200px) {
+    height: 105px;
+    max-height: 105px;
     padding: unset;
   }
   z-index: 20;
@@ -76,30 +62,6 @@ const MobileNavbar = ({ renderLangSwitch }) => {
     </MobileNavbarContainer>
   )
 }
-
-const LangButton = styled.span`
-  padding: 0 0.5rem;
-  cursor: pointer;
-  min-width: 45px;
-  font-weight: 400;
-  transition: all 0.1s ease;
-  text-align: center;
-  line-height: 0.8;
-  :hover,
-  & > .lang-button.active {
-    /* line-height: 120%; */
-    text-decoration: underline;
-    color: var(--argo-blue);
-    font-weight: 800;
-    transition: all 0.1s ease;
-  }
-  :first-child {
-    border-right: 2px solid #333;
-  }
-  @media (min-width: 1200px) {
-    min-width: 55px;
-  }
-`
 
 const LangButtonLabel = ({ currentLang, thisLang: { locale, label } }) => {
   const activeClassname = currentLang.locale === locale ? "active" : ""
