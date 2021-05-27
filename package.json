@@ -15,6 +15,7 @@
     "autoprefixer": "^10.1.0",
     "framer-motion": "^3.1.1",
     "gsap": "^3.6.1",
+    "hamburger-react": "^2.4.1",
     "next": "^10.0.9",
     "postcss": "^8.2.1",
     "postcss-import": "^13.0.0",

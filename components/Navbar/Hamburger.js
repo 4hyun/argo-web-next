@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import {Twirl as TwirlBurger} from 'hamburger-react'
 
 const Button = styled.button`
   cursor: pointer;
@@ -74,11 +75,12 @@ function Hamburger(props) {
     setActive(!isActive);
   };
   return (
-    <Button className="select-none" isActive={isActive} onClick={onClick}>
-      <Box>
-        <Line />
-      </Box>
-    </Button>
+    // <Button className="select-none" isActive={isActive} onClick={onClick}>
+    //   <Box>
+    //     <Line />
+    //   </Box>
+    // </Button>
+<TwirlBurger></TwirlBurger>
   );
 }
 
