@@ -84,7 +84,9 @@ const AllFeatureList = styled.ul`
 const FeatureItem = styled.li`
   ${tw`mb-2 flex items-center space-x-2`}
 `;
-const scrollToTop = () => animateScroll.scrollToTop();
+
+const scrollOptions = {duration:250}
+const scrollToTop = () => animateScroll.scrollToTop(scrollOptions);
 const Card = ({ priceData, addInquiryItem, showForm }) => {
   const {
     id,
