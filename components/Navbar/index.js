@@ -1,28 +1,28 @@
-import React from "react";
-import Link from "next/link";
-import styled from "styled-components";
-import Hamburger from "components/Navbar/Hamburger";
-import DarkLogo from "../../public/logos/lettermark/logo-full_white-long-sm.svg";
-import { useTranslationsContext, supportedLang } from "contexts/Translations";
+import React from "react"
+import Link from "next/link"
+import styled from "styled-components"
+import tw from "twin.macro"
+import Hamburger from "components/Navbar/Hamburger"
+import DarkLogo from "../../public/logos/lettermark/logo-full_white-long-sm.svg"
+import { useTranslationsContext, supportedLang } from "contexts/Translations"
 
+const LogoA = tw.a`flex items-center`
 const Logo = styled(DarkLogo)`
   width: auto;
   &,
   & > * {
-    height: 35px;
+    ${tw`h-8`}
   }
-  @media (min-width: 1200px) {
-    padding: 0 2rem;
-  }
-`;
+  ${tw`lg:(px-0)`}
+`
 
 const Container = styled.div`
   position: fixed;
   display: flex;
   align-items: center;
   width: 100%;
-  height: 64px;
-  max-height: 64px;
+  height: 105px;
+  max-height: 105px;
   /* box-shadow: 0 2px 8px #222;
   box-shadow: 0 2px 16px #2222220f; */
   background-color: var(--nav-bg);
@@ -31,33 +31,42 @@ const Container = styled.div`
     padding: unset;
   }
   z-index: 20;
-`;
+`
 
 const MobileNavbarContainer = styled.nav`
   display: none;
   width: 100%;
-`;
+`
 
 const DektopNavbarContainer = styled.nav`
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  background-color: transparent;
-`;
+  @media (min-width: 640px) {
+    max-width: 640px;
+  }
+  @media (min-width: 768px) {
+    max-width: 768px;
+  }
+  @media (min-width: 1024px) {
+    max-width: 1024px;
+  }
+  @media (min-width: 1200px) {
+    max-width: 1200px;
+  }
+  ${tw`flex w-full mx-auto justify-between bg-transparent`}
+`
 
 const DesktopNavbar = ({ renderLangSwitch }) => {
   return (
     <DektopNavbarContainer>
       <Link href="/">
-        <a>
+        <LogoA>
           <Logo />
-        </a>
+        </LogoA>
       </Link>
       {renderLangSwitch()}
       <Hamburger />
     </DektopNavbarContainer>
-  );
-};
+  )
+}
 
 const MobileNavbar = ({ renderLangSwitch }) => {
   return (
@@ -65,8 +74,8 @@ const MobileNavbar = ({ renderLangSwitch }) => {
       {renderLangSwitch()}
       <Hamburger />
     </MobileNavbarContainer>
-  );
-};
+  )
+}
 
 const LangButton = styled.span`
   padding: 0 0.5rem;
@@ -90,21 +99,15 @@ const LangButton = styled.span`
   @media (min-width: 1200px) {
     min-width: 55px;
   }
-`;
+`
 
 const LangButtonLabel = ({ currentLang, thisLang: { locale, label } }) => {
-  const activeClassname = currentLang.locale === locale ? "active" : "";
-  return (
-    <span
-      className={`lang-button ${activeClassname} flex justify-center items-start`}
-    >
-      {label}
-    </span>
-  );
-};
+  const activeClassname = currentLang.locale === locale ? "active" : ""
+  return <span className={`lang-button ${activeClassname} flex justify-center items-start`}>{label}</span>
+}
 
 const LangSwitch = () => {
-  const { switchLang, lang } = useTranslationsContext();
+  const { switchLang, lang } = useTranslationsContext()
 
   return (
     <div className="lang-switch ml-auto mr-auto md:mr-4 flex items-center select-none text-xs lg:text-base">
@@ -113,29 +116,26 @@ const LangSwitch = () => {
           <LangButton
             key={supportedLangKey}
             onClick={() => {
-              switchLang(supportedLang[supportedLangKey].locale);
+              switchLang(supportedLang[supportedLangKey].locale)
             }}
           >
-            <LangButtonLabel
-              currentLang={lang}
-              thisLang={supportedLang[supportedLangKey]}
-            />
+            <LangButtonLabel currentLang={lang} thisLang={supportedLang[supportedLangKey]} />
           </LangButton>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
 const Navbar = () => {
-  const { lang } = useTranslationsContext();
+  const { lang } = useTranslationsContext()
 
   return (
     <Container>
       <DesktopNavbar renderLangSwitch={LangSwitch} />
       <MobileNavbar renderLangSwitch={LangSwitch} />
     </Container>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

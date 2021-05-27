@@ -24,12 +24,12 @@ const SubmitButton = tw.button`inline-flex justify-center py-2 px-4 border borde
 
 const Ping = ({ on }) => (
   <span
-    class={`flex absolute h-3 w-3 top-1 right-1 -mt-1 -mr-1 ${
+    className={`flex absolute h-3 w-3 top-1 right-1 -mt-1 -mr-1 ${
       on ? "opacity-100" : "opacity-0"
     }`}
   >
-    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-    <span class="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
+    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+    <span className="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
   </span>
 );
 
