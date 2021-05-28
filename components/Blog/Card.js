@@ -1,10 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import styled from "styled-components"
 import tw from "twin.macro"
 
 const H2 = styled.h2`
-  ${tw`text-xl font-black mb-3 leading-normal border-b-2  border-transparent hover:(border-argo-blue-400)`}
+  ${tw`text-xl font-black mb-3 leading-normal`}
 `
 
 const AuthorLabel = styled.p`
@@ -15,17 +15,28 @@ const PublishedAt = styled.span`
 `
 
 const Wrapper = styled.article`
-  ${tw`rounded-lg bg-white p-6 shadow-lg hover:shadow-xl`}
+  ${tw`rounded-lg bg-white p-6 shadow-lg hover:shadow-xl transform`}
   ${AuthorLabel},${PublishedAt} {
     ${tw`leading-none`}
+  }
+  &.hovered,
+  &.hovered-active {
+    ${tw`ring-4 ring-argo-blue-400`}
+  }
+  &.hovered-active {
+    ${tw`translate-y-2`}
   }
 `
 
 const Card = ({ id, title, content, firstname, lastname, email, published_at, slug }) => {
+  const [cardHoverClass, setCardHoverClass] = useState(null)
+  const handleCardHovered = () => setCardHoverClass("hovered")
+  const handleCardMouseLeave = () => setCardHoverClass(null)
+  const handleCardHoverActive = () => setCardHoverClass("hovered-active")
   const postDate = new Date(published_at)
   return (
-    <Wrapper>
-      <H2>
+    <Wrapper className={`${cardHoverClass && cardHoverClass}`}>
+      <H2 onMouseEnter={handleCardHovered} onMouseLeave={handleCardMouseLeave} onMouseDown={handleCardHoverActive}>
         <Link href={`blog/post/${slug}`}>
           <a>{title}</a>
         </Link>

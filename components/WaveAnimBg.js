@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
-import gsap from "gsap";
+import React, { useState, useEffect, useRef } from "react"
+import styled from "styled-components"
+import gsap from "gsap"
 
 const WaveAnimBg = () => {
-  const requestAnimationFrameRef = useRef();
-  const canvasRef = useRef();
-  const OPACITY_START = "opacity-0";
-  const OPACITY_END = "opacity-30";
-  const [opacity, setOpacity] = useState(OPACITY_START);
+  const requestAnimationFrameRef = useRef()
+  const canvasRef = useRef()
+  const OPACITY_START = "opacity-0"
+  const OPACITY_END = "opacity-30"
+  const [opacity, setOpacity] = useState(OPACITY_START)
 
   useEffect(() => {
     var c = canvasRef.current,
@@ -36,7 +36,7 @@ const WaveAnimBg = () => {
       red = "hsla(11, 100%, 50%, " + alpha + ")",
       blue = "hsla(242, 100%, 50%, " + alpha + ")",
       blueEnd = "hsla(242, 100%, 50%, 0)",
-      gradientArray = [];
+      gradientArray = []
 
     var curve1 = {
       x1: minX,
@@ -45,7 +45,7 @@ const WaveAnimBg = () => {
       y2: minY + varY * (4 / 3),
       x3: minX,
       y3: minY,
-    };
+    }
 
     var curve2 = {
       x1: minX + w1,
@@ -54,7 +54,7 @@ const WaveAnimBg = () => {
       y2: minY - varY / 2,
       x3: minX + w1 + varX,
       y3: h - minY,
-    };
+    }
 
     var curve3 = {
       x1: minX + w1 * 2,
@@ -63,7 +63,7 @@ const WaveAnimBg = () => {
       y2: minY + varY * (4 / 3),
       x3: minX + w1 * 2 + varX,
       y3: minY,
-    };
+    }
 
     var curve4 = {
       x1: minX + w1 * 3,
@@ -72,7 +72,7 @@ const WaveAnimBg = () => {
       y2: minY - varY / 2,
       x3: minX + w1 * 3 + varX,
       y3: h - minY,
-    };
+    }
     var curve5 = {
       x1: w - minX,
       y1: minY,
@@ -80,52 +80,52 @@ const WaveAnimBg = () => {
       y2: minY + varY * (4 / 3),
       x3: w - minX,
       y3: minY,
-    };
+    }
 
-    $.globalCompositeOperation = "source-over";
+    $.globalCompositeOperation = "source-over"
 
     window.addEventListener(
       "resize",
       function () {
-        c.width = window.innerWidth;
-        c.height = window.innerHeight / 4;
-        ready();
+        c.width = window.innerWidth
+        c.height = window.innerHeight / 4
+        ready()
       },
       false
-    );
+    )
 
     var ready = function () {
-      console.log("ready called");
-      (w = c.width = window.innerWidth),
+      // console.log("ready called");
+      ;(w = c.width = window.innerWidth),
         (h = c.height = window.innerHeight / 4),
         (varX = w / 10 - minX / 10),
         (varY = h - minY * 2),
         (w1 = (w - minX * 2 - varX) / 4),
-        createGradients();
-      curve1.x1 = minX;
-      curve1.x2 = minX;
-      curve1.x3 = minX;
+        createGradients()
+      curve1.x1 = minX
+      curve1.x2 = minX
+      curve1.x3 = minX
 
-      curve2.x1 = minX + w1;
-      curve2.x2 = minX + w1 + varX / 2;
-      curve2.x3 = minX + w1 + varX;
+      curve2.x1 = minX + w1
+      curve2.x2 = minX + w1 + varX / 2
+      curve2.x3 = minX + w1 + varX
 
-      curve3.x1 = minX + w1 * 2;
-      curve3.x2 = minX + w1 * 2 + varX / 2;
-      curve3.x3 = minX + w1 * 2 + varX;
+      curve3.x1 = minX + w1 * 2
+      curve3.x2 = minX + w1 * 2 + varX / 2
+      curve3.x3 = minX + w1 * 2 + varX
 
-      curve4.x1 = minX + w1 * 3;
-      curve4.x2 = minX + w1 * 3 + varX / 2;
-      curve4.x3 = minX + w1 * 3 + varX;
+      curve4.x1 = minX + w1 * 3
+      curve4.x2 = minX + w1 * 3 + varX / 2
+      curve4.x3 = minX + w1 * 3 + varX
 
-      curve5.x1 = w - minX;
-      curve5.x2 = w - minX;
-      curve5.x3 = w - minX;
-    };
+      curve5.x1 = w - minX
+      curve5.x2 = w - minX
+      curve5.x3 = w - minX
+    }
 
     var clearFrame = function () {
       // if (clearTheFrame == true) {
-      $.clearRect(minX - 1, 0, w - minX * 2 + 2, h); // only clear the bits we draw on
+      $.clearRect(minX - 1, 0, w - minX * 2 + 2, h) // only clear the bits we draw on
       // }
 
       //draw quadratic curves that contain the points for the animation
@@ -149,273 +149,246 @@ const WaveAnimBg = () => {
       //   $.stroke();
       //   $.closePath();
       // }
-    };
+    }
 
     var tweenCurves = function () {
       let MainTL = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
-      });
+      })
 
       let Curve1TL = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
-      });
+      })
 
       let Curve1y1 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve1y1.to(curve1, {
         duration: 8,
         y1: h - minY,
         ease: "power2.inOut",
-      });
+      })
       let Curve1y2 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve1y2.to(curve1, {
         duration: 8,
         y2: minY - varY / 2,
         ease: "power2.inOut",
-      });
+      })
       let Curve1y3 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve1y3.to(curve1, {
         duration: 8,
         y3: h - minY,
         ease: "power2.inOut",
-      });
+      })
 
-      Curve1TL.add(Curve1y1, "start")
-        .add(Curve1y2, "start")
-        .add(Curve1y3, "start");
+      Curve1TL.add(Curve1y1, "start").add(Curve1y2, "start").add(Curve1y3, "start")
 
       let Curve2TL = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
-      });
+      })
 
       let Curve2y1 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve2y1.to(curve2, {
         duration: 8,
         y1: minY,
         ease: "power2.inOut",
-      });
+      })
       let Curve2y2 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve2y2.to(curve2, {
         duration: 8,
         y2: minY + varY * (4 / 3),
         ease: "power2.inOut",
-      });
+      })
       let Curve2y3 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve2y3.to(curve2, {
         duration: 8,
         y3: minY,
         ease: "power2.inOut",
-      });
+      })
 
-      Curve2TL.add(Curve2y1, "start")
-        .add(Curve2y2, "start")
-        .add(Curve2y3, "start");
+      Curve2TL.add(Curve2y1, "start").add(Curve2y2, "start").add(Curve2y3, "start")
 
       let Curve3TL = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
-      });
+      })
 
       let Curve3y1 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve3y1.to(curve3, {
         duration: 8,
         y1: h - minY,
         ease: "power2.inOut",
-      });
+      })
       let Curve3y2 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve3y2.to(curve3, {
         duration: 8,
         y2: minY - varY / 2,
         ease: "power2.inOut",
-      });
+      })
       let Curve3y3 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve3y3.to(curve3, {
         duration: 8,
         y3: h - minY,
         ease: "power2.inOut",
-      });
+      })
 
-      Curve3TL.add(Curve3y1, "start")
-        .add(Curve3y2, "start")
-        .add(Curve3y3, "start");
+      Curve3TL.add(Curve3y1, "start").add(Curve3y2, "start").add(Curve3y3, "start")
 
       let Curve4TL = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
-      });
+      })
 
       let Curve4y1 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve4y1.to(curve4, {
         duration: 8,
         y1: minY,
         ease: "power2.inOut",
-      });
+      })
       let Curve4y2 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve4y2.to(curve4, {
         duration: 8,
         y2: minY + varY * (4 / 3),
         ease: "power2.inOut",
-      });
+      })
       let Curve4y3 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve4y3.to(curve4, {
         duration: 8,
         y3: minY,
         ease: "power2.inOut",
-      });
+      })
 
-      Curve4TL.add(Curve4y1, "start")
-        .add(Curve4y2, "start")
-        .add(Curve4y3, "start");
+      Curve4TL.add(Curve4y1, "start").add(Curve4y2, "start").add(Curve4y3, "start")
 
       let Curve5TL = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
-      });
+      })
 
       let Curve5y1 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve5y1.to(curve5, {
         duration: 8,
         y1: h - minY,
         ease: "power2.inOut",
-      });
+      })
       let Curve5y2 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve5y2.to(curve5, {
         duration: 8,
         y2: minY - varY / 2,
         ease: "power2.inOut",
-      });
+      })
       let Curve5y3 = gsap.timeline({
         paused: false,
         yoyo: true,
         repeat: -1,
         delay: 1.5,
-      });
+      })
       Curve5y3.to(curve5, {
         duration: 8,
         y3: h - minY,
         ease: "power2.inOut",
-      });
+      })
 
-      Curve5TL.add(Curve5y1, "start")
-        .add(Curve5y2, "start")
-        .add(Curve5y3, "start");
+      Curve5TL.add(Curve5y1, "start").add(Curve5y2, "start").add(Curve5y3, "start")
 
-      MainTL.add(Curve1TL, "MainStart")
-        .add(Curve2TL, "MainStart")
-        .add(Curve3TL, "MainStart")
-        .add(Curve4TL, "MainStart")
-        .add(Curve4TL, "MainStart");
-    };
+      MainTL.add(Curve1TL, "MainStart").add(Curve2TL, "MainStart").add(Curve3TL, "MainStart").add(Curve4TL, "MainStart").add(Curve4TL, "MainStart")
+    }
 
-    function drawCurve(
-      ctx,
-      ptsa,
-      tension,
-      isClosed,
-      numOfSegments,
-      showPoints
-    ) {
-      showPoints = showPoints ? showPoints : false;
+    function drawCurve(ctx, ptsa, tension, isClosed, numOfSegments, showPoints) {
+      showPoints = showPoints ? showPoints : false
 
-      ctx.beginPath();
+      ctx.beginPath()
 
-      drawLines(ctx, getCurvePoints(ptsa, tension, isClosed, numOfSegments));
+      drawLines(ctx, getCurvePoints(ptsa, tension, isClosed, numOfSegments))
 
-      ctx.stroke();
-      ctx.closePath();
+      ctx.stroke()
+      ctx.closePath()
 
       if (showPoints) {
-        ctx.stroke();
-        ctx.beginPath();
-        for (var i = 0; i < pts.length - 1; i += 2)
-          ctx.rect(pts[i] - 2, pts[i + 1] - 2, 4, 4);
+        ctx.stroke()
+        ctx.beginPath()
+        for (var i = 0; i < pts.length - 1; i += 2) ctx.rect(pts[i] - 2, pts[i + 1] - 2, 4, 4)
       }
     }
 
-    function getCurvePoints(
-      ptsa,
-      tension = 0.5,
-      isClosed = false,
-      numOfSegments = 16
-    ) {
+    function getCurvePoints(ptsa, tension = 0.5, isClosed = false, numOfSegments = 16) {
       // use input value if provided, or use a default value
       //   isClosed = isClosed ? isClosed : false;
       //   numOfSegments = numOfSegments ? numOfSegments : 16;
@@ -434,27 +407,27 @@ const WaveAnimBg = () => {
         c4, // cardinal points
         st,
         t,
-        i; // steps based on num. of segments
+        i // steps based on num. of segments
 
       // clone array so we don't change the original
-      _pts = ptsa.slice(0);
+      _pts = ptsa.slice(0)
 
       // The algorithm require a previous and next point to the actual point array.
       // Check if we will draw closed or open curve.
       // If closed, copy end points to beginning and first points to end
       // If open, duplicate first points to befinning, end points to end
       if (isClosed) {
-        _pts.unshift(ptsa[ptsa.length - 1]);
-        _pts.unshift(ptsa[ptsa.length - 2]);
-        _pts.unshift(ptsa[ptsa.length - 1]);
-        _pts.unshift(ptsa[ptsa.length - 2]);
-        _pts.push(ptsa[0]);
-        _pts.push(ptsa[1]);
+        _pts.unshift(ptsa[ptsa.length - 1])
+        _pts.unshift(ptsa[ptsa.length - 2])
+        _pts.unshift(ptsa[ptsa.length - 1])
+        _pts.unshift(ptsa[ptsa.length - 2])
+        _pts.push(ptsa[0])
+        _pts.push(ptsa[1])
       } else {
-        _pts.unshift(ptsa[1]); //copy 1. point and insert at beginning
-        _pts.unshift(ptsa[0]);
-        _pts.push(ptsa[ptsa.length - 2]); //copy last point and append
-        _pts.push(ptsa[ptsa.length - 1]);
+        _pts.unshift(ptsa[1]) //copy 1. point and insert at beginning
+        _pts.unshift(ptsa[0])
+        _pts.push(ptsa[ptsa.length - 2]) //copy last point and append
+        _pts.push(ptsa[ptsa.length - 1])
       }
 
       // ok, lets start..
@@ -464,98 +437,55 @@ const WaveAnimBg = () => {
       for (let i = 2; i < _pts.length - 4; i += 2) {
         for (let t = 0; t <= numOfSegments; t++) {
           // calc tension vectors
-          t1x = (_pts[i + 2] - _pts[i - 2]) * tension;
-          t2x = (_pts[i + 4] - _pts[i]) * tension;
+          t1x = (_pts[i + 2] - _pts[i - 2]) * tension
+          t2x = (_pts[i + 4] - _pts[i]) * tension
 
-          t1y = (_pts[i + 3] - _pts[i - 1]) * tension;
-          t2y = (_pts[i + 5] - _pts[i + 1]) * tension;
+          t1y = (_pts[i + 3] - _pts[i - 1]) * tension
+          t2y = (_pts[i + 5] - _pts[i + 1]) * tension
 
           // calc step
-          st = t / numOfSegments;
+          st = t / numOfSegments
 
           // calc cardinals
-          c1 = 2 * Math.pow(st, 3) - 3 * Math.pow(st, 2) + 1;
-          c2 = -(2 * Math.pow(st, 3)) + 3 * Math.pow(st, 2);
-          c3 = Math.pow(st, 3) - 2 * Math.pow(st, 2) + st;
-          c4 = Math.pow(st, 3) - Math.pow(st, 2);
+          c1 = 2 * Math.pow(st, 3) - 3 * Math.pow(st, 2) + 1
+          c2 = -(2 * Math.pow(st, 3)) + 3 * Math.pow(st, 2)
+          c3 = Math.pow(st, 3) - 2 * Math.pow(st, 2) + st
+          c4 = Math.pow(st, 3) - Math.pow(st, 2)
 
           // calc x and y cords with common control vectors
-          x = c1 * _pts[i] + c2 * _pts[i + 2] + c3 * t1x + c4 * t2x;
-          y = c1 * _pts[i + 1] + c2 * _pts[i + 3] + c3 * t1y + c4 * t2y;
+          x = c1 * _pts[i] + c2 * _pts[i + 2] + c3 * t1x + c4 * t2x
+          y = c1 * _pts[i + 1] + c2 * _pts[i + 3] + c3 * t1y + c4 * t2y
 
           //store points in array
-          res.push(x);
-          res.push(y);
+          res.push(x)
+          res.push(y)
         }
       }
 
-      return res;
+      return res
     }
 
     function drawLines(ctx, pts) {
-      ctx.moveTo(pts[0], pts[1]);
-      for (let i = 2; i < pts.length - 1; i += 2)
-        ctx.lineTo(pts[i], pts[i + 1]);
+      ctx.moveTo(pts[0], pts[1])
+      for (let i = 2; i < pts.length - 1; i += 2) ctx.lineTo(pts[i], pts[i + 1])
     }
 
     function pointOnLine(time, startx, midx, endx, starty, midy, endy) {
-      var t = time; // given example value
-      var x =
-        (1 - t) * (1 - t) * startx + 2 * (1 - t) * t * midx + t * t * endx;
-      var y =
-        (1 - t) * (1 - t) * starty + 2 * (1 - t) * t * midy + t * t * endy;
+      var t = time // given example value
+      var x = (1 - t) * (1 - t) * startx + 2 * (1 - t) * t * midx + t * t * endx
+      var y = (1 - t) * (1 - t) * starty + 2 * (1 - t) * t * midy + t * t * endy
 
-      return { xVal: x, yVal: y };
+      return { xVal: x, yVal: y }
     }
 
     function returnPoints(time) {
-      var Points = [];
+      var Points = []
 
-      var returnVal1 = pointOnLine(
-        time,
-        curve1.x1,
-        curve1.x2,
-        curve1.x3,
-        curve1.y1,
-        curve1.y2,
-        curve1.y3
-      );
-      var returnVal2 = pointOnLine(
-        time,
-        curve2.x1,
-        curve2.x2,
-        curve2.x3,
-        curve2.y1,
-        curve2.y2,
-        curve2.y3
-      );
-      var returnVal3 = pointOnLine(
-        time,
-        curve3.x1,
-        curve3.x2,
-        curve3.x3,
-        curve3.y1,
-        curve3.y2,
-        curve3.y3
-      );
-      var returnVal4 = pointOnLine(
-        time,
-        curve4.x1,
-        curve4.x2,
-        curve4.x3,
-        curve4.y1,
-        curve4.y2,
-        curve4.y3
-      );
-      var returnVal5 = pointOnLine(
-        time,
-        curve5.x1,
-        curve5.x2,
-        curve5.x3,
-        curve5.y1,
-        curve5.y2,
-        curve5.y3
-      );
+      var returnVal1 = pointOnLine(time, curve1.x1, curve1.x2, curve1.x3, curve1.y1, curve1.y2, curve1.y3)
+      var returnVal2 = pointOnLine(time, curve2.x1, curve2.x2, curve2.x3, curve2.y1, curve2.y2, curve2.y3)
+      var returnVal3 = pointOnLine(time, curve3.x1, curve3.x2, curve3.x3, curve3.y1, curve3.y2, curve3.y3)
+      var returnVal4 = pointOnLine(time, curve4.x1, curve4.x2, curve4.x3, curve4.y1, curve4.y2, curve4.y3)
+      var returnVal5 = pointOnLine(time, curve5.x1, curve5.x2, curve5.x3, curve5.y1, curve5.y2, curve5.y3)
 
       Points = [
         returnVal1.xVal,
@@ -568,87 +498,60 @@ const WaveAnimBg = () => {
         returnVal4.yVal,
         returnVal5.xVal,
         returnVal5.yVal,
-      ];
+      ]
 
-      return Points;
+      return Points
     }
 
     function createGradients() {
-      alpha = 1;
-      gradientArray = [];
+      alpha = 1
+      gradientArray = []
       for (let k = 0; k < numberOfCurves; k++) {
-        alpha -= 0.019;
-        yellow = "hsla(45, 100%, 60%, " + alpha + ")";
-        red = "hsla(11, 100%, 50%, " + alpha + ")";
-        blue = "hsla(242, 100%, 50%, " + alpha + ")";
-        blueEnd = "hsla(242, 100%, 50%, 0)";
-        var gradient = $.createLinearGradient(0, 0, c.width - minX * 2, 0);
-        gradient.addColorStop("0", yellowStart);
-        gradient.addColorStop("0.1", yellow);
-        gradient.addColorStop("0.5", red);
-        gradient.addColorStop("0.9", blue);
-        gradient.addColorStop("1", blueEnd);
+        alpha -= 0.019
+        yellow = "hsla(45, 100%, 60%, " + alpha + ")"
+        red = "hsla(11, 100%, 50%, " + alpha + ")"
+        blue = "hsla(242, 100%, 50%, " + alpha + ")"
+        blueEnd = "hsla(242, 100%, 50%, 0)"
+        var gradient = $.createLinearGradient(0, 0, c.width - minX * 2, 0)
+        gradient.addColorStop("0", yellowStart)
+        gradient.addColorStop("0.1", yellow)
+        gradient.addColorStop("0.5", red)
+        gradient.addColorStop("0.9", blue)
+        gradient.addColorStop("1", blueEnd)
         // Fill array with gradient
-        gradientArray[k] = gradient;
+        gradientArray[k] = gradient
       }
     }
 
     var animate = function () {
-      clearFrame();
+      clearFrame()
 
-      $.lineWidth = 1;
+      $.lineWidth = 1
       // $.globalAlpha = 0.4;
 
-      CurvesArray[0] = [
-        curve1.x1,
-        curve1.y1,
-        curve2.x1,
-        curve2.y1,
-        curve3.x1,
-        curve3.y1,
-        curve4.x1,
-        curve4.y1,
-        curve5.x1,
-        curve5.y1,
-      ];
+      CurvesArray[0] = [curve1.x1, curve1.y1, curve2.x1, curve2.y1, curve3.x1, curve3.y1, curve4.x1, curve4.y1, curve5.x1, curve5.y1]
       for (let i = 1; i < numberOfCurves; i++) {
-        CurvesArray[i] = returnPoints(TimeOnCurve * i);
+        CurvesArray[i] = returnPoints(TimeOnCurve * i)
       }
-      CurvesArray[numberOfCurves] = [
-        curve1.x3,
-        curve1.y3,
-        curve2.x3,
-        curve2.y3,
-        curve3.x3,
-        curve3.y3,
-        curve4.x3,
-        curve4.y3,
-        curve5.x3,
-        curve5.y3,
-      ];
+      CurvesArray[numberOfCurves] = [curve1.x3, curve1.y3, curve2.x3, curve2.y3, curve3.x3, curve3.y3, curve4.x3, curve4.y3, curve5.x3, curve5.y3]
 
       for (let j = 0; j < CurvesArray.length; j++) {
-        $.strokeStyle = gradientArray[j];
-        drawCurve($, CurvesArray[j], tension);
+        $.strokeStyle = gradientArray[j]
+        drawCurve($, CurvesArray[j], tension)
       }
 
-      requestAnimationFrameRef.current = requestAnimationFrame(animate);
-    };
-    ready();
-    tweenCurves();
-    animate();
+      requestAnimationFrameRef.current = requestAnimationFrame(animate)
+    }
+    ready()
+    tweenCurves()
+    animate()
     /* set opacity on component mount */
-    setOpacity(OPACITY_END);
+    setOpacity(OPACITY_END)
     return () => {
-      cancelAnimationFrame(requestAnimationFrameRef.current);
-    };
-  }, []); /* useEffect END */
-  return (
-    <canvas
-      ref={canvasRef}
-      className={`absolute h-1/5 top-2/5 w-screen transition-opacity duration-1000 ${opacity}`}
-    ></canvas>
-  );
-};
+      cancelAnimationFrame(requestAnimationFrameRef.current)
+    }
+  }, []) /* useEffect END */
+  return <canvas ref={canvasRef} className={`absolute h-1/5 top-2/5 w-screen transition-opacity duration-1000 ${opacity}`}></canvas>
+}
 
-export default WaveAnimBg;
+export default WaveAnimBg

@@ -36,11 +36,20 @@ const MenuList = styled.ul`
   ${tw`flex! flex-col pt-1`}
 `
 
+const MenuItemWrapper = styled.div`
+  ${tw`w-full space-x-4`}
+`
+
 const MenuItemA = styled.a`
-  --margin-offset: -1rem;
-  margin-left: var(--margin-offset);
-  margin-right: var(--margin-offset);
-  ${tw`flex text-2xl rounded-md text-white font-bold hover:(bg-argo-blue-400) lg:(text-3xl px-8 py-5) active:(transform translate-y-1)`}
+  @media (min-width: 1024px) {
+    --margin-offset: -1rem;
+    margin-left: var(--margin-offset);
+    margin-right: var(--margin-offset);
+  }
+  ${tw`flex text-2xl rounded-md text-white font-bold px-2 py-2 lg:(active:(transform translate-y-1) hover:(bg-argo-blue-400) text-3xl px-8 py-5)`}
+  & > svg {
+    ${tw`my-auto`}
+  }
 `
 
 const Menu = ({ children, isOpen, onClose }) => {
@@ -55,4 +64,4 @@ const Menu = ({ children, isOpen, onClose }) => {
   )
 }
 
-export { Menu, MenuItemA, MenuList, menuData }
+export { Menu, MenuList, MenuItemA, MenuItemWrapper, menuData }

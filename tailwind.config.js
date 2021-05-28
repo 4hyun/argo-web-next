@@ -4,7 +4,7 @@ module.exports = {
     extend: {
       colors: {
         "argo-blue": {
-          400: "var(--argo-blue)",
+          400: "#0a29ca",
           500: "#0500FF",
           600: "#1E0AD4",
           700: "#250FAB",

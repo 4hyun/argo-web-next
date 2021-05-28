@@ -26,7 +26,7 @@ const BlogMainPage = ({ posts }) => {
       <ContentWrapper>
         {posts.map((blogProps) => (
           <List>
-            <BlogCard {...blogProps} />
+            <BlogCard {...blogProps} key={blogProps.id} />
           </List>
         ))}
       </ContentWrapper>
