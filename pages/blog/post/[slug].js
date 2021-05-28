@@ -11,7 +11,7 @@ const FallbackContainer = styled.div`
 `
 
 const Container = styled.div`
-  ${tw`w-full pt-24 lg:(pt-40) min-h-screen`}
+  ${tw`w-full pt-24 pb-24 lg:(pt-40) min-h-screen`}
 `
 const ContentWrapper = styled.div`
   max-width: 800px;
