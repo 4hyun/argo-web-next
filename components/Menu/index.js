@@ -1,5 +1,6 @@
 import { memo } from "react"
-import tw, { styled } from "twin.macro"
+import styled from "styled-components"
+import tw from "twin.macro"
 import { slide as SlidingMenu } from "react-burger-menu"
 import { Close } from "components/Icons"
 import { MENU_EID } from "configs"
@@ -17,8 +18,7 @@ const LogoCircleDark = memo(styled.div`
 `)
 
 const StyledMenu = styled(SlidingMenu)`
-  ${"" /* width: 100vw; */}
-  ${tw`w-screen!`}
+  ${tw`w-screen! md:(w-3/12)!`}
   background: center / 100% 130% linear-gradient( 161deg,hsl(255deg 100% 27%) 17%,hsl(218deg 100% 34%) 36%,hsl(224deg 97% 36% / 88%) 66%,hsl(177deg 100% 50%) 100% );
 `
 
@@ -32,11 +32,15 @@ const MenuHeader = styled.div`
   ${tw`flex! w-full justify-between`}
 `
 
-const CloseButton = memo(Close)
+const CloseButton = memo(
+  styled(Close)`
+    ${tw`cursor-pointer`}
+  `
+)
 
 const Menu = ({ children, isOpen, onClose }) => {
   return (
-    <StyledMenu right isOpen={isOpen} outerContainerId={MENU_EID} onClose={onClose} width="100vw">
+    <StyledMenu right isOpen={isOpen} outerContainerId={MENU_EID} onClose={onClose}>
       <MenuHeader>
         <LogoCircleDark />
         <CloseButton size={32} color="#fff" onClick={onClose} />

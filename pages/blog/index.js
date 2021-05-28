@@ -4,25 +4,26 @@ import { fetchStrapi } from "lib/api"
 import { BlogCard } from "components/Blog"
 
 const Container = styled.div`
-  ${tw`w-full bg-gray-50 pt-24 lg:(pt-40) min-h-screen`}
+  max-width: 1200px;
+  ${tw`w-full pt-24 lg:(pt-40) min-h-screen px-6 mx-auto`}
 `
 
 const ContentWrapper = styled.div`
-  ${tw`container mx-auto px-6`}
+  ${tw`container mx-auto`}
 `
 
 const PageHeading = styled.h1`
-  ${tw`text-3xl font-bold`}
+  ${tw`container mx-auto text-3xl font-bold`}
 `
 const List = styled.ul`
-  ${tw`mt-4`}
+  ${tw`flex flex-col md:(flex-row) mt-4`}
 `
 
 const BlogMainPage = ({ posts }) => {
   return (
     <Container>
+      <PageHeading>Blog</PageHeading>
       <ContentWrapper>
-        <PageHeading>Blog</PageHeading>
         {posts.map((blogProps) => (
           <List>
             <BlogCard {...blogProps} />

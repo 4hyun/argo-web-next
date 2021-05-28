@@ -8,7 +8,7 @@ import { animateScroll } from "react-scroll"
 
 const Button = styled.button`
   ${tw`rounded-full bg-argo-blue-400 text-white fixed right-9 bottom-12 flex justify-center items-center md:(right-24 bottom-28) lg:(right-32 bottom-40) focus:outline-none shadow-xl transform active:(translate-x-1 translate-y-1) transition-opacity`}
-  ${({ scrollY }) => (scrollY > 300 ? tw`opacity-100` : tw`opacity-0`)}
+  ${({ scrollY }) => (scrollY > 500 ? tw`opacity-80` : tw`opacity-0`)}
 `
 
 const scrollOptions = { duration: 250 }

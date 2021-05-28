@@ -5,6 +5,7 @@ import { Close } from "@styled-icons/evaicons-solid/Close"
 import { Check } from "@styled-icons/boxicons-regular/Check"
 import { UpArrowCircle } from "@styled-icons/boxicons-regular/UpArrowCircle"
 import { RightTopArrowCircle } from "@styled-icons/boxicons-regular/RightTopArrowCircle"
+import { ArrowLeftCircle } from "@styled-icons/bootstrap/ArrowLeftCircle"
 // import { Close } from "@styled-icons/material/Close"
 
-export { At, Close, Check, UpArrowCircle }
+export { At, Close, Check, UpArrowCircle, ArrowLeftCircle }

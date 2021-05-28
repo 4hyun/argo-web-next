@@ -8,6 +8,10 @@ const CustomStyles = createGlobalStyle`
   * {  
     -webkit-tap-highlight-color: transparent;
     ${tw`antialiased`};
+
+  }
+  ::selection {
+      background: #93bcfa;
   }
 `
 
