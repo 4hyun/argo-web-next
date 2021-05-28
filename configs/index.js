@@ -4,7 +4,7 @@ export const STRAPI_AUTH_TOKEN = process.env.NODE_ENV === "production" ? process
 const headers = { Authorization: `Bearer ${STRAPI_AUTH_TOKEN}` }
 
 export const getStrapiURL = (path = "") => {
-  return `${process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337"}${path}`
+  return `${BASE_URL}${path}`
 }
 
 export const fetchStrapi = async (path) => {
