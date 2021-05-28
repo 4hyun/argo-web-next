@@ -4,6 +4,7 @@ export const STRAPI_AUTH_TOKEN = process.env.NODE_ENV === "production" ? process
 const headers = { Authorization: `Bearer ${STRAPI_AUTH_TOKEN}` }
 
 export const getStrapiURL = (path = "") => {
+  console.log(">>DEBUG: BASE_URL: ", BASE_URL)
   return `${BASE_URL}${path}`
 }
 
