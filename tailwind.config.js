@@ -1,9 +1,5 @@
 module.exports = {
-  purge: [
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./public/styles/**/*.{css,scss}",
-  ],
+  purge: ["./components/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}", "./public/styles/**/*.{css,scss}"],
   theme: {
     extend: {
       colors: {
@@ -18,8 +14,7 @@ module.exports = {
       },
       boxShadow: {
         DEFAULT: "0 1px 4px rgb(26 26 67 / 10%)",
-        lg:
-          "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 0px 6px -2px rgba(0, 0, 0, 0.05)",
+        lg: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 0px 6px -2px rgba(0, 0, 0, 0.05)",
       },
       borderColor: (theme) => ({
         ...theme("colors"),
@@ -37,4 +32,4 @@ module.exports = {
       translate: ["active", "group-hover"],
     },
   },
-};
+}

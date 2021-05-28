@@ -7,6 +7,15 @@ import { MENU_EID } from "configs"
 import { default as menuData } from "./data"
 import { logoCircleDarkUrl } from "components/Brand"
 
+const StyledMenu = styled(SlidingMenu)`
+  ${tw`w-screen! md:(w-3/12)!`}
+  background: center / 100% 130% linear-gradient( 161deg,hsl(255deg 100% 27%) 17%,hsl(218deg 100% 34%) 36%,hsl(224deg 97% 36% / 88%) 66%,hsl(177deg 100% 50%) 100% );
+`
+
+const MenuHeader = styled.div`
+  ${tw`flex! w-full justify-between`}
+`
+
 const LogoCircleDark = memo(styled.div`
   ${tw`w-16 mb-8`}
   :after {
@@ -17,26 +26,22 @@ const LogoCircleDark = memo(styled.div`
   background: center / contain no-repeat url(${logoCircleDarkUrl});
 `)
 
-const StyledMenu = styled(SlidingMenu)`
-  ${tw`w-screen! md:(w-3/12)!`}
-  background: center / 100% 130% linear-gradient( 161deg,hsl(255deg 100% 27%) 17%,hsl(218deg 100% 34%) 36%,hsl(224deg 97% 36% / 88%) 66%,hsl(177deg 100% 50%) 100% );
-`
-
-const MenuItemA = tw.a`flex text-2xl lg:text-xl text-white font-bold`
-
-const MenuList = styled.ul`
-  ${tw`flex! flex-col space-y-6 pt-1`}
-`
-
-const MenuHeader = styled.div`
-  ${tw`flex! w-full justify-between`}
-`
-
 const CloseButton = memo(
   styled(Close)`
     ${tw`cursor-pointer`}
   `
 )
+
+const MenuList = styled.ul`
+  ${tw`flex! flex-col pt-1`}
+`
+
+const MenuItemA = styled.a`
+  --margin-offset: -1rem;
+  margin-left: var(--margin-offset);
+  margin-right: var(--margin-offset);
+  ${tw`flex text-2xl rounded-md text-white font-bold hover:(bg-argo-blue-400) lg:(text-3xl px-8 py-5) active:(transform translate-y-1)`}
+`
 
 const Menu = ({ children, isOpen, onClose }) => {
   return (

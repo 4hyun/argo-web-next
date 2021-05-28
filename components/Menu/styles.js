@@ -9,8 +9,7 @@ const styles = css`
   /* General sidebar styles */
   .bm-menu {
     ${"" /* background: #273089; */}
-    padding: 3em 2em 0;
-    font-size: 1.15em;
+    padding: 3rem 2rem 0;
   }
   /* Morph shape necessary with bubble or elastic */
   .bm-morph-shape {
