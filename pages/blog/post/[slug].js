@@ -5,6 +5,7 @@ import tw from "twin.macro"
 import { useRouter } from "next/router"
 import { fetchStrapi } from "lib/api"
 import { ArrowLeftCircle } from "components/Icons"
+import { PostContent } from "components/Blog"
 
 const FallbackContainer = styled.div`
   ${tw`w-full pt-24 lg:(pt-40) min-h-screen flex justify-center items-center`}
@@ -69,7 +70,7 @@ const PostPage = ({ post }) => {
             <Author>{`${firstname} ${lastname}`}</Author>
           </MainHeadingFooter>
         </MainHeading>
-        <ContentBody>{content}</ContentBody>
+        <PostContent>{content}</PostContent>
       </ContentWrapper>
     </Container>
   )

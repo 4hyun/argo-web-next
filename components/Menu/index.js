@@ -50,6 +50,7 @@ const MenuItemA = styled.a`
   & > svg {
     ${tw`my-auto`}
   }
+  font-family: Poppins;
 `
 
 const Menu = ({ children, isOpen, onClose }) => {
