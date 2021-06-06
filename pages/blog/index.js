@@ -1,11 +1,11 @@
 import React from "react"
 import tw, { styled } from "twin.macro"
-import { fetchStrapi } from "lib/api"
-import { BlogCard } from "components/Blog"
+import { fetchStrapi } from "lib/api/strapi"
+import { BlogCard, PostList } from "components/Blog"
 
 const Container = styled.div`
   max-width: 1200px;
-  ${tw`w-full pt-24 lg:(pt-40) min-h-screen px-6 mx-auto`}
+  ${tw`w-full pt-24 lg:(pt-40) min-h-screen lg:(px-0) px-6  mx-auto`}
 `
 
 const ContentWrapper = styled.div`
@@ -15,20 +15,19 @@ const ContentWrapper = styled.div`
 const PageHeading = styled.h1`
   ${tw`container mx-auto text-3xl font-bold`}
 `
-const PostList = styled.ul`
-  ${tw`flex flex-col md:(flex-row) mt-4`}
-`
 
 const BlogMainPage = ({ posts }) => {
   return (
     <Container>
       <PageHeading>Blog</PageHeading>
       <ContentWrapper>
-        {posts.map((blogProps) => (
-          <PostList>
-            <BlogCard {...blogProps} key={blogProps.id} />
+        {posts && (
+          <PostList tw="space-y-4" col>
+            {posts.map((blogProps) => (
+              <BlogCard {...blogProps} key={blogProps.id} />
+            ))}
           </PostList>
-        ))}
+        )}
       </ContentWrapper>
     </Container>
   )

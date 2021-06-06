@@ -35,7 +35,7 @@ const SUBMIT_ERROR_MESSAGE = "Please click to retry."
 const PING_ON = true
 const PING_OFF = false
 
-const Form = ({ inquiryItems, priceModelsMap, removeInquiryItem, closeForm }) => {
+const Form = ({ inquiryItems, priceListMap, removeInquiryItem, closeForm }) => {
   const ref = useRef()
   const { isMobile } = useDeviceDetect()
   const [pingOn, setPing] = useState(PING_OFF)
@@ -91,11 +91,11 @@ const Form = ({ inquiryItems, priceModelsMap, removeInquiryItem, closeForm }) =>
       <InquiryItemsContainer>
         {inquiryItems.map((inquiryItemId) => (
           <InquiryItem key={inquiryItemId}>
-            <span>{priceModelsMap[inquiryItemId]}</span>
+            <span>{priceListMap[inquiryItemId]}</span>
             <Close size="20" onClick={() => removeInquiryItem(inquiryItemId)} />
           </InquiryItem>
         ))}
-        {Object.entries(priceModelsMap).map(([inquiryItemId, heading]) => (
+        {Object.entries(priceListMap).map(([inquiryItemId, heading]) => (
           <div className="hidden" key={`a-${inquiryItemId}`}>
             <Label htmlFor={inquiryItemId}>{heading}</Label>
             <Input

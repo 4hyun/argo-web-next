@@ -15,7 +15,7 @@ const PublishedAt = styled.span`
 `
 
 const Wrapper = styled.article`
-  ${tw`rounded-lg bg-white p-6 shadow-lg hover:shadow-xl transform`}
+  ${tw`rounded-lg bg-white p-6 shadow-lg hover:shadow-xl transform md:(max-w-3xl)`}
   ${AuthorLabel},${PublishedAt} {
     ${tw`leading-none`}
   }
@@ -28,7 +28,8 @@ const Wrapper = styled.article`
   }
 `
 
-const Card = ({ id, title, content, firstname, lastname, email, published_at, slug }) => {
+const Card = ({ id, title, content, firstname, lastname, email, published_at, slug, wrapper = Wrapper }) => {
+  const Wrapper = wrapper
   const [cardHoverClass, setCardHoverClass] = useState(null)
   const handleCardHovered = () => setCardHoverClass("hovered")
   const handleCardMouseLeave = () => setCardHoverClass(null)

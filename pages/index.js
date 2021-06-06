@@ -1,21 +1,24 @@
 import { useState, useMemo } from "react"
+import styled from "styled-components"
+import tw from "twin.macro"
+import styles from "../styles/Home.module.css"
+import trads from "../translations"
 // import Head from "next/head"
 // import Link from "next/link"
 // import { useRouter } from "next/router"
+/* components */
 import GetInTouchForm from "components/Form"
-import styled from "styled-components"
-import styles from "../styles/Home.module.css"
 // import ArgoComingSoon from "../public/logos/lettermark/dark.svg"
 import ScrollTopButton from "components/ScrollTopButton"
 import { Close } from "components/Icons"
-import trads from "../translations"
 import Button from "components/Button"
 import WaveAnimBg from "components/WaveAnimBg"
 import { delay } from "lib/delay"
 import { useTranslationsContext } from "contexts/Translations"
 import { PricingCards } from "components/PricingCards"
-import { fetchStrapi } from "lib/api"
-import tw from "twin.macro"
+import { PostList, BlogCard } from "components/Blog"
+/* lib */
+import { fetchStrapi, queryList } from "lib/api/strapi"
 
 const CloseButton = styled(Close)`
   ${tw`w-8 h-8 bg-white float-right cursor-pointer rounded-md transition-all transform active:translate-x-1 active:translate-y-1`}
@@ -97,10 +100,22 @@ const MobileFormCloseBar = styled.div`
   height: 62px;
 `
 
+const SectionHeading = styled.h3`
+  ${tw`leading-tight w-full text-3xl font-black whitespace-pre-line`}
+`
+
 const PricingSection = styled.div`
   ${tw`flex my-0 mx-auto md:px-12 md:max-w-full justify-center relative h-3/6`}
   min-height: 500px;
   margin-bottom: 200px;
+`
+
+const BlogCardWrapper = styled.div`
+  ${tw`rounded-lg bg-white p-6 shadow-lg hover:shadow-xl transform w-1/2 lg:(w-1/4)`}
+`
+
+const LatestPostSection = styled.div`
+  ${tw`container mx-auto px-6 mb-20`}
 `
 
 const FormWrapper = styled.div(({ formOpen }) => [
@@ -111,8 +126,8 @@ const FormWrapper = styled.div(({ formOpen }) => [
 ])
 
 export default function Home(props) {
-  const { priceModels } = props
-  const priceModelsMap = useMemo(() => priceModels.reduce((acc, cur) => (acc[cur.id] = cur.heading) && acc, {}))
+  const { priceList, latestPosts } = props
+  const priceListMap = useMemo(() => priceList.reduce((acc, cur) => (acc[cur.id] = cur.heading) && acc, {}))
   const [inquiryItems, setInquiryItems] = useState([])
   const [formOpen, openForm] = useState()
   // const [bgCanvasLoaded, setBgCanvasLoaded] = useState();
@@ -172,12 +187,7 @@ export default function Home(props) {
                 <div className="text-white text-lg ff-open-sans font-bold ">Let's get in touch</div>
                 <CloseButton onClick={delay(closeForm, 800)}></CloseButton>
               </MobileFormCloseBar>
-              <GetInTouchForm
-                inquiryItems={inquiryItems}
-                removeInquiryItem={removeInquiryItem}
-                priceModelsMap={priceModelsMap}
-                closeForm={closeForm}
-              />
+              <GetInTouchForm inquiryItems={inquiryItems} removeInquiryItem={removeInquiryItem} priceListMap={priceListMap} closeForm={closeForm} />
             </FormWrapper>
           </div>
         </main>
@@ -185,26 +195,32 @@ export default function Home(props) {
         <WaveAnimBg />
       </div>
       <PricingSection>
-        <PricingCards
-          priceModels={priceModels}
-          addInquiryItem={addInquiryItem}
-          removeInquiryItem={removeInquiryItem}
-          showForm={showForm}
-        ></PricingCards>
+        <PricingCards priceList={priceList} addInquiryItem={addInquiryItem} removeInquiryItem={removeInquiryItem} showForm={showForm}></PricingCards>
       </PricingSection>
+      <LatestPostSection>
+        <SectionHeading>Latest Posts</SectionHeading>
+        <PostList tw="space-x-4">
+          {latestPosts.map((blogProps) => (
+            <BlogCard {...blogProps} key={blogProps.id} wrapper={BlogCardWrapper} />
+          ))}
+        </PostList>
+      </LatestPostSection>
       <ScrollTopButton />
     </>
   )
 }
 
 export async function getStaticProps() {
-  const path = "/price-models"
-  const res = await fetchStrapi(path)
-  const priceModels = await res.json()
-
+  const { getLatestPosts, getPriceList } = queryList
+  const latestPostsRes = await fetchStrapi(getLatestPosts.url)
+  const priceListRes = await fetchStrapi(getPriceList.url)
+  const latestPosts = await latestPostsRes.json()
+  const priceList = await priceListRes.json()
+  const props = {
+    priceList,
+    latestPosts,
+  }
   return {
-    props: {
-      priceModels,
-    },
+    props,
   }
 }
