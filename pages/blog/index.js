@@ -15,7 +15,7 @@ const ContentWrapper = styled.div`
 const PageHeading = styled.h1`
   ${tw`container mx-auto text-3xl font-bold`}
 `
-const List = styled.ul`
+const PostList = styled.ul`
   ${tw`flex flex-col md:(flex-row) mt-4`}
 `
 
@@ -25,9 +25,9 @@ const BlogMainPage = ({ posts }) => {
       <PageHeading>Blog</PageHeading>
       <ContentWrapper>
         {posts.map((blogProps) => (
-          <List>
+          <PostList>
             <BlogCard {...blogProps} key={blogProps.id} />
-          </List>
+          </PostList>
         ))}
       </ContentWrapper>
     </Container>
