@@ -1,9 +1,10 @@
 module.exports = {
   purge: ["./components/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}", "./public/styles/**/*.{css,scss}"],
   theme: {
-    fontFamily:{'poppins':['Poppins','sans-serif']},
+    fontFamily: { poppins: ["Poppins", "sans-serif"] },
     extend: {
       colors: {
+        "argo-secondary": "#f8e371",
         "argo-blue": {
           400: "#0a29ca",
           500: "#0500FF",

@@ -3,12 +3,9 @@ import styled from "styled-components"
 import tw from "twin.macro"
 import styles from "../styles/Home.module.css"
 import trads from "../translations"
-// import Head from "next/head"
-// import Link from "next/link"
-// import { useRouter } from "next/router"
 /* components */
+import { HomeBlogCarousel, HomeBlogCarouselSlide } from "components/Carousel"
 import GetInTouchForm from "components/Form"
-// import ArgoComingSoon from "../public/logos/lettermark/dark.svg"
 import ScrollTopButton from "components/ScrollTopButton"
 import { Close } from "components/Icons"
 import Button from "components/Button"
@@ -19,6 +16,21 @@ import { PricingCards } from "components/PricingCards"
 import { PostList, BlogCard } from "components/Blog"
 /* lib */
 import { fetchStrapi, queryList } from "lib/api/strapi"
+
+const homeBlogCarouselConfig = {
+  slidesPerView: 1,
+  spaceBetween: 8,
+  breakpoints: {
+    640: {
+      slidesPerView: 2,
+      spaceBetween: 15,
+    },
+    768: {
+      slidesPerView: 3,
+      spaceBetween: 25,
+    },
+  },
+}
 
 const CloseButton = styled(Close)`
   ${tw`w-8 h-8 bg-white float-right cursor-pointer rounded-md transition-all transform active:translate-x-1 active:translate-y-1`}
@@ -111,7 +123,7 @@ const PricingSection = styled.div`
 `
 
 const BlogCardWrapper = styled.div`
-  ${tw`rounded-lg bg-white p-6 shadow-lg hover:shadow-xl transform w-1/2 lg:(w-1/4)`}
+  ${tw`rounded-lg bg-white p-6 shadow-lg hover:shadow-xl transform w-full h-full`}
 `
 
 const LatestPostSection = styled.div`
@@ -125,7 +137,7 @@ const FormWrapper = styled.div(({ formOpen }) => [
   !formOpen && tw`hidden`,
 ])
 
-export default function Home(props) {
+const HomePage = (props) => {
   const { priceList, latestPosts } = props
   const priceListMap = useMemo(() => priceList.reduce((acc, cur) => (acc[cur.id] = cur.heading) && acc, {}))
   const [inquiryItems, setInquiryItems] = useState([])
@@ -199,11 +211,16 @@ export default function Home(props) {
       </PricingSection>
       <LatestPostSection>
         <SectionHeading>Latest Posts</SectionHeading>
-        <PostList tw="space-x-4">
+        {/* <PostList tw="space-x-4"> */}
+        <HomeBlogCarousel swiperConfig={homeBlogCarouselConfig}>
           {latestPosts.map((blogProps) => (
-            <BlogCard {...blogProps} key={blogProps.id} wrapper={BlogCardWrapper} />
+            <HomeBlogCarouselSlide>
+              <BlogCard {...blogProps} key={blogProps.id} wrapper={BlogCardWrapper} />
+            </HomeBlogCarouselSlide>
           ))}
-        </PostList>
+        </HomeBlogCarousel>
+
+        {/* </PostList> */}
       </LatestPostSection>
       <ScrollTopButton />
     </>
@@ -224,3 +241,5 @@ export async function getStaticProps() {
     props,
   }
 }
+
+export default HomePage

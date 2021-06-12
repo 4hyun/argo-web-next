@@ -1,5 +1,6 @@
 import "../styles/globals.css"
 import "../styles/tailwind.css"
+import "swiper/swiper.scss"
 import Head from "next/head"
 import Layout from "components/Layout"
 import GlobalStyles from "styles/GlobalStyles"
