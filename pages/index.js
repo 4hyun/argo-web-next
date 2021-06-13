@@ -12,7 +12,7 @@ import Button from "components/Button"
 import WaveAnimBg from "components/WaveAnimBg"
 import { delay } from "lib/delay"
 import { useTranslationsContext } from "contexts/Translations"
-import { PricingCards } from "components/PricingCards"
+import PriceInfo from "components/PriceInfo"
 import { PostList, BlogCard } from "components/Blog"
 /* lib */
 import { fetchStrapi, queryList } from "lib/api/strapi"
@@ -207,15 +207,15 @@ const HomePage = (props) => {
         <WaveAnimBg />
       </div>
       <PricingSection>
-        <PricingCards priceList={priceList} addInquiryItem={addInquiryItem} removeInquiryItem={removeInquiryItem} showForm={showForm}></PricingCards>
+        <PriceInfo priceList={priceList} addInquiryItem={addInquiryItem} removeInquiryItem={removeInquiryItem} showForm={showForm}></PriceInfo>
       </PricingSection>
-      <LatestPostSection>
+      <LatestPostSection className="latestposts">
         <SectionHeading>Latest Posts</SectionHeading>
         {/* <PostList tw="space-x-4"> */}
         <HomeBlogCarousel swiperConfig={homeBlogCarouselConfig}>
           {latestPosts.map((blogProps) => (
-            <HomeBlogCarouselSlide>
-              <BlogCard {...blogProps} key={blogProps.id} wrapper={BlogCardWrapper} />
+            <HomeBlogCarouselSlide key={blogProps.id}>
+              <BlogCard {...blogProps} wrapper={BlogCardWrapper} />
             </HomeBlogCarouselSlide>
           ))}
         </HomeBlogCarousel>

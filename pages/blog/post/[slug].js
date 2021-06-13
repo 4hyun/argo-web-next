@@ -1,11 +1,14 @@
 import React from "react"
 import Link from "next/link"
+/* modules */
 import styled from "styled-components"
 import tw from "twin.macro"
-import { useRouter } from "next/router"
+/* lib */
 import { fetchStrapi } from "lib/api/strapi"
+/* components */
 import { ArrowLeftCircle } from "components/Icons"
 import { PostContent } from "components/Blog"
+import TableOfContents from "components/Blog/TableOfContents"
 
 const FallbackContainer = styled.div`
   ${tw`w-full pt-24 lg:(pt-40) min-h-screen flex justify-center items-center`}
@@ -65,6 +68,7 @@ const PostPage = ({ post }) => {
             </a>
           </Link>
           <BlogTitle>{title}</BlogTitle>
+          {/* <TableOfContents /> */}
           <MainHeadingFooter>
             <PostDate>{postDate.toLocaleDateString("ko-KR").slice(0, -1)}</PostDate>
             <Author>{`${firstname} ${lastname}`}</Author>

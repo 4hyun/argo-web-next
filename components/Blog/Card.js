@@ -14,8 +14,11 @@ const PublishedAt = styled.span`
   ${tw`text-xs`}
 `
 
+const HOVERED = "hovered"
+const HOVERED_ACTIVE = "hovered-active"
+
 const Wrapper = styled.article`
-  ${tw`rounded-lg bg-white p-6 shadow-lg hover:shadow-xl transform md:(max-w-3xl)`}
+  ${tw`rounded-lg p-6 shadow-lg hover:(shadow-xl) transform md:(max-w-3xl) transition-colors`}
   ${AuthorLabel},${PublishedAt} {
     ${tw`leading-none`}
   }
@@ -28,24 +31,35 @@ const Wrapper = styled.article`
   }
 `
 
+const CLASSNAME = "blogcard"
+export const CARD_CLASSNAME = "." + CLASSNAME
+
 const Card = ({ id, title, content, firstname, lastname, email, published_at, slug, wrapper = Wrapper }) => {
   const Wrapper = wrapper
   const [cardHoverClass, setCardHoverClass] = useState(null)
-  const handleCardHovered = () => setCardHoverClass("hovered")
+  const handleCardHovered = () => setCardHoverClass(HOVERED)
   const handleCardMouseLeave = () => setCardHoverClass(null)
-  const handleCardHoverActive = () => setCardHoverClass("hovered-active")
+  const handleCardHoverActive = () => setCardHoverClass(HOVERED_ACTIVE)
   const postDate = new Date(published_at)
   return (
-    <Wrapper className={`${cardHoverClass && cardHoverClass}`}>
-      <H2 onMouseEnter={handleCardHovered} onMouseLeave={handleCardMouseLeave} onMouseDown={handleCardHoverActive}>
-        <Link href={`blog/post/${slug}`}>
-          <a>{title}</a>
-        </Link>
-      </H2>
-      {/* <div>{content}</div> */}
-      <AuthorLabel>{`by ${firstname} ${lastname}`}</AuthorLabel>
-      <PublishedAt>{postDate.toLocaleDateString("ko-KR").slice(0, -1)}</PublishedAt>
-    </Wrapper>
+    <Link href={`blog/post/${slug}`}>
+      <a>
+        <Wrapper
+          cardHoverClass={cardHoverClass}
+          className={`${CLASSNAME} ${cardHoverClass && cardHoverClass}`}
+          onMouseEnter={handleCardHovered}
+          onMouseLeave={handleCardMouseLeave}
+          onMouseDown={handleCardHoverActive}
+        >
+          <H2>
+            <a>{title}</a>
+          </H2>
+          {/* <div>{content}</div> */}
+          <AuthorLabel>{`by ${firstname} ${lastname}`}</AuthorLabel>
+          <PublishedAt>{postDate.toLocaleDateString("ko-KR").slice(0, -1)}</PublishedAt>
+        </Wrapper>
+      </a>
+    </Link>
   )
 }
 
