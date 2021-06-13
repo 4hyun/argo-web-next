@@ -112,12 +112,15 @@ const MobileFormCloseBar = styled.div`
   height: 62px;
 `
 
-const SectionHeading = styled.h3`
-  ${tw`leading-tight w-full text-3xl font-black whitespace-pre-line`}
+const SectionHeading = styled.h2`
+  ${tw`leading-tight w-full text-4xl font-black whitespace-pre-line mb-10 text-center`}
 `
 
+const PricingSectionWrapper = styled.div`
+  ${tw`flex flex-col container mx-auto md:px-12 md:max-w-full`}
+`
 const PricingSection = styled.div`
-  ${tw`flex my-0 mx-auto md:px-12 md:max-w-full justify-center relative h-3/6`}
+  ${tw`flex my-0 mx-auto justify-center relative h-3/6 pt-4`}
   min-height: 500px;
   margin-bottom: 200px;
 `
@@ -206,11 +209,14 @@ const HomePage = (props) => {
         {/* {bgCanvasLoaded && <WaveAnimBg />} */}
         <WaveAnimBg />
       </div>
-      <PricingSection>
-        <PriceInfo priceList={priceList} addInquiryItem={addInquiryItem} removeInquiryItem={removeInquiryItem} showForm={showForm}></PriceInfo>
-      </PricingSection>
+      <PricingSectionWrapper>
+        <SectionHeading id="tyk-pricing">Tyk Pricing</SectionHeading>
+        <PricingSection>
+          <PriceInfo priceList={priceList} addInquiryItem={addInquiryItem} removeInquiryItem={removeInquiryItem} showForm={showForm}></PriceInfo>
+        </PricingSection>
+      </PricingSectionWrapper>
       <LatestPostSection className="latestposts">
-        <SectionHeading>Latest Posts</SectionHeading>
+        <SectionHeading id="latest-posts">Latest Posts</SectionHeading>
         {/* <PostList tw="space-x-4"> */}
         <HomeBlogCarousel swiperConfig={homeBlogCarouselConfig}>
           {latestPosts.map((blogProps) => (

@@ -18,16 +18,16 @@ const HOVERED = "hovered"
 const HOVERED_ACTIVE = "hovered-active"
 
 const Wrapper = styled.article`
-  ${tw`rounded-lg p-6 shadow-lg hover:(shadow-xl) transform md:(max-w-3xl) transition-colors`}
+  ${tw`rounded-lg p-6 shadow-md hover:(shadow-xl) transform md:(max-w-3xl) transition-all`}
   ${AuthorLabel},${PublishedAt} {
     ${tw`leading-none`}
   }
   &.hovered,
   &.hovered-active {
-    ${tw`ring-4 ring-argo-blue-400`}
+    ${tw`ring-4 ring-argo-lavender-400`}
   }
   &.hovered-active {
-    ${tw`translate-y-2`}
+    ${tw`translate-y-1`}
   }
 `
 

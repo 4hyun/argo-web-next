@@ -48,11 +48,14 @@ const Author = styled.span`
 `
 
 const BackButton = styled(ArrowLeftCircle)`
-  ${tw`text-argo-blue-400 mb-4`}
+  ${tw`text-argo-blue-400 cursor-pointer`}
+  &:hover {
+    ${tw`text-off-white fill-current`}
+  }
 `
 
 const MainHeading = styled.div`
-  ${tw`flex flex-col py-4`}
+  ${tw`flex flex-col py-4 space-y-4`}
 `
 
 const PostPage = ({ post }) => {
@@ -63,7 +66,7 @@ const PostPage = ({ post }) => {
       <ContentWrapper>
         <MainHeading>
           <Link href="/blog">
-            <a>
+            <a tw="w-max p-1 rounded-full transition-colors hover:(bg-argo-blue-400)">
               <BackButton size={32} />
             </a>
           </Link>

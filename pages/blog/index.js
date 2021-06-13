@@ -9,11 +9,11 @@ const Container = styled.div`
 `
 
 const ContentWrapper = styled.div`
-  ${tw`container mx-auto`}
+  ${tw`container mx-auto mt-8`}
 `
 
 const PageHeading = styled.h1`
-  ${tw`container mx-auto text-3xl font-bold`}
+  ${tw`container mx-auto text-3xl font-black`}
 `
 
 const BlogMainPage = ({ posts }) => {
@@ -22,7 +22,7 @@ const BlogMainPage = ({ posts }) => {
       <PageHeading>Blog</PageHeading>
       <ContentWrapper>
         {posts && (
-          <PostList tw="space-y-4" col>
+          <PostList tw="space-y-6" col>
             {posts.map((blogProps) => (
               <BlogCard {...blogProps} key={blogProps.id} />
             ))}
