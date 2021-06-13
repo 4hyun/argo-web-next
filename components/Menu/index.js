@@ -8,16 +8,18 @@ import { default as menuData } from "./data"
 import { logoCircleDarkUrl } from "components/Brand"
 
 const StyledMenu = styled(SlidingMenu)`
-  ${tw`w-screen! md:(w-3/12)!`}
-  background: center / 100% 130% linear-gradient( 161deg,hsl(255deg 100% 27%) 17%,hsl(218deg 100% 34%) 36%,hsl(224deg 97% 36% / 88%) 66%,hsl(177deg 100% 50%) 100% );
+  ${tw`w-screen! md:(w-3/12)! bg-off-white`}
+  ${
+    "" /* background: center / 100% 130% linear-gradient( 161deg,hsl(255deg 100% 27%) 17%,hsl(218deg 100% 34%) 36%,hsl(224deg 97% 36% / 88%) 66%,hsl(177deg 100% 50%) 100% ); */
+  }
 `
 
 const MenuHeader = styled.div`
-  ${tw`flex! w-full justify-between`}
+  ${tw`flex! w-full justify-end`}
 `
 
-const LogoCircleDark = memo(styled.div`
-  ${tw`w-16 mb-8`}
+export const LogoCircleDark = memo(styled.div`
+  ${tw`w-8 h-8`}
   :after {
     display: block;
     content: "";
@@ -28,7 +30,7 @@ const LogoCircleDark = memo(styled.div`
 
 const CloseButton = memo(
   styled(Close)`
-    ${tw`cursor-pointer`}
+    ${tw`cursor-pointer text-argo-blue-400 fill-current my-auto w-6 h-6`}
   `
 )
 
@@ -46,7 +48,7 @@ const MenuItemA = styled.a`
     margin-left: var(--margin-offset);
     margin-right: var(--margin-offset);
   }
-  ${tw`flex text-2xl rounded-md text-white font-bold px-2 py-2 lg:(active:(transform translate-y-1) hover:(bg-argo-blue-400) text-3xl px-8 py-5)`}
+  ${tw`flex text-2xl rounded-md text-argo-blue-400 font-bold px-2 py-2 lg:(active:(transform translate-y-1) transform transition-transform hover:(scale-105) text-3xl px-6 py-4)`}
   & > svg {
     ${tw`my-auto`}
   }
@@ -57,8 +59,7 @@ const Menu = ({ children, isOpen, onClose }) => {
   return (
     <StyledMenu right isOpen={isOpen} outerContainerId={MENU_EID} onClose={onClose}>
       <MenuHeader>
-        <LogoCircleDark />
-        <CloseButton size={32} color="#fff" onClick={onClose} />
+        <CloseButton onClick={onClose} />
       </MenuHeader>
       {children}
     </StyledMenu>

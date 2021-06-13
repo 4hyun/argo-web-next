@@ -3,7 +3,7 @@ import { useState } from "react"
 import styled from "styled-components"
 import tw from "twin.macro"
 import Navbar from "components/Navbar"
-import { Menu, MenuItemA, MenuList, menuData } from "../Menu"
+import { Menu, MenuItemA, MenuList, menuData, LogoCircleDark } from "../Menu"
 import { OpenLinkArrow } from "components/Icons"
 
 const Wrapper = styled.div``
@@ -25,6 +25,14 @@ const Header = () => {
           {/* <Logo /> */}
           {menuData.map(({ item: { mid, title, slug, icon, target } }) => {
             let Icon = icons[icon]
+            if (mid === 1)
+              return (
+                <Link key={mid} href={`${slug}`} passHref>
+                  <MenuItemA onClick={closeMenu} target={target || "_self"}>
+                    {title}
+                  </MenuItemA>
+                </Link>
+              )
             return (
               <Link key={mid} href={`${slug}`} passHref>
                 <MenuItemA onClick={closeMenu} target={target || "_self"}>
