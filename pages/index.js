@@ -217,7 +217,6 @@ const HomePage = (props) => {
       </PricingSectionWrapper>
       <LatestPostSection className="latestposts">
         <SectionHeading id="latest-posts">Latest Posts</SectionHeading>
-        {/* <PostList tw="space-x-4"> */}
         <HomeBlogCarousel swiperConfig={homeBlogCarouselConfig}>
           {latestPosts.map((blogProps) => (
             <HomeBlogCarouselSlide key={blogProps.id}>
