@@ -33,7 +33,7 @@ const homeBlogCarouselConfig = {
 }
 
 const CloseButton = styled(Close)`
-  ${tw`w-8 h-8 bg-white float-right cursor-pointer rounded-md transition-all transform active:translate-x-1 active:translate-y-1`}
+  ${tw`w-8 h-8 p-1.5 bg-white text-gray-800 fill-current float-right cursor-pointer rounded-full transition-all transform active:translate-x-1 active:translate-y-1`}
 `
 
 const ComingSoonMessageContainer = styled.div`
