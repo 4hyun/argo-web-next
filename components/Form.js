@@ -4,6 +4,10 @@ import styled from "styled-components"
 import tw from "twin.macro"
 import useDeviceDetect from "hooks/useDeviceDetect"
 
+const StyledCloseIcon = styled(Close)`
+  ${tw`p-1`}
+`
+
 const InquiryItemsContainer = styled.div`
   ${tw`flex flex-col pt-4 px-4 space-y-2`}
 `
@@ -82,7 +86,7 @@ const Form = ({ inquiryItems, priceListMap, removeInquiryItem, closeForm }) => {
     <form
       name="contact"
       method="POST"
-      className="bg-white shadow-md overflow-hidden rounded-md lg:my-auto select-none"
+      className="bg-white shadow-lg overflow-hidden rounded-b-2xl lg:(rounded-2xl my-auto)! select-none"
       data-netlify="true"
       onSubmit={netlifyFormSubmit}
       ref={ref}
@@ -92,7 +96,7 @@ const Form = ({ inquiryItems, priceListMap, removeInquiryItem, closeForm }) => {
         {inquiryItems.map((inquiryItemId) => (
           <InquiryItem key={inquiryItemId}>
             <span>{priceListMap[inquiryItemId]}</span>
-            <Close size="20" onClick={() => removeInquiryItem(inquiryItemId)} />
+            <StyledCloseIcon size="20" onClick={() => removeInquiryItem(inquiryItemId)} />
           </InquiryItem>
         ))}
         {Object.entries(priceListMap).map(([inquiryItemId, heading]) => (
@@ -125,7 +129,7 @@ const Form = ({ inquiryItems, priceListMap, removeInquiryItem, closeForm }) => {
             </div>
           </div>
         </div>
-        <div className="form-footer px-4 py-3 bg-gray-50 text-right sm:px-6 ">
+        <div className="form-footer px-4 py-3 bg-white text-right sm:px-6 ">
           <div className="form-button-wrapper relative">
             <SubmitButton type="submit" aria-label="submit">
               {submitButtonMessage}

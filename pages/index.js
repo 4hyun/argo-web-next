@@ -17,6 +17,17 @@ import { PostList, BlogCard } from "components/Blog"
 /* lib */
 import { fetchStrapi, queryList } from "lib/api/strapi"
 
+const LayoutTopGradientOverlayBg = styled.div`
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 90px;
+  z-index: 11;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 65%, rgba(255, 255, 255, 0) 100%);
+  ${tw`lg:hidden!`}
+`
+
 const homeBlogCarouselConfig = {
   slidesPerView: 1,
   spaceBetween: 8,
@@ -31,10 +42,6 @@ const homeBlogCarouselConfig = {
     },
   },
 }
-
-const CloseButton = styled(Close)`
-  ${tw`w-8 h-8 p-1.5 bg-white text-gray-800 fill-current float-right cursor-pointer rounded-full transition-all transform active:translate-x-1 active:translate-y-1`}
-`
 
 const ComingSoonMessageContainer = styled.div`
   ${tw`xl:ml-10 select-none flex flex-col justify-center xl:justify-start xl:mr-4`}
@@ -107,10 +114,22 @@ const GetInTouchButton = styled(StyledButton)`
 
 const LearnMoreButton = styled(StyledButton)``
 
-const MobileFormCloseBar = styled.div`
-  ${tw`flex justify-between bg-argo-blue-400 lg:hidden py-3 px-4`}
-  height: 62px;
+const MobileFormCloseIcon = styled(Close)`
+  ${tw`w-8 h-8 p-1.5 text-gray-50 fill-current float-right cursor-pointer`}
 `
+const MobileFormCloseBarMessage = styled.div`
+  ${tw`flex items-center text-gray-50 text-lg font-poppins font-bold pl-2`}
+`
+const MobileFormCloseBar = styled.div`
+  ${tw`flex justify-between items-center bg-argo-blue-400 py-1 px-4 rounded-t-2xl lg:hidden!`}
+  height: 52px;
+`
+const FormContainer = styled.div(({ formOpen }) => [
+  tw`lg:relative lg:flex lg:bg-transparent lg:w-5/12`,
+  tw`fixed inset-0 w-screen h-full flex justify-center px-4 flex-col bg-gradient-to-b from-white to-argo-blue-400 lg:(bg-none rounded-2xl)`,
+  formOpen && tw`flex`,
+  !formOpen && tw`hidden`,
+])
 
 const SectionHeading = styled.h2`
   ${tw`leading-tight w-full text-4xl font-black whitespace-pre-line mb-10 text-center`}
@@ -132,13 +151,6 @@ const BlogCardWrapper = styled.div`
 const LatestPostSection = styled.div`
   ${tw`container mx-auto px-6 mb-20`}
 `
-
-const FormWrapper = styled.div(({ formOpen }) => [
-  tw`lg:relative lg:flex lg:bg-transparent lg:w-5/12 `,
-  tw`fixed inset-0 w-screen h-full flex justify-center px-4 flex-col bg-argo-blue-400`,
-  formOpen && tw`flex`,
-  !formOpen && tw`hidden`,
-])
 
 const HomePage = (props) => {
   const { priceList, latestPosts } = props
@@ -180,6 +192,7 @@ const HomePage = (props) => {
   return (
     <>
       <div className={styles.container}>
+        {!formOpen && <LayoutTopGradientOverlayBg />}
         <main className={`absolute flex items-center w-screen h-full z-10`}>
           <div className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center`}>
             <ComingSoonMessageContainer>
@@ -197,13 +210,13 @@ const HomePage = (props) => {
                 </a>
               </div>
             </ComingSoonMessageContainer>
-            <FormWrapper formOpen={formOpen}>
+            <FormContainer formOpen={formOpen}>
               <MobileFormCloseBar>
-                <div className="text-white text-lg ff-open-sans font-bold ">Let's get in touch</div>
-                <CloseButton onClick={delay(closeForm, 800)}></CloseButton>
+                <MobileFormCloseBarMessage>Let's get in touch</MobileFormCloseBarMessage>
+                <MobileFormCloseIcon onClick={delay(closeForm, 800)}></MobileFormCloseIcon>
               </MobileFormCloseBar>
               <GetInTouchForm inquiryItems={inquiryItems} removeInquiryItem={removeInquiryItem} priceListMap={priceListMap} closeForm={closeForm} />
-            </FormWrapper>
+            </FormContainer>
           </div>
         </main>
         {/* {bgCanvasLoaded && <WaveAnimBg />} */}

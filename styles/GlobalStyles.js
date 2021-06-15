@@ -5,12 +5,10 @@ import { styles as slidingMenuStyles } from "components/Menu/styles"
 
 const CustomStyles = createGlobalStyle`
   ${slidingMenuStyles}
-  ${
-    "" /* * {  
+  .no-tap-highlight {  
     -webkit-tap-highlight-color: transparent;
     ${tw`antialiased`};
 
-  } */
   }
   ::selection {
       background: #93bcfa;

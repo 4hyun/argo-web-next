@@ -5,7 +5,7 @@ import { Twirl as TwirlBurger } from "hamburger-react"
 const StyledBurger = tw(TwirlBurger)`text-argo-blue-600 select-none`
 
 const Hamburger = ({ toggled, toggle, closeMenu }) => {
-  return <StyledBurger color="#250FAB" toggled={toggled} toggle={toggle}></StyledBurger>
+  return <StyledBurger className="no-tap-highlight" color="#250FAB" toggled={toggled} toggle={toggle}></StyledBurger>
 }
 
 export default Hamburger

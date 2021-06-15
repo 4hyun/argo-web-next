@@ -9,7 +9,7 @@ import { useTranslationsContext, supportedLang } from "contexts/Translations"
 
 const Container = styled.div`
   ${tw`fixed flex items-center h-16 max-h-16 lg:(absolute items-end) w-full`};
-  background-color: var(--nav-bg);
+  background: var(--nav-bg);
   padding: 0 1rem;
   @media (min-width: 1200px) {
     height: 105px;
