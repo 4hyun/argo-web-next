@@ -15,7 +15,7 @@ import { useTranslationsContext } from "contexts/Translations"
 import PriceInfo from "components/PriceInfo"
 import { PostList, BlogCard } from "components/Blog"
 /* lib */
-import { fetchStrapi, queryList } from "lib/api/strapi"
+import { fetchStrapi, paths, getStrapiAuthToken } from "lib/api/strapi"
 
 const LayoutTopGradientOverlayBg = styled.div`
   position: fixed;
@@ -246,9 +246,11 @@ const HomePage = (props) => {
 }
 
 export async function getStaticProps() {
-  const { getLatestPosts, getPriceList } = queryList
-  const latestPostsRes = await fetchStrapi(getLatestPosts.url)
-  const priceListRes = await fetchStrapi(getPriceList.url)
+  const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
+  const token = await getStrapiAuthToken(strapiUser)
+  const { getLatestPosts, getPriceList } = paths
+  const latestPostsRes = await fetchStrapi(getLatestPosts.url, token)
+  const priceListRes = await fetchStrapi(getPriceList.url, token)
   const latestPosts = await latestPostsRes.json()
   const priceList = await priceListRes.json()
   const props = {

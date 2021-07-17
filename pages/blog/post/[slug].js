@@ -4,7 +4,7 @@ import Link from "next/link"
 import styled from "styled-components"
 import tw from "twin.macro"
 /* lib */
-import { fetchStrapi } from "lib/api/strapi"
+import { fetchStrapi, getStrapiAuthToken, paths as apiPaths } from "lib/api/strapi"
 /* components */
 import { ArrowLeftCircle } from "components/Icons"
 import { PostContent } from "components/Blog"
@@ -87,8 +87,10 @@ export default PostPage
 
 export async function getStaticProps({ params, query }) {
   const { slug } = params
+  const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
+  const token = await getStrapiAuthToken(strapiUser)
   const path = `/blog-posts?slug=${slug}`
-  const res = await fetchStrapi(path)
+  const res = await fetchStrapi(path, token)
   const post = await res.json()
 
   return {
@@ -103,8 +105,9 @@ export async function getStaticProps({ params, query }) {
 }
 
 export async function getStaticPaths() {
-  const contentURL = `/blog-posts`
-  const res = await fetchStrapi(contentURL)
+  const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
+  const token = await getStrapiAuthToken(strapiUser)
+  const res = await fetchStrapi(apiPaths.getBlogPosts.url, token)
   const posts = await res.json()
   const paths = posts.map(({ slug }) => ({ params: { slug } }))
   return {
