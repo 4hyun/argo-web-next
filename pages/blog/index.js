@@ -38,7 +38,7 @@ export default BlogMainPage
 // revalidation is enabled and a new request comes in
 export async function getStaticProps() {
   const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
-  const token = await getStrapiAuthToken(strapiUser)
+  const token = await getStrapiAuthToken(strapiUser, process.env)
   const res = await fetchStrapi(paths.getBlogPosts.url, token)
   const posts = await res.json()
 

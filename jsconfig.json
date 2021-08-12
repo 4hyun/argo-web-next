@@ -6,7 +6,8 @@
       "@/components/*": ["components/*"],
       "@/hooks/*": ["hooks/*"],
       "@/configs/*": ["configs/*"],
-      "@/contexts/*": ["contexts/*"]
+      "@/contexts/*": ["contexts/*"],
+      "@/lib/*": ["lib/*"]
     }
   },
   "exclude": ["node_modules"]
