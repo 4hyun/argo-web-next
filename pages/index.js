@@ -149,7 +149,7 @@ const BlogCardWrapper = styled.div`
 `
 
 const LatestPostSection = styled.div`
-  ${tw`container mx-auto px-6 mb-20`}
+  ${tw`container mx-auto px-6 mb-20 max-w-screen-xl!`}
 `
 
 const HomePage = (props) => {
