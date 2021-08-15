@@ -28,7 +28,7 @@ const Wrapper = styled.article`
   }
   &.hovered,
   &.hovered-active {
-    ${tw`ring-4 ring-argo-lavender-400`}
+    ${tw`ring-4 ring-argo-blue-50`}
   }
   &.hovered-active {
     ${tw`translate-y-1`}

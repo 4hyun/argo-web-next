@@ -4,7 +4,7 @@ import tw from "twin.macro"
 import Tag from "components/Tag"
 
 const Wrapper = styled.div`
-  ${tw`flex justify-center gap-x-2 mb-4`}
+  ${tw`flex flex-wrap	justify-center items-center gap-y-2 gap-x-2 mb-4`}
 `
 
 const HomeBlogTags = ({ tagsList }) => {

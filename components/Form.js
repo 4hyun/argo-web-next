@@ -24,7 +24,7 @@ const Input = tw.input`mt-1 block w-full shadow-sm sm:text-sm border border-gray
 
 const Textarea = tw.textarea`shadow-sm mt-1 block w-full sm:text-sm border border-gray-300 rounded-md px-2 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500`
 
-const SubmitButton = tw.button`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-base font-medium text-white bg-argo-blue-400 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full relative`
+const SubmitButton = tw.button`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-base font-medium text-white bg-argo-blue-400 hover:(filter drop-shadow-lg) focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full relative`
 
 const Ping = ({ on }) => (
   <span className={`flex absolute h-3 w-3 top-1 right-1 -mt-1 -mr-1 ${on ? "opacity-100" : "opacity-0"}`}>
