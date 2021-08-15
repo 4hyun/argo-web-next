@@ -14,11 +14,15 @@ const PublishedAt = styled.span`
   ${tw`text-xs`}
 `
 
+const AuthorInfoContainer = styled.div`
+  ${tw`flex flex-col`}
+`
+
 const HOVERED = "hovered"
 const HOVERED_ACTIVE = "hovered-active"
 
 const Wrapper = styled.article`
-  ${tw`rounded-lg p-6 shadow-md hover:(shadow-xl) transform md:(max-w-3xl) transition-all`}
+  ${tw`rounded-lg p-6 hover:(shadow-lg) transform md:(max-w-3xl) transition-all ring-1 ring-argo-lavender-400`}
   ${AuthorLabel},${PublishedAt} {
     ${tw`leading-none`}
   }
@@ -34,7 +38,7 @@ const Wrapper = styled.article`
 const CLASSNAME = "blogcard"
 export const CARD_CLASSNAME = "." + CLASSNAME
 
-const Card = ({ id, title, content, firstname, lastname, email, published_at, slug, wrapper = Wrapper }) => {
+const Card = ({ id, title, content, firstname, lastname, email, published_at, slug, wrapper = Wrapper, showAuthor }) => {
   const Wrapper = wrapper
   const [cardHoverClass, setCardHoverClass] = useState(null)
   const handleCardHovered = () => setCardHoverClass(HOVERED)
@@ -55,8 +59,12 @@ const Card = ({ id, title, content, firstname, lastname, email, published_at, sl
             <a>{title}</a>
           </H2>
           {/* <div>{content}</div> */}
-          <AuthorLabel>{`by ${firstname} ${lastname}`}</AuthorLabel>
-          <PublishedAt>{postDate.toLocaleDateString("ko-KR").slice(0, -1)}</PublishedAt>
+          {showAuthor && (
+            <AuthorInfoContainer>
+              <AuthorLabel>{`by ${firstname} ${lastname}`}</AuthorLabel>
+              <PublishedAt>{postDate.toLocaleDateString("ko-KR").slice(0, -1)}</PublishedAt>
+            </AuthorInfoContainer>
+          )}
         </Wrapper>
       </a>
     </Link>

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react"
+import { useState, useMemo, useEffect } from "react"
 import styled from "styled-components"
 import tw from "twin.macro"
 import styles from "../styles/Home.module.css"
@@ -14,6 +14,7 @@ import { delay } from "lib/delay"
 import { useTranslationsContext } from "contexts/Translations"
 import PriceInfo from "components/PriceInfo"
 import { PostList, BlogCard } from "components/Blog"
+import HomeBlogTags from "containers/HomeBlogTags/index"
 /* lib */
 import { fetchStrapi, paths, getStrapiAuthToken } from "lib/api/strapi"
 
@@ -37,7 +38,7 @@ const homeBlogCarouselConfig = {
       spaceBetween: 15,
     },
     768: {
-      slidesPerView: 3,
+      slidesPerView: 4,
       spaceBetween: 25,
     },
   },
@@ -144,8 +145,18 @@ const PricingSection = styled.div`
   margin-bottom: 200px;
 `
 
-const BlogCardWrapper = styled.div`
-  ${tw`rounded-lg bg-white p-6 shadow-lg hover:shadow-xl transform w-full h-full`}
+const HomeBlogCardWrapper = styled.div`
+  ${tw`flex flex-col justify-between`}
+  ${tw`rounded-lg bg-white p-6 shadow-lg hover:(shadow-xl) hover:(bg-gradient-to-br from-white via-off-white to-argo-blue-50) transform w-full h-full`}
+  :hover:after {
+    content: "";
+    width: 2.25rem;
+    height: 2.25rem;
+    background: center / cover no-repeat url("/android-chrome-512x512.png");
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+  }
 `
 
 const LatestPostSection = styled.div`
@@ -153,7 +164,10 @@ const LatestPostSection = styled.div`
 `
 
 const HomePage = (props) => {
-  const { priceList, latestPosts } = props
+  const { priceList, latestPosts, tagsList } = props
+  useEffect(() => {
+    console.log(">> HomePage/props.tagsList: ", tagsList)
+  })
   const priceListMap = useMemo(() => priceList.reduce((acc, cur) => (acc[cur.id] = cur.heading) && acc, {}))
   const [inquiryItems, setInquiryItems] = useState([])
   const [formOpen, openForm] = useState()
@@ -230,10 +244,11 @@ const HomePage = (props) => {
       </PricingSectionWrapper>
       <LatestPostSection className="latestposts">
         <SectionHeading id="latest-posts">Latest Posts</SectionHeading>
+        <HomeBlogTags tagsList={tagsList} />
         <HomeBlogCarousel swiperConfig={homeBlogCarouselConfig}>
           {latestPosts.map((blogProps) => (
             <HomeBlogCarouselSlide key={blogProps.id}>
-              <BlogCard {...blogProps} wrapper={BlogCardWrapper} />
+              <BlogCard {...blogProps} wrapper={HomeBlogCardWrapper} showAuthor />
             </HomeBlogCarouselSlide>
           ))}
         </HomeBlogCarousel>
@@ -248,14 +263,19 @@ const HomePage = (props) => {
 export async function getStaticProps() {
   const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
   const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
-  const { getLatestPosts, getPriceList } = paths
+  const { getLatestPosts, getPriceList, getTagsList, getHomePageData } = paths
   const latestPostsRes = await fetchStrapi(getLatestPosts.url, token)
   const priceListRes = await fetchStrapi(getPriceList.url, token)
+  const tagsListRes = await fetchStrapi(getTagsList.url, token)
+  const homePageDataRes = await fetchStrapi(getHomePageData.url, token)
   const latestPosts = await latestPostsRes.json()
   const priceList = await priceListRes.json()
+  const homePageData = await homePageDataRes.json()
+  const tagsList = homePageData.home_blog_tags
   const props = {
     priceList,
     latestPosts,
+    tagsList,
   }
   return {
     props,
