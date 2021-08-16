@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import tw from "twin.macro"
 import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
 const MarkdownStyles = styled.div`
   > * {
@@ -34,10 +35,13 @@ const MarkdownStyles = styled.div`
   strong {
     font-weight: 900;
   }
+  blockquote {
+    ${tw`ml-6 pl-6 pr-4 py-4 bg-argo-blue-50 rounded-sm border-l-4 border-argo-blue-400 italic`}
+  }
 `
 const PostContent = ({ children }) => (
   <MarkdownStyles>
-    <ReactMarkdown children={children} />
+    <ReactMarkdown children={children} remarkPlugins={[remarkGfm]} />
   </MarkdownStyles>
 )
 

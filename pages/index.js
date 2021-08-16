@@ -177,10 +177,10 @@ const HomePage = (props) => {
     lang: { locale },
   } = useTranslationsContext()
 
-  const authorInfoConfig ={
+  const authorInfoConfig = {
     showAuthorLabel: true,
-    showDate: true
-}
+    showDate: true,
+  }
 
   const closeForm = () => {
     openForm(false)
@@ -272,7 +272,6 @@ export async function getStaticProps() {
   const { getLatestPosts, getPriceList, getTagsList, getHomePageData } = paths
   const latestPostsRes = await fetchStrapi(getLatestPosts.url, token)
   const priceListRes = await fetchStrapi(getPriceList.url, token)
-  const tagsListRes = await fetchStrapi(getTagsList.url, token)
   const homePageDataRes = await fetchStrapi(getHomePageData.url, token)
   const latestPosts = await latestPostsRes.json()
   const priceList = await priceListRes.json()
