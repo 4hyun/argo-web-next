@@ -30,6 +30,7 @@ const LayoutTopGradientOverlayBg = styled.div`
 `
 
 const homeBlogCarouselConfig = {
+  navigation: true,
   slidesPerView: 1,
   spaceBetween: 8,
   breakpoints: {
@@ -236,12 +237,7 @@ const HomePage = (props) => {
         {/* {bgCanvasLoaded && <WaveAnimBg />} */}
         <WaveAnimBg />
       </div>
-      <PricingSectionWrapper>
-        <SectionHeading id="tyk-pricing">Tyk Pricing</SectionHeading>
-        <PricingSection>
-          <PriceInfo priceList={priceList} addInquiryItem={addInquiryItem} removeInquiryItem={removeInquiryItem} showForm={showForm}></PriceInfo>
-        </PricingSection>
-      </PricingSectionWrapper>
+
       <LatestPostSection className="latestposts">
         <SectionHeading id="latest-posts">Latest Posts</SectionHeading>
         <HomeBlogTags tagsList={tagsList} />
@@ -255,6 +251,12 @@ const HomePage = (props) => {
 
         {/* </PostList> */}
       </LatestPostSection>
+      <PricingSectionWrapper>
+        <SectionHeading id="tyk-pricing">Tyk Pricing</SectionHeading>
+        <PricingSection>
+          <PriceInfo priceList={priceList} addInquiryItem={addInquiryItem} removeInquiryItem={removeInquiryItem} showForm={showForm}></PriceInfo>
+        </PricingSection>
+      </PricingSectionWrapper>
       <ScrollTopButton />
     </>
   )

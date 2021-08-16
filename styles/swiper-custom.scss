@@ -1,0 +1,5 @@
+@use 'swiper/swiper.scss' with (
+  $themeColor: var(--argo-blue)
+);
+
+@import 'swiper/components/navigation/navigation.scss';
