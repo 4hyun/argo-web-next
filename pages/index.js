@@ -241,7 +241,7 @@ const HomePage = (props) => {
       </div>
       <LatestPostSection className="latestposts">
         <SectionHeading id="latest-posts">Latest Posts</SectionHeading>
-        <HomeBlogTags tagsList={tagsList} />
+        {/* <HomeBlogTags tagsList={tagsList} /> */}
         <HomeBlogCarousel swiperConfig={homeBlogCarouselConfig}>
           {latestPosts.map((blogProps) => (
             <HomeBlogCarouselSlide key={blogProps.id}>
