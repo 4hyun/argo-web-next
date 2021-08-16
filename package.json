@@ -9,7 +9,8 @@
     "start": "next start",
     "deploy:netlify": "npm run build && npx next export",
     "storybook": "start-storybook -p 6007",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "lint": "next lint"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -20,7 +21,7 @@
     "framer-motion": "^3.1.1",
     "gsap": "^3.7.1",
     "hamburger-react": "^2.4.1",
-    "next": "^10.0.9",
+    "next": "^11.1.0",
     "postcss": "^8.3.6",
     "postcss-import": "^13.0.0",
     "react": "17.0.1",
@@ -46,8 +47,12 @@
     "babel-plugin-inline-react-svg": "^1.1.2",
     "babel-plugin-macros": "^3.0.1",
     "babel-plugin-styled-components": "^1.13.2",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "^11.1.0",
+    "eslint-config-prettier": "^8.3.0",
     "postcss-flexbugs-fixes": "^5.0.1",
     "postcss-preset-env": "^6.7.0",
+    "prettier": "2.3.2",
     "react-is": "^17.0.2",
     "twin.macro": "^2.6.2"
   }

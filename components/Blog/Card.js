@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import PropTypes from 'prop-types'
 import Link from "next/link"
 import styled from "styled-components"
 import tw from "twin.macro"
@@ -24,10 +25,10 @@ const HOVERED_ACTIVE = "hovered-active"
 const Wrapper = styled.article`
   ${tw`rounded-lg p-6 hover:(shadow-lg) transform md:(max-w-3xl) transition-all ring-1 ring-argo-lavender-400`}
   ${AuthorLabel},${PublishedAt} {
-    ${tw`leading-none`}
+     ${tw`leading-none`}
   }
   &.hovered,
-  &.hovered-active {
+    &.hovered-active {
     ${tw`ring-4 ring-argo-blue-50`}
   }
   &.hovered-active {
@@ -38,7 +39,7 @@ const Wrapper = styled.article`
 const CLASSNAME = "blogcard"
 export const CARD_CLASSNAME = "." + CLASSNAME
 
-const Card = ({ id, title, content, firstname, lastname, email, published_at, slug, wrapper = Wrapper, showAuthor }) => {
+const Card = ({ id, title, content, firstname, lastname, email, published_at, slug, wrapper = Wrapper, authorInfoConfig }) => {
   const Wrapper = wrapper
   const [cardHoverClass, setCardHoverClass] = useState(null)
   const handleCardHovered = () => setCardHoverClass(HOVERED)
@@ -49,7 +50,7 @@ const Card = ({ id, title, content, firstname, lastname, email, published_at, sl
     <Link href={`blog/post/${slug}`}>
       <a>
         <Wrapper
-          cardHoverClass={cardHoverClass}
+            cardHoverClass={cardHoverClass}
           className={`${CLASSNAME} ${cardHoverClass && cardHoverClass}`}
           onMouseEnter={handleCardHovered}
           onMouseLeave={handleCardMouseLeave}
@@ -59,7 +60,7 @@ const Card = ({ id, title, content, firstname, lastname, email, published_at, sl
             <a>{title}</a>
           </H2>
           {/* <div>{content}</div> */}
-          {showAuthor && (
+          {authorInfoConfig && (
             <AuthorInfoContainer>
               <AuthorLabel>{`by ${firstname} ${lastname}`}</AuthorLabel>
               <PublishedAt>{postDate.toLocaleDateString("ko-KR").slice(0, -1)}</PublishedAt>
@@ -72,3 +73,11 @@ const Card = ({ id, title, content, firstname, lastname, email, published_at, sl
 }
 
 export default Card
+
+
+Card.propTypes = {
+  authorInfoConfig: PropTypes.shape({
+    showAuthorLabel: PropTypes.bool,
+    showDate: PropTypes.bool
+})
+}

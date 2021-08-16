@@ -177,6 +177,11 @@ const HomePage = (props) => {
     lang: { locale },
   } = useTranslationsContext()
 
+  const authorInfoConfig ={
+    showAuthorLabel: true,
+    showDate: true
+}
+
   const closeForm = () => {
     openForm(false)
   }
@@ -237,14 +242,13 @@ const HomePage = (props) => {
         {/* {bgCanvasLoaded && <WaveAnimBg />} */}
         <WaveAnimBg />
       </div>
-
       <LatestPostSection className="latestposts">
         <SectionHeading id="latest-posts">Latest Posts</SectionHeading>
         <HomeBlogTags tagsList={tagsList} />
         <HomeBlogCarousel swiperConfig={homeBlogCarouselConfig}>
           {latestPosts.map((blogProps) => (
             <HomeBlogCarouselSlide key={blogProps.id}>
-              <BlogCard {...blogProps} wrapper={HomeBlogCardWrapper} showAuthor />
+              <BlogCard {...blogProps} wrapper={HomeBlogCardWrapper} authorInfoConfig={authorInfoConfig} />
             </HomeBlogCarouselSlide>
           ))}
         </HomeBlogCarousel>

@@ -9,7 +9,7 @@ const Container = styled.div`
 `
 
 const ContentWrapper = styled.div`
-  ${tw`container mx-auto mt-8`}
+    ${tw`container mx-auto mt-8`}
 `
 
 const PageHeading = styled.h1`
