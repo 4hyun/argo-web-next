@@ -2,6 +2,7 @@ import styled from "styled-components"
 import tw from "twin.macro"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import { PlainListItem, NumberListItem } from "components/Markdown/index.js"
 
 const MarkdownStyles = styled.div`
   > * {
@@ -38,10 +39,25 @@ const MarkdownStyles = styled.div`
   blockquote {
     ${tw`ml-6 pl-6 pr-4 py-4 bg-argo-blue-50 rounded-sm border-l-4 border-argo-blue-400 italic`}
   }
+  ul > li {
+    ${tw`list-inside list-disc`}
+  }
+  li > strong {
+    ${tw`font-bold!`}
+  }
 `
 const PostContent = ({ children }) => (
   <MarkdownStyles>
-    <ReactMarkdown children={children} remarkPlugins={[remarkGfm]} />
+    <ReactMarkdown
+      components={{
+        li: ({ node, checked, ordered, children, ...props }) => {
+          if (ordered) return <NumberListItem>{children}</NumberListItem>
+          return <PlainListItem>{children}</PlainListItem>
+        },
+      }}
+      children={children}
+      remarkPlugins={[remarkGfm]}
+    />
   </MarkdownStyles>
 )
 
