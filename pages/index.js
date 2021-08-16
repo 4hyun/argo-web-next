@@ -166,9 +166,6 @@ const LatestPostSection = styled.div`
 
 const HomePage = (props) => {
   const { priceList, latestPosts, tagsList } = props
-  useEffect(() => {
-    console.log(">> HomePage/props.tagsList: ", tagsList)
-  })
   const priceListMap = useMemo(() => priceList.reduce((acc, cur) => (acc[cur.id] = cur.heading) && acc, {}))
   const [inquiryItems, setInquiryItems] = useState([])
   const [formOpen, openForm] = useState()
@@ -269,7 +266,7 @@ const HomePage = (props) => {
 export async function getStaticProps() {
   const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
   const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
-  const { getLatestPosts, getPriceList, getTagsList, getHomePageData } = paths
+  const { getLatestPosts, getPriceList, getHomePageData } = paths
   const latestPostsRes = await fetchStrapi(getLatestPosts.url, token)
   const priceListRes = await fetchStrapi(getPriceList.url, token)
   const homePageDataRes = await fetchStrapi(getHomePageData.url, token)
