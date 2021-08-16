@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types"
 import Link from "next/link"
 import styled from "styled-components"
 import tw from "twin.macro"
@@ -25,11 +25,11 @@ const HOVERED_ACTIVE = "hovered-active"
 const Wrapper = styled.article`
   ${tw`rounded-lg p-6 hover:(shadow-lg) transform md:(max-w-3xl) transition-all ring-1 ring-argo-lavender-400`}
   ${AuthorLabel},${PublishedAt} {
-     ${tw`leading-none`}
+    ${tw`leading-none`}
   }
   &.hovered,
-    &.hovered-active {
-    ${tw`ring-4 ring-argo-blue-50`}
+  &.hovered-active {
+    ${tw`ring-2 ring-argo-blue-50`}
   }
   &.hovered-active {
     ${tw`translate-y-1`}
@@ -50,7 +50,7 @@ const Card = ({ id, title, content, firstname, lastname, email, published_at, sl
     <Link href={`blog/post/${slug}`}>
       <a>
         <Wrapper
-            cardHoverClass={cardHoverClass}
+          cardHoverClass={cardHoverClass}
           className={`${CLASSNAME} ${cardHoverClass && cardHoverClass}`}
           onMouseEnter={handleCardHovered}
           onMouseLeave={handleCardMouseLeave}
@@ -62,8 +62,8 @@ const Card = ({ id, title, content, firstname, lastname, email, published_at, sl
           {/* <div>{content}</div> */}
           {authorInfoConfig && (
             <AuthorInfoContainer>
-              <AuthorLabel>{`by ${firstname} ${lastname}`}</AuthorLabel>
-              <PublishedAt>{postDate.toLocaleDateString("ko-KR").slice(0, -1)}</PublishedAt>
+              {authorInfoConfig.showAuthorLabel && <AuthorLabel>{`by ${firstname} ${lastname}`}</AuthorLabel>}
+              {authorInfoConfig.showDate && <PublishedAt>{postDate.toLocaleDateString("ko-KR").slice(0, -1)}</PublishedAt>}
             </AuthorInfoContainer>
           )}
         </Wrapper>
@@ -74,10 +74,9 @@ const Card = ({ id, title, content, firstname, lastname, email, published_at, sl
 
 export default Card
 
-
 Card.propTypes = {
   authorInfoConfig: PropTypes.shape({
     showAuthorLabel: PropTypes.bool,
-    showDate: PropTypes.bool
-})
+    showDate: PropTypes.bool,
+  }),
 }

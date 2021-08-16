@@ -1,4 +1,3 @@
-import React from "react"
 import tw, { styled } from "twin.macro"
 import { fetchStrapi, getStrapiAuthToken, paths } from "lib/api/strapi"
 import { BlogCard, PostList } from "components/Blog"
@@ -9,12 +8,16 @@ const Container = styled.div`
 `
 
 const ContentWrapper = styled.div`
-    ${tw`container mx-auto mt-8`}
+  ${tw`container mx-auto mt-8`}
 `
 
 const PageHeading = styled.h1`
   ${tw`container mx-auto text-3xl font-black`}
 `
+
+const authorInfoConfig = {
+  showDate: true,
+}
 
 const BlogMainPage = ({ posts }) => {
   return (
@@ -24,7 +27,7 @@ const BlogMainPage = ({ posts }) => {
         {posts && (
           <PostList tw="space-y-6" col>
             {posts.map((blogProps) => (
-              <BlogCard {...blogProps} key={blogProps.id} />
+              <BlogCard {...blogProps} key={blogProps.id} authorInfoConfig={authorInfoConfig} />
             ))}
           </PostList>
         )}
@@ -39,7 +42,8 @@ export default BlogMainPage
 export async function getStaticProps() {
   const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
   const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
-  const res = await fetchStrapi(paths.getBlogPosts.url, token)
+  const params = "?_sort=published_at:DESC"
+  const res = await fetchStrapi(paths.getBlogPosts.url + params, token)
   const posts = await res.json()
 
   return {
