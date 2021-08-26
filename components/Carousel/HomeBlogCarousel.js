@@ -4,7 +4,7 @@ import tw from "twin.macro"
 import { CARD_CLASSNAME } from "components/Blog/Card"
 
 const StyledSwiper = styled(Swiper)`
-  ${tw`h-80 pt-4 pb-8 -mx-8 px-8`}
+  ${tw`h-60 pt-4 pb-8 -mx-8 px-8`}
   ${`${CARD_CLASSNAME}`} {
     ${tw`text-gray-900`}
   }

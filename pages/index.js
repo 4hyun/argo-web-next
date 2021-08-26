@@ -17,6 +17,8 @@ import { PostList, BlogCard } from "components/Blog"
 import HomeBlogTags from "containers/HomeBlogTags/index"
 /* lib */
 import { fetchStrapi, paths, getStrapiAuthToken } from "lib/api/strapi"
+/* styles */
+import { swiperNavigationStyles } from "containers/HomePage/styles"
 
 const LayoutTopGradientOverlayBg = styled.div`
   position: fixed;
@@ -146,13 +148,13 @@ const PricingSection = styled.div`
   margin-bottom: 200px;
 `
 
-const HomeBlogCardWrapper = styled.div`
-  ${tw`flex flex-col justify-between`}
-  ${tw`rounded-lg bg-white p-6 hover:(bg-argo-blue-400 text-white)! transform w-full h-full transition-none`}
+const BlogPostCardWrapper = styled.div`
+  ${tw`flex flex-col justify-between p-6`}
+  ${tw`rounded-lg bg-white hover:(bg-argo-blue-400 text-white)! transform w-full h-full flex-1 transition-none`}
   ${tw`border-2`}
 `
 
-const LatestPostSection = styled.div`
+const LatestBlogPostSection = styled.div`
   ${tw`container mx-auto px-6 mb-20 max-w-screen-xl!`}
 `
 
@@ -231,19 +233,19 @@ const HomePage = (props) => {
         {/* {bgCanvasLoaded && <WaveAnimBg />} */}
         <WaveAnimBg />
       </div>
-      <LatestPostSection className="latestposts">
+      <LatestBlogPostSection className="latestposts" css={[swiperNavigationStyles]}>
         <SectionHeading id="latest-posts">Latest Posts</SectionHeading>
         {/* <HomeBlogTags tagsList={tagsList} /> */}
         <HomeBlogCarousel swiperConfig={homeBlogCarouselConfig}>
           {latestPosts.map((blogProps) => (
             <HomeBlogCarouselSlide key={blogProps.id}>
-              <BlogCard {...blogProps} wrapper={HomeBlogCardWrapper} authorInfoConfig={authorInfoConfig} />
+              <BlogCard {...blogProps} wrapper={BlogPostCardWrapper} authorInfoConfig={authorInfoConfig} />
             </HomeBlogCarouselSlide>
           ))}
         </HomeBlogCarousel>
 
         {/* </PostList> */}
-      </LatestPostSection>
+      </LatestBlogPostSection>
       <PricingSectionWrapper>
         <SectionHeading id="tyk-pricing">Tyk Pricing</SectionHeading>
         <PricingSection>
