@@ -195,13 +195,13 @@ const HomePage = (props) => {
     inquiryItems.includes(inquiryItemId) &&
       setInquiryItems((prevState) => {
         prevState.splice(inquiryItemId.indexOf(inquiryItemId, 1))
-        console.log("prevState after delete : ", prevState)
+        // console.log("prevState after delete : ", prevState)
         return [...prevState]
       })
   }
 
   const addInquiryItem = (inquiryItemId) => {
-    console.log(!!inquiryItems.includes(inquiryItemId))
+    // console.log(!!inquiryItems.includes(inquiryItemId))
     if (inquiryItems.includes(inquiryItemId)) return
     setInquiryItems((prevState) => [...prevState, inquiryItemId])
   }

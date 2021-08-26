@@ -106,7 +106,7 @@ export async function getStaticProps({ params, query }) {
 
 export async function getStaticPaths() {
   const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
-  const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
+  const token = process.env.PROD_STRAPI_AUTH || (await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH))
   const res = await fetchStrapi(apiPaths.getBlogPosts.url, token)
   const posts = await res.json()
   const paths = posts.map(({ slug }) => ({ params: { slug } }))

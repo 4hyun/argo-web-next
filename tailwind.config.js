@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         "argo-lemon": {
+          700: "#ffe488",
           400: "#FFF3CF",
           300: "#FFF5D9",
           200: "#FFF8E2",
@@ -17,12 +18,15 @@ module.exports = {
           100: "#FFF0E6",
         },
         "argo-pink": {
+          900: "#ff616b",
+          700: "#ff8080",
           400: "#F4D0D4",
           300: "#F6D9DC",
           200: "#F9E3E5",
           100: "#FBECEE",
         },
         "argo-lavender": {
+          700: "#8e5cff",
           400: "#CAC7FF",
           300: "#D5D2FF",
           200: "#E0DDFF",
@@ -34,6 +38,12 @@ module.exports = {
           500: "#0300FF",
           600: "#1E0AD4",
           700: "#250FAB",
+        },
+        "argo-bb-blue": {
+          500: "#80c7ff",
+        },
+        "argo-vert": {
+          700: "#8cff85",
         },
         "tyk-green": "rgba(5, 217, 187, 1)",
         white: "#fff",
