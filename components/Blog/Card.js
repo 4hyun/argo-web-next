@@ -62,9 +62,7 @@ const Card = ({ id, title, content, firstname, lastname, email, published_at, sl
           onMouseLeave={handleCardMouseLeave}
           onMouseDown={handleCardHoverActive}
         >
-          <H2>
-            <a>{title}</a>
-          </H2>
+          <H2>{title}</H2>
           {/* <div>{content}</div> */}
           {authorInfoConfig && (
             <AuthorInfoContainer>
