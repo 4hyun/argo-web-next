@@ -148,16 +148,8 @@ const PricingSection = styled.div`
 
 const HomeBlogCardWrapper = styled.div`
   ${tw`flex flex-col justify-between`}
-  ${tw`rounded-lg bg-white p-6 shadow-lg hover:(shadow-xl) hover:(bg-gradient-to-br from-white via-off-white to-argo-blue-50) transform w-full h-full`}
-  :hover:after {
-    content: "";
-    width: 2.25rem;
-    height: 2.25rem;
-    background: center / cover no-repeat url("/android-chrome-512x512.png");
-    position: absolute;
-    right: 1.5rem;
-    bottom: 1.5rem;
-  }
+  ${tw`rounded-lg bg-white p-6 hover:(bg-argo-blue-400 text-white)! transform w-full h-full transition-none`}
+  ${tw`border-2`}
 `
 
 const LatestPostSection = styled.div`
