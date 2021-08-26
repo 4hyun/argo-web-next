@@ -3,6 +3,8 @@ import PropTypes from "prop-types"
 import Link from "next/link"
 import styled from "styled-components"
 import tw from "twin.macro"
+/* styles */
+import { hoverShadowCss } from "./styles"
 
 const H2 = styled.h2`
   ${tw`text-xl font-black mb-3 leading-normal`}
@@ -23,13 +25,15 @@ const HOVERED = "hovered"
 const HOVERED_ACTIVE = "hovered-active"
 
 const Wrapper = styled.article`
-  ${tw`rounded-lg p-6 hover:(shadow-lg) transform md:(max-w-3xl) transition-all ring-1 ring-argo-lavender-400`}
+  ${tw`rounded-lg p-6 hover:(shadow-sm) transform md:(max-w-3xl) transition-all ring-1 ring-argo-lavender-400`}
+  transition-duration: unset;
   ${AuthorLabel},${PublishedAt} {
     ${tw`leading-none`}
   }
   &.hovered,
   &.hovered-active {
     ${tw`ring-2 ring-argo-blue-50`}
+    ${hoverShadowCss}
   }
   &.hovered-active {
     ${tw`translate-y-1`}
