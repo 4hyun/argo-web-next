@@ -1,6 +1,6 @@
 import { featureParser } from "../../utils"
 import CardWrapper from "./CardWrapper"
-import CardHeading from "./CardHeading"
+import CardHeadingGroup from "./CardHeadingGroup"
 import CardBody from "./CardBody"
 import { DesktopInquireButtonWrapper, DesktopPriceInquireButton } from "./InquireButtons"
 import { animateScroll } from "react-scroll"
@@ -22,7 +22,7 @@ const Card = ({ priceData, addInquiryItem, showForm, colorClass }) => {
 
   return (
     <CardWrapper className={colorClass}>
-      <CardHeading heading={heading} onClickMobileInquireButton={onClickMobileInquireButton} inquireButtonTextLabel={cta_text} />
+      <CardHeadingGroup heading={heading} onClickMobileInquireButton={onClickMobileInquireButton} inquireButtonTextLabel={cta_text} />
       <CardBody descList={desc_list} featureList={featureList} />
       <DesktopInquireButtonWrapper>
         <DesktopPriceInquireButton onClick={onClickDesktopPriceInquireButton} className={colorClass}>

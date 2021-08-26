@@ -33,6 +33,6 @@ const DesktopPriceInquireButton = styled(BaseInquireButton).attrs(({ className }
 `
 
 const MobilePriceInquireButton = styled(BaseInquireButton)`
-  ${tw`xl:hidden flex-grow-0 w-min px-4 py-2`}
+  ${tw`xl:hidden flex-grow-0 w-min px-4 py-2 mt-6!`}
 `
 export { MobilePriceInquireButton, DesktopPriceInquireButton, DesktopInquireButtonWrapper }

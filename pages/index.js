@@ -12,7 +12,7 @@ import Button from "components/Button"
 import WaveAnimBg from "components/WaveAnimBg"
 import { delay } from "lib/delay"
 import { useTranslationsContext } from "contexts/Translations"
-import PriceInfo from "components/PriceInfo"
+import PriceInfoList from "components/PriceInfoList"
 import { PostList, BlogCard } from "components/Blog"
 import HomeBlogTags from "containers/HomeBlogTags/index"
 /* lib */
@@ -146,6 +146,7 @@ const PricingSection = styled.div`
   ${tw`flex my-0 mx-auto justify-center relative h-3/6 pt-4`}
   min-height: 500px;
   margin-bottom: 200px;
+  transform: scale(0.85);
 `
 
 const BlogPostCardWrapper = styled.div`
@@ -247,9 +248,17 @@ const HomePage = (props) => {
         {/* </PostList> */}
       </LatestBlogPostSection>
       <PricingSectionWrapper>
-        <SectionHeading id="tyk-pricing">Tyk Pricing</SectionHeading>
+        <SectionHeading id="tyk-pricing">
+          Tyk API Gateway
+          <br /> Licenses
+        </SectionHeading>
         <PricingSection>
-          <PriceInfo priceList={priceList} addInquiryItem={addInquiryItem} removeInquiryItem={removeInquiryItem} showForm={showForm}></PriceInfo>
+          <PriceInfoList
+            priceList={priceList}
+            addInquiryItem={addInquiryItem}
+            removeInquiryItem={removeInquiryItem}
+            showForm={showForm}
+          ></PriceInfoList>
         </PricingSection>
       </PricingSectionWrapper>
       <ScrollTopButton />

@@ -1,9 +1,9 @@
-import Container from "./container"
-import Card from "./components/Card"
+import Container from "@/components/PriceInfoList/Container"
+import Card from "components/PriceInfoList/components/Card"
 
 const colorClassByOrder = ["lemon", "coral", "pink", "lavender"]
 
-const PriceInfo = ({ priceList, addInquiryItem, removeInquiryItem, showForm }) => {
+const PriceInfoList = ({ priceList, addInquiryItem, removeInquiryItem, showForm }) => {
   return (
     <Container>
       {priceList.map((priceData, i) => {
@@ -23,4 +23,4 @@ const PriceInfo = ({ priceList, addInquiryItem, removeInquiryItem, showForm }) =
   )
 }
 
-export default PriceInfo
+export default PriceInfoList

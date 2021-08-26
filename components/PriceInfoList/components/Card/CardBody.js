@@ -3,7 +3,7 @@ import tw from "twin.macro"
 import GreenCheckIcon, { GreenCheckIconWrapper } from "./GreenCheckIcon"
 
 const DesktopLicenseFeatureList = styled.ul`
-  ${tw`space-y-0.5 hidden xl:block font-poppins text-base`}
+  ${tw`space-y-0.5 hidden xl:block font-poppins text-base xl:(mt-10! mb-8!)`}
 `
 
 const DesktopLicenseFeatureItem = styled.li`
@@ -11,7 +11,7 @@ const DesktopLicenseFeatureItem = styled.li`
 `
 
 const LicenseDescriptionList = styled.ul`
-  ${tw`font-bold ml-2 xl:ml-0`}
+  ${tw`font-semibold ml-2 xl:ml-0`}
 `
 const LicenseDescriptionItem = styled.li`
   ${tw`mb-2 flex items-center space-x-2`}

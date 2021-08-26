@@ -10,7 +10,13 @@ const Container = styled.div`
 `
 
 const Heading = styled.h3`
-  ${tw`leading-tight w-full text-3xl font-black whitespace-pre-line`}
+  ${tw`leading-tight w-full text-3xl font-black text-white whitespace-pre-line`}
+  line-height: 90%;
+  text-shadow: 0 0 8px #84848438;
+  @media screen and (min-width: 1280px) {
+    font-size: 5rem;
+    line-height: 70%;
+  }
 `
 
 const CardHeading = ({ heading, onClickMobileInquireButton, inquireButtonTextLabel }) => (
