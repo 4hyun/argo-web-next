@@ -4,7 +4,7 @@ import { BlogCard, PostList } from "components/Blog"
 
 const Container = styled.div`
   max-width: 1200px;
-  ${tw`w-full pt-24 lg:(pt-40) min-h-screen lg:(px-0) px-6  mx-auto`}
+  ${tw`w-full pt-24 pb-20 lg:(pt-40) min-h-screen lg:(px-0) px-6  mx-auto`}
 `
 
 const ContentWrapper = styled.div`
