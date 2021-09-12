@@ -58,9 +58,7 @@ const MainHeading = styled.div`
   ${tw`flex flex-col py-4 space-y-4`}
 `
 
-const PostPage = ({ post }) => {
-  const { id, title, content, firstname, lastname, email, published_at } = post
-  const postDate = new Date(published_at)
+const PostPage = ({ post, slug }) => {
   return (
     <Container>
       <ContentWrapper>

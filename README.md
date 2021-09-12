@@ -28,3 +28,13 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Notes for Developer
+
+When deployed on Netlify(freemium), build often fails when triggered via webhook from instance on GAE. Upon checking the log at GAE, this build fail appears to occur at the very moment when GAE autoscales the CMS instance.
+
+To mitigate this problem, following solutions were searched for and tried(results and notes are listed under each solution attempted):
+
+1. use getStaticProps in custom App.
+
+   - Not possible as Next.js custom App currently does not support getStaticProps.
