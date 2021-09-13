@@ -55,6 +55,7 @@ const PostContent = ({ children }) => (
           return <PlainListItem>{children}</PlainListItem>
         },
       }}
+      // eslint-disable-next-line
       children={children}
       remarkPlugins={[remarkGfm]}
     />

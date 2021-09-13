@@ -55,9 +55,14 @@ const A = styled.a`
 
 const NavMenu = ({ children, isOpen, onClose }) => {
   return (
-    <SlidingMenu right isOpen={isOpen} outerContainerId={ELASTIC_MENU_EID} onClose={onClose}>
+    <SlidingMenu
+      right
+      isOpen={isOpen}
+      outerContainerId={ELASTIC_MENU_EID}
+      onClose={onClose}>
       <MenuHeader>
-        <CloseButton onClick={onClose} />
+        <CloseButton
+          onClick={onClose} />
       </MenuHeader>
       {children}
     </SlidingMenu>

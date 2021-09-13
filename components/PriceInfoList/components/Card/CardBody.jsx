@@ -21,14 +21,17 @@ const CardBody = ({ descList, featureList }) => (
   <>
     <DesktopLicenseFeatureList>
       {featureList.map((featureItem, i) => (
-        <DesktopLicenseFeatureItem key={i}>{featureItem}</DesktopLicenseFeatureItem>
+        <DesktopLicenseFeatureItem
+          key={i}>{featureItem}</DesktopLicenseFeatureItem>
       ))}
     </DesktopLicenseFeatureList>
     <LicenseDescriptionList>
       {descList.map((desc_item, i) => (
-        <LicenseDescriptionItem key={i}>
+        <LicenseDescriptionItem
+          key={i}>
           <GreenCheckIconWrapper>
-            <GreenCheckIcon size={20} />
+            <GreenCheckIcon
+              size={20} />
           </GreenCheckIconWrapper>
           <span>{desc_item}</span>
         </LicenseDescriptionItem>

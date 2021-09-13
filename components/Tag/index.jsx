@@ -8,7 +8,8 @@ const Wrapper = styled.div`
 `
 
 const Tag = ({ name, onClick }) => {
-  return <Wrapper onClick={onClick}>{name}</Wrapper>
+  return <Wrapper
+    onClick={onClick}>{name}</Wrapper>
 }
 
 export default Tag

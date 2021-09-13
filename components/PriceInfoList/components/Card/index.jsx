@@ -21,11 +21,19 @@ const Card = ({ priceData, addInquiryItem, showForm, colorClass }) => {
   }
 
   return (
-    <CardWrapper className={colorClass}>
-      <CardHeadingGroup heading={heading} onClickMobileInquireButton={onClickMobileInquireButton} inquireButtonTextLabel={cta_text} />
-      <CardBody descList={desc_list} featureList={featureList} />
+    <CardWrapper
+      className={colorClass}>
+      <CardHeadingGroup
+        heading={heading}
+        onClickMobileInquireButton={onClickMobileInquireButton}
+        inquireButtonTextLabel={cta_text} />
+      <CardBody
+        descList={desc_list}
+        featureList={featureList} />
       <DesktopInquireButtonWrapper>
-        <DesktopPriceInquireButton onClick={onClickDesktopPriceInquireButton} className={colorClass}>
+        <DesktopPriceInquireButton
+          onClick={onClickDesktopPriceInquireButton}
+          className={colorClass}>
           {cta_text}
         </DesktopPriceInquireButton>
       </DesktopInquireButtonWrapper>

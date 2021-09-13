@@ -53,7 +53,9 @@ const Card = ({ id, title, content, firstname, lastname, email, published_at, sl
   const handleCardHoverActive = () => setCardHoverClass(HOVERED_ACTIVE)
   const postDate = new Date(published_at)
   return (
-    <Link href={`blog/post/${slug}`} passHref>
+    <Link
+      href={`blog/post/${slug}`}
+      passHref>
       <A>
         <Wrapper
           cardHoverClass={cardHoverClass}

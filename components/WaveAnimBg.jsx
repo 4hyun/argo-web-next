@@ -551,7 +551,9 @@ const WaveAnimBg = () => {
       cancelAnimationFrame(requestAnimationFrameRef.current)
     }
   }, []) /* useEffect END */
-  return <canvas ref={canvasRef} className={`absolute h-1/5 top-2/5 w-screen transition-opacity duration-1000 ${opacity}`}></canvas>
+  return <canvas
+    ref={canvasRef}
+    className={`absolute h-1/5 top-2/5 w-screen transition-opacity duration-1000 ${opacity}`}></canvas>
 }
 
 export default WaveAnimBg
