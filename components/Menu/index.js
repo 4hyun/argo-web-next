@@ -4,7 +4,7 @@ import tw from "twin.macro"
 import { slide as SlidingMenu } from "react-burger-menu"
 import { Close } from "components/Icons"
 import { MENU_EID } from "configs"
-import { default as menuData } from "./data"
+import { default as navMenuData } from "./data"
 import { logoCircleDarkUrl } from "components/Brand"
 
 const StyledMenu = styled(SlidingMenu)`
@@ -15,7 +15,7 @@ const MenuHeader = styled.div`
   ${tw`flex! w-full justify-end`}
 `
 
-export const LogoCircleDark = memo(styled.div`
+const LogoCircleDark = memo(styled.div`
   ${tw`w-8 h-8`}
   :after {
     display: block;
@@ -31,15 +31,15 @@ const CloseButton = memo(
   `
 )
 
-const MenuList = styled.ul`
+const NavMenuList = styled.ul`
   ${tw`flex! flex-col pt-1`}
 `
 
-const MenuItemWrapper = styled.div`
+const NavMenuItemWrapper = styled.div`
   ${tw`w-full space-x-4`}
 `
 
-const MenuItemA = styled.a`
+const A = styled.a`
   @media (min-width: 1024px) {
     --margin-offset: -1rem;
     margin-left: var(--margin-offset);
@@ -52,7 +52,7 @@ const MenuItemA = styled.a`
   font-family: Poppins;
 `
 
-const Menu = ({ children, isOpen, onClose }) => {
+const NavMenu = ({ children, isOpen, onClose }) => {
   return (
     <StyledMenu right isOpen={isOpen} outerContainerId={MENU_EID} onClose={onClose}>
       <MenuHeader>
@@ -63,4 +63,4 @@ const Menu = ({ children, isOpen, onClose }) => {
   )
 }
 
-export { Menu, MenuList, MenuItemA, MenuItemWrapper, menuData }
+export { NavMenu, NavMenuList, A, NavMenuItemWrapper, navMenuData, LogoCircleDark }
