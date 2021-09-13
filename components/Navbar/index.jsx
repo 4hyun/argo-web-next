@@ -44,13 +44,16 @@ const DektopNavbarContainer = styled.nav`
 const DesktopNavbar = ({ renderLangSwitch, toggleMenu, menuOpen }) => {
   return (
     <DektopNavbarContainer>
-      <Link href="/">
+      <Link
+        href="/">
         <LogoA>
           <Logo />
         </LogoA>
       </Link>
       {renderLangSwitch()}
-      <Hamburger toggled={menuOpen} toggle={toggleMenu} />
+      <Hamburger
+        toggled={menuOpen}
+        toggle={toggleMenu} />
     </DektopNavbarContainer>
   )
 }
@@ -59,21 +62,25 @@ const MobileNavbar = ({ renderLangSwitch, toggleMenu, menuOpen }) => {
   return (
     <MobileNavbarContainer>
       {renderLangSwitch()}
-      <Hamburger toggled={menuOpen} toggle={toggleMenu} />
+      <Hamburger
+        toggled={menuOpen}
+        toggle={toggleMenu} />
     </MobileNavbarContainer>
   )
 }
 
 const LangButtonLabel = ({ currentLang, thisLang: { locale, label } }) => {
   const activeClassname = currentLang.locale === locale ? "active" : ""
-  return <span className={`lang-button ${activeClassname} flex justify-center items-start`}>{label}</span>
+  return <span
+    className={`lang-button ${activeClassname} flex justify-center items-start`}>{label}</span>
 }
 
 const LangSwitch = () => {
   const { switchLang, lang } = useTranslationsContext()
 
   return (
-    <div className="lang-switch ml-auto mr-auto md:mr-4 flex items-center select-none text-xs lg:text-base">
+    <div
+      className="lang-switch ml-auto mr-auto md:mr-4 flex items-center select-none text-xs lg:text-base">
       {Object.keys(supportedLang).map((supportedLangKey) => {
         return (
           <LangButton
@@ -82,7 +89,9 @@ const LangSwitch = () => {
               switchLang(supportedLang[supportedLangKey].locale)
             }}
           >
-            <LangButtonLabel currentLang={lang} thisLang={supportedLang[supportedLangKey]} />
+            <LangButtonLabel
+              currentLang={lang}
+              thisLang={supportedLang[supportedLangKey]} />
           </LangButton>
         )
       })}
@@ -95,8 +104,14 @@ const Navbar = ({ menuOpen, toggleMenu }) => {
 
   return (
     <Container>
-      <DesktopNavbar renderLangSwitch={LangSwitch} toggleMenu={toggleMenu} menuOpen={menuOpen} />
-      <MobileNavbar renderLangSwitch={LangSwitch} toggleMenu={toggleMenu} menuOpen={menuOpen} />
+      <DesktopNavbar
+        renderLangSwitch={LangSwitch}
+        toggleMenu={toggleMenu}
+        menuOpen={menuOpen} />
+      <MobileNavbar
+        renderLangSwitch={LangSwitch}
+        toggleMenu={toggleMenu}
+        menuOpen={menuOpen} />
     </Container>
   )
 }

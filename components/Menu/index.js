@@ -1,13 +1,14 @@
 import { memo } from "react"
+import { motion } from "framer-motion"
 import styled from "styled-components"
 import tw from "twin.macro"
-import { slide as SlidingMenu } from "react-burger-menu"
+import { slide as Menu } from "react-burger-menu"
 import { Close } from "components/Icons"
-import { MENU_EID } from "configs"
+import { ELASTIC_MENU_EID } from "configs"
 import { default as navMenuData } from "./data"
 import { logoCircleDarkUrl } from "components/Brand"
 
-const StyledMenu = styled(SlidingMenu)`
+const SlidingMenu = styled(Menu)`
   ${tw`w-screen! md:(w-3/12)! bg-argo-blue-700`}
 `
 
@@ -54,12 +55,12 @@ const A = styled.a`
 
 const NavMenu = ({ children, isOpen, onClose }) => {
   return (
-    <StyledMenu right isOpen={isOpen} outerContainerId={MENU_EID} onClose={onClose}>
+    <SlidingMenu right isOpen={isOpen} outerContainerId={ELASTIC_MENU_EID} onClose={onClose}>
       <MenuHeader>
         <CloseButton onClick={onClose} />
       </MenuHeader>
       {children}
-    </StyledMenu>
+    </SlidingMenu>
   )
 }
 

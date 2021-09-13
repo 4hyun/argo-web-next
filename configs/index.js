@@ -6,4 +6,4 @@ export const getStrapiURL = (path = "") => {
   return `${BASE_URL}${path}`
 }
 
-export const MENU_EID = "argo-elastic-menu"
+export const ELASTIC_MENU_EID = "argo-elastic-menu"

@@ -1,7 +1,9 @@
 {
-  "extends": ["next", "prettier"],
-  "plugins": ["prettier"],
+  "extends": ["prettier", "next"],
   "rules": {
-    "prettier/prettier": "error"
+    "react/jsx-uses-react": "error",
+    "react/jsx-max-props-per-line": [2, { "maximum": 1, "when": "multiline" }],
+    "react/jsx-indent-props": [2, 2],
+    "react/jsx-first-prop-new-line": [2, "always"]
   }
 }

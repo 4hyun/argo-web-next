@@ -1,14 +1,14 @@
 import { useState, useMemo, useEffect } from "react"
 import styled from "styled-components"
 import tw from "twin.macro"
-import styles from "../styles/Home.module.css"
-import trads from "../translations"
 /* components */
+import Container from "containers/HomePage/Container"
+import ComingSoonMessage from "components/HomePage/ComingSoonMessage"
+import LayoutTopGradientOverlay from "components/HomePage/LayoutTopGradientOverlay"
 import { HomeBlogCarousel, HomeBlogCarouselSlide } from "components/Carousel"
 import GetInTouchForm from "components/Form"
 import ScrollTopButton from "components/ScrollTopButton"
 import { Close } from "components/Icons"
-import Button from "components/Button"
 import WaveAnimBg from "components/WaveAnimBg"
 import { delay } from "lib/delay"
 import { useTranslationsContext } from "contexts/Translations"
@@ -19,17 +19,6 @@ import HomeBlogTags from "containers/HomeBlogTags/index"
 import { fetchStrapi, paths, getStrapiAuthToken } from "lib/api/strapi"
 /* styles */
 import { swiperNavigationStyles } from "containers/HomePage/styles"
-
-const LayoutTopGradientOverlayBg = styled.div`
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  height: 90px;
-  z-index: 11;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 65%, rgba(255, 255, 255, 0) 100%);
-  ${tw`lg:hidden!`}
-`
 
 const homeBlogCarouselConfig = {
   navigation: true,
@@ -46,77 +35,6 @@ const homeBlogCarouselConfig = {
     },
   },
 }
-
-const ComingSoonMessageContainer = styled.div`
-  ${tw`xl:ml-10 select-none flex flex-col justify-center xl:justify-start xl:mr-4`}
-  width: 90%;
-  padding: 0 1rem;
-  margin: 0 auto;
-  @media (min-width: 400px) {
-    width: 85%;
-  }
-  @media (min-width: 1200px) {
-    padding: unset;
-    height: 338px;
-  }
-`
-
-const Slogan = styled.p`
-  font-family: "Open Sans", sans-serif;
-  font-style: normal;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  color: #111;
-  ${tw`leading-none font-normal mt-4`}
-  @media (min-width: 1200px) {
-    line-height: 57px;
-    margin-top: 2rem;
-    margin-bottom: 0;
-    font-size: 24px;
-  }
-`
-
-const CtaMessage = styled(Slogan)`
-  @media (min-width: 1200px) {
-    margin-top: 0;
-  }
-`
-
-const Heading = styled.h2`
-  ${tw`mt-4`}
-  font-family: Poppins;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 1.75rem;
-  line-height: 1;
-  /* or 110% */
-
-  display: flex;
-  align-items: center;
-  letter-spacing: -0.01em;
-  text-shadow: 0px 0px 20px white;
-
-  color: #111;
-  @media (min-width: 1200px) {
-    font-size: 48px;
-    margin: 0;
-    line-height: 56px;
-  }
-`
-
-const StyledButton = styled(Button)`
-  ${tw`flex rounded-full py-2 px-4 md:px-6 md:ml-0 hover:border-solid border-2 border-transparent focus:outline-none whitespace-nowrap transition-all transform active:translate-x-1 active:translate-y-1`}
-  @media (min-width: 401px) {
-    font-size: 1rem;
-  }
-`
-
-const GetInTouchButton = styled(StyledButton)`
-  ${tw`lg:hidden`}
-`
-
-const LearnMoreButton = styled(StyledButton)``
 
 const MobileFormCloseIcon = styled(Close)`
   ${tw`w-8 h-8 p-1.5 text-gray-50 fill-current float-right cursor-pointer`}
@@ -136,7 +54,10 @@ const FormContainer = styled.div(({ formOpen }) => [
 ])
 
 const SectionHeading = styled.h2`
-  ${tw`leading-tight w-full text-4xl font-black whitespace-pre-line mb-10 text-center`}
+  ${tw`leading-tight w-full text-4xl font-black whitespace-pre-line mb-6 text-center`}
+  @media screen (min-width: 1200px) {
+    ${tw`mb-10`}
+  }
 `
 
 const PricingSectionWrapper = styled.div`
@@ -146,7 +67,9 @@ const PricingSection = styled.div`
   ${tw`flex my-0 mx-auto justify-center relative h-3/6 pt-4`}
   min-height: 500px;
   margin-bottom: 200px;
-  transform: scale(0.85);
+  @media screen (min-width: 1200px) {
+    transform: scale(0.85);
+  }
 `
 
 const BlogPostCardWrapper = styled.div`
@@ -182,6 +105,8 @@ const HomePage = (props) => {
     openForm(true)
   }
 
+  const handleGetInTouchButtonClick = delay(showForm, 800)
+
   const removeInquiryItem = (inquiryItemId) => {
     if (inquiryItemId === "all") {
       setInquiryItems([])
@@ -190,57 +115,59 @@ const HomePage = (props) => {
     inquiryItems.includes(inquiryItemId) &&
       setInquiryItems((prevState) => {
         prevState.splice(inquiryItemId.indexOf(inquiryItemId, 1))
-        // console.log("prevState after delete : ", prevState)
         return [...prevState]
       })
   }
 
   const addInquiryItem = (inquiryItemId) => {
-    // console.log(!!inquiryItems.includes(inquiryItemId))
     if (inquiryItems.includes(inquiryItemId)) return
     setInquiryItems((prevState) => [...prevState, inquiryItemId])
   }
 
   return (
     <>
-      <div className={styles.container}>
-        {!formOpen && <LayoutTopGradientOverlayBg />}
-        <main className={`absolute flex items-center w-screen h-full z-10`}>
-          <div className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center`}>
-            <ComingSoonMessageContainer>
-              <Slogan>{trads[locale]["comingsoon.components.Slogan.tyk"]}</Slogan>
-              <Heading>{trads[locale]["comingsoon.components.Heading.main"]}</Heading>
-              <CtaMessage className="leading-none font-normal mt-4">{trads[locale]["comingsoon.components.Slogan.ctamessage"]}</CtaMessage>
-              <div className="coming-soon-action-button-container flex space-x-4 lg:space-x-0 mt-5">
-                <GetInTouchButton onClick={delay(showForm, 800)} aria-label="Inquire about Tyk API Gateway">
-                  {trads[locale]["comingsoon.components.EmailInputContainer.button.getintouch"]}
-                </GetInTouchButton>
-                <a href="https://tyk.io/docs/getting-started/tyk-components/gateway/" target="_blank">
-                  <LearnMoreButton aria-label="Learn More about Tyk API Gateway">
-                    {trads[locale]["comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"]}
-                  </LearnMoreButton>
-                </a>
-              </div>
-            </ComingSoonMessageContainer>
-            <FormContainer formOpen={formOpen}>
+      <Container>
+        {!formOpen && <LayoutTopGradientOverlay />}
+        <main
+          className={`absolute flex items-center w-screen h-full z-10`}>
+          <div
+            className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center`}>
+            <ComingSoonMessage
+              locale={locale}
+              handleGetInTouchButtonClick={handleGetInTouchButtonClick} />
+            <FormContainer
+              formOpen={formOpen}>
               <MobileFormCloseBar>
-                <MobileFormCloseBarMessage>Let's get in touch</MobileFormCloseBarMessage>
-                <MobileFormCloseIcon onClick={delay(closeForm, 800)}></MobileFormCloseIcon>
+                <MobileFormCloseBarMessage>{`Let's get in touch`}</MobileFormCloseBarMessage>
+                <MobileFormCloseIcon
+                  onClick={delay(closeForm, 800)}></MobileFormCloseIcon>
               </MobileFormCloseBar>
-              <GetInTouchForm inquiryItems={inquiryItems} removeInquiryItem={removeInquiryItem} priceListMap={priceListMap} closeForm={closeForm} />
+              <GetInTouchForm
+                inquiryItems={inquiryItems}
+                removeInquiryItem={removeInquiryItem}
+                priceListMap={priceListMap}
+                closeForm={closeForm} />
             </FormContainer>
           </div>
         </main>
         {/* {bgCanvasLoaded && <WaveAnimBg />} */}
         <WaveAnimBg />
-      </div>
-      <LatestBlogPostSection className="latestposts" css={[swiperNavigationStyles]}>
-        <SectionHeading id="latest-posts">Latest Posts</SectionHeading>
+      </Container>
+      <LatestBlogPostSection
+        className="latestposts"
+        css={[swiperNavigationStyles]}>
+        <SectionHeading
+          id="latest-posts">Latest Posts</SectionHeading>
         {/* <HomeBlogTags tagsList={tagsList} /> */}
-        <HomeBlogCarousel swiperConfig={homeBlogCarouselConfig}>
+        <HomeBlogCarousel
+          swiperConfig={homeBlogCarouselConfig}>
           {latestPosts.map((blogProps) => (
-            <HomeBlogCarouselSlide key={blogProps.id}>
-              <BlogCard {...blogProps} wrapper={BlogPostCardWrapper} authorInfoConfig={authorInfoConfig} />
+            <HomeBlogCarouselSlide
+              key={blogProps.id}>
+              <BlogCard
+                {...blogProps}
+                wrapper={BlogPostCardWrapper}
+                authorInfoConfig={authorInfoConfig} />
             </HomeBlogCarouselSlide>
           ))}
         </HomeBlogCarousel>
@@ -248,7 +175,8 @@ const HomePage = (props) => {
         {/* </PostList> */}
       </LatestBlogPostSection>
       <PricingSectionWrapper>
-        <SectionHeading id="tyk-pricing">
+        <SectionHeading
+          id="tyk-pricing">
           Tyk API Gateway
           <br /> Licenses
         </SectionHeading>
