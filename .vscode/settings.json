@@ -3,5 +3,6 @@
   "eslint.format.enable": true,
   "eslint.probe": ["javascript", "javascriptreact", "typescript", "typescriptreact", "html", "vue", "markdown", "react"],
   "editor.codeActionsOnSave": { "source.fixAll.eslint": true },
-  "editor.formatOnSave": false
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
 }
