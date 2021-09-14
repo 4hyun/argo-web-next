@@ -6,10 +6,10 @@ import Container from "containers/HomePage/Container"
 import ComingSoonMessage from "components/HomePage/ComingSoonMessage"
 import LayoutTopGradientOverlay from "components/HomePage/LayoutTopGradientOverlay"
 import { HomeBlogCarousel, HomeBlogCarouselSlide } from "components/Carousel"
-import GetInTouchForm from "components/Form"
+import GetInTouchForm from "@/components/Form"
 import ScrollTopButton from "components/ScrollTopButton"
 import { Close } from "components/Icons"
-import WaveAnimBg from "components/WaveAnimBg"
+import WaveAnimBg from "@/components/WaveAnimBg"
 import { delay } from "lib/delay"
 import { useTranslationsContext } from "contexts/Translations"
 import PriceInfoList from "components/PriceInfoList"
@@ -64,7 +64,7 @@ const PricingSectionWrapper = styled.div`
   ${tw`flex flex-col container mx-auto md:px-12 md:max-w-full`}
 `
 const PricingSection = styled.div`
-  ${tw`flex my-0 mx-auto justify-center relative h-3/6 pt-4`}
+  ${tw`flex px-4 max-w-full sm:(px-0 max-w-max) my-0 mx-auto justify-center relative h-3/6 pt-4`}
   min-height: 500px;
   margin-bottom: 200px;
   @media screen (min-width: 1200px) {
