@@ -11,7 +11,7 @@ const DesktopLicenseFeatureItem = styled.li`
 `
 
 const LicenseDescriptionList = styled.ul`
-  ${tw`font-semibold ml-2 xl:ml-0`}
+  ${tw`font-semibold ml-2 mt-5 sm:(mt-0) xl:(ml-0)`}
 `
 const LicenseDescriptionItem = styled.li`
   ${tw`mb-2 flex items-center space-x-2`}

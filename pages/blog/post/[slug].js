@@ -8,7 +8,7 @@ import { fetchStrapi, getStrapiAuthToken, paths as apiPaths } from "lib/api/stra
 /* components */
 import { ArrowLeftCircle } from "components/Icons"
 import { PostContent } from "components/Blog"
-import TableOfContents from "components/Blog/TableOfContents"
+import TableOfContents from "@/components/Blog/TableOfContents"
 
 const FallbackContainer = styled.div`
   ${tw`w-full pt-24 lg:(pt-40) min-h-screen flex justify-center items-center`}
@@ -65,9 +65,12 @@ const PostPage = ({ post }) => {
     <Container>
       <ContentWrapper>
         <MainHeading>
-          <Link href="/blog">
-            <a tw="w-max p-1 rounded-full transition-colors hover:(bg-argo-blue-400)">
-              <BackButton size={32} />
+          <Link
+            href="/blog">
+            <a
+              tw="w-max p-1 rounded-full transition-colors hover:(bg-argo-blue-400)">
+              <BackButton
+                size={32} />
             </a>
           </Link>
           <BlogTitle>{title}</BlogTitle>

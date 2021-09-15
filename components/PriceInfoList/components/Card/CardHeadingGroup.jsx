@@ -6,7 +6,7 @@ import { MobilePriceInquireButton } from "./InquireButtons"
 import { specialHeadingParser } from "../../utils"
 
 const Container = styled.div`
-  ${tw`flex flex-col flex-grow xl:flex-grow-0 xl:block space-y-3`}
+  ${tw`flex flex-col flex-grow xl:(block)`}
 `
 
 const Heading = styled.h3`

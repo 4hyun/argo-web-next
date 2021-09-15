@@ -2,7 +2,7 @@ import { featureParser } from "../../utils"
 import CardWrapper from "./CardWrapper"
 import CardHeadingGroup from "./CardHeadingGroup"
 import CardBody from "./CardBody"
-import { DesktopInquireButtonWrapper, DesktopPriceInquireButton } from "./InquireButtons"
+import { DesktopInquireButtonWrapper, DesktopPriceInquireButton} from "./InquireButtons"
 import { animateScroll } from "react-scroll"
 
 const scrollOptions = { duration: 250 }

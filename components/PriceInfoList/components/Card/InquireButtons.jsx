@@ -8,7 +8,11 @@ const StyledButton = styled.button`
 
 /* Wrappers */
 const DesktopInquireButtonWrapper = styled.div`
-  ${tw`hidden xl:flex flex-col flex-grow items-end`}
+  ${tw`hidden xl:(flex flex-col flex-grow items-end)`}
+`
+
+const MobileInquireButtonWrapper = styled.div`
+  ${tw`flex mt-5 sm:(mt-4) xl:(hidden)`}
 `
 
 /* Buttons */
@@ -33,6 +37,7 @@ const DesktopPriceInquireButton = styled(BaseInquireButton).attrs(({ className }
 `
 
 const MobilePriceInquireButton = styled(BaseInquireButton)`
-  ${tw`xl:hidden flex-grow-0 w-min px-4 py-2 mt-6!`}
+  ${tw`flex-grow-0 w-min px-4 py-2 mt-5 sm:(mt-6) xl:(hidden)`}
 `
-export { MobilePriceInquireButton, DesktopPriceInquireButton, DesktopInquireButtonWrapper }
+
+export { MobilePriceInquireButton, DesktopPriceInquireButton, DesktopInquireButtonWrapper, MobileInquireButtonWrapper }

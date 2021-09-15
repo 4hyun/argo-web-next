@@ -1,5 +1,6 @@
 {
-  "extends": ["prettier", "next"],
+  "extends": ["next", "prettier"],
+  "plugins": ["react-hooks"],
   "rules": {
     "react/jsx-uses-react": "error",
     "react/jsx-max-props-per-line": [2, { "maximum": 1, "when": "multiline" }],

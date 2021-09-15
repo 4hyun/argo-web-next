@@ -54,7 +54,8 @@ const FormContainer = styled.div(({ formOpen }) => [
 ])
 
 const SectionHeading = styled.h2`
-  ${tw`leading-tight w-full text-4xl font-black whitespace-pre-line mb-6 text-center`}
+  font-size: 1.75rem;
+  ${tw`leading-tight w-full md:(text-3xl) font-black whitespace-pre-line mb-6 text-center`}
   @media screen (min-width: 1200px) {
     ${tw`mb-10`}
   }
@@ -64,7 +65,7 @@ const PricingSectionWrapper = styled.div`
   ${tw`flex flex-col container mx-auto md:px-12 md:max-w-full`}
 `
 const PricingSection = styled.div`
-  ${tw`flex px-4 max-w-full sm:(px-0 max-w-max) my-0 mx-auto justify-center relative h-3/6 pt-4`}
+  ${tw`flex px-5 max-w-full sm:(px-0 max-w-max) my-0 mx-auto justify-center relative h-3/6 pt-4`}
   min-height: 500px;
   margin-bottom: 200px;
   @media screen (min-width: 1200px) {
@@ -82,9 +83,8 @@ const LatestBlogPostSection = styled.div`
   ${tw`container mx-auto px-6 mb-20 max-w-screen-xl!`}
 `
 
-const HomePage = (props) => {
-  const { priceList, latestPosts, tagsList } = props
-  const priceListMap = useMemo(() => priceList.reduce((acc, cur) => (acc[cur.id] = cur.heading) && acc, {}))
+const HomePage = ({ priceList, latestPosts, tagsList }) => {
+  const priceListMap = useMemo(() => priceList.reduce((acc, cur) => (acc[cur.id] = cur.heading) && acc, {}), [priceList])
   const [inquiryItems, setInquiryItems] = useState([])
   const [formOpen, openForm] = useState()
   // const [bgCanvasLoaded, setBgCanvasLoaded] = useState();
@@ -139,9 +139,11 @@ const HomePage = (props) => {
               formOpen={formOpen}>
               <MobileFormCloseBar>
                 <MobileFormCloseBarMessage>{`Let's get in touch`}</MobileFormCloseBarMessage>
+
                 <MobileFormCloseIcon
                   onClick={delay(closeForm, 800)}></MobileFormCloseIcon>
               </MobileFormCloseBar>
+
               <GetInTouchForm
                 inquiryItems={inquiryItems}
                 removeInquiryItem={removeInquiryItem}
@@ -153,6 +155,7 @@ const HomePage = (props) => {
         {/* {bgCanvasLoaded && <WaveAnimBg />} */}
         <WaveAnimBg />
       </Container>
+
       <LatestBlogPostSection
         className="latestposts"
         css={[swiperNavigationStyles]}>
@@ -171,15 +174,16 @@ const HomePage = (props) => {
             </HomeBlogCarouselSlide>
           ))}
         </HomeBlogCarousel>
-
         {/* </PostList> */}
       </LatestBlogPostSection>
+
       <PricingSectionWrapper>
         <SectionHeading
           id="tyk-pricing">
           Tyk API Gateway
           <br /> Licenses
         </SectionHeading>
+
         <PricingSection>
           <PriceInfoList
             priceList={priceList}
@@ -189,13 +193,17 @@ const HomePage = (props) => {
           ></PriceInfoList>
         </PricingSection>
       </PricingSectionWrapper>
+
       <ScrollTopButton />
     </>
   )
 }
 
 export async function getStaticProps() {
-  const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
+  const strapiUser = {
+    identifier: process.env.STRAPI_ID,
+    password: process.env.STRAPI_PW,
+  }
   const token = process.env.PROD_STRAPI_AUTH || (await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH))
   const { getLatestPosts, getPriceList, getHomePageData } = paths
   const latestPostsRes = await fetchStrapi(getLatestPosts.url, token)

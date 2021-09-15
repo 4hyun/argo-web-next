@@ -1,11 +1,9 @@
 import React from "react"
 import tw, { styled } from "twin.macro"
-import LangButton from "./LanguageButton"
+import LanguageSelect from "./LanguageSelect"
 import { Link, LogoA } from "./Link"
-import Hamburger from "components/Navbar/Hamburger"
+import Hamburger from "@/components/Navbar/Hamburger"
 import Logo from "./Logo"
-
-import { useTranslationsContext, supportedLang } from "contexts/Translations"
 
 const Container = styled.div`
   ${tw`fixed flex items-center h-16 max-h-16 lg:(absolute items-end) w-full`};
@@ -41,7 +39,7 @@ const DektopNavbarContainer = styled.nav`
   ${tw`flex w-full mx-auto justify-between bg-transparent`}
 `
 
-const DesktopNavbar = ({ renderLangSwitch, toggleMenu, menuOpen }) => {
+const DesktopNavbar = ({ renderLangSelect, toggleMenu, menuOpen }) => {
   return (
     <DektopNavbarContainer>
       <Link
@@ -50,7 +48,7 @@ const DesktopNavbar = ({ renderLangSwitch, toggleMenu, menuOpen }) => {
           <Logo />
         </LogoA>
       </Link>
-      {renderLangSwitch()}
+      {renderLangSelect()}
       <Hamburger
         toggled={menuOpen}
         toggle={toggleMenu} />
@@ -58,10 +56,10 @@ const DesktopNavbar = ({ renderLangSwitch, toggleMenu, menuOpen }) => {
   )
 }
 
-const MobileNavbar = ({ renderLangSwitch, toggleMenu, menuOpen }) => {
+const MobileNavbar = ({ renderLangSelect, toggleMenu, menuOpen }) => {
   return (
     <MobileNavbarContainer>
-      {renderLangSwitch()}
+      {renderLangSelect()}
       <Hamburger
         toggled={menuOpen}
         toggle={toggleMenu} />
@@ -69,47 +67,15 @@ const MobileNavbar = ({ renderLangSwitch, toggleMenu, menuOpen }) => {
   )
 }
 
-const LangButtonLabel = ({ currentLang, thisLang: { locale, label } }) => {
-  const activeClassname = currentLang.locale === locale ? "active" : ""
-  return <span
-    className={`lang-button ${activeClassname} flex justify-center items-start`}>{label}</span>
-}
-
-const LangSwitch = () => {
-  const { switchLang, lang } = useTranslationsContext()
-
-  return (
-    <div
-      className="lang-switch ml-auto mr-auto md:mr-4 flex items-center select-none text-xs lg:text-base">
-      {Object.keys(supportedLang).map((supportedLangKey) => {
-        return (
-          <LangButton
-            key={supportedLangKey}
-            onClick={() => {
-              switchLang(supportedLang[supportedLangKey].locale)
-            }}
-          >
-            <LangButtonLabel
-              currentLang={lang}
-              thisLang={supportedLang[supportedLangKey]} />
-          </LangButton>
-        )
-      })}
-    </div>
-  )
-}
-
 const Navbar = ({ menuOpen, toggleMenu }) => {
-  const { lang } = useTranslationsContext()
-
   return (
     <Container>
       <DesktopNavbar
-        renderLangSwitch={LangSwitch}
+        renderLangSelect={LanguageSelect}
         toggleMenu={toggleMenu}
         menuOpen={menuOpen} />
       <MobileNavbar
-        renderLangSwitch={LangSwitch}
+        renderLangSelect={LanguageSelect}
         toggleMenu={toggleMenu}
         menuOpen={menuOpen} />
     </Container>
