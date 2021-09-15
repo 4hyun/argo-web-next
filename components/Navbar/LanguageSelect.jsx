@@ -12,6 +12,7 @@ const ToggleContainer = styled(motion.div)`
   text-align: center;
   line-height: 0.8;
   height: auto;
+  margin-left: auto;
 
   & > .Locale.active {
     /* line-height: 120%; */
@@ -23,7 +24,6 @@ const ToggleContainer = styled(motion.div)`
     border-right: 1.5px solid #333;
   }
   @media (min-width: 1200px) {
-    margin-left: auto;
     min-width: 55px;
   }
   ${({ configurable }) => (configurable ? tw`overflow-y-visible` : tw`overflow-y-hidden`)}
