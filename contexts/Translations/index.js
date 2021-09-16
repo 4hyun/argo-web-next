@@ -6,7 +6,9 @@ import { createContext, useContext } from "react"
 //   ko: "ko",
 // };
 
-const supportedLangs = {
+const DEFAULT_LOCALE = "ko"
+
+const supportedLocaleMap = {
   en: { locale: "en", label: "EN" },
   ko: { locale: "ko", label: "KR" },
 }
@@ -15,4 +17,4 @@ const TranslationsContext = createContext({})
 
 const useTranslationsContext = () => useContext(TranslationsContext)
 
-export { TranslationsContext, useTranslationsContext, supportedLangs }
+export { TranslationsContext, useTranslationsContext, supportedLocaleMap, DEFAULT_LOCALE }

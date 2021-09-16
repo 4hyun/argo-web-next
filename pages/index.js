@@ -89,7 +89,7 @@ const HomePage = ({ priceList, latestPosts, tagsList }) => {
   const [formOpen, openForm] = useState()
   // const [bgCanvasLoaded, setBgCanvasLoaded] = useState();
   const {
-    lang: { locale },
+    currentLocaleData: { locale },
   } = useTranslationsContext()
 
   const authorInfoConfig = {

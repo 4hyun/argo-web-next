@@ -3,70 +3,87 @@ import { motion } from "framer-motion"
 import tw, { styled } from "twin.macro"
 import { useTranslationsContext } from "contexts/Translations"
 
-const ToggleContainer = styled(motion.div)`
+const Wrapper = styled.div`
+  ${tw`relative h-auto ml-auto mr-2 w-10`}
+`
+
+const LabelText = styled(motion.span)`
   padding: 0 0.5rem;
+  user-select: none;
+  ${tw`flex w-full min-h-full h-full justify-center items-center`}
+  ${({ configurable, isCurrentLocale }) =>
+    configurable && !isCurrentLocale ? tw`relative` : !configurable && !isCurrentLocale ? tw`absolute top-0 left-0 hidden` : null}
+  ${({ configurable }) => configurable && tw`text-white bg-argo-blue-400 bg-opacity-60`}
+  &:first-child {
+    ${tw`rounded-t-md`}
+  }
+  &:last-child {
+    ${tw`rounded-b-md`}
+  }
+`
+
+const ToggleContainer = styled(motion.div)`
+  position: absolute;
   cursor: pointer;
-  min-width: 45px;
+  width: 100%;
   font-weight: 600;
   transition: all 0.1s ease;
   text-align: center;
   line-height: 0.8;
-  height: auto;
-  margin-left: auto;
+  height: 100%;
 
-  & > .Locale.active {
+  & > ${LabelText}.active {
     /* line-height: 120%; */
     color: var(--argo-blue);
     font-weight: 900;
     transition: all 0.1s ease;
   }
-  :first-child {
-    border-right: 1.5px solid #333;
-  }
   @media (min-width: 1200px) {
-    min-width: 55px;
+    height: 100%;
   }
   ${({ configurable }) => (configurable ? tw`overflow-y-visible` : tw`overflow-y-hidden`)}
 `
 
-const LabelText = styled(motion.span)`
-  ${tw`flex min-h-full h-full justify-center items-center`}
-`
-
-const LocaleLabel = ({ currentLang, thisLang, onClick }) => {
-  const activeClassname = currentLang.locale === thisLang.locale ? "active" : ""
+const LocaleLabel = ({ configurable, currentLocaleData, thisLocaleData, onClick }) => {
+  const activeClassName = currentLocaleData.locale === thisLocaleData.locale ? "active" : ""
   return (
     <LabelText
-      className={`Locale ${activeClassname}`}
-      onClick={onClick}>
-      {thisLang.label}
+      className={activeClassName}
+      onClick={onClick}
+      configurable={configurable}
+      isCurrentLocale={activeClassName === "active"}>
+      {thisLocaleData.label}
     </LabelText>
   )
 }
 
 const LanguageSelect = (props) => {
-  const { supportedLangsEntries, supportedLangsMap, switchLang, lang: currentLang } = useTranslationsContext()
+  const { supportedLocaleEntries, supportedLocaleMap, switchLocale, currentLocaleData } = useTranslationsContext()
   const [configurable, setConfigurable] = React.useState(null)
-  const handleLocaleClick = (thisLangObj, index) => {
+  const handleLocaleClick = (thisLocaleData, index) => {
     if (!configurable) return setConfigurable(true)
     if (configurable) {
       setConfigurable(false)
-      switchLang(thisLangObj, index)
+      switchLocale(thisLocaleData, index)
       return
     }
   }
   return (
-    <ToggleContainer
-      configurable={configurable}>
-      {supportedLangsEntries &&
-        supportedLangsEntries.map(([langId, thisLangObj], i) => (
-          <LocaleLabel
-            key={langId}
-            currentLang={currentLang}
-            thisLang={thisLangObj}
-            onClick={() => handleLocaleClick(thisLangObj, i)} />
-        ))}
-    </ToggleContainer>
+    <Wrapper>
+      <ToggleContainer
+        configurable={configurable}>
+        {supportedLocaleEntries &&
+          supportedLocaleEntries.map(([langId, thisLocaleData], i) => (
+            <LocaleLabel
+              key={langId}
+              configurable={configurable}
+              currentLocaleData={currentLocaleData}
+              thisLocaleData={thisLocaleData}
+              onClick={() => handleLocaleClick(thisLocaleData, i)}
+            />
+          ))}
+      </ToggleContainer>
+    </Wrapper>
   )
 }
 
