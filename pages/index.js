@@ -16,7 +16,7 @@ import PriceInfoList from "components/PriceInfoList"
 import { PostList, BlogCard } from "components/Blog"
 import HomeBlogTags from "containers/HomeBlogTags/index"
 /* lib */
-import { fetchStrapi, paths, getStrapiAuthToken } from "lib/api/strapi"
+import { resources, fetchResource } from "lib/api/strapi"
 /* styles */
 import { swiperNavigationStyles } from "containers/HomePage/styles"
 
@@ -293,16 +293,15 @@ const HomePage = (props) => {
 }
 
 export async function getStaticProps() {
-  const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
-  const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
-  const { getLatestPosts, getPriceList, getHomePageData } = paths
-  const latestPostsRes = await fetchStrapi(getLatestPosts.url, token)
-  const priceListRes = await fetchStrapi(getPriceList.url, token)
-  const homePageDataRes = await fetchStrapi(getHomePageData.url, token)
+  // const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
+  // const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
+  const { Posts, Price, Homepage } = resources
+  const latestPostsRes = await fetchStrapi(Posts.methods.Latest.url)
+  const priceListRes = await fetchStrapi(Price.methods.List.url)
+  const homePageDataRes = await fetchStrapi(Homepage.methods.Get.url)
   const latestPosts = await latestPostsRes.json()
   const priceList = await priceListRes.json()
   const homePageData = await homePageDataRes.json()
-  console.log(">> home_blog_tags: ", homePageData)
   const tagsList = homePageData.home_blog_tags
   const props = {
     priceList,
