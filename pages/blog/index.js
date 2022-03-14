@@ -25,9 +25,14 @@ const BlogMainPage = ({ posts }) => {
       <PageHeading>Blog</PageHeading>
       <ContentWrapper>
         {posts && (
-          <PostList tw="space-y-6" col>
+          <PostList
+            tw="space-y-6"
+            col>
             {posts.map((blogProps) => (
-              <BlogCard {...blogProps} key={blogProps.id} authorInfoConfig={authorInfoConfig} />
+              <BlogCard
+                {...blogProps}
+                key={blogProps.id}
+                authorInfoConfig={authorInfoConfig} />
             ))}
           </PostList>
         )}
@@ -41,7 +46,7 @@ export default BlogMainPage
 // revalidation is enabled and a new request comes in
 export async function getStaticProps() {
   const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
-  const token = process.env.PROD_STRAPI_AUTH || (await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH))
+  const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
   const params = "?_sort=published_at:DESC"
   const res = await fetchStrapi(paths.getBlogPosts.url + params, token)
   const posts = await res.json()
