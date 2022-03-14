@@ -4,7 +4,7 @@ import Link from "next/link"
 import styled from "styled-components"
 import tw from "twin.macro"
 /* lib */
-import { fetchStrapi, getStrapiAuthToken, paths as apiPaths } from "lib/api/strapi"
+import { fetchStrapi, fetchResource, paths as apiPaths } from "lib/api/strapi"
 /* components */
 import { ArrowLeftCircle } from "components/Icons"
 import { PostContent } from "components/Blog"
@@ -90,10 +90,8 @@ export default PostPage
 
 export async function getStaticProps({ params, query }) {
   const { slug } = params
-  const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
-  const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
   const path = `/blog-posts?slug=${slug}`
-  const res = await fetchStrapi(path, token)
+  const res = await fetchStrapi(path)
   const post = await res.json()
 
   return {
@@ -108,10 +106,8 @@ export async function getStaticProps({ params, query }) {
 }
 
 export async function getStaticPaths() {
-  const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
-  const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
-  const res = await fetchStrapi(apiPaths.getBlogPosts.url, token)
-  const posts = await res.json()
+  const postsRes = await fetchResource("Posts", "List")
+  const posts = await postsRes.json()
   const paths = posts.map(({ slug }) => ({ params: { slug } }))
   return {
     paths,

@@ -1,5 +1,5 @@
 import tw, { styled } from "twin.macro"
-import { fetchStrapi, getStrapiAuthToken, paths } from "lib/api/strapi"
+import { fetchStrapi, paths } from "lib/api/strapi"
 import { BlogCard, PostList } from "components/Blog"
 
 const Container = styled.div`
@@ -45,10 +45,8 @@ export default BlogMainPage
 
 // revalidation is enabled and a new request comes in
 export async function getStaticProps() {
-  const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
-  const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
   const params = "?_sort=published_at:DESC"
-  const res = await fetchStrapi(paths.getBlogPosts.url + params, token)
+  const res = await fetchStrapi(paths.getBlogPosts.url + params)
   const posts = await res.json()
 
   return {
