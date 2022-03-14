@@ -11,7 +11,9 @@ const HomeBlogTags = ({ tagsList }) => {
   return (
     <Wrapper>
       {tagsList.map(({ id, name }) => (
-        <Tag key={id} name={name} />
+        <Tag
+          key={id}
+          name={name} />
       ))}
     </Wrapper>
   )

@@ -1,4 +1,4 @@
-import Container from "@/components/PriceInfoList/Container"
+import Container from "components/PriceInfoList/Container"
 import Card from "components/PriceInfoList/components/Card"
 
 const colorClassByOrder = ["lemon", "coral", "pink", "lavender"]

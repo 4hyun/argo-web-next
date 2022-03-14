@@ -1,5 +1,5 @@
 import tw from "twin.macro"
 
-const A = tw.a`w-max`
+const A = tw.a`w-full xl:w-max`
 
 export default A

@@ -21,8 +21,12 @@ const ScrollTopButton = () => {
   const scrollDir = useScrollDirection()
   const scrollY = useScrollPosition(60)
   return (
-    <Button onClick={scrollToTop} scrollY={scrollY} scrollDir={scrollDir}>
-      <UpArrowCircle size={60} />
+    <Button
+      onClick={scrollToTop}
+      scrollY={scrollY}
+      scrollDir={scrollDir}>
+      <UpArrowCircle
+        size={60} />
     </Button>
   )
 }

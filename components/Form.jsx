@@ -27,9 +27,12 @@ const Textarea = tw.textarea`shadow-sm mt-1 block w-full sm:text-sm border borde
 const SubmitButton = tw.button`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-base font-medium text-white bg-argo-blue-400 hover:(filter drop-shadow-lg) focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rounded-full relative`
 
 const Ping = ({ on }) => (
-  <span className={`flex absolute h-3 w-3 top-1 right-1 -mt-1 -mr-1 ${on ? "opacity-100" : "opacity-0"}`}>
-    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-    <span className="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
+  <span
+    className={`flex absolute h-3 w-3 top-1 right-1 -mt-1 -mr-1 ${on ? "opacity-100" : "opacity-0"}`}>
+    <span
+      className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+    <span
+      className="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
   </span>
 )
 
@@ -91,17 +94,26 @@ const Form = ({ inquiryItems, priceListMap, removeInquiryItem, closeForm }) => {
       onSubmit={netlifyFormSubmit}
       ref={ref}
     >
-      <input type="hidden" name="form-name" value="contact"></input>
+      <input
+        type="hidden"
+        name="form-name"
+        value="contact"></input>
       <InquiryItemsContainer>
         {inquiryItems.map((inquiryItemId) => (
-          <InquiryItem key={inquiryItemId}>
+          <InquiryItem
+            key={inquiryItemId}>
             <span>{priceListMap[inquiryItemId]}</span>
-            <StyledCloseIcon size="20" onClick={() => removeInquiryItem(inquiryItemId)} />
+            <StyledCloseIcon
+              size="20"
+              onClick={() => removeInquiryItem(inquiryItemId)} />
           </InquiryItem>
         ))}
         {Object.entries(priceListMap).map(([inquiryItemId, heading]) => (
-          <div className="hidden" key={`a-${inquiryItemId}`}>
-            <Label htmlFor={inquiryItemId}>{heading}</Label>
+          <div
+            className="hidden"
+            key={`a-${inquiryItemId}`}>
+            <Label
+              htmlFor={inquiryItemId}>{heading}</Label>
             <Input
               type="hidden"
               key={`${inquiryItemId}_h`}
@@ -112,29 +124,57 @@ const Form = ({ inquiryItems, priceListMap, removeInquiryItem, closeForm }) => {
           </div>
         ))}
       </InquiryItemsContainer>
-      <div className="outer bg-white">
-        <div className="form-body__wrapper px-4 md:px-3 py-4 bg-white">
-          <div className="grid lg:grid-cols-6 grid-cols-12 gap-4">
-            <div className="col-span-8">
-              <Label htmlFor="full_name">Full name</Label>
-              <Input type="text" name="full_name" id="full_name" autoComplete="on" required />
+      <div
+        className="outer bg-white">
+        <div
+          className="form-body__wrapper px-4 md:px-3 py-4 bg-white">
+          <div
+            className="grid lg:grid-cols-6 grid-cols-12 gap-4">
+            <div
+              className="col-span-8">
+              <Label
+                htmlFor="full_name">Full name</Label>
+              <Input
+                type="text"
+                name="full_name"
+                id="full_name"
+                autoComplete="on"
+                required />
             </div>
-            <div className="col-span-12">
-              <Label htmlFor="email_address">Email address</Label>
-              <Input type="text" name="email_address" id="email_address" autoComplete="on" required />
+            <div
+              className="col-span-12">
+              <Label
+                htmlFor="email_address">Email address</Label>
+              <Input
+                type="text"
+                name="email_address"
+                id="email_address"
+                autoComplete="on"
+                required />
             </div>
-            <div className="col-span-12">
-              <Label htmlFor="message">Drop us a line</Label>
-              <Textarea id="message" name="message" rows="3" placeholder="for Tyk inquiries and others"></Textarea>
+            <div
+              className="col-span-12">
+              <Label
+                htmlFor="message">Drop us a line</Label>
+              <Textarea
+                id="message"
+                name="message"
+                rows="3"
+                placeholder="for Tyk inquiries and others"></Textarea>
             </div>
           </div>
         </div>
-        <div className="form-footer px-4 py-3 bg-white text-right sm:px-6 ">
-          <div className="form-button-wrapper relative">
-            <SubmitButton type="submit" aria-label="submit">
+        <div
+          className="form-footer px-4 py-3 bg-white text-right sm:px-6 ">
+          <div
+            className="form-button-wrapper relative">
+            <SubmitButton
+              type="submit"
+              aria-label="submit">
               {submitButtonMessage}
             </SubmitButton>
-            <Ping on={pingOn} />
+            <Ping
+              on={pingOn} />
           </div>
         </div>
       </div>

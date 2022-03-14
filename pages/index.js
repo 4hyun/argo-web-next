@@ -203,44 +203,69 @@ const HomePage = (props) => {
 
   return (
     <>
-      <div className={styles.container}>
+      <div
+        className={styles.container}>
         {!formOpen && <LayoutTopGradientOverlayBg />}
-        <main className={`absolute flex items-center w-screen h-full z-10`}>
-          <div className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center`}>
+        <main
+          className={`absolute flex items-center w-screen h-full z-10`}>
+          <div
+            className={`flex my-0 mx-auto md:px-8 md:max-w-full justify-center`}>
             <ComingSoonMessageContainer>
               <Slogan>{trads[locale]["comingsoon.components.Slogan.tyk"]}</Slogan>
               <Heading>{trads[locale]["comingsoon.components.Heading.main"]}</Heading>
-              <CtaMessage className="leading-none font-normal mt-4">{trads[locale]["comingsoon.components.Slogan.ctamessage"]}</CtaMessage>
-              <div className="coming-soon-action-button-container flex space-x-4 lg:space-x-0 mt-5">
-                <GetInTouchButton onClick={delay(showForm, 800)} aria-label="Inquire about Tyk API Gateway">
+              <CtaMessage
+                className="leading-none font-normal mt-4">{trads[locale]["comingsoon.components.Slogan.ctamessage"]}</CtaMessage>
+              <div
+                className="coming-soon-action-button-container flex space-x-4 lg:space-x-0 mt-5">
+                <GetInTouchButton
+                  onClick={delay(showForm, 800)}
+                  aria-label="Inquire about Tyk API Gateway">
                   {trads[locale]["comingsoon.components.EmailInputContainer.button.getintouch"]}
                 </GetInTouchButton>
-                <a href="https://tyk.io/docs/getting-started/tyk-components/gateway/" target="_blank">
-                  <LearnMoreButton aria-label="Learn More about Tyk API Gateway">
+                <a
+                  href="https://tyk.io/docs/getting-started/tyk-components/gateway/"
+                  target="_blank"
+                  rel="noreferrer">
+                  <LearnMoreButton
+                    aria-label="Learn More about Tyk API Gateway">
                     {trads[locale]["comingsoon.components.EmailInputContainer.button.learnmoreaboutyk"]}
                   </LearnMoreButton>
                 </a>
               </div>
             </ComingSoonMessageContainer>
-            <FormContainer formOpen={formOpen}>
+            <FormContainer
+              formOpen={formOpen}>
               <MobileFormCloseBar>
                 <MobileFormCloseBarMessage>Let's get in touch</MobileFormCloseBarMessage>
-                <MobileFormCloseIcon onClick={delay(closeForm, 800)}></MobileFormCloseIcon>
+                <MobileFormCloseIcon
+                  onClick={delay(closeForm, 800)}></MobileFormCloseIcon>
               </MobileFormCloseBar>
-              <GetInTouchForm inquiryItems={inquiryItems} removeInquiryItem={removeInquiryItem} priceListMap={priceListMap} closeForm={closeForm} />
+              <GetInTouchForm
+                inquiryItems={inquiryItems}
+                removeInquiryItem={removeInquiryItem}
+                priceListMap={priceListMap}
+                closeForm={closeForm} />
             </FormContainer>
           </div>
         </main>
         {/* {bgCanvasLoaded && <WaveAnimBg />} */}
         <WaveAnimBg />
       </div>
-      <LatestBlogPostSection className="latestposts" css={[swiperNavigationStyles]}>
-        <SectionHeading id="latest-posts">Latest Posts</SectionHeading>
+      <LatestBlogPostSection
+        className="latestposts"
+        css={[swiperNavigationStyles]}>
+        <SectionHeading
+          id="latest-posts">Latest Posts</SectionHeading>
         {/* <HomeBlogTags tagsList={tagsList} /> */}
-        <HomeBlogCarousel swiperConfig={homeBlogCarouselConfig}>
+        <HomeBlogCarousel
+          swiperConfig={homeBlogCarouselConfig}>
           {latestPosts.map((blogProps) => (
-            <HomeBlogCarouselSlide key={blogProps.id}>
-              <BlogCard {...blogProps} wrapper={BlogPostCardWrapper} authorInfoConfig={authorInfoConfig} />
+            <HomeBlogCarouselSlide
+              key={blogProps.id}>
+              <BlogCard
+                {...blogProps}
+                wrapper={BlogPostCardWrapper}
+                authorInfoConfig={authorInfoConfig} />
             </HomeBlogCarouselSlide>
           ))}
         </HomeBlogCarousel>
@@ -248,7 +273,8 @@ const HomePage = (props) => {
         {/* </PostList> */}
       </LatestBlogPostSection>
       <PricingSectionWrapper>
-        <SectionHeading id="tyk-pricing">
+        <SectionHeading
+          id="tyk-pricing">
           Tyk API Gateway
           <br /> Licenses
         </SectionHeading>

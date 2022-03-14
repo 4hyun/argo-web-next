@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "./Carousel"
 import styled from "styled-components"
 import tw from "twin.macro"
-import { CARD_CLASSNAME } from "components/Blog/Card"
+import { CARD_CLASSNAME } from "@/components/Blog/Card"
 
 const StyledSwiper = styled(Swiper)`
   ${tw`h-60 pt-4 pb-8 -mx-8 px-8`}
@@ -14,7 +14,8 @@ const StyledSwiper = styled(Swiper)`
 `
 
 const HomeBlogCarousel = ({ swiperConfig, children }) => {
-  return <StyledSwiper {...swiperConfig}>{children}</StyledSwiper>
+  return <StyledSwiper
+    {...swiperConfig}>{children}</StyledSwiper>
 }
 
 export { HomeBlogCarousel, SwiperSlide as HomeBlogCarouselSlide }

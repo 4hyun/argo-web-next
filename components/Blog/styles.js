@@ -1,4 +1,3 @@
-// import styled from "styled-components"
 import { css } from "twin.macro"
 
 export const hoverShadowRainbowCss = css`
@@ -25,8 +24,3 @@ export const hoverShadowPileShallowCss = css`
   border-color: #250fab;
   box-shadow: 10px 10px 0px 0px #0300ff;
 `
-
-// export const hoverShadowPileShallowCss = css`
-//   border-color: #250fab;
-//   box-shadow: 5px 5px 0px 0px #0300ff, 10px 10px 0px 0px #0300ff, 15px 15px 0px 0px #0300ff;
-// `
