@@ -8,7 +8,7 @@ import { fetchStrapi, getStrapiAuthToken, paths as apiPaths } from "lib/api/stra
 /* components */
 import { ArrowLeftCircle } from "components/Icons"
 import { PostContent } from "components/Blog"
-import TableOfContents from "@/components/Blog/TableOfContents"
+import TableOfContents from "components/Blog/TableOfContents"
 
 const FallbackContainer = styled.div`
   ${tw`w-full pt-24 lg:(pt-40) min-h-screen flex justify-center items-center`}
@@ -58,9 +58,7 @@ const MainHeading = styled.div`
   ${tw`flex flex-col py-4 space-y-4`}
 `
 
-const PostPage = ({ post }) => {
-  const { title, content, firstname, lastname, published_at } = post
-  const postDate = new Date(published_at)
+const PostPage = ({ post, slug }) => {
   return (
     <Container>
       <ContentWrapper>
@@ -109,7 +107,7 @@ export async function getStaticProps({ params, query }) {
 
 export async function getStaticPaths() {
   const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
-  const token = process.env.PROD_STRAPI_AUTH || (await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH))
+  const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
   const res = await fetchStrapi(apiPaths.getBlogPosts.url, token)
   const posts = await res.json()
   const paths = posts.map(({ slug }) => ({ params: { slug } }))
