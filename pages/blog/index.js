@@ -47,7 +47,8 @@ export default BlogMainPage
 // revalidation is enabled and a new request comes in
 export async function getStaticProps() {
   const query = "?_sort=published_at:DESC"
-  const posts = await fetchStrapi(makeResourcePath("Posts", "List", query)).then((response) => response.json())
+  const postsResponse = await fetchStrapi(makeResourcePath("Posts", "List", query))
+  const posts = await postsResponse.json()
 
   return {
     props: {
