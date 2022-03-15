@@ -4,7 +4,8 @@ import Link from "next/link"
 import styled from "styled-components"
 import tw from "twin.macro"
 /* lib */
-import { fetchStrapi, fetchResource, paths as apiPaths } from "lib/api/strapi"
+import { fetchResource } from "lib/api"
+import { fetchStrapi, paths as apiPaths } from "lib/api/strapi"
 /* components */
 import { ArrowLeftCircle } from "components/Icons"
 import { PostContent } from "components/Blog"
@@ -91,8 +92,8 @@ export default PostPage
 export async function getStaticProps({ params, query }) {
   const { slug } = params
   const path = `/blog-posts?slug=${slug}`
-  const res = await fetchStrapi(path)
-  const post = await res.json()
+  const postResponse = await fetchStrapi(path)
+  const post = await postResponse.json()
 
   return {
     props: {
@@ -106,8 +107,8 @@ export async function getStaticProps({ params, query }) {
 }
 
 export async function getStaticPaths() {
-  const postsRes = await fetchResource("Posts", "List")
-  const posts = await postsRes.json()
+  const postListResponse = await fetchResource("Posts", "List")
+  const posts = await postListResponse.json()
   const paths = posts.map(({ slug }) => ({ params: { slug } }))
   return {
     paths,
