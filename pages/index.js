@@ -16,7 +16,7 @@ import PriceInfoList from "components/PriceInfoList"
 import { PostList, BlogCard } from "components/Blog"
 import HomeBlogTags from "containers/HomeBlogTags/index"
 /* lib */
-import { fetchResource } from "lib/api/strapi"
+import { fetchResource } from "lib/api"
 /* styles */
 import { swiperNavigationStyles } from "containers/HomePage/styles"
 
@@ -207,6 +207,7 @@ export async function getStaticProps() {
   ].map((fetchResourceParams) => fetchResource(...fetchResourceParams))
   const responses = await Promise.all(responsePromises)
   const [postListLatest, priceList, homepageData] = await Promise.all(responses.map((response) => response.json()))
+
   const tagsList = homepageData.home_blog_tags
   const props = {
     priceList,
