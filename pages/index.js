@@ -200,8 +200,6 @@ const HomePage = ({ priceList, postListLatest, tagsList }) => {
 }
 
 export async function getStaticProps() {
-  // const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
-  // const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
   const responsePromises = [
     ["Posts", "ListLatest"],
     ["Prices", "List"],
@@ -209,13 +207,6 @@ export async function getStaticProps() {
   ].map((fetchResourceParams) => fetchResource(...fetchResourceParams))
   const responses = await Promise.all(responsePromises)
   const [postListLatest, priceList, homepageData] = await Promise.all(responses.map((response) => response.json()))
-
-  // const latestPostsRes = await fetchResource("Posts", "List")
-  // const priceListRes = await fetchResource("Prices", "List")
-  // const homePageDataRes = await fetchResource("Homepage", "Get")
-  // const latestPosts = await latestPostsRes.json()
-  // const priceList = await priceListRes.json()
-  // const homePageData = await homePageDataRes.json()
   const tagsList = homepageData.home_blog_tags
   const props = {
     priceList,

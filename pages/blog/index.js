@@ -1,5 +1,6 @@
 import tw, { styled } from "twin.macro"
-import { fetchStrapi, paths } from "lib/api/strapi"
+import { fetchStrapi, resources } from "lib/api/strapi"
+import { makeResourcePath } from "lib/utils/resources"
 import { BlogCard, PostList } from "components/Blog"
 
 const Container = styled.div`
@@ -45,8 +46,8 @@ export default BlogMainPage
 
 // revalidation is enabled and a new request comes in
 export async function getStaticProps() {
-  const params = "?_sort=published_at:DESC"
-  const res = await fetchStrapi(paths.getBlogPosts.url + params)
+  const query = "?_sort=published_at:DESC"
+  const res = await fetchStrapi(makeResourcePath("Posts", "List", query))
   const posts = await res.json()
 
   return {
