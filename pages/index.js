@@ -16,7 +16,7 @@ import PriceInfoList from "components/PriceInfoList"
 import { PostList, BlogCard } from "components/Blog"
 import HomeBlogTags from "containers/HomeBlogTags/index"
 /* lib */
-import { fetchResource } from "lib/api/strapi"
+import { fetchResource } from "lib/api"
 /* styles */
 import { swiperNavigationStyles } from "containers/HomePage/styles"
 
@@ -83,7 +83,7 @@ const LatestBlogPostSection = styled.div`
   ${tw`container mx-auto px-6 mb-20 max-w-screen-xl!`}
 `
 
-const HomePage = ({ priceList, latestPosts, tagsList }) => {
+const HomePage = ({ priceList, postListLatest, tagsList }) => {
   const priceListMap = useMemo(() => priceList.reduce((acc, cur) => (acc[cur.id] = cur.heading) && acc, {}), [priceList])
   const [inquiryItems, setInquiryItems] = useState([])
   const [formOpen, openForm] = useState()
@@ -164,7 +164,7 @@ const HomePage = ({ priceList, latestPosts, tagsList }) => {
         {/* <HomeBlogTags tagsList={tagsList} /> */}
         <HomeBlogCarousel
           swiperConfig={homeBlogCarouselConfig}>
-          {latestPosts.map((blogProps) => (
+          {postListLatest.map((blogProps) => (
             <HomeBlogCarouselSlide
               key={blogProps.id}>
               <BlogCard
@@ -200,18 +200,18 @@ const HomePage = ({ priceList, latestPosts, tagsList }) => {
 }
 
 export async function getStaticProps() {
-  // const strapiUser = { identifier: process.env.STRAPI_ID, password: process.env.STRAPI_PW }
-  // const token = await getStrapiAuthToken(strapiUser, process.env.NODE_ENV, process.env.DEV_STRAPI_AUTH)
-  const latestPostsRes = await fetchResource("Posts", "List")
-  const priceListRes = await fetchResource("Prices", "List")
-  const homePageDataRes = await fetchResource("Homepage", "Get")
-  const latestPosts = await latestPostsRes.json()
-  const priceList = await priceListRes.json()
-  const homePageData = await homePageDataRes.json()
-  const tagsList = homePageData.home_blog_tags
+  const responsePromises = [
+    ["Posts", "ListLatest"],
+    ["Prices", "List"],
+    ["Homepage", "Get"],
+  ].map((fetchResourceParams) => fetchResource(...fetchResourceParams))
+  const responses = await Promise.all(responsePromises)
+  const [postListLatest, priceList, homepageData] = await Promise.all(responses.map((response) => response.json()))
+
+  const tagsList = homepageData.home_blog_tags
   const props = {
     priceList,
-    latestPosts,
+    postListLatest,
     tagsList,
   }
   return {
