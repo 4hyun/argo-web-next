@@ -1,7 +1,7 @@
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import Input from './Input';
 import styled from 'styled-components';
-import tw, { css } from 'twin.macro';
+import tw from 'twin.macro';
 import { Search } from '@/components/icons';
 import { getInputProps } from './utils';
 import {
@@ -11,17 +11,16 @@ import {
 } from './styles';
 
 const Root = styled.div`
-  display: flex;
-  width: fit-content;
-  margin-right: auto;
+  ${tw`flex mr-auto items-center my-auto`}
 `;
 
 const FlexRow = styled.div`
-  ${tw`relative flex h-10 border border-argo-blue-400`}
+  ${tw`relative flex h-10 border border-argo-blue-400 rounded-md overflow-hidden`}
+  ${({ focused }) => (focused && tw`ring-2 ring-blue-400`) || ''}
 `;
 
 const ButtonWrapper = styled.div`
-  ${tw`flex items-center justify-center bg-argo-blue-400 hover:cursor-pointer active:cursor-default`}
+  ${tw`flex items-center justify-center hover:cursor-pointer active:cursor-default`}
   width: 40px;
 `;
 
@@ -34,10 +33,14 @@ const SearchBar = ({
   context = {},
   ...props
 }) => {
+  const [focused, setFocused] = useState(null);
   const searchContext = useContext(context);
+  const setIsFocused = v => () => {
+    if (focused === v) return;
+    setFocused(v);
+  };
   useEffect(() => {
     /* init() fuse */
-    console.log('>> SearchBar useEffect()');
     if (searchContext) {
       console.log(searchContext.search('Monster'));
     }
@@ -47,9 +50,12 @@ const SearchBar = ({
   };
   return (
     <Root>
-      <FlexRow>
+      <FlexRow
+        focused={focused}>
         <Input
           {...getInputProps(props)}
+          onFocus={setIsFocused(true)}
+          setParentFocusOut={setIsFocused(false)}
           handleInputChange={handleInputChange}
           css={InputStyles}
         />

@@ -2,7 +2,7 @@ import tw, { css } from 'twin.macro';
 
 export const SearchIconStyles = css`
   * {
-    fill: #fff;
+    ${tw`fill-current text-argo-blue-400`};
   }
 `;
 

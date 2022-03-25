@@ -1,7 +1,6 @@
 import tw, { styled } from 'twin.macro';
-import { Link, LogoA } from './Link';
 import Hamburger from '@/components/Navbar/Hamburger';
-import Logo from './Logo';
+
 const MobileNavbarContainer = styled.nav`
   ${tw`backdrop-filter backdrop-blur-md`}
   display: none;
