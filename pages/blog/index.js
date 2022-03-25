@@ -29,10 +29,10 @@ const FlexRow = styled.div`
 const BlogMainPage = ({ posts }) => {
   return (
     <Container>
-      <FlexRow>
+      {/* <FlexRow>
         <SearchBar
           placeholder="Quick search..." />
-      </FlexRow>
+      </FlexRow> */}
       <PageHeading>Blog</PageHeading>
       <ContentWrapper>
         {posts && (
