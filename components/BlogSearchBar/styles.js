@@ -12,5 +12,7 @@ export const SearchIconWrapperStyles = css`
 `;
 
 export const InputStyles = css`
+  ${'' /* Desktop: width */}
+  width: 400px;
   ${tw`px-4 focus:outline-none`}
 `;

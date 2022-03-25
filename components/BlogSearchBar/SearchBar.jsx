@@ -3,6 +3,7 @@ import Input from './Input';
 import styled from 'styled-components';
 import tw, { css } from 'twin.macro';
 import { Search } from '@/components/icons';
+import { getInputProps } from './utils';
 import {
   SearchIconStyles,
   SearchIconWrapperStyles,
@@ -12,8 +13,6 @@ import {
 const Root = styled.div`
   display: flex;
   width: fit-content;
-  margin-top: 100px;
-  margin-left: auto;
   margin-right: auto;
 `;
 
@@ -30,7 +29,11 @@ const SearchButton = styled(Search)`
   ${SearchIconStyles}
 `;
 
-const SearchBar = ({ renderSearchResult = () => {}, context }) => {
+const SearchBar = ({
+  renderSearchResult = () => {},
+  context = {},
+  ...props
+}) => {
   const searchContext = useContext(context);
   useEffect(() => {
     /* init() fuse */
@@ -46,8 +49,10 @@ const SearchBar = ({ renderSearchResult = () => {}, context }) => {
     <Root>
       <FlexRow>
         <Input
+          {...getInputProps(props)}
           handleInputChange={handleInputChange}
-          css={InputStyles} />
+          css={InputStyles}
+        />
         {/* TODO: style SearchResult layout to 'fixed', and position align to bottom of SearchBar */}
         {renderSearchResult()}
         <ButtonWrapper
