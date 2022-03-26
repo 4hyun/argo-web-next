@@ -17,8 +17,13 @@ export const InputStyles = css`
   ${tw`px-4 focus:outline-none`}
 `;
 
+/* style line by 'key' to print */
+/* eg. 'title' key is styled with lineStyles.title<css> */
 export const lineStyles = {
-  bold: css`
+  title: css`
     ${tw`font-bold`}
+  `,
+  excerpt: css`
+    ${tw`font-light`}
   `,
 };

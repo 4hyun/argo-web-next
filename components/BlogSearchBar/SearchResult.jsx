@@ -1,3 +1,4 @@
+import React from 'react';
 import tw, { styled } from 'twin.macro';
 import { lineStyles } from './styles';
 
@@ -15,9 +16,31 @@ const SearchResultFooter = styled.div`
 
 const List = styled.ul``;
 
-const Item = styled.li`
+const ItemBase = styled.li`
   ${tw`flex flex-col`}
 `;
+
+const Item = props => {
+  const [hovered, setHovered] = React.useState(null);
+  return (
+    <ItemBase
+      className={`${hovered ? 'hovered' : ''}`}
+      onMouseOver={e => {
+        e.stopPropagation();
+        console.log('hovered');
+        setHovered(true);
+      }}
+      onMouseOut={e => {
+        e.stopPropagation();
+        setHovered(false);
+      }}
+      css={props.itemCss}
+    >
+      {props.children}
+    </ItemBase>
+  );
+};
+
 const Line = styled.span`
   ${tw`flex whitespace-nowrap overflow-hidden`}
   max-width: 100%;
@@ -38,6 +61,7 @@ const SearchResult = ({
   lineStylesConfig = {},
   ...props
 }) => {
+  const testRef = React.createRef(null);
   // console.log('>>DEBUG/SearchResult props: ', props);
   // console.log('>>DEBUG/SearchResult result: ', result);
   return (
@@ -50,19 +74,21 @@ const SearchResult = ({
         css={wrapperCss}>
         {result.map((item, i) => (
           <Item
-            css={itemCss}
-            key={i}>
+            itemCss={itemCss}
+            key={item.item.id}>
             {/* <Line >{item.item.title}</Line>
             <Line>{item.item.excerpt}</Line> */}
             {keys.map((key, j) => {
-              console.log('>>DEBUG key: ', key);
-              console.log('>>DEBUG item.item: ', item.item);
               const text = key
                 .split('.')
                 .reduce((value, property) => value[property], item.item);
-              console.log('>>DEBUG: text: ', text);
-              return <Line
-                key={`${item.item.id}-${j}`}>{text}</Line>;
+              return (
+                <Line
+                  css={lineStyles[key]}
+                  key={`${item.item.id}-${j}`}>
+                  {text}
+                </Line>
+              );
             })}
           </Item>
         ))}

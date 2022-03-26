@@ -18,6 +18,9 @@ export const SearchResultBoxStyles = css`
 export const SearchResultItemStyles = css`
   background: #332fe4;
   ${tw`rounded-sm px-3 py-2`}
-  test-styles:'yes';
   color: #f2f2f2;
+  &.hovered {
+    cursor: pointer;
+    background: #8686ff;
+  }
 `;
