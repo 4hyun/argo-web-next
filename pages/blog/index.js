@@ -1,8 +1,9 @@
+import { useContext } from 'react';
 import tw, { styled } from 'twin.macro';
 import { fetchStrapi, resources } from 'lib/api/strapi';
 import { makeResourcePath } from 'lib/utils/resources';
 import { BlogCard, PostList } from 'components/Blog';
-import SearchBar from 'components/BlogSearchBar';
+import { PostsContext } from '@/contexts/Posts';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -27,6 +28,10 @@ const FlexRow = styled.div`
 `;
 
 const BlogMainPage = ({ posts }) => {
+  const { setPosts } = useContext(PostsContext);
+  /* use searchContext methods to load post data */
+  setPosts(posts);
+
   return (
     <Container>
       {/* <FlexRow>

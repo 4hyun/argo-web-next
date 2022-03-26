@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './Header';
 // import Footer from "./Footer"
 // import trads from "translations/index"
+import { PostsProvider } from '@/contexts/Posts';
 import {
   TranslationsContext,
   supportedLocaleMap,
@@ -27,6 +28,7 @@ const Layout = ({ children }) => {
   };
 
   React.useEffect(() => {
+    console.log('>>DEBUG/Layout rendered...');
     const index = supportedLocaleEntries.findIndex(
       ([localeId, ,]) => localeId === DEFAULT_LOCALE,
     );
@@ -34,18 +36,20 @@ const Layout = ({ children }) => {
   }, []);
   return (
     <>
-      <TranslationsContext.Provider
-        value={{
-          supportedLocaleEntries,
-          supportedLocaleMap,
-          currentLocaleData,
-          switchLocale,
-        }}
-      >
-        <Header></Header>
-        {children}
-        {/* <Footer></Footer> */}
-      </TranslationsContext.Provider>
+      <PostsProvider>
+        <TranslationsContext.Provider
+          value={{
+            supportedLocaleEntries,
+            supportedLocaleMap,
+            currentLocaleData,
+            switchLocale,
+          }}
+        >
+          <Header></Header>
+          {children}
+          {/* <Footer></Footer> */}
+        </TranslationsContext.Provider>
+      </PostsProvider>
     </>
   );
 };

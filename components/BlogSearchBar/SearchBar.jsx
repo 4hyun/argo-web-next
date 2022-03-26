@@ -9,7 +9,7 @@ import {
   SearchIconWrapperStyles,
   InputStyles,
 } from './styles';
-
+import { SearchContext } from '@/contexts/Search';
 const Root = styled.div`
   ${tw`flex mr-auto items-center my-auto`}
 `;
@@ -34,19 +34,15 @@ const SearchBar = ({
   ...props
 }) => {
   const [focused, setFocused] = useState(null);
-  const searchContext = useContext(context);
+  const searchContext = useContext(SearchContext);
   const setIsFocused = v => () => {
     if (focused === v) return;
     setFocused(v);
   };
-  useEffect(() => {
-    /* init() fuse */
-    if (searchContext) {
-      console.log(searchContext.search('Monster'));
-    }
-  }, []);
-  const handleInputChange = () => {
-    console.log('handleInputChange()');
+  const handleInputChange = e => {
+    console.log('handleInputChange()/ e: ', e.target.value);
+    console.log('searchContext', searchContext);
+    console.log(searchContext.search(e.target.value));
   };
   return (
     <Root>

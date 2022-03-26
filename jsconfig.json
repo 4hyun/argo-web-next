@@ -7,7 +7,8 @@
       "@/hooks/*": ["hooks/*"],
       "@/configs/*": ["configs/*"],
       "@/contexts/*": ["contexts/*"],
-      "@/translations/*": ["translations/*"]
+      "@/translations/*": ["translations/*"],
+      "@/lib/*": ["lib/*"]
     }
   },
   "exclude": ["node_modules"]

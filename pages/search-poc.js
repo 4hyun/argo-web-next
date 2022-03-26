@@ -190,16 +190,16 @@ const mockData = [
   },
 ];
 
-const fuse = fuseFactory.createFuseSingleton(mockData, options);
+// const fuse = fuseFactory.createFuseSingleton(mockData, options);
 
-const searchContext = React.createContext(fuse);
+// const searchContext = React.createContext(fuse);
 
 const SearchPOCPage = () => {
   return (
     <div>
       SearchPOCPage
-      <SearchBar
-        context={searchContext} />
+      {/* <SearchBar
+        context={searchContext} /> */}
     </div>
   );
 };
