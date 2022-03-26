@@ -27,3 +27,11 @@ export const lineStyles = {
     ${tw`font-light`}
   `,
 };
+
+export const KeyComboButtonStyles = css`
+  &,
+  path {
+    fill: #f2f2f2;
+  }
+  ${tw`rounded-lg fill-current`}
+`;

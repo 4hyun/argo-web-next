@@ -1,13 +1,16 @@
 import React from 'react';
 import tw, { styled, css } from 'twin.macro';
 import { lineStyles } from './styles';
+import { Close } from '@/components/Icons';
+import { KeyComboIcon, keyComboKeyString } from '@/components/KeyCombo';
+import { KeyComboButtonStyles } from './styles';
 
 const Container = styled.div`
   ${tw`flex flex-col`}
 `;
 
 const SearchResultHeader = styled.header`
-  ${tw`h-8 w-full bg-transparent`}
+  ${tw`flex items-end w-full bg-transparent pt-2 pb-4`}
 `;
 
 const SearchResultFooter = styled.div`
@@ -55,6 +58,13 @@ const FlexColWithIconStyles = css`
   width: 80%;
 `;
 
+// const CloseButton = styled(Close)`
+//   width: 20px;
+//   height: auto;
+//   color: #f2f2f2;
+//   ${tw`flex ml-auto`}
+// `;
+
 const SearchResult = ({
   result,
   config = {},
@@ -76,7 +86,12 @@ const SearchResult = ({
       paddingTop={paddingTop}
       theme={theme}
       css={containerCss}>
-      <SearchResultHeader />
+      <SearchResultHeader>
+        <KeyComboIcon
+          css={KeyComboButtonStyles}
+          keyString={keyComboKeyString['esc']}
+        />
+      </SearchResultHeader>
       <List
         css={wrapperCss}>
         {result.map(({ item }, i) => (

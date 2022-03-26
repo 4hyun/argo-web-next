@@ -5,12 +5,12 @@ export const SearchResultContainerStyles = css`
   ${({ theme }) => ({
     backgroundColor: theme.backgroundColor || 'transparent',
   })}
-  ${tw`absolute top-0 min-w-full max-w-full rounded-md`}
+  ${tw`absolute top-0 min-w-full max-w-full rounded-md pl-2 pr-1`}
   z-index: -1;
 `;
 
 export const SearchResultBoxStyles = css`
-  ${tw`list-none flex flex-col space-y-4 py-4 px-2`}
+  ${tw`list-none flex flex-col space-y-4 pb-4 pr-1`}
   max-height: 400px;
   overflow-y: auto;
 `;
