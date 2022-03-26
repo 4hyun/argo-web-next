@@ -79,27 +79,30 @@ const SearchResult = ({
       <SearchResultHeader />
       <List
         css={wrapperCss}>
-        {result.map((item, i) => (
-          <Item
-            key={item.item.id}
-            itemCss={itemCss}>
-            <FlexCol
-              css={renderItemIcon && FlexColWithIconStyles}>
-              {keys.map((key, j) => {
-                const text = key
-                  .split('.')
-                  .reduce((value, property) => value[property], item.item);
-                return (
-                  <Line
-                    css={lineStyles[key]}
-                    key={`${item.item.id}-${j}`}>
-                    {text}
-                  </Line>
-                );
-              })}
-            </FlexCol>
-            {renderItemIcon && renderItemIcon()}
-          </Item>
+        {result.map(({ item }, i) => (
+          <a
+            href={`/blog/post/${item.slug}`}
+            key={item.id}>
+            <Item
+              itemCss={itemCss}>
+              <FlexCol
+                css={renderItemIcon && FlexColWithIconStyles}>
+                {keys.map((key, j) => {
+                  const text = key
+                    .split('.')
+                    .reduce((value, property) => value[property], item);
+                  return (
+                    <Line
+                      css={lineStyles[key]}
+                      key={`${item.id}-${j}`}>
+                      {text}
+                    </Line>
+                  );
+                })}
+              </FlexCol>
+              {renderItemIcon && renderItemIcon()}
+            </Item>
+          </a>
         ))}
       </List>
       <SearchResultFooter />
