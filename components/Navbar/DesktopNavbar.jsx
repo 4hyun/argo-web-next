@@ -6,9 +6,11 @@ import Hamburger from './Hamburger';
 import { Link, LogoA } from './Link';
 import Logo from './Logo';
 import SearchResultBase from '@/components/BlogSearchBar/SearchResult';
+import { buildSearchResultBox } from '@/components/BlogSearchBar/utils';
 import { PostsContext } from '@/contexts/Posts';
 import { SearchContext } from '@/contexts/Search';
 import { fuseFactory } from '@/lib/fuse';
+import { ResultStyles } from './styles';
 
 const DektopNavbarContainer = styled.nav`
   @media (min-width: 640px) {
@@ -19,8 +21,9 @@ const DektopNavbarContainer = styled.nav`
   }
   @media (min-width: 1024px) {
     max-width: 1024px;
+
     > :nth-child(2) {
-      ${tw`ml-8`}
+      ${({ showSearch }) => showSearch && tw`ml-8`}
     }
   }
   @media (min-width: 1200px) {
@@ -46,30 +49,22 @@ const fuseOptions = {
   keys: ['title'],
 };
 
-const buildSearchResult = (ResultStyles, searchComponent) => props => {
-  return searchComponent({ css: ResultStyles, ...props });
-};
-
-const ResultStyles = css`
-  ${tw`absolute top-0 list-none`}
-`;
-const SearchResult = buildSearchResult(ResultStyles, SearchResultBase);
+const SearchResultBox = buildSearchResultBox(ResultStyles, SearchResultBase);
 
 const DesktopNavbar = ({ renderLangSelect, toggleMenu, menuOpen }) => {
   const { pathname } = useRouter();
-  const isBlogPage = /^\/(blog|post)/g.test(pathname);
+  const showSearch = /^\/(blog|post)/g.test(pathname);
   const { posts } = useContext(PostsContext);
   const fuse = fuseFactory.createSingleton(posts, fuseOptions);
   useEffect(() => {
     if (posts.length && posts.length !== SearchContext?._docs?.length) {
-      // console.log('>>DEBUG/ searchContext: ', SearchContext);
       fuse.setCollection(posts);
     }
   }, [posts]);
-  // console.log('>>DEBUG/ posts: ', posts);
 
   return (
-    <DektopNavbarContainer>
+    <DektopNavbarContainer
+      showSearch={showSearch}>
       <Link
         href="/">
         <LogoA>
@@ -78,9 +73,9 @@ const DesktopNavbar = ({ renderLangSelect, toggleMenu, menuOpen }) => {
       </Link>
       <SearchContext.Provider
         value={fuse}>
-        {isBlogPage && (
+        {showSearch && (
           <SearchBar
-            renderSearchResult={SearchResult}
+            renderSearchResult={SearchResultBox}
             placeholder="Quick search..."
           />
         )}
