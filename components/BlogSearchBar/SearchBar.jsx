@@ -30,9 +30,10 @@ const SearchButton = styled(Search)`
 
 const SearchBar = ({
   renderSearchResult = () => {},
-  context = {},
+  // context = {},
   ...props
 }) => {
+  const [result, setResult] = useState(null);
   const [focused, setFocused] = useState(null);
   const searchContext = useContext(SearchContext);
   const setIsFocused = v => () => {
@@ -40,9 +41,10 @@ const SearchBar = ({
     setFocused(v);
   };
   const handleInputChange = e => {
-    console.log('handleInputChange()/ e: ', e.target.value);
-    console.log('searchContext', searchContext);
+    // console.log('handleInputChange()/ e: ', e.target.value);
+    // console.log('searchContext', searchContext);
     console.log(searchContext.search(e.target.value));
+    setResult(searchContext.search(e.target.value));
   };
   return (
     <Root>
@@ -56,13 +58,14 @@ const SearchBar = ({
           css={InputStyles}
         />
         {/* TODO: style SearchResult layout to 'fixed', and position align to bottom of SearchBar */}
-        {renderSearchResult()}
+
         <ButtonWrapper
           css={SearchIconWrapperStyles}>
           <SearchButton
             size={22} />
         </ButtonWrapper>
       </FlexRow>
+      {result && renderSearchResult({ result })}
     </Root>
   );
 };
