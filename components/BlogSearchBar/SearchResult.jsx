@@ -1,5 +1,5 @@
 import React from 'react';
-import tw, { styled } from 'twin.macro';
+import tw, { styled, css } from 'twin.macro';
 import { lineStyles } from './styles';
 
 const Container = styled.div`
@@ -17,6 +17,10 @@ const SearchResultFooter = styled.div`
 const List = styled.ul``;
 
 const ItemBase = styled.li`
+  ${tw`flex`}
+`;
+
+const FlexCol = styled.div`
   ${tw`flex flex-col`}
 `;
 
@@ -27,7 +31,6 @@ const Item = props => {
       className={`${hovered ? 'hovered' : ''}`}
       onMouseOver={e => {
         e.stopPropagation();
-        console.log('hovered');
         setHovered(true);
       }}
       onMouseOut={e => {
@@ -48,6 +51,10 @@ const Line = styled.span`
   ${'' /* TODO: decompose Config type to configure Line settings */}
 `;
 
+const FlexColWithIconStyles = css`
+  width: 80%;
+`;
+
 const SearchResult = ({
   result,
   config = {},
@@ -59,9 +66,9 @@ const SearchResult = ({
   /* keys to print */
   keys = [],
   lineStylesConfig = {},
+  renderItemIcon,
   ...props
 }) => {
-  const testRef = React.createRef(null);
   // console.log('>>DEBUG/SearchResult props: ', props);
   // console.log('>>DEBUG/SearchResult result: ', result);
   return (
@@ -74,22 +81,24 @@ const SearchResult = ({
         css={wrapperCss}>
         {result.map((item, i) => (
           <Item
-            itemCss={itemCss}
-            key={item.item.id}>
-            {/* <Line >{item.item.title}</Line>
-            <Line>{item.item.excerpt}</Line> */}
-            {keys.map((key, j) => {
-              const text = key
-                .split('.')
-                .reduce((value, property) => value[property], item.item);
-              return (
-                <Line
-                  css={lineStyles[key]}
-                  key={`${item.item.id}-${j}`}>
-                  {text}
-                </Line>
-              );
-            })}
+            key={item.item.id}
+            itemCss={itemCss}>
+            <FlexCol
+              css={renderItemIcon && FlexColWithIconStyles}>
+              {keys.map((key, j) => {
+                const text = key
+                  .split('.')
+                  .reduce((value, property) => value[property], item.item);
+                return (
+                  <Line
+                    css={lineStyles[key]}
+                    key={`${item.item.id}-${j}`}>
+                    {text}
+                  </Line>
+                );
+              })}
+            </FlexCol>
+            {renderItemIcon && renderItemIcon()}
           </Item>
         ))}
       </List>

@@ -14,7 +14,15 @@ import {
   SearchResultBoxStyles,
   SearchResultItemStyles,
   SearchResultContainerStyles,
+  SearchResultItemLinkIconStyles,
 } from './styles';
+
+import { ExternalLinkAlt } from '@/components/Icons';
+
+const LinkIcon = () => {
+  return <ExternalLinkAlt
+    css={SearchResultItemLinkIconStyles} />;
+};
 
 const DektopNavbarContainer = styled.nav`
   @media (min-width: 640px) {
@@ -63,6 +71,7 @@ const searchResultBoxProps = {
   paddingTop: '50px',
   theme: { backgroundColor: '#001ba8' },
   keys: ['title', 'excerpt'],
+  renderItemIcon: LinkIcon,
 };
 const SearchResultBox = buildSearchResultBox(
   searchResultBoxStylesConfig,

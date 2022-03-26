@@ -1,14 +1,12 @@
 // import * as faBrands from "@styled-icons/fa-brands";
 // import * as faRegular from "@styled-icons/fa-regular";
-import { At } from '@styled-icons/fa-solid/At';
+import { At, Search, ExternalLinkAlt } from '@styled-icons/fa-solid';
 import { Close } from '@styled-icons/zondicons/Close';
 import { Check } from '@styled-icons/boxicons-regular/Check';
 import { UpArrowCircle } from '@styled-icons/boxicons-regular/UpArrowCircle';
 // import { RightTopArrowCircle } from '@styled-icons/boxicons-regular/RightTopArrowCircle';
 import { ArrowLeftCircle } from '@styled-icons/bootstrap/ArrowLeftCircle';
 import { Open as OpenLinkArrow } from '@styled-icons/fluentui-system-regular/Open';
-import { Search } from '@styled-icons/fa-solid/Search';
-// import { Close } from "@styled-icons/material/Close"
 
 export {
   At,
@@ -18,4 +16,5 @@ export {
   ArrowLeftCircle,
   OpenLinkArrow,
   Search,
+  ExternalLinkAlt,
 };

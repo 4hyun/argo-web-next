@@ -17,10 +17,21 @@ export const SearchResultBoxStyles = css`
 
 export const SearchResultItemStyles = css`
   background: #332fe4;
-  ${tw`rounded-sm px-3 py-2`}
+  ${tw`rounded-sm px-3 py-2 justify-between`}
   color: #f2f2f2;
   &.hovered {
     cursor: pointer;
     background: #8686ff;
   }
+`;
+
+export const SearchResultItemLinkIconStyles = css`
+  ${
+    '' /* --size-xl: 22px;
+  width: var(--size-xl);
+  height: var(--size-xl); */
+  }
+  width: 5%;
+  max-width: 18px;
+  height: auto;
 `;
