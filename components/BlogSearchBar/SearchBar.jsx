@@ -11,7 +11,7 @@ import {
 } from './styles';
 import { SearchContext } from '@/contexts/Search';
 const Root = styled.div`
-  ${tw`flex mr-auto items-center my-auto`}
+  ${tw`relative flex mr-auto items-center my-auto`}
 `;
 
 const FlexRow = styled.div`
@@ -65,7 +65,7 @@ const SearchBar = ({
             size={22} />
         </ButtonWrapper>
       </FlexRow>
-      {result && renderSearchResult({ result })}
+      {result != null && !!result.length && renderSearchResult({ result })}
     </Root>
   );
 };

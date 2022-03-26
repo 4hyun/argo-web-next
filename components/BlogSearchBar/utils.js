@@ -11,16 +11,14 @@ export const getInputProps = props => {
   return inputProps;
 };
 
-const searchResultWrapperProps = ['css'];
-export const getSearchResultWrapperProps = props => {
-  let _props = {};
-  for (const k of searchResultWrapperProps) {
-    _props[k] = props[k];
-  }
-  console.log('_props:', _props);
-  return _props;
-};
-
-export const buildSearchResultBox = (wrapperCss, searchComponent) => props => {
-  return searchComponent({ wrapperCss, ...props });
-};
+export const buildSearchResultBox =
+  ({ wrapperCss, itemCss, containerCss }, component, curriedProps) =>
+  props => {
+    return component({
+      wrapperCss,
+      itemCss,
+      containerCss,
+      ...props,
+      ...curriedProps,
+    });
+  };

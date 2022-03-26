@@ -16,3 +16,9 @@ export const InputStyles = css`
   width: 400px;
   ${tw`px-4 focus:outline-none`}
 `;
+
+export const lineStyles = {
+  bold: css`
+    ${tw`font-bold`}
+  `,
+};

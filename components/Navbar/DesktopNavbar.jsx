@@ -1,6 +1,6 @@
 import { useEffect, createContext, useContext } from 'react';
 import { useRouter } from 'next/router';
-import tw, { css, styled } from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 import SearchBar from '@/components/BlogSearchBar/SearchBar';
 import Hamburger from './Hamburger';
 import { Link, LogoA } from './Link';
@@ -10,7 +10,11 @@ import { buildSearchResultBox } from '@/components/BlogSearchBar/utils';
 import { PostsContext } from '@/contexts/Posts';
 import { SearchContext } from '@/contexts/Search';
 import { fuseFactory } from '@/lib/fuse';
-import { ResultStyles } from './styles';
+import {
+  SearchResultBoxStyles,
+  SearchResultItemStyles,
+  SearchResultContainerStyles,
+} from './styles';
 
 const DektopNavbarContainer = styled.nav`
   @media (min-width: 640px) {
@@ -49,7 +53,22 @@ const fuseOptions = {
   keys: ['title'],
 };
 
-const SearchResultBox = buildSearchResultBox(ResultStyles, SearchResultBase);
+const searchResultBoxStylesConfig = {
+  containerCss: SearchResultContainerStyles,
+  wrapperCss: SearchResultBoxStyles,
+  itemCss: SearchResultItemStyles,
+};
+
+const searchResultBoxProps = {
+  paddingTop: '50px',
+  theme: { backgroundColor: '#001ba8' },
+  keys: ['title', 'excerpt'],
+};
+const SearchResultBox = buildSearchResultBox(
+  searchResultBoxStylesConfig,
+  SearchResultBase,
+  searchResultBoxProps,
+);
 
 const DesktopNavbar = ({ renderLangSelect, toggleMenu, menuOpen }) => {
   const { pathname } = useRouter();
