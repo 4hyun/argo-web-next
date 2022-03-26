@@ -5,7 +5,7 @@ export const SearchResultContainerStyles = css`
   ${({ theme }) => ({
     backgroundColor: theme.backgroundColor || 'transparent',
   })}
-  ${tw`absolute top-0  max-w-full rounded-md`}
+  ${tw`absolute top-0 min-w-full max-w-full rounded-md`}
   z-index: -1;
 `;
 

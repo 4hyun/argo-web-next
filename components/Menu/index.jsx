@@ -1,44 +1,44 @@
-import { memo } from "react"
-import { motion } from "framer-motion"
-import styled from "styled-components"
-import tw from "twin.macro"
-import { slide as Menu } from "react-burger-menu"
-import { Close } from "components/Icons"
-import { ELASTIC_MENU_EID } from "configs"
-import { default as navMenuData } from "./data"
-import { logoCircleDarkUrl } from "components/Brand"
+import { memo } from 'react';
+// import { motion } from "framer-motion"
+import styled from 'styled-components';
+import tw from 'twin.macro';
+import { slide as MenuSlideBox } from 'react-burger-menu';
+import { Close } from 'components/Icons';
+import { ELASTIC_MENU_EID } from 'configs';
+import { default as menuData } from './data';
+import { logoCircleDarkUrl } from 'components/Brand';
 
-const SlidingMenu = styled(Menu)`
+const SlidingMenu = styled(MenuSlideBox)`
   ${tw`w-screen! md:(w-3/12)! bg-argo-blue-700`}
-`
+`;
 
 const MenuHeader = styled.div`
   ${tw`flex! w-full justify-end`}
-`
+`;
 
 const LogoCircleDark = memo(styled.div`
   ${tw`w-8 h-8`}
   :after {
     display: block;
-    content: "";
+    content: '';
     padding-bottom: 100%;
   }
   background: center / contain no-repeat url(${logoCircleDarkUrl});
-`)
+`);
 
 const CloseButton = memo(
   styled(Close)`
     ${tw`cursor-pointer text-off-white fill-current my-auto w-6 h-6`}
-  `
-)
+  `,
+);
 
-const NavMenuList = styled.ul`
+const MenuList = styled.ul`
   ${tw`flex! flex-col pt-1`}
-`
+`;
 
-const NavMenuItemWrapper = styled.div`
+const MenuItemWrapper = styled.div`
   ${tw`w-full space-x-4`}
-`
+`;
 
 const A = styled.a`
   @media (min-width: 1024px) {
@@ -51,22 +51,23 @@ const A = styled.a`
     ${tw`my-auto`}
   }
   font-family: Poppins;
-`
+`;
 
-const NavMenu = ({ children, isOpen, onClose }) => {
+const Menu = ({ children, isOpen, onClose }) => {
   return (
     <SlidingMenu
       right
       isOpen={isOpen}
       outerContainerId={ELASTIC_MENU_EID}
-      onClose={onClose}>
+      onClose={onClose}
+    >
       <MenuHeader>
         <CloseButton
           onClick={onClose} />
       </MenuHeader>
       {children}
     </SlidingMenu>
-  )
-}
+  );
+};
 
-export { NavMenu, NavMenuList, A, NavMenuItemWrapper, navMenuData, LogoCircleDark }
+export { Menu, MenuList, A, MenuItemWrapper, menuData, LogoCircleDark };

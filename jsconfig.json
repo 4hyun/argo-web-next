@@ -8,7 +8,8 @@
       "@/configs/*": ["configs/*"],
       "@/contexts/*": ["contexts/*"],
       "@/translations/*": ["translations/*"],
-      "@/lib/*": ["lib/*"]
+      "@/lib/*": ["lib/*"],
+      "@/data/*": ["data/*"]
     }
   },
   "exclude": ["node_modules"]
