@@ -67,6 +67,7 @@ const FlexColWithIconStyles = css`
 
 const SearchResult = ({
   result,
+  resultForceClosed = false,
   config = {},
   containerCss,
   wrapperCss,
@@ -81,7 +82,7 @@ const SearchResult = ({
 }) => {
   // console.log('>>DEBUG/SearchResult props: ', props);
   // console.log('>>DEBUG/SearchResult result: ', result);
-  return (
+  return resultForceClosed ? null : (
     <Container
       paddingTop={paddingTop}
       theme={theme}

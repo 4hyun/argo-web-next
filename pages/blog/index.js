@@ -4,7 +4,6 @@ import { fetchStrapi, resources } from 'lib/api/strapi';
 import { makeResourcePath } from 'lib/utils/resources';
 import { BlogCard, PostList } from 'components/Blog';
 import { PostsContext } from '@/contexts/Posts';
-import useKeyBinding from '@/hooks/useKeyBinding';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -30,7 +29,7 @@ const FlexRow = styled.div`
 
 const BlogMainPage = ({ posts }) => {
   const { setPosts } = useContext(PostsContext);
-  useKeyBinding();
+
   /* use searchContext methods to load post data */
   setPosts(posts);
 

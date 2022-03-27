@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useContext, useState, useCallback } from 'react';
 import Input from './Input';
 import styled from 'styled-components';
 import tw from 'twin.macro';
@@ -10,6 +10,7 @@ import {
   InputStyles,
 } from './styles';
 import { SearchContext } from '@/contexts/Search';
+import useKeyBinding from '@/hooks/useKeyBinding';
 const Root = styled.div`
   ${tw`relative flex mr-auto items-center my-auto`}
 `;
@@ -30,22 +31,30 @@ const SearchButton = styled(Search)`
 
 const SearchBar = ({
   renderSearchResult = () => {},
+  useKeyBindingConfig = {},
   // context = {},
   ...props
 }) => {
   const [result, setResult] = useState(null);
+  const [resultForceClosed, setResultForceClosed] = useState(false);
   const [focused, setFocused] = useState(null);
   const searchContext = useContext(SearchContext);
   const setIsFocused = v => () => {
     if (focused === v) return;
     setFocused(v);
   };
+
+  const closeResultBox = useCallback(() => setResultForceClosed(true), []);
+  const resetResultForceClosed = useCallback(
+    () => setResultForceClosed(false),
+    [],
+  );
   const handleInputChange = e => {
-    // console.log('handleInputChange()/ e: ', e.target.value);
-    // console.log('searchContext', searchContext);
-    // console.log(searchContext.search(e.target.value));
     setResult(searchContext.search(e.target.value));
+    resetResultForceClosed();
   };
+  useKeyBinding({ Escape: { handler: closeResultBox } });
+
   return (
     <Root>
       <FlexRow
@@ -65,7 +74,10 @@ const SearchBar = ({
             size={22} />
         </ButtonWrapper>
       </FlexRow>
-      {result != null && !!result.length && renderSearchResult({ result })}
+      {result != null &&
+        !!result.length &&
+        resultForceClosed != true &&
+        renderSearchResult({ result, resultForceClosed })}
     </Root>
   );
 };
