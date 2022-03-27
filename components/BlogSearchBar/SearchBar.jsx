@@ -2,7 +2,7 @@ import { useEffect, useContext, useState, useCallback } from 'react';
 import Input from './Input';
 import styled from 'styled-components';
 import tw from 'twin.macro';
-import { Search } from '@/components/icons';
+import { Search } from '@/components/Icons';
 import { getInputProps } from './utils';
 import {
   SearchIconStyles,
