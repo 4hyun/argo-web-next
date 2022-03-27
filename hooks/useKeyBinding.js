@@ -19,14 +19,7 @@ const useKeyBinding = (config = defaultConfig) => {
       '>>DEBUG keyDownHandler() pressedKeyString: ',
       pressedKeyString,
     ); */
-    try {
-      config[pressedKeyString].handler();
-    } catch (error) {
-      console.warn(
-        'useKeyBinding<hook> Error: error during pressedKeyString.handler().\n' +
-          error.msg,
-      );
-    }
+    config[pressedKeyString]?.handler();
   };
 
   const throttledKeyDownHandler = throttle(keydownHandler, THROTTLE_WAIT);
