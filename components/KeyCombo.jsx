@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 `;
 
 const KeyComboIcon = ({ keyString, wrapperCss, ...props }) => {
-  console.log('>>DEBUG keyString: ', keyString);
+  // console.log('>>DEBUG keyString: ', keyString);
   const Cmp = keyComboIcon[keyString];
   if (!Cmp) return;
   return (

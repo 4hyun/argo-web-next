@@ -7,7 +7,7 @@ export const getInputProps = props => {
       inputProps[prop] = props[prop];
     }
   }
-  console.log('>>getInputProps()/inputProps: ', inputProps);
+  // console.log('>>getInputProps()/inputProps: ', inputProps);
   return inputProps;
 };
 

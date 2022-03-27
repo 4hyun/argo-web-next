@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
   };
 
   React.useEffect(() => {
-    console.log('>>DEBUG/Layout rendered...');
+    // console.log('>>DEBUG/Layout rendered...');
     const index = supportedLocaleEntries.findIndex(
       ([localeId, ,]) => localeId === DEFAULT_LOCALE,
     );

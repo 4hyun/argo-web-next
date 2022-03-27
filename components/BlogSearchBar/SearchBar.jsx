@@ -43,7 +43,7 @@ const SearchBar = ({
   const handleInputChange = e => {
     // console.log('handleInputChange()/ e: ', e.target.value);
     // console.log('searchContext', searchContext);
-    console.log(searchContext.search(e.target.value));
+    // console.log(searchContext.search(e.target.value));
     setResult(searchContext.search(e.target.value));
   };
   return (
