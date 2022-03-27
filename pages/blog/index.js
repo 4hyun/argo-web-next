@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import tw, { styled } from 'twin.macro';
-import { fetchStrapi, resources } from 'lib/api/strapi';
+import { fetchStrapi } from 'lib/api/strapi';
 import { makeResourcePath } from 'lib/utils/resources';
-import { BlogCard, PostList } from 'components/Blog';
+import { BlogCard, PostList } from '@/components/Blog';
 import { PostsContext } from '@/contexts/Posts';
 
 const Container = styled.div`
@@ -22,10 +22,10 @@ const authorInfoConfig = {
   showDate: true,
 };
 
-const FlexRow = styled.div`
-  height: 100px;
-  ${tw`flex w-full items-center`}
-`;
+// const FlexRow = styled.div`
+//   height: 100px;
+//   ${tw`flex w-full items-center`}
+// `;
 
 const BlogMainPage = ({ posts }) => {
   const { setPosts } = useContext(PostsContext);
