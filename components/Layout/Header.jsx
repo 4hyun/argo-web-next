@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import tw from 'twin.macro';
 import Navbar from 'components/Navbar';
-import { Menu, A, MenuList, menuData } from '../Menu';
+import { Menu, A, MenuList, menuData } from '@/components/Menu';
 import { OpenLinkArrow } from 'components/Icons';
 import { ELASTIC_MENU_EID } from 'configs';
 

@@ -1,5 +1,5 @@
-import tw from "twin.macro"
+import tw from 'twin.macro';
 
-const A = tw.a`w-full xl:w-max`
+const A = tw.a`w-full`;
 
-export default A
+export default A;
