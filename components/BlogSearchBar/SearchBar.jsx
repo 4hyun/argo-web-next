@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState, useCallback } from 'react';
+import { useContext, useState, useCallback } from 'react';
 import Input from './Input';
 import styled from 'styled-components';
 import tw from 'twin.macro';
