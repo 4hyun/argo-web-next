@@ -1,10 +1,12 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import tw, { css, styled } from 'twin.macro';
 import { fetchStrapi } from 'lib/api/strapi';
 import { makeResourcePath } from 'lib/utils/resources';
 import { BlogCard, PostList } from '@/components/Blog';
 import { PostsContext } from '@/contexts/Posts';
 import Pagination from '@/components/Pagination';
+import { usePageState } from '@/hooks/Pagination';
+import chunk from 'lodash/chunk';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -29,16 +31,20 @@ const authorInfoConfig = {
 // `;
 
 const PaginationLayoutStyles = css`
-  ${tw`mt-4`}
+  ${tw`mt-6`}
 `;
 
 /* TODO: refactor Pagination to use a Theme context for Top-level and
 all of its sub-components */
+const PAGE_SIZE = 10;
 const BlogMainPage = ({ posts }) => {
+  const [page, setPage] = usePageState();
   const { setPosts } = useContext(PostsContext);
-
-  /* use searchContext methods to load post data */
   setPosts(posts);
+  /* TODO: chunk posts */
+  const chunkedPosts = useMemo(() => chunk(posts, PAGE_SIZE), [posts]);
+  const updatePagination = (e, v) => setPage(v);
+  /* use searchContext methods to load post data */
 
   return (
     <Container>
@@ -52,7 +58,7 @@ const BlogMainPage = ({ posts }) => {
           <PostList
             tw="space-y-6"
             col>
-            {posts.map(blogProps => (
+            {chunkedPosts[page].map(blogProps => (
               <BlogCard
                 {...blogProps}
                 key={blogProps.id}
@@ -63,8 +69,11 @@ const BlogMainPage = ({ posts }) => {
         )}
       </ContentWrapper>
       <Pagination
+        page={page}
         count={10}
-        css={PaginationLayoutStyles} />
+        css={PaginationLayoutStyles}
+        onChange={updatePagination}
+      />
     </Container>
   );
 };
