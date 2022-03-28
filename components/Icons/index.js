@@ -7,6 +7,12 @@ import { UpArrowCircle } from '@styled-icons/boxicons-regular/UpArrowCircle';
 // import { RightTopArrowCircle } from '@styled-icons/boxicons-regular/RightTopArrowCircle';
 import { ArrowLeftCircle } from '@styled-icons/bootstrap/ArrowLeftCircle';
 import { Open as OpenLinkArrow } from '@styled-icons/fluentui-system-regular/Open';
+import {
+  FirstPage,
+  LastPage,
+  NavigateNext,
+  NavigateBefore,
+} from '@styled-icons/material';
 
 export {
   At,
@@ -17,4 +23,8 @@ export {
   OpenLinkArrow,
   Search,
   ExternalLinkAlt,
+  FirstPage,
+  LastPage,
+  NavigateNext,
+  NavigateBefore,
 };

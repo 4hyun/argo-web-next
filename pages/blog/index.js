@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import tw, { styled } from 'twin.macro';
+import tw, { css, styled } from 'twin.macro';
 import { fetchStrapi } from 'lib/api/strapi';
 import { makeResourcePath } from 'lib/utils/resources';
 import { BlogCard, PostList } from '@/components/Blog';
 import { PostsContext } from '@/contexts/Posts';
+import Pagination from '@/components/Pagination';
 
 const Container = styled.div`
   max-width: 1200px;
@@ -27,6 +28,12 @@ const authorInfoConfig = {
 //   ${tw`flex w-full items-center`}
 // `;
 
+const PaginationLayoutStyles = css`
+  ${tw`mt-4`}
+`;
+
+/* TODO: refactor Pagination to use a Theme context for Top-level and
+all of its sub-components */
 const BlogMainPage = ({ posts }) => {
   const { setPosts } = useContext(PostsContext);
 
@@ -55,6 +62,9 @@ const BlogMainPage = ({ posts }) => {
           </PostList>
         )}
       </ContentWrapper>
+      <Pagination
+        count={10}
+        css={PaginationLayoutStyles} />
     </Container>
   );
 };
