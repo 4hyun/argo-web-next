@@ -1,4 +1,5 @@
-import tw, { styled, css } from 'styled-components';
+import { useRef } from 'react';
+import tw, { styled, css } from 'twin.macro';
 import { Close } from '@/components/Icons';
 
 const RootDefaultStyles = css`
@@ -6,14 +7,17 @@ const RootDefaultStyles = css`
 `;
 
 const Root = styled.div`
-  ${({ css }) => !css && RootDefaultStyles}
+  ${({ styleDefault }) => !styleDefault && RootDefaultStyles}
 `;
 const Label = styled.span``;
 const CloseButtonStyles = css``;
 
-const Chip = ({ label = '', onDelete }) => {
+const Chip = ({ label = '', onDelete, as, chipStyles, ...other }) => {
   return (
-    <Root>
+    <Root
+      as={as || null}
+      css={chipStyles}
+      styleDefault={!!chipStyles}>
       <Label>{label}</Label>
       {onDelete && <Close
         css={CloseButtonStyles}
