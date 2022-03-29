@@ -1,10 +1,10 @@
-import { useEffect, useContext, useMemo, useState, useCallback } from 'react';
+import { useEffect, useContext, useMemo, useCallback } from 'react';
 import tw, { css, styled } from 'twin.macro';
 import { fetchResource } from '@/lib/api';
 import { fetchStrapi } from 'lib/api/strapi';
 import { makeResourcePath } from 'lib/utils/resources';
 import { H1 } from '@/components/Page';
-import Tags from '@/components/Tags';
+import Tags, { useTagSelect } from '@/components/Tags';
 import Chip from '@/components/Chip';
 import { BlogCard, PostList } from '@/components/Blog';
 import { PostsContext } from '@/contexts/Posts';
@@ -48,43 +48,11 @@ const PaginationLayoutStyles = css`
 const ChipSelectedStyles = css`
   ${({ selected }) => selected && tw`ring ring-4 bg-argo-blue-400`}
 `;
-const useTagSelect = () => {
-  const [tags, setTag] = useState({});
-  const handleTagToggle = (e, v) => {
-    // console.log('handleTagToggle()');
-    // console.log('>>DEBUG/useTag/ e: ', e);
-    // console.log('>>DEBUG/useTag/ e.currentTarget: ', e.currentTarget);
-    // console.log('>>DEBUG/useTag/ e.target: ', e.target);
-    const { tagId, tagName } = e.target.dataset;
-    const addTag = () =>
-      setTag(prevTags => ({ ...prevTags, ...{ [tagId]: tagName } }));
-
-    const removeTag = () =>
-      setTag(prevTags => ({ ...prevTags, ...{ [tagId]: null } }));
-    // console.log('>>DEBUG/useTag/ e.target.dataset.tagId: ', tagId);
-    // console.log('>>DEBUG/useTag/ e.target.dataset.tagName: ', tagName);
-    if (!tagId) return;
-    if (tagId in tags) {
-      if (tags[tagId] == null) {
-        addTag();
-        return;
-      }
-      // console.log('>>DEBUG/useTag before setTag');
-      removeTag();
-      return;
-      // console.log('>>DEBUG/useTag tags: ', tags);
-    }
-    addTag();
-    // console.log('>>DEBUG/useTag tags: ', tags);
-    // console.log('>>DEBUG/useTag/ v: ', v);
-  };
-  return [tags, handleTagToggle];
-};
 
 /* TODO: refactor Pagination to use a Theme context for Top-level and
 all of its sub-components */
 const PAGE_SIZE = 10;
-const DEFAULT_PAGE = 2;
+const DEFAULT_PAGE = 1;
 const BlogMainPage = ({ posts, tags }) => {
   // const log = useLogger('>>DEBUG/<BlogMainPage>');
   /* NOTE: page-to-show-index should be '-1' of `page`
@@ -98,7 +66,27 @@ const BlogMainPage = ({ posts, tags }) => {
   }, [posts, setPosts]);
 
   /* TODO: chunk posts */
-  const chunkedPosts = useMemo(() => chunk(posts, PAGE_SIZE), [posts]);
+  const chunkedPosts = useMemo(() => {
+    let filteredPosts = [];
+    if (selectedTags) {
+      filteredPosts = posts.filter(post => {
+        // console.log(
+        //   '>>DEBUG inside filter',
+        //   post.tags.some(postTag => postTag.name === selectedTags[postTag.id]),
+        // );
+        return post.tags.some(
+          postTag => postTag.name === selectedTags[postTag.id],
+        );
+      });
+
+      // console.log('>>DEBUG filtered Posts selectedTags: ', selectedTags);
+      // console.log('>>DEBUG filtered Posts: ', filteredPosts);
+    }
+    // TODO: optimize logic for case when,
+    // all tags are selected then deselected.
+    // Because then, selectedTags will have keys of all tagId with value of null which will still filter everything for no reason.
+    return chunk(filteredPosts.length ? filteredPosts : posts, PAGE_SIZE);
+  }, [tags, posts, selectedTags]);
   const updateResultPage = (_, v) => setPageValue(v);
   // useEffect(() => {
   //   log('chunkedPosts.length: ', chunkedPosts.length);
@@ -115,13 +103,14 @@ const BlogMainPage = ({ posts, tags }) => {
           <PostList
             tw="space-y-6"
             col>
-            {chunkedPosts[page - 1].map(blogProps => (
-              <BlogCard
-                {...blogProps}
-                key={blogProps.id}
-                authorInfoConfig={authorInfoConfig}
-              />
-            ))}
+            {chunkedPosts.length > 0 &&
+              chunkedPosts[page - 1].map(blogProps => (
+                <BlogCard
+                  {...blogProps}
+                  key={blogProps.id}
+                  authorInfoConfig={authorInfoConfig}
+                />
+              ))}
           </PostList>
         )}
         <Pagination
@@ -141,7 +130,7 @@ const BlogMainPage = ({ posts, tags }) => {
         >
           {tags.map(tag => (
             <Chip
-              selected={!!selectedTags[tag.id]}
+              selected={selectedTags && !!selectedTags[tag.id]}
               selectedStyles={ChipSelectedStyles}
               chipStyles={ChipBaseStyles}
               key={tag.id}
