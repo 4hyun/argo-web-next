@@ -12,11 +12,9 @@ const usePagination = (props = {}) => {
     siblingCount = 1,
   } = props;
 
-  const [page, setPageValue] = usePageState({ defaultPage });
+  const [page, setPageValue] = usePageState({ pageProp, defaultPage });
 
   const handleClick = (event, value) => {
-    /* TODO: remove logger */
-    console.log('>>DEBUG setPageValue()<hook:setState> value: ', value);
     if (!pageProp) {
       setPageValue(value);
     }

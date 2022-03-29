@@ -1,4 +1,4 @@
-import { useState, useContext, useMemo, useEffect } from 'react';
+import { useEffect, useContext, useMemo } from 'react';
 import tw, { css, styled } from 'twin.macro';
 import { fetchStrapi } from 'lib/api/strapi';
 import { makeResourcePath } from 'lib/utils/resources';
@@ -6,6 +6,7 @@ import { BlogCard, PostList } from '@/components/Blog';
 import { PostsContext } from '@/contexts/Posts';
 import Pagination from '@/components/Pagination';
 import { usePageState } from '@/hooks/Pagination';
+// import useLogger from '@/hooks/useLogger';
 import chunk from 'lodash/chunk';
 
 const Container = styled.div`
@@ -39,31 +40,34 @@ all of its sub-components */
 const PAGE_SIZE = 10;
 const DEFAULT_PAGE = 2;
 const BlogMainPage = ({ posts }) => {
-  const [resultPage, setResultPage] = useState(DEFAULT_PAGE);
+  // const log = useLogger('>>DEBUG/<BlogMainPage>');
+  /* NOTE: page-to-show-index should be '-1' of `page`
+  because chunkedPosts start index from 0 and
+ */
+  const [page, setPageValue] = usePageState({ defaultPage: DEFAULT_PAGE });
   const { setPosts } = useContext(PostsContext);
-  setPosts(posts);
+  useEffect(() => {
+    setPosts(posts);
+  }, [posts, setPosts]);
+
   /* TODO: chunk posts */
   const chunkedPosts = useMemo(() => chunk(posts, PAGE_SIZE), [posts]);
-  const updateResultPage = (e, v) => setResultPage(v);
-  useEffect(() => {
-    console.log('>>DEBUG/ chunkedPosts.length: ', chunkedPosts.length);
-    console.log('>>DEBUG/ chunkedPosts: ', chunkedPosts);
-  }, []);
+  const updateResultPage = (_, v) => setPageValue(v);
+  // useEffect(() => {
+  //   log('chunkedPosts.length: ', chunkedPosts.length);
+  //   log('chunkedPosts: ', chunkedPosts);
+  // }, []);
   /* use searchContext methods to load post data */
 
   return (
     <Container>
-      {/* <FlexRow>
-        <SearchBar
-          placeholder="Quick search..." />
-      </FlexRow> */}
       <PageHeading>Blog</PageHeading>
       <ContentWrapper>
         {posts && (
           <PostList
             tw="space-y-6"
             col>
-            {chunkedPosts[resultPage - 1].map(blogProps => (
+            {chunkedPosts[page - 1].map(blogProps => (
               <BlogCard
                 {...blogProps}
                 key={blogProps.id}
