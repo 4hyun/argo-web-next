@@ -2,6 +2,8 @@ import { useEffect, useContext, useMemo } from 'react';
 import tw, { css, styled } from 'twin.macro';
 import { fetchStrapi } from 'lib/api/strapi';
 import { makeResourcePath } from 'lib/utils/resources';
+import { H1 } from '@/components/Page';
+import Tags from '@/components/Tags';
 import { BlogCard, PostList } from '@/components/Blog';
 import { PostsContext } from '@/contexts/Posts';
 import Pagination from '@/components/Pagination';
@@ -16,10 +18,6 @@ const Container = styled.div`
 
 const ContentWrapper = styled.div`
   ${tw`container mx-auto mt-8`}
-`;
-
-const PageHeading = styled.h1`
-  ${tw`container mx-auto text-3xl font-black`}
 `;
 
 const authorInfoConfig = {
@@ -61,8 +59,8 @@ const BlogMainPage = ({ posts }) => {
 
   return (
     <Container>
-      <PageHeading>Blog</PageHeading>
       <ContentWrapper>
+        <H1>Blog</H1>
         {posts && (
           <PostList
             tw="space-y-6"
@@ -76,13 +74,17 @@ const BlogMainPage = ({ posts }) => {
             ))}
           </PostList>
         )}
+        <Pagination
+          count={chunkedPosts.length}
+          defaultPage={DEFAULT_PAGE}
+          css={PaginationLayoutStyles}
+          onChange={updateResultPage}
+        />
       </ContentWrapper>
-      <Pagination
-        count={chunkedPosts.length}
-        defaultPage={DEFAULT_PAGE}
-        css={PaginationLayoutStyles}
-        onChange={updateResultPage}
-      />
+      <ContentWrapper>
+        <Tags
+          header={{}} />
+      </ContentWrapper>
     </Container>
   );
 };
