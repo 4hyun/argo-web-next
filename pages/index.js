@@ -13,8 +13,7 @@ import WaveAnimBg from '@/components/WaveAnimBg';
 import { delay } from 'lib/delay';
 import { useTranslationsContext } from 'contexts/Translations';
 import PriceInfoList from 'components/PriceInfoList';
-import { PostList, BlogCard } from 'components/Blog';
-import HomeBlogTags from 'containers/HomeBlogTags/index';
+import { BlogCard } from 'components/Blog';
 /* lib */
 import { fetchResource } from 'lib/api';
 /* styles */
