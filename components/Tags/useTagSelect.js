@@ -9,21 +9,23 @@ const useTagSelect = () => {
     // console.log('>>DEBUG/useTag/ e.target: ', e.target);
     const { tagId, tagName } = e.target.dataset;
     if (!tagId) {
-      console
-        .warn([
+      console.warn(
+        [
           `useTagSelect() hook requires tag-element targets to have "data-tag-id" and "data-tag-name" attributes set.`,
           `Aborting because "data-tag-id" is not set.`,
-        ] .join('\n');)
-       
+        ].join('\n'),
+      );
+
       return;
     }
     if (!tagName) {
-      console
-        .warn([
+      console.warn(
+        [
           `useTagSelect() hook requires tag-element targets to have "data-tag-id" and "data-tag-name" attributes set.`,
           `Aborting because "data-tag-name" is not set.`,
-        ].join('\n');)
-        
+        ].join('\n'),
+      );
+
       return;
     }
     const addTag = () =>
