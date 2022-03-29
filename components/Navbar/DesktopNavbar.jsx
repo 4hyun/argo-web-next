@@ -15,6 +15,7 @@ import {
   SearchResultItemStyles,
   SearchResultContainerStyles,
   SearchResultItemLinkIconStyles,
+  SearchBarRootStyles,
 } from './styles';
 
 import { ExternalLinkAlt } from '@/components/Icons';
@@ -103,6 +104,7 @@ const DesktopNavbar = ({ renderLangSelect, toggleMenu, menuOpen }) => {
         value={fuse}>
         {showSearch && (
           <SearchBar
+            rootStyles={SearchBarRootStyles}
             renderSearchResult={SearchResultBox}
             placeholder="Quick search..."
           />

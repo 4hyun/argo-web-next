@@ -9,6 +9,12 @@ export const SearchResultContainerStyles = css`
   z-index: -1;
 `;
 
+export const SearchBarRootStyles = css`
+  @media (max-width: 1024px) {
+    display: none;
+  }
+`;
+
 export const SearchResultBoxStyles = css`
   ${tw`list-none flex flex-col space-y-4 pb-4 pr-1`}
   max-height: 400px;

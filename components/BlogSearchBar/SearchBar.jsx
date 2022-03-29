@@ -32,6 +32,7 @@ const SearchButton = styled(Search)`
 const SearchBar = ({
   renderSearchResult = () => {},
   useKeyBindingConfig = {},
+  rootStyles,
   // context = {},
   ...props
 }) => {
@@ -56,7 +57,8 @@ const SearchBar = ({
   useKeyBinding({ Escape: { handler: closeResultBox } });
 
   return (
-    <Root>
+    <Root
+      css={rootStyles}>
       <FlexRow
         focused={focused}>
         <Input
