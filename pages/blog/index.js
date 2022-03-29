@@ -1,4 +1,4 @@
-import { useEffect, useContext, useMemo } from 'react';
+import { useEffect, useContext, useMemo, useState, useCallback } from 'react';
 import tw, { css, styled } from 'twin.macro';
 import { fetchResource } from '@/lib/api';
 import { fetchStrapi } from 'lib/api/strapi';
@@ -29,8 +29,8 @@ const RightContentWrapperStyles = css`
 const TagListStyles = css`
   ${tw`flex flex-wrap gap-x-3 gap-y-4`}
 `;
-const ChipStyles = css`
-  ${tw`bg-argo-blue-400 text-white px-4 pt-1 pb-1.5 rounded-full hover:cursor-pointer`}
+const ChipBaseStyles = css`
+  ${tw`bg-argo-blue-50 text-white px-4 pt-1 pb-1.5 rounded-full hover:cursor-pointer`}
 `;
 
 const ContentWrapper = styled.div`
@@ -45,6 +45,42 @@ const PaginationLayoutStyles = css`
   ${tw`mt-6`}
 `;
 
+const ChipSelectedStyles = css`
+  ${({ selected }) => selected && tw`ring ring-4 bg-argo-blue-400`}
+`;
+const useTagSelect = () => {
+  const [tags, setTag] = useState({});
+  const handleTagToggle = (e, v) => {
+    // console.log('handleTagToggle()');
+    // console.log('>>DEBUG/useTag/ e: ', e);
+    // console.log('>>DEBUG/useTag/ e.currentTarget: ', e.currentTarget);
+    // console.log('>>DEBUG/useTag/ e.target: ', e.target);
+    const { tagId, tagName } = e.target.dataset;
+    const addTag = () =>
+      setTag(prevTags => ({ ...prevTags, ...{ [tagId]: tagName } }));
+
+    const removeTag = () =>
+      setTag(prevTags => ({ ...prevTags, ...{ [tagId]: null } }));
+    // console.log('>>DEBUG/useTag/ e.target.dataset.tagId: ', tagId);
+    // console.log('>>DEBUG/useTag/ e.target.dataset.tagName: ', tagName);
+    if (!tagId) return;
+    if (tagId in tags) {
+      if (tags[tagId] == null) {
+        addTag();
+        return;
+      }
+      // console.log('>>DEBUG/useTag before setTag');
+      removeTag();
+      return;
+      // console.log('>>DEBUG/useTag tags: ', tags);
+    }
+    addTag();
+    // console.log('>>DEBUG/useTag tags: ', tags);
+    // console.log('>>DEBUG/useTag/ v: ', v);
+  };
+  return [tags, handleTagToggle];
+};
+
 /* TODO: refactor Pagination to use a Theme context for Top-level and
 all of its sub-components */
 const PAGE_SIZE = 10;
@@ -56,6 +92,7 @@ const BlogMainPage = ({ posts, tags }) => {
  */
   const [page, setPageValue] = usePageState({ defaultPage: DEFAULT_PAGE });
   const { setPosts } = useContext(PostsContext);
+  const [selectedTags, handleTagToggle] = useTagSelect();
   useEffect(() => {
     setPosts(posts);
   }, [posts, setPosts]);
@@ -99,12 +136,19 @@ const BlogMainPage = ({ posts, tags }) => {
         <Tags
           heading="Tags"
           headingAs="h1"
-          listStyles={TagListStyles}>
+          listStyles={TagListStyles}
+          handleTagToggle={handleTagToggle}
+        >
           {tags.map(tag => (
             <Chip
-              chipStyles={ChipStyles}
+              selected={!!selectedTags[tag.id]}
+              selectedStyles={ChipSelectedStyles}
+              chipStyles={ChipBaseStyles}
               key={tag.id}
-              label={tag.name} />
+              label={tag.name}
+              data-tag-id={tag.id}
+              data-tag-name={tag.name}
+            />
           ))}
         </Tags>
       </ContentWrapper>

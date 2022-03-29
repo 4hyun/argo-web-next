@@ -9,19 +9,33 @@ const RootDefaultStyles = css`
 const Root = styled.div`
   ${({ styleDefault }) => !styleDefault && RootDefaultStyles}
 `;
-const Label = styled.span``;
+const Label = styled.span`
+  ${tw`select-none`}
+`;
 const CloseButtonStyles = css``;
 
-const Chip = ({ label = '', onDelete, as, chipStyles, ...other }) => {
+const Chip = ({
+  label = '',
+  onDelete,
+  as,
+  chipStyles,
+  selectedStyles,
+  selected,
+  ...other
+}) => {
   return (
     <Root
       as={as || null}
-      css={chipStyles}
-      styleDefault={!!chipStyles}>
-      <Label>{label}</Label>
+      css={[chipStyles, selectedStyles]}
+      styleDefault={!!chipStyles}
+      selected={selected}
+      {...other}
+    >
+      <Label
+        {...other}>{label}</Label>
       {onDelete && <Close
         css={CloseButtonStyles}
-        onClick={onDelet} />}
+        onClick={onDelete} />}
     </Root>
   );
 };

@@ -26,11 +26,20 @@ const TagList = styled.ul`
   ${({ styleDefault }) => !styleDefault && TagListDefaultStyles}
 `;
 
-const Tag = ({ containerStyles, listStyles, heading, headingAs, children }) => {
+const Tags = ({
+  children,
+  containerStyles,
+  heading,
+  headingAs,
+  listStyles,
+  handleTagToggle = () => {},
+}) => {
   return (
     <Container
       css={containerStyles}
-      styleDefault={!!containerStyles}>
+      styleDefault={!!containerStyles}
+      onClick={handleTagToggle}
+    >
       {heading && renderHeader({ heading, headingAs })}
       <TagList
         css={listStyles}
@@ -41,4 +50,4 @@ const Tag = ({ containerStyles, listStyles, heading, headingAs, children }) => {
   );
 };
 
-export default Tag;
+export default Tags;
