@@ -13,8 +13,8 @@ const useTagSelect = () => {
         .warn([
           `useTagSelect() hook requires tag-element targets to have "data-tag-id" and "data-tag-name" attributes set.`,
           `Aborting because "data-tag-id" is not set.`,
-        ])
-        .join('\n');
+        ] .join('\n');)
+       
       return;
     }
     if (!tagName) {
@@ -22,8 +22,8 @@ const useTagSelect = () => {
         .warn([
           `useTagSelect() hook requires tag-element targets to have "data-tag-id" and "data-tag-name" attributes set.`,
           `Aborting because "data-tag-name" is not set.`,
-        ])
-        .join('\n');
+        ].join('\n');)
+        
       return;
     }
     const addTag = () =>
