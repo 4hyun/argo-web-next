@@ -29,8 +29,9 @@ const RightContentWrapperStyles = css`
 const TagListStyles = css`
   ${tw`flex flex-wrap gap-x-3 gap-y-4`}
 `;
+
 const ChipBaseStyles = css`
-  ${tw`bg-argo-blue-50 text-white px-4 pt-1 pb-1.5 rounded-full hover:cursor-pointer`}
+  ${tw`bg-argo-blue-50 text-white px-4 pt-1 pb-1.5 rounded-full hover:(cursor-pointer ring ring-4)`}
 `;
 
 const ContentWrapper = styled.div`
