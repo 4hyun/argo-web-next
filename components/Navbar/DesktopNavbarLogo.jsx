@@ -9,7 +9,7 @@ import { DefaultStyles as PageTitleDefaultStyles } from '@/components/Page/H1';
 const PageTitle = styled.span`
   ${PageTitleDefaultStyles}
   ${tw`ml-2`}
-    display: flex;
+  display: flex;
   align-items: center;
   padding-bottom: 7px;
 `;

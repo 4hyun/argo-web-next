@@ -85,7 +85,8 @@ const BlogMainPage = ({ posts, tags }) => {
     // TODO: optimize logic for case when,
     // all tags are selected then deselected.
     // Because then, selectedTags will have keys of all tagId with value of null which will still filter everything for no reason.
-    return chunk(filteredPosts.length ? filteredPosts : posts, PAGE_SIZE);
+    const count = filteredPosts.length;
+    return { posts: chunk(count ? filteredPosts : posts, PAGE_SIZE), count };
   }, [tags, posts, selectedTags]);
   const updateResultPage = (_, v) => setPageValue(v);
   // useEffect(() => {
@@ -98,13 +99,13 @@ const BlogMainPage = ({ posts, tags }) => {
     <Container>
       <ContentWrapper
         css={LeftContentWrapperStyles}>
-        <H1>Blog</H1>
+        <H1>{`검색 결과 - ${chunkedPosts.count}/${posts.length}`}</H1>
         {posts && (
           <PostList
             tw="space-y-6"
             col>
-            {chunkedPosts.length > 0 &&
-              chunkedPosts[page - 1].map(blogProps => (
+            {chunkedPosts.posts &&
+              chunkedPosts.posts[page - 1].map(blogProps => (
                 <BlogCard
                   {...blogProps}
                   key={blogProps.id}
@@ -114,7 +115,7 @@ const BlogMainPage = ({ posts, tags }) => {
           </PostList>
         )}
         <Pagination
-          count={chunkedPosts.length}
+          count={chunkedPosts.count}
           defaultPage={DEFAULT_PAGE}
           css={PaginationLayoutStyles}
           onChange={updateResultPage}
