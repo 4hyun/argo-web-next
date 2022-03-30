@@ -60,7 +60,6 @@ const useTagSelect = () => {
     // console.log('>>DEBUG/useTag/ e.target.dataset.tagName: ', tagName);
     // console.log('>>DEBUG/useTag/tags: ', tags);
     if (tagId in (state ? state.tags : {})) {
-      console.log('>>DEBUG tags.tags: ', state.tags);
       if (state.tags[tagId] == null) {
         addTag();
         return;

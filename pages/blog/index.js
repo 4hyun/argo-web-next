@@ -65,11 +65,9 @@ const BlogMainPage = ({ posts, tags: tagsProp }) => {
 
   const updateResultPage = (_, v) => setPageValue(v);
   useEffect(() => {
-    console.log('>>DEBUG selectedTags changed');
     setPageValue(1);
   }, [selectedTags]);
   useEffect(() => {
-    console.log('>>DEBUG blogpage useEffect()');
     setPosts(posts);
   }, [posts, setPosts]);
 
