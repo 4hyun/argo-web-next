@@ -62,46 +62,56 @@ const BlogMainPage = ({ posts, tags: tagsProp }) => {
   const [page, setPageValue] = usePageState({ defaultPage: DEFAULT_PAGE });
   const { setPosts } = useContext(PostsContext);
   const [selectedTags, handleTagToggle] = useTagSelect();
+
+  const updateResultPage = (_, v) => setPageValue(v);
   useEffect(() => {
+    console.log('>>DEBUG selectedTags changed');
+    setPageValue(1);
+  }, [selectedTags]);
+  useEffect(() => {
+    console.log('>>DEBUG blogpage useEffect()');
     setPosts(posts);
   }, [posts, setPosts]);
 
   /* TODO: chunk posts */
-  const chunkedPosts = useMemo(() => {
+  // const chunkedPosts = useMemo(() => {
+  //   let filteredPosts = [];
+  //   if (selectedTags) {
+  //     filteredPosts = posts.filter(post => {
+  //       return post.tags.some(
+  //         postTag => postTag.name === selectedTags.tags[postTag.id],
+  //       );
+  //     });
+  //   }
+  //   // TODO: optimize logic for case when,
+  //   // all tags are selected then deselected.
+  //   // Because then, selectedTags.tags will have keys of all tagId with value of null which will still filter everything for no reason.
+  //   const count = filteredPosts.length;
+  //   return { posts: chunk(count ? filteredPosts : posts, PAGE_SIZE), count };
+  // }, [posts, selectedTags]);
+  const getChunkedPosts = () => {
     let filteredPosts = [];
     if (selectedTags) {
       filteredPosts = posts.filter(post => {
-        // console.log(
-        //   '>>DEBUG inside filter',
-        //   post.tags.some(postTag => postTag.name === selectedTags[postTag.id]),
-        // );
         return post.tags.some(
           postTag => postTag.name === selectedTags.tags[postTag.id],
         );
       });
-
-      // console.log('>>DEBUG filtered Posts selectedTags.tags: ', selectedTags.tags);
-      // console.log('>>DEBUG filtered Posts: ', filteredPosts);
     }
     // TODO: optimize logic for case when,
     // all tags are selected then deselected.
     // Because then, selectedTags.tags will have keys of all tagId with value of null which will still filter everything for no reason.
     const count = filteredPosts.length;
     return { posts: chunk(count ? filteredPosts : posts, PAGE_SIZE), count };
-  }, [posts, selectedTags]);
-  const updateResultPage = (_, v) => setPageValue(v);
-  // useEffect(() => {
-  //   log('chunkedPosts.length: ', chunkedPosts.length);
-  //   log('chunkedPosts: ', chunkedPosts);
-  // }, []);
-  /* use searchContext methods to load post data */
+  };
+  const chunkedPosts = getChunkedPosts();
 
   return (
     <Container>
       <ContentWrapper
         css={LeftContentWrapperStyles}>
         <H1>{`검색 결과 - ${
-          selectedTags && selectedTags.selected.size
+          selectedTags && selectedTags.selected.length
             ? chunkedPosts.count
             : posts.length
         }/${posts.length}`}</H1>
@@ -110,6 +120,7 @@ const BlogMainPage = ({ posts, tags: tagsProp }) => {
             tw="space-y-6"
             col>
             {chunkedPosts.posts &&
+              chunkedPosts.posts[page - 1] &&
               chunkedPosts.posts[page - 1].map(blogProps => (
                 <BlogCard
                   {...blogProps}
@@ -121,6 +132,7 @@ const BlogMainPage = ({ posts, tags: tagsProp }) => {
         )}
         <Pagination
           count={chunkedPosts.posts.length}
+          page={page}
           defaultPage={DEFAULT_PAGE}
           css={PaginationLayoutStyles}
           onChange={updateResultPage}

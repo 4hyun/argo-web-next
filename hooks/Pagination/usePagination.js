@@ -104,9 +104,10 @@ const usePagination = (props = {}) => {
           },
           type: 'page',
           page: item,
-          selected: item === page,
+          selected: item === (pageProp ? pageProp : page),
           disabled,
-          'aria-current': item === page ? 'true' : undefined,
+          'aria-current':
+            item === (pageProp ? pageProp : page) ? 'true' : undefined,
         }
       : {
           onClick: event => {

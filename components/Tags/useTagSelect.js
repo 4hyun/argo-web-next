@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 const useTagSelect = () => {
-  const [tags, setTag] = useState(null);
+  const [state, setState] = useState(null);
   const handleTagToggle = (e, v) => {
     // console.log('handleTagToggle()');
     // console.log('>>DEBUG/useTag/ e: ', e);
@@ -29,37 +29,39 @@ const useTagSelect = () => {
       return;
     }
     const addTag = () =>
-      setTag(prevTags => ({
-        tags: {
-          ...(prevTags == null ? { tags: {} } : prevTags.tags),
-          ...{ [tagId]: tagName },
-        },
-        selected:
-          prevTags == null ? new Set([tagId]) : prevTags.selected.add(tagId),
-      }));
-
-    const removeTag = () => {
-      setTag(prevTags => {
-        let selected;
-        if (prevTags == null) selected = new Set();
-        else {
-          selected = new Set(prevTags.selected.values());
-          selected.delete(tagId);
+      setState(prevState => {
+        let tags, selected;
+        if (prevState == null) {
+          tags = { [tagId]: tagName };
+          selected = [tagId];
+        } else {
+          tags = { ...prevState.tags, [tagId]: tagName };
+          selected = [...prevState.selected, tagId];
         }
-        return {
-          tags: {
-            ...(prevTags == null ? { tags: {} } : prevTags.tags),
-            ...{ [tagId]: null },
-          },
-          selected,
-        };
+        return { tags, selected };
       });
-    };
+
+    const removeTag = () =>
+      setState(prevState => {
+        let tags, selected;
+        if (prevState == null) {
+          return;
+        } else {
+          tags = { ...prevState.tags };
+          tags[tagId] = null;
+          let indexToRemove = prevState.selected.indexOf(tagId);
+          selected = [...prevState.selected];
+          if (indexToRemove > -1) selected.splice(indexToRemove, 1);
+          return { tags, selected };
+        }
+      });
+
     // console.log('>>DEBUG/useTag/ e.target.dataset.tagId: ', tagId);
     // console.log('>>DEBUG/useTag/ e.target.dataset.tagName: ', tagName);
     // console.log('>>DEBUG/useTag/tags: ', tags);
-    if (tagId in (tags ? tags.tags : { tags: {} })) {
-      if (tags.tags[tagId] == null) {
+    if (tagId in (state ? state.tags : {})) {
+      console.log('>>DEBUG tags.tags: ', state.tags);
+      if (state.tags[tagId] == null) {
         addTag();
         return;
       }
@@ -72,7 +74,7 @@ const useTagSelect = () => {
     // console.log('>>DEBUG/useTag tags: ', tags);
     // console.log('>>DEBUG/useTag/ v: ', v);
   };
-  return [tags, handleTagToggle];
+  return [state, handleTagToggle];
 };
 
 export default useTagSelect;
