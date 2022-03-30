@@ -29,14 +29,25 @@ const useTagSelect = () => {
       return;
     }
     const addTag = () =>
-      setTag(prevTags => ({ ...(prevTags || {}), ...{ [tagId]: tagName } }));
+      setTag(prevTags => ({
+        tags: {
+          ...(prevTags == null ? { tags: {} } : prevTags.tags),
+          ...{ [tagId]: tagName },
+        },
+      }));
 
     const removeTag = () =>
-      setTag(prevTags => ({ ...(prevTags || {}), ...{ [tagId]: null } }));
+      setTag(prevTags => ({
+        tags: {
+          ...(prevTags == null ? { tags: {} } : prevTags.tags),
+          ...{ [tagId]: null },
+        },
+      }));
     // console.log('>>DEBUG/useTag/ e.target.dataset.tagId: ', tagId);
     // console.log('>>DEBUG/useTag/ e.target.dataset.tagName: ', tagName);
-    if (tagId in (tags || {})) {
-      if (tags[tagId] == null) {
+    // console.log('>>DEBUG/useTag/tags: ', tags);
+    if (tagId in (tags ? tags.tags : { tags: {} })) {
+      if (tags.tags[tagId] == null) {
         addTag();
         return;
       }

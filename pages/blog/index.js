@@ -53,7 +53,7 @@ const ChipSelectedStyles = css`
 all of its sub-components */
 const PAGE_SIZE = 10;
 const DEFAULT_PAGE = 1;
-const BlogMainPage = ({ posts, tags }) => {
+const BlogMainPage = ({ posts, tags: tagsProp }) => {
   // const log = useLogger('>>DEBUG/<BlogMainPage>');
   /* NOTE: page-to-show-index should be '-1' of `page`
   because chunkedPosts start index from 0 and
@@ -75,19 +75,19 @@ const BlogMainPage = ({ posts, tags }) => {
         //   post.tags.some(postTag => postTag.name === selectedTags[postTag.id]),
         // );
         return post.tags.some(
-          postTag => postTag.name === selectedTags[postTag.id],
+          postTag => postTag.name === selectedTags.tags[postTag.id],
         );
       });
 
-      // console.log('>>DEBUG filtered Posts selectedTags: ', selectedTags);
+      // console.log('>>DEBUG filtered Posts selectedTags.tags: ', selectedTags.tags);
       // console.log('>>DEBUG filtered Posts: ', filteredPosts);
     }
     // TODO: optimize logic for case when,
     // all tags are selected then deselected.
-    // Because then, selectedTags will have keys of all tagId with value of null which will still filter everything for no reason.
+    // Because then, selectedTags.tags will have keys of all tagId with value of null which will still filter everything for no reason.
     const count = filteredPosts.length;
     return { posts: chunk(count ? filteredPosts : posts, PAGE_SIZE), count };
-  }, [tags, posts, selectedTags]);
+  }, [posts, selectedTags]);
   const updateResultPage = (_, v) => setPageValue(v);
   // useEffect(() => {
   //   log('chunkedPosts.length: ', chunkedPosts.length);
@@ -129,9 +129,9 @@ const BlogMainPage = ({ posts, tags }) => {
           listStyles={TagListStyles}
           handleTagToggle={handleTagToggle}
         >
-          {tags.map(tag => (
+          {tagsProp.map(tag => (
             <Chip
-              selected={selectedTags && !!selectedTags[tag.id]}
+              selected={selectedTags && !!selectedTags.tags[tag.id]}
               selectedStyles={ChipSelectedStyles}
               chipStyles={ChipBaseStyles}
               key={tag.id}
