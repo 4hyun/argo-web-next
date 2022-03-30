@@ -120,7 +120,7 @@ const BlogMainPage = ({ posts, tags: tagsProp }) => {
           </PostList>
         )}
         <Pagination
-          count={chunkedPosts.count}
+          count={chunkedPosts.posts.length}
           defaultPage={DEFAULT_PAGE}
           css={PaginationLayoutStyles}
           onChange={updateResultPage}
