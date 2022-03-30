@@ -99,7 +99,11 @@ const BlogMainPage = ({ posts, tags: tagsProp }) => {
     <Container>
       <ContentWrapper
         css={LeftContentWrapperStyles}>
-        <H1>{`검색 결과 - ${chunkedPosts.count}/${posts.length}`}</H1>
+        <H1>{`검색 결과 - ${
+          selectedTags && selectedTags.selected.size
+            ? chunkedPosts.count
+            : posts.length
+        }/${posts.length}`}</H1>
         {posts && (
           <PostList
             tw="space-y-6"

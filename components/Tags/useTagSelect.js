@@ -34,15 +34,27 @@ const useTagSelect = () => {
           ...(prevTags == null ? { tags: {} } : prevTags.tags),
           ...{ [tagId]: tagName },
         },
+        selected:
+          prevTags == null ? new Set([tagId]) : prevTags.selected.add(tagId),
       }));
 
-    const removeTag = () =>
-      setTag(prevTags => ({
-        tags: {
-          ...(prevTags == null ? { tags: {} } : prevTags.tags),
-          ...{ [tagId]: null },
-        },
-      }));
+    const removeTag = () => {
+      setTag(prevTags => {
+        let selected;
+        if (prevTags == null) selected = new Set();
+        else {
+          selected = new Set(prevTags.selected.values());
+          selected.delete(tagId);
+        }
+        return {
+          tags: {
+            ...(prevTags == null ? { tags: {} } : prevTags.tags),
+            ...{ [tagId]: null },
+          },
+          selected,
+        };
+      });
+    };
     // console.log('>>DEBUG/useTag/ e.target.dataset.tagId: ', tagId);
     // console.log('>>DEBUG/useTag/ e.target.dataset.tagName: ', tagName);
     // console.log('>>DEBUG/useTag/tags: ', tags);
