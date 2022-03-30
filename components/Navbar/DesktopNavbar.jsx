@@ -1,15 +1,15 @@
-import { useEffect, createContext, useContext } from 'react';
+import { useEffect, useContext, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import tw, { styled } from 'twin.macro';
+import { fuseFactory } from '@/lib/fuse';
 import SearchBar from '@/components/BlogSearchBar/SearchBar';
-import Hamburger from './Hamburger';
-import { Link, LogoA } from './Link';
-import Logo from './Logo';
 import SearchResultBase from '@/components/BlogSearchBar/SearchResult';
 import { buildSearchResultBox } from '@/components/BlogSearchBar/utils';
+import DesktopNavbarLogo from './DesktopNavbarLogo';
+import Hamburger from './Hamburger';
 import { PostsContext } from '@/contexts/Posts';
 import { SearchContext } from '@/contexts/Search';
-import { fuseFactory } from '@/lib/fuse';
+import { NavbarLogoProvider } from '@/contexts/NavbarLogo';
 import {
   SearchResultBoxStyles,
   SearchResultItemStyles,
@@ -17,6 +17,7 @@ import {
   SearchResultItemLinkIconStyles,
   SearchBarRootStyles,
 } from './styles';
+import { isBlogOrPostPage } from './utils';
 
 import { ExternalLinkAlt } from '@/components/Icons';
 
@@ -34,10 +35,6 @@ const DektopNavbarContainer = styled.nav`
   }
   @media (min-width: 1024px) {
     max-width: 1024px;
-
-    > :nth-child(2) {
-      ${({ showSearch }) => showSearch && tw`ml-8`}
-    }
   }
   @media (min-width: 1200px) {
     max-width: 1200px;
@@ -80,10 +77,19 @@ const SearchResultBox = buildSearchResultBox(
   searchResultBoxProps,
 );
 
+/* @param {string} pathname - NextRouter.pathname */
+const pageTitleMap = {
+  blog: 'Blog',
+};
+const getPageTitle = ({ pathname, isBlogPage }) => {
+  if (isBlogPage) return pageTitleMap['blog'];
+  return '';
+};
+
 const DesktopNavbar = ({ renderLangSelect, toggleMenu, menuOpen }) => {
   const { pathname } = useRouter();
-  const showSearch = /^\/(blog|post)/g.test(pathname);
   const { posts } = useContext(PostsContext);
+  const isBlogPage = useMemo(() => isBlogOrPostPage(pathname), [pathname]);
   const fuse = fuseFactory.createSingleton(posts, fuseOptions);
   useEffect(() => {
     if (posts.length && posts.length !== SearchContext?._docs?.length) {
@@ -92,17 +98,14 @@ const DesktopNavbar = ({ renderLangSelect, toggleMenu, menuOpen }) => {
   }, [posts]);
 
   return (
-    <DektopNavbarContainer
-      showSearch={showSearch}>
-      <Link
-        href="/">
-        <LogoA>
-          <Logo />
-        </LogoA>
-      </Link>
+    <DektopNavbarContainer>
+      <NavbarLogoProvider>
+        <DesktopNavbarLogo
+          pageTitle={getPageTitle({ isBlogPage })} />
+      </NavbarLogoProvider>
       <SearchContext.Provider
         value={fuse}>
-        {showSearch && (
+        {isBlogPage && (
           <SearchBar
             rootStyles={SearchBarRootStyles}
             renderSearchResult={SearchResultBox}

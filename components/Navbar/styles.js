@@ -13,6 +13,7 @@ export const SearchBarRootStyles = css`
   @media (max-width: 1024px) {
     display: none;
   }
+  ${tw`mx-auto`}
 `;
 
 export const SearchResultBoxStyles = css`
