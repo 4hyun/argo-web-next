@@ -16,7 +16,7 @@ const Root = styled.div`
 `;
 
 const FlexRow = styled.div`
-  ${tw`relative flex h-10 border border-argo-blue-400 rounded-md overflow-hidden`}
+  ${tw`relative flex h-10 border border-argo-blue-400 rounded-full overflow-hidden`}
   ${({ focused }) => (focused && tw`ring-2 ring-blue-400`) || ''}
 `;
 
