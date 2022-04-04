@@ -166,17 +166,22 @@ export default BlogMainPage;
 // revalidation is enabled and a new request comes in
 export async function getStaticProps() {
   const postQuery = '?_sort=published_at:DESC';
-  const postsResponse = await fetchResource({
+  const postsResponsePromise = fetchResource({
     resourceName: 'Posts',
     method: 'List',
     query: postQuery,
   });
-  const tagsResponse = await fetchResource({
+  const tagsResponsePromise = fetchResource({
     resourceName: 'Tags',
     method: 'List',
   });
-  const posts = await postsResponse.json();
-  const tags = await tagsResponse.json();
+  const responses = await Promise.all([
+    postsResponsePromise,
+    tagsResponsePromise,
+  ]);
+  const [posts, tags] = await Promise.all(
+    responses.map(response => response.json()),
+  );
 
   return {
     props: {
