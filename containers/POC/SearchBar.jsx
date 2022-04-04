@@ -1,6 +1,5 @@
-import { fuseFactory } from 'lib/fuse';
 import React from 'react';
-import SearchBar from 'components/BlogSearchBar';
+// import SearchBar from 'components/BlogSearchBar';
 
 /* fuse */
 // const options = {};

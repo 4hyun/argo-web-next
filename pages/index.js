@@ -210,10 +210,10 @@ const HomePage = ({ priceList, postListLatest, tagsList }) => {
 
 export async function getStaticProps() {
   const responsePromises = [
-    ['Posts', 'ListLatest'],
-    ['Prices', 'List'],
-    ['Homepage', 'Get'],
-  ].map(fetchResourceParams => fetchResource(...fetchResourceParams));
+    { resourceName: 'Posts', method: 'ListLatest' },
+    { resourceName: 'Prices', method: 'List' },
+    { resourceName: 'Homepage', method: 'Get' },
+  ].map(resource => fetchResource(resource));
   const responses = await Promise.all(responsePromises);
   const [postListLatest, priceList, homepageData] = await Promise.all(
     responses.map(response => response.json()),

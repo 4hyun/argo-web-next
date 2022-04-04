@@ -4,6 +4,7 @@
     "target": "es6",
     "paths": {
       "@/components/*": ["components/*"],
+      "@/containers/*": ["containers/*"],
       "@/hooks/*": ["hooks/*"],
       "@/configs/*": ["configs/*"],
       "@/contexts/*": ["contexts/*"],
