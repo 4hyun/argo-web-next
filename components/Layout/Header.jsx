@@ -1,8 +1,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import styled from 'styled-components';
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 import Navbar from 'components/Navbar';
 import { Menu, A, MenuList, menuData } from '@/components/Menu';
 import { OpenLinkArrow } from 'components/Icons';

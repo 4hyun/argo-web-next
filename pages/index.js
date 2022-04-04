@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import styled from 'styled-components';
-import tw from 'twin.macro';
+import tw, { styled } from 'twin.macro';
 /* components */
 import Container from 'containers/HomePage/Container';
 import ComingSoonMessage from 'components/HomePage/ComingSoonMessage';
