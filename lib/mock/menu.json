@@ -64,7 +64,7 @@
       "label": "Architecture",
       "parentId_to_sort": {
         "62494855709b5b7834468c11": {
-          "624aac545c3a387b701b4496.62494855709b5b7834468c11": 1
+          "624aac545c3a387b701b4496.624aad435c3a387b701b449b": 1
         }
       },
       "desc": "Tyk Handbook Menu/Tyk 이해하기/Architecture",
@@ -93,9 +93,95 @@
         }
       ],
       "createdAt": "2022-04-04T08:33:07.827Z",
-      "updatedAt": "2022-04-04T13:43:56.778Z",
+      "updatedAt": "2022-04-04T14:54:22.278Z",
       "__v": 0,
       "id": "624aad435c3a387b701b449b"
+    },
+    {
+      "menus": ["62494855709b5b7834468c11"],
+      "_id": "624b0063a5f4064104d0b337",
+      "published_at": null,
+      "label": "GW - Gateway",
+      "parentId_to_sort": {
+        "62494855709b5b7834468c11": {
+          "624aac545c3a387b701b4496.624aad435c3a387b701b449b.624b0063a5f4064104d0b337": 1
+        }
+      },
+      "desc": "Tyk Handbook Menu/Tyk 이해하기/Architecture/Gateway",
+      "menu": [],
+      "createdAt": "2022-04-04T14:27:47.126Z",
+      "updatedAt": "2022-04-04T14:54:41.220Z",
+      "__v": 0,
+      "id": "624b0063a5f4064104d0b337"
+    },
+    {
+      "menus": ["62494855709b5b7834468c11"],
+      "_id": "624bdb68e48be0464cf7eff1",
+      "published_at": null,
+      "label": "D - Dashboard",
+      "location_to_sort": null,
+      "desc": "Tyk Handbook Menu/Tyk 이해하기/Architecture/Dashboard",
+      "menu": [],
+      "createdAt": "2022-04-05T06:02:16.441Z",
+      "updatedAt": "2022-04-05T06:05:22.459Z",
+      "__v": 0,
+      "parentId_to_sort": {
+        "62494855709b5b7834468c11": {
+          "624aac545c3a387b701b4496.624aad435c3a387b701b449b.624bdb68e48be0464cf7eff1": 1
+        }
+      },
+      "id": "624bdb68e48be0464cf7eff1"
+    },
+    {
+      "menus": ["62494855709b5b7834468c11"],
+      "_id": "624bded68928377f80fe5136",
+      "published_at": null,
+      "label": "M - Mongo",
+      "parentId_to_sort": {
+        "62494855709b5b7834468c11": {
+          "624aac545c3a387b701b4496.624aad435c3a387b701b449b.624bded68928377f80fe5136": 2
+        }
+      },
+      "desc": "Tyk Handbook Menu/Tyk 이해하기/Architecture/Mongo",
+      "menu": [],
+      "createdAt": "2022-04-05T06:16:54.881Z",
+      "updatedAt": "2022-04-05T06:17:16.368Z",
+      "__v": 0,
+      "id": "624bded68928377f80fe5136"
+    },
+    {
+      "menus": ["62494855709b5b7834468c11"],
+      "_id": "624bdf0b8928377f80fe5137",
+      "published_at": null,
+      "label": "R - Redis",
+      "parentId_to_sort": {
+        "62494855709b5b7834468c11": {
+          "624aac545c3a387b701b4496.624aad435c3a387b701b449b.624bdf0b8928377f80fe5137": 4
+        }
+      },
+      "desc": "Tyk Handbook Menu/Tyk 이해하기/Architecture/Redis",
+      "menu": [],
+      "createdAt": "2022-04-05T06:17:47.331Z",
+      "updatedAt": "2022-04-05T06:18:36.844Z",
+      "__v": 0,
+      "id": "624bdf0b8928377f80fe5137"
+    },
+    {
+      "menus": ["62494855709b5b7834468c11"],
+      "_id": "624bdf4c8928377f80fe5138",
+      "published_at": null,
+      "label": "PMP - Pump",
+      "parentId_to_sort": {
+        "62494855709b5b7834468c11": {
+          "624aac545c3a387b701b4496.624aad435c3a387b701b449b.624bdf4c8928377f80fe5138": 5
+        }
+      },
+      "desc": "Tyk Handbook Menu/Tyk 이해하기/Architecture/Pump",
+      "menu": [],
+      "createdAt": "2022-04-05T06:18:52.759Z",
+      "updatedAt": "2022-04-05T06:19:53.632Z",
+      "__v": 0,
+      "id": "624bdf4c8928377f80fe5138"
     }
   ],
   "id": "62494855709b5b7834468c11"

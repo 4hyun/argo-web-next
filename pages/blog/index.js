@@ -1,8 +1,6 @@
 import { useEffect, useContext, useMemo, useCallback } from 'react';
 import tw, { css, styled } from 'twin.macro';
 import { fetchResource } from '@/lib/api';
-import { fetchStrapi } from 'lib/api/strapi';
-import { makeResourcePath } from 'lib/utils/resources';
 import { H1 } from '@/components/Page';
 import Tags, { useTagSelect } from '@/components/Tags';
 import Chip from '@/components/Chip';
