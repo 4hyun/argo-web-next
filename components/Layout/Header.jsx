@@ -27,13 +27,13 @@ const Header = () => {
         onClose={closeMenu}>
         <MenuList>
           {/* <Logo /> */}
-          {menuData.map(({ item: { mid, title, slug, icon, target } }) => {
+          {menuData.map(({ item: { mid, title, url, icon, target } }) => {
             let Icon = icons[icon];
             if (mid === 1)
               return (
                 <Link
                   key={mid}
-                  href={`${slug}`}
+                  href={`${url}`}
                   passHref>
                   <A
                     onClick={closeMenu}
@@ -45,7 +45,7 @@ const Header = () => {
             return (
               <Link
                 key={mid}
-                href={`${slug}`}
+                href={`${url}`}
                 passHref>
                 <A
                   onClick={closeMenu}
