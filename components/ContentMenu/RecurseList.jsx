@@ -3,7 +3,7 @@ import Item from './Item';
 import List from './List';
 
 const RecurseList = props => {
-  const { keyField } = props;
+  const { keyField, sortKey } = props;
   return (
     <UL>
       <Item
@@ -15,7 +15,8 @@ const RecurseList = props => {
         <List
           key={keyField ? `${props[keyField]}-ul` : props.id}
           {...props}
-        ></List>
+          sortKey={sortKey}
+        />
       )}
     </UL>
   );

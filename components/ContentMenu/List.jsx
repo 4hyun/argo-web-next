@@ -3,15 +3,17 @@ import Item from './Item';
 import UL from '../Base/UL';
 
 const List = props => {
-  const { items, keyField } = props;
+  const { items, keyField, sortKey } = props;
 
   return (
     <UL>
-      {items.map((item, i) => (
-        <Item
-          key={keyField ? item[keyField] : i}
-          {...item} />
-      ))}
+      {(sortKey ? items.sort((a, b) => a[sortKey] - b[sortKey]) : items).map(
+        (item, i) => (
+          <Item
+            key={keyField ? item[keyField] : i}
+            {...item} />
+        ),
+      )}
     </UL>
   );
 };

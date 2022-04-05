@@ -5,30 +5,36 @@ import RecurseList from './RecurseList';
 
 const KEY_FIELD = 'menuItemUid';
 
-const ContentMenu = ({ data }) => {
+const ContentMenu = ({ data, sortKey = 'sort', deepSort = true }) => {
   return (
     <MenuRoot>
-      {data.map(rootMenuItem =>
-        rootMenuItem?.items.length > 0 ? (
-          <RecurseList
-            key={rootMenuItem.id}
-            keyField={KEY_FIELD}
-            {...rootMenuItem}
-          >
-            {rootMenuItem.items.map(item =>
-              item?.items.length > 0 ? (
-                <RecurseList
-                  key={item.id}
-                  keyField={KEY_FIELD}
-                  {...item} />
-              ) : null,
-            )}
-          </RecurseList>
-        ) : (
-          <Item
-            key={rootMenuItem.menuItemUid}
-            {...rootMenuItem} />
-        ),
+      {(sortKey ? data.sort((a, b) => a[sortKey] - b[sortKey]) : data).map(
+        rootMenuItem =>
+          rootMenuItem?.items.length > 0 ? (
+            <RecurseList
+              key={rootMenuItem.id}
+              keyField={KEY_FIELD}
+              {...rootMenuItem}
+            >
+              {(sortKey
+                ? rootMenuItem.items.sort((a, b) => a[sortKey] - b[sortKey])
+                : rootMenuItem.items
+              ).map(item =>
+                item?.items.length > 0 ? (
+                  <RecurseList
+                    key={item.id}
+                    keyField={KEY_FIELD}
+                    sortKey={deepSort && sortKey}
+                    {...item}
+                  />
+                ) : null,
+              )}
+            </RecurseList>
+          ) : (
+            <Item
+              key={rootMenuItem.menuItemUid}
+              {...rootMenuItem} />
+          ),
       )}
     </MenuRoot>
   );
