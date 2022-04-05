@@ -31,7 +31,7 @@ function buildTreeFromLocation(item, location, root, menuId) {
           /* note: we are starting a new menuItem iteration */
           findIndexResult = acc.findIndex(item => item.id === curId);
 
-          console.log('>>DEBUG findIndexResult : ', findIndexResult);
+          // console.log('>>DEBUG findIndexResult : ', findIndexResult);
           return acc[findIndexResult];
         } else if (typeof acc === 'object') {
           // if (curId === '624aad435c3a387b701b449b') {

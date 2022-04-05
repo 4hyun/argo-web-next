@@ -23,6 +23,5 @@ export async function getStaticProps() {
     },
   });
   const menu = await menuResponse.json();
-  // console.log('>>DEBUG menu: ', menu);
   return { props: { menu } };
 }

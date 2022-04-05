@@ -21,7 +21,7 @@ const FlexRow = styled.div`
 const MenuPOCPage = props => {
   const { menu = mockMenuData } = props;
   const menuTree = parseMenuTree(menu);
-  console.log('>> menuTree: ', menuTree);
+  // console.log('>> menuTree: ', menuTree);
 
   return (
     <FlexCol>
