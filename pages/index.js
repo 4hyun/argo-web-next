@@ -1,22 +1,22 @@
 import { useState, useMemo, useEffect } from 'react';
 import tw, { styled } from 'twin.macro';
 /* components */
-import Container from 'containers/HomePage/Container';
-import ComingSoonMessage from 'components/HomePage/ComingSoonMessage';
-import LayoutTopGradientOverlay from 'components/HomePage/LayoutTopGradientOverlay';
-import { HomeBlogCarousel, HomeBlogCarouselSlide } from 'components/Carousel';
+import Container from '@/containers/Container';
+import ComingSoonMessage from '@/components/HomePage/ComingSoonMessage';
+import LayoutTopGradientOverlay from '@/components/HomePage/LayoutTopGradientOverlay';
+import { HomeBlogCarousel, HomeBlogCarouselSlide } from '@/components/Carousel';
 import GetInTouchForm from '@/components/Form';
-import ScrollTopButton from 'components/ScrollTopButton';
-import { Close } from 'components/Icons';
+import ScrollTopButton from '@/components/ScrollTopButton';
+import { Close } from '@/components/Icons';
 import WaveAnimBg from '@/components/WaveAnimBg';
 import { delay } from 'lib/delay';
 import { useTranslationsContext } from 'contexts/Translations';
-import PriceInfoList from 'components/PriceInfoList';
-import { BlogCard } from 'components/Blog';
+import PriceInfoList from '@/components/PriceInfoList';
+import { BlogCard } from '@/components/Blog';
 /* lib */
-import { fetchResource } from 'lib/api';
+import { fetchResource } from '@/lib/api';
 /* styles */
-import { swiperNavigationStyles } from 'containers/HomePage/styles';
+import { swiperNavigationStyles } from '@/containers/HomePage/styles';
 
 const homeBlogCarouselConfig = {
   navigation: true,
