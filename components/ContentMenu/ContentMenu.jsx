@@ -20,14 +20,18 @@ const ContentMenu = ({ data, sortKey = 'sort', deepSort = true }) => {
                 ? rootMenuItem.items.sort((a, b) => a[sortKey] - b[sortKey])
                 : rootMenuItem.items
               ).map(item =>
-                item?.items.length > 0 ? (
+                item?.items?.length > 0 ? (
                   <RecurseList
                     key={item.id}
                     keyField={KEY_FIELD}
                     sortKey={deepSort && sortKey}
                     {...item}
                   />
-                ) : null,
+                ) : (
+                  <Item
+                    key={item.menuItemUid}
+                    {...item} />
+                ),
               )}
             </RecurseList>
           ) : (
