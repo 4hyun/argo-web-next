@@ -1,4 +1,3 @@
-import React from 'react';
 import { LI, Label } from '@/components/Base';
 import tw, { css } from 'twin.macro';
 
@@ -9,20 +8,7 @@ const ItemStyles = css`
     level > 0 ? `calc(var(--indent) * ${level})` : 0}
 `;
 
-const Item = props => {
-  const { label, level, controlling } = props;
-
-  return (
-    <LI
-      css={ItemStyles}
-      {...{ level }}>
-      {controlling && 'controlling'}
-      {Label && <Label>{label}</Label>}
-    </LI>
-  );
-};
-
-export const ItemDEV = props => {
+export const Item = props => {
   const { data = {} } = props;
   const { label, level, controlling } = data;
 
@@ -35,5 +21,3 @@ export const ItemDEV = props => {
     </LI>
   );
 };
-
-export default Item;
