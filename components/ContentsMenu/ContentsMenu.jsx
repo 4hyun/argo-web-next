@@ -1,20 +1,21 @@
 import React from 'react';
 import MenuRoot from './MenuRoot';
-import Item from './Item';
-import RecurseListDeprecated, { RecurseListDEV } from './RecurseList';
+import { RecurseList } from './RecurseList';
 
 const KEY_FIELD = 'menuItemUid';
+const getKeyProp = prop => prop[KEY_FIELD];
 
-const ContentMenu = ({ data, sortKey = 'sort', deepSort = true }) => {
+const ContentMenu = ({ data, sortKey = 'sort' }) => {
   const sortedData = sortKey
     ? data.sort((a, b) => a[sortKey] - b[sortKey])
     : data;
   return (
     <MenuRoot>
       {sortedData.map((data, j) => (
-        <RecurseListDEV
+        <RecurseList
           key={j}
-          data={data} />
+          data={data}
+          getKeyProp={getKeyProp} />
       ))}
       {/* {(sortKey ? data.sort((a, b) => a[sortKey] - b[sortKey]) : data).map(
         rootMenuItem =>

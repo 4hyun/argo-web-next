@@ -30,18 +30,30 @@ const RecurseListDeprecated = props => {
   );
 };
 
-export const RecurseListDEV = props => {
-  const { keyField, sortKey, data } = props;
-  // const controlling = !!props.children;
+export const RecurseList = props => {
+  const { getKeyProp = () => 'undefined', sortKey, data } = props;
+  let sortedDataItems;
+  if (data.items) {
+    if (sortKey) {
+      sortedDataItems = data.items.sort((a, b) => a[sortKey] - b[sortKey]);
+    } else {
+      sortedDataItems = data.items;
+    }
+  }
   return (
     <UL>
       <ItemDEV
+        key={`${getKeyProp}-root`}
         data={data} />
-      {data.items &&
-        data.items.map((item, k) => <RecurseListDEV
-          key={k}
-          data={item} />)}
+      {sortedDataItems &&
+        sortedDataItems.map((item, index) => (
+          <RecurseListDEV
+            key={index}
+            data={item}
+            getKeyProp={getKeyProp} />
+        ))}
     </UL>
   );
 };
+
 export default RecurseListDeprecated;
