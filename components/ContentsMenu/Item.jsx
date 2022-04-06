@@ -10,12 +10,27 @@ const ItemStyles = css`
 `;
 
 const Item = props => {
-  const { label, level } = props;
+  const { label, level, controlling } = props;
 
   return (
     <LI
       css={ItemStyles}
       {...{ level }}>
+      {controlling && 'controlling'}
+      {Label && <Label>{label}</Label>}
+    </LI>
+  );
+};
+
+export const ItemDEV = props => {
+  const { data = {} } = props;
+  const { label, level, controlling } = data;
+
+  return (
+    <LI
+      css={ItemStyles}
+      {...{ level }}>
+      {controlling && 'controlling'}
       {Label && <Label>{label}</Label>}
     </LI>
   );

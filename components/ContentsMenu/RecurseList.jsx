@@ -1,14 +1,22 @@
 import { UL } from '@/components/Base';
-import Item from './Item';
+import Item, { ItemDEV } from './Item';
 import List from './List';
 
-const RecurseList = props => {
+export const getSortProps = props => {
   const { keyField, sortKey } = props;
+  return { keyField, sortKey };
+};
+
+const RecurseListDeprecated = props => {
+  const { keyField, sortKey } = props;
+  const controlling = !!props.children;
   return (
     <UL>
       <Item
         key={keyField ? `${props[keyField]}-li` : props.id}
-        {...props} />
+        {...props}
+        controlling={controlling}
+      />
       {props.children ? (
         props.children
       ) : (
@@ -22,4 +30,18 @@ const RecurseList = props => {
   );
 };
 
-export default RecurseList;
+export const RecurseListDEV = props => {
+  const { keyField, sortKey, data } = props;
+  // const controlling = !!props.children;
+  return (
+    <UL>
+      <ItemDEV
+        data={data} />
+      {data.items &&
+        data.items.map((item, k) => <RecurseListDEV
+          key={k}
+          data={item} />)}
+    </UL>
+  );
+};
+export default RecurseListDeprecated;
