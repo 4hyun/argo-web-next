@@ -1,8 +1,8 @@
 import React from 'react';
 import tw, { styled } from 'twin.macro';
 import mockMenuData from '@/lib/mock/menu';
-import { parseMenuTree } from '@/components/ContentMenu/utils';
-import ContentMenu from '@/components/ContentMenu';
+import { parseMenuTree } from '@/components/ContentsMenu/utils';
+import ContentsMenu from '@/components/ContentsMenu';
 
 const FlexCol = styled.div`
   ${tw`flex flex-col`}
@@ -25,7 +25,7 @@ const MenuPOCPage = props => {
 
   return (
     <FlexCol>
-      <ContentMenu
+      <ContentsMenu
         data={menuTree} />
     </FlexCol>
   );

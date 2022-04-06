@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+// import { useRouter } from 'next/router';
+import tw, { styled } from 'twin.macro';
+import { useState, createContext, useRef, useEffect } from 'react';
 import Header from './Header';
+import { PortalRoot as TykHandbookPortalRoot } from '@/components/TykHandbookMenu';
 // import Footer from "./Footer"
 // import trads from "translations/index"
 import { PostsProvider } from '@/contexts/Posts';
@@ -27,7 +30,7 @@ const Layout = ({ children }) => {
     setLocale(localeData);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     // console.log('>>DEBUG/Layout rendered...');
     const index = supportedLocaleEntries.findIndex(
       ([localeId, ,]) => localeId === DEFAULT_LOCALE,
@@ -35,7 +38,7 @@ const Layout = ({ children }) => {
     sortLocaleDisplayOrder(index);
   }, []);
   return (
-    <>
+    <div>
       <PostsProvider>
         <TranslationsContext.Provider
           value={{
@@ -47,10 +50,11 @@ const Layout = ({ children }) => {
         >
           <Header></Header>
           {children}
+          <TykHandbookPortalRoot />
           {/* <Footer></Footer> */}
         </TranslationsContext.Provider>
       </PostsProvider>
-    </>
+    </div>
   );
 };
 
