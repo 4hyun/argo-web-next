@@ -7,6 +7,7 @@ import { PortalRootCss } from '@/components/TykHandbookMenu/styles';
 // import Footer from "./Footer"
 // import trads from "translations/index"
 import { PostsProvider } from '@/contexts/Posts';
+import { ContentsMenuProvider } from '@/contexts/ContentsMenu';
 import {
   TranslationsContext,
   supportedLocaleMap,
@@ -50,9 +51,11 @@ const Layout = ({ children }) => {
           }}
         >
           <Header></Header>
-          {children}
-          <TykHandbookPortalRoot
-            css={PortalRootCss} />
+          <ContentsMenuProvider>
+            {children}
+            <TykHandbookPortalRoot
+              css={PortalRootCss} />
+          </ContentsMenuProvider>
           {/* <Footer></Footer> */}
         </TranslationsContext.Provider>
       </PostsProvider>
