@@ -1,8 +1,9 @@
 // import { useRouter } from 'next/router';
-import tw, { styled } from 'twin.macro';
-import { useState, createContext, useRef, useEffect } from 'react';
+// import tw, { styled } from 'twin.macro';
+import { useState, useEffect } from 'react';
 import Header from './Header';
 import { PortalRoot as TykHandbookPortalRoot } from '@/components/TykHandbookMenu';
+import { PortalRootCss } from '@/components/TykHandbookMenu/styles';
 // import Footer from "./Footer"
 // import trads from "translations/index"
 import { PostsProvider } from '@/contexts/Posts';
@@ -50,7 +51,8 @@ const Layout = ({ children }) => {
         >
           <Header></Header>
           {children}
-          <TykHandbookPortalRoot />
+          <TykHandbookPortalRoot
+            css={PortalRootCss} />
           {/* <Footer></Footer> */}
         </TranslationsContext.Provider>
       </PostsProvider>

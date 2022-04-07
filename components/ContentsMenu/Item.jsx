@@ -9,12 +9,13 @@ const ItemStyles = css`
 `;
 
 export const Item = props => {
-  const { data = {} } = props;
+  const { data = {}, onClick } = props;
   const { label, level, controlling } = data;
 
   return (
     <LI
       css={ItemStyles}
+      onClick={onClick}
       {...{ level }}>
       {controlling && 'controlling'}
       {Label && <Label>{label}</Label>}

@@ -1,16 +1,19 @@
+import { useMemo } from 'react';
 import Container from '@/containers/TykHandbookPage';
 import { fetchResource } from '@/lib/api/resources';
 import { ContentsMenuPortal } from '@/components/TykHandbookMenu';
 import ContentsMenu from '@/components/ContentsMenu';
 import { parseMenuTree } from '@/components/ContentsMenu/utils';
+import { MenuRootCss } from '@/components/TykHandbookMenu/styles';
 
 const TykHandbookPage = ({ menu }) => {
-  const menuTree = parseMenuTree(menu);
+  const menuTree = useMemo(() => parseMenuTree(menu), [menu]);
 
   return (
     <Container>
       <ContentsMenuPortal>
         <ContentsMenu
+          rootCssProp={MenuRootCss}
           data={menuTree} />
       </ContentsMenuPortal>
     </Container>

@@ -9,20 +9,23 @@ const KEY_FIELD = 'menuItemUid';
 const getKeyProp = prop => prop[KEY_FIELD];
 
 const RecurseListDevStyles = css`
+  li {
+    ${tw`px-4 pt-2 pb-2 rounded-md flex-1`}
+  }
   li:hover {
-    background: red;
-    ${tw`cursor-pointer`}
+    ${tw`cursor-pointer bg-white`}
   }
   li:active {
-    ${tw`ring-4 ring-red-400`}
+    ${tw`ring-4 ring-argo-blue-50 select-none`}
   }
 `;
 
-const ContentMenu = ({ data, sortKey = 'sort' }) => {
+const ContentMenu = ({ rootCssProp, data, sortKey = 'sort' }) => {
   const sortedData = sortAsc(data, sortKey);
   if (!sortedData) return null;
   return (
-    <MenuRoot>
+    <MenuRoot
+      css={rootCssProp}>
       {sortedData.map((data, j) => (
         <RecurseList
           cssProp={RecurseListDevStyles}
@@ -30,6 +33,7 @@ const ContentMenu = ({ data, sortKey = 'sort' }) => {
           data={data}
           getKeyProp={getKeyProp}
           itemAs={Item}
+          isRoot={true}
         />
       ))}
     </MenuRoot>
