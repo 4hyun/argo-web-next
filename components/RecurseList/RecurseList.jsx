@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import tw, { css } from 'twin.macro';
 import { UL } from '@/components/Base';
+import { CaretDown } from '@/components/TykHandbookMenu';
 import sortAsc from '@/lib/utils/sort-asc.js';
 
 const useAccordion = initState => {
@@ -23,8 +24,10 @@ const RecurseList = ({
   data,
   itemAs,
   collapsed,
+  caretDownIcon = CaretDown,
 }) => {
   const [isOpen, toggleOpen] = useAccordion();
+  const OpenIndictorIcon = caretDownIcon;
 
   const sortedItems = sortAsc(data.items, sortKey);
   const Item = itemAs;
@@ -37,7 +40,11 @@ const RecurseList = ({
         data={data}
         onClick={toggleOpen}
         isOpen={isOpen}
-      ></Item>
+        icon={caretDownIcon}
+      >
+        {sortedItems && <OpenIndictorIcon
+          open={isOpen} />}
+      </Item>
       {sortedItems &&
         sortedItems.map((item, index) => (
           <RecurseList

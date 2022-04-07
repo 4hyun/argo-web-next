@@ -1,6 +1,6 @@
 // import * as faBrands from "@styled-icons/fa-brands";
 // import * as faRegular from "@styled-icons/fa-regular";
-import { At, Search, ExternalLinkAlt } from '@styled-icons/fa-solid';
+import { At, Search, ExternalLinkAlt, CaretDown } from '@styled-icons/fa-solid';
 import { Close } from '@styled-icons/zondicons/Close';
 import { Check } from '@styled-icons/boxicons-regular/Check';
 import { UpArrowCircle } from '@styled-icons/boxicons-regular/UpArrowCircle';
@@ -16,6 +16,7 @@ import {
 
 export {
   At,
+  CaretDown,
   Close,
   Check,
   UpArrowCircle,

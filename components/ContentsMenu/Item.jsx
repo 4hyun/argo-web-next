@@ -9,8 +9,9 @@ const ItemStyles = css`
 `;
 
 export const Item = props => {
-  const { data = {}, onClick } = props;
+  const { children: icon, data = {}, onClick } = props;
   const { label, level, controlling } = data;
+  const Icon = icon;
 
   return (
     <LI
@@ -19,6 +20,7 @@ export const Item = props => {
       {...{ level }}>
       {controlling && 'controlling'}
       {Label && <Label>{label}</Label>}
+      {icon && icon}
     </LI>
   );
 };
