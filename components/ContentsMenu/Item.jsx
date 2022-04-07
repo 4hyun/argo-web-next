@@ -11,7 +11,6 @@ const ItemStyles = css`
 export const Item = props => {
   const { children: icon, data = {}, onClick } = props;
   const { label, level, controlling } = data;
-  const Icon = icon;
 
   return (
     <LI
