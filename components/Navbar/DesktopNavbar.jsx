@@ -80,17 +80,26 @@ const SearchResultBox = buildSearchResultBox(
 /* @param {string} pathname - NextRouter.pathname */
 const pageTitleMap = {
   blog: 'Blog',
+  tykhandbook: 'Tyk Handbook',
 };
-const getPageTitle = ({ pathname, isBlogPage }) => {
+const getPageTitle = ({ pathname, isBlogPage, isTykHandbookPage }) => {
   if (isBlogPage) return pageTitleMap['blog'];
+  if (isTykHandbookPage) return pageTitleMap['tykhandbook'];
   return '';
 };
 
 const DesktopNavbar = ({ renderLangSelect, toggleMenu, menuOpen }) => {
   const { pathname } = useRouter();
   const { posts } = useContext(PostsContext);
-  const isBlogPage = useMemo(() => isBlogOrPostPage(pathname), [pathname]);
+  const { isBlogPage, isTykHandbookPage } = useMemo(
+    () => ({
+      isBlogPage: isBlogOrPostPage(pathname),
+      isTykHandbookPage: pathname === '/tyk-handbook',
+    }),
+    [pathname],
+  );
   const fuse = fuseFactory.createSingleton(posts, fuseOptions);
+
   useEffect(() => {
     if (posts.length && posts.length !== SearchContext?._docs?.length) {
       fuse.setCollection(posts);
@@ -101,7 +110,9 @@ const DesktopNavbar = ({ renderLangSelect, toggleMenu, menuOpen }) => {
     <DektopNavbarContainer>
       <NavbarLogoProvider>
         <DesktopNavbarLogo
-          pageTitle={getPageTitle({ isBlogPage })} />
+          pageTitle={getPageTitle({ isBlogPage, isTykHandbookPage })}
+          {...{ isBlogPage, isTykHandbookPage }}
+        />
       </NavbarLogoProvider>
       <SearchContext.Provider
         value={fuse}>

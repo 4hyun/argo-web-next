@@ -1,6 +1,7 @@
 import { LogoWordmarkFullHorizontal, LogoCombination } from './Logo';
 
 const _logoList = [LogoWordmarkFullHorizontal, LogoCombination];
+
 export const renderLogoTypeHelper = ({
   logoList = _logoList,
   typeIndex = 0,

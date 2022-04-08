@@ -8,7 +8,7 @@ const CaretDown = styled(CaretDownIcon)`
     height: var(--size-md);
   }
   ${tw`fill-current text-argo-blue-50 transform transition-transform ml-4`}
-  ${({ open }) => !open && tw`rotate-180`}
+  ${({ open }) => open && tw`rotate-180`}
 `;
 
 export default CaretDown;

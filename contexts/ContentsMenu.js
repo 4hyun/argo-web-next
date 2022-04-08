@@ -1,16 +1,18 @@
 import { createContext, useState } from 'react';
 
-const init = {};
+const init = {
+  selectedItem: null,
+};
 
 export const ContentsMenuContext = createContext(init);
 
 export const ContentsMenuProvider = ({ children, value }) => {
-  const [state, setState] = useState();
+  const [state, setState] = useState(init);
   const setItemSelected = id => {
     setState(prevState => {
       return {
         ...prevState,
-        selected: id,
+        selectedItem: id,
       };
     });
   };

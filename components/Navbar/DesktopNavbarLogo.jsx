@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import tw, { styled } from 'twin.macro';
 import { withRouter } from 'next/router';
 import Link from 'next/link';
@@ -14,19 +15,25 @@ const PageTitle = styled.span`
   padding-bottom: 7px;
 `;
 
-const DesktopNavbarLogo = withRouter(({ router, pageTitle }) => {
-  const isBlogPage = isBlogOrPostPage(router.pathname);
-  const { typeIndex } = useNavbarLogo();
-  return (
-    <>
-      <Link
-        href="/"
-        passHref>
-        <A>{renderLogoTypeHelper({ typeIndex: isBlogPage ? 1 : typeIndex })}</A>
-      </Link>
-      {pageTitle && <PageTitle>{pageTitle}</PageTitle>}
-    </>
-  );
-});
+const DesktopNavbarLogo = withRouter(
+  ({ pageTitle, isBlogPage, isTykHandbookPage }) => {
+    const { typeIndex } = useNavbarLogo();
+
+    return (
+      <>
+        <Link
+          href="/"
+          passHref>
+          <A>
+            {renderLogoTypeHelper({
+              typeIndex: isBlogPage || isTykHandbookPage ? 1 : typeIndex,
+            })}
+          </A>
+        </Link>
+        {pageTitle && <PageTitle>{pageTitle}</PageTitle>}
+      </>
+    );
+  },
+);
 
 export default DesktopNavbarLogo;
