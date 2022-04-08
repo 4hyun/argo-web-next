@@ -7,7 +7,7 @@ import sortAsc from '@/lib/utils/sort-asc.js';
 const KEY_FIELD = 'menuItemUid';
 const getKeyProp = prop => prop[KEY_FIELD];
 
-const ContentMenu = ({ rootCss, listCss, data, sortKey = 'sort' }) => {
+const ContentMenu = ({ rootCss, listCss, itemCss, data, sortKey = 'sort' }) => {
   const sortedData = sortAsc(data, sortKey);
   if (!sortedData) return null;
   return (
@@ -15,7 +15,7 @@ const ContentMenu = ({ rootCss, listCss, data, sortKey = 'sort' }) => {
       css={rootCss}>
       {sortedData.map((data, j) => (
         <RecurseList
-          cssProp={listCss}
+          cssProps={{ listCss, itemCss }}
           key={j}
           data={data}
           getKeyProp={getKeyProp}

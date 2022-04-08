@@ -1,9 +1,10 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import ContentsMenuPortal from '@/components/TykHandbookMenu/ContentsMenuPortal';
 import ContentsMenu from '@/components/ContentsMenu';
 import {
   MenuRootCss,
   RecurseListCss,
+  MenuItemCss,
 } from '@/components/TykHandbookMenu/styles';
 import { parseMenuTree } from '@/components/ContentsMenu/utils';
 
@@ -15,6 +16,7 @@ const TykHandbookMenu = ({ data }) => {
       <ContentsMenu
         rootCss={MenuRootCss}
         listCss={RecurseListCss}
+        itemCss={MenuItemCss}
         data={menuTree}
       />
     </ContentsMenuPortal>

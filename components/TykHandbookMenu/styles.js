@@ -4,6 +4,19 @@ const ItemFontCss = css`
   ${tw`font-medium`}
 `;
 
+const MenuItemActiveStyles = css`
+  ${tw`bg-argo-blue-400 bg-opacity-30 text-white`}
+`;
+
+const MenuItemCss = css`
+  ${tw`my-1`}
+  --indent: 1rem;
+  ${tw`flex`}
+  margin-left: ${({ level }) =>
+    level > 0 ? `calc(var(--indent) * ${level})!important` : 0};
+  ${({ active }) => active && MenuItemActiveStyles}
+`;
+
 const PortalRootCss = css`
   @media (min-width: 1025px) {
     ${tw`w-1/4 flex-grow`}
@@ -31,4 +44,4 @@ const RecurseListCss = css`
   }
 `;
 
-export { PortalRootCss, MenuRootCss, RecurseListCss };
+export { PortalRootCss, MenuRootCss, RecurseListCss, MenuItemCss };

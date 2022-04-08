@@ -11,7 +11,7 @@ const CollapsedStyles = css`
 `;
 
 const RecurseList = ({
-  cssProp,
+  cssProps,
   getKeyProp = () => 'undefined',
   sortKey,
   data,
@@ -35,8 +35,9 @@ const RecurseList = ({
 
   return (
     <UL
-      css={[cssProp, collapsed && CollapsedStyles]}>
+      css={[cssProps.listCss, collapsed && CollapsedStyles]}>
       <Item
+        cssProp={cssProps.itemCss}
         key={`${getKeyProp}-root`}
         data={data}
         onClick={toggleOpenAndMarkActive}
@@ -49,6 +50,7 @@ const RecurseList = ({
       {sortedItems &&
         sortedItems.map((item, index) => (
           <RecurseList
+            cssProps={{ listCss: cssProps.listCss, itemCss: cssProps.itemCss }}
             key={index}
             data={item}
             getKeyProp={getKeyProp}
