@@ -15,11 +15,18 @@ const PostListHeading = styled(H1)`
   ${tw`text-base lg:(text-3xl)`}
 `;
 
+const containerStyles = {
+  base: tw``,
+  sm: tw``,
+  lg: tw``,
+};
 const Container = styled.div`
   max-width: 1200px;
+  justify-content: start;
   ${tw`flex flex-col flex-col-reverse w-full pt-24 pb-20 lg:(pt-40) min-h-screen lg:(px-0) px-6 mx-auto`}
   @media (min-width: 1024px) {
     ${tw`flex-row`}
+    justify-content: initial;
   }
 `;
 
