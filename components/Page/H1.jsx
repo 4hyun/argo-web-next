@@ -5,7 +5,8 @@ export const DefaultStyles = css`
 `;
 
 const H1 = styled.h1`
-  ${({ css }) => !css && DefaultStyles}
+  ${DefaultStyles}
+  ${({ cssProp }) => cssProp}
 `;
 
 export default H1;

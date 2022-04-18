@@ -11,25 +11,58 @@ import { usePageState } from '@/hooks/Pagination';
 // import useLogger from '@/hooks/useLogger';
 import chunk from 'lodash/chunk';
 
+const PostListHeading = styled(H1)`
+  ${tw`text-base lg:(text-3xl)`}
+`;
+
 const Container = styled.div`
   max-width: 1200px;
-  ${tw`flex w-full pt-24 pb-20 lg:(pt-40) min-h-screen lg:(px-0) px-6  mx-auto`}
+  ${tw`flex flex-col flex-col-reverse w-full pt-24 pb-20 lg:(pt-40) min-h-screen lg:(px-0) px-6 mx-auto`}
+  @media (min-width: 1024px) {
+    ${tw`flex-row`}
+  }
 `;
 
 const LeftContentWrapperStyles = css`
-  flex: 3;
+  ${'' /* flex: 5; */}
+  ${tw`flex flex-col w-full`}
+  @media (min-width: 1024px) {
+    width: 80%;
+    flex: 3;
+  }
 `;
 
 const RightContentWrapperStyles = css`
-  flex: 1;
+  ${tw`flex w-full mt-0`}
+  @media (min-width: 1024px) {
+    margin-top: initial;
+    flex: 1;
+    width: 20%;
+  }
 `;
+
+const TagsContainerStyle = css``;
 
 const TagListStyles = css`
   ${tw`flex flex-wrap gap-x-3 gap-y-4`}
 `;
 
+const TagsHeadingStyles = css`
+  ${tw`hidden`}
+  @media (min-width:1024px) {
+    ${tw`flex`}
+  }
+`;
+
+const chipBaseStyles = {
+  base: tw`bg-argo-blue-50 text-white rounded-lg hover:(cursor-pointer ring ring-4)`,
+  sm: tw`px-2 pt-0.5 pb-1 text-sm `,
+  lg: tw`lg:(px-4 pt-1 pb-1.5 rounded-full text-base)`,
+};
 const ChipBaseStyles = css`
-  ${tw`bg-argo-blue-50 text-white px-4 pt-1 pb-1.5 rounded-full hover:(cursor-pointer ring ring-4)`}
+  ${chipBaseStyles.base}
+  ${chipBaseStyles.sm}
+  ${chipBaseStyles.lg}
 `;
 
 const ContentWrapper = styled.div`
@@ -106,11 +139,11 @@ const BlogMainPage = ({ posts, tags: tagsProp }) => {
     <Container>
       <ContentWrapper
         css={LeftContentWrapperStyles}>
-        <H1>{`검색 결과 - ${
+        <PostListHeading>{`검색 결과 - ${
           selectedTags && selectedTags.selected.length
             ? chunkedPosts.count
             : posts.length
-        }/${posts.length}`}</H1>
+        }/${posts.length}`}</PostListHeading>
         {posts && (
           <PostList
             tw="space-y-6"
@@ -139,6 +172,7 @@ const BlogMainPage = ({ posts, tags: tagsProp }) => {
         <Tags
           heading="Tags"
           headingAs="h1"
+          headingStyles={TagsHeadingStyles}
           listStyles={TagListStyles}
           handleTagToggle={handleTagToggle}
         >

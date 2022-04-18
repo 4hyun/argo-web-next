@@ -1,7 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import tw, { styled, css } from 'twin.macro';
-import { H1 } from '@/components/Page';
+import H1 from '@/components/Page/H1';
 
 const ContainerDefaultStyles = css`
   ${tw`flex flex-col space-y-4`}
@@ -14,9 +14,11 @@ const headerComponents = {
   h1: H1,
 };
 
-const renderHeader = ({ heading, headingAs }) => {
+const renderHeading = ({ heading, headingAs, headingStyles }) => {
   const Heading = headerComponents[headingAs];
-  return <Heading>{heading}</Heading>;
+  if (!Heading) return;
+  return <Heading
+    cssProp={headingStyles}>{heading}</Heading>;
 };
 
 const TagListDefaultStyles = css`
@@ -31,6 +33,7 @@ const Tags = ({
   containerStyles,
   heading,
   headingAs,
+  headingStyles,
   listStyles,
   handleTagToggle = () => {},
 }) => {
@@ -40,7 +43,9 @@ const Tags = ({
       styleDefault={!!containerStyles}
       onClick={handleTagToggle}
     >
-      {heading && renderHeader({ heading, headingAs })}
+      {heading &&
+        headingAs &&
+        renderHeading({ heading, headingAs, headingStyles })}
       <TagList
         css={listStyles}
         styleDefault={!!listStyles}>
