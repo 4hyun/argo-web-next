@@ -7,17 +7,17 @@ const menuData = [
     pid: 0,
     item: { mid: 2, title: 'Blog', url: '/blog', icon: null, target: null },
   },
-
-  {
-    pid: 0,
-    item: {
-      mid: 4,
-      title: 'Tyk Handbook',
-      url: '/tyk-handbook',
-      icon: 'openLinkArrow',
-      target: '_blank',
-    },
-  },
+  /* TODO: enable handbook menu after feature done */
+  // {
+  //   pid: 0,
+  //   item: {
+  //     mid: 4,
+  //     title: 'Tyk Handbook',
+  //     url: '/tyk-handbook',
+  //     icon: 'openLinkArrow',
+  //     target: '_blank',
+  //   },
+  // },
   {
     pid: 0,
     item: {
