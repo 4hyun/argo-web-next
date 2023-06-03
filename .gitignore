@@ -40,3 +40,5 @@ netlify.toml
 app.yamlbackups/
 
 backups/
+/bak_2_node_modules
+/bak_node_modules
