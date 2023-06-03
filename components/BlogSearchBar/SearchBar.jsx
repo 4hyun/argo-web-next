@@ -33,7 +33,6 @@ const SearchBar = ({
   renderSearchResult = () => {},
   useKeyBindingConfig = {},
   rootStyles,
-  // context = {},
   ...props
 }) => {
   const [result, setResult] = useState(null);
@@ -51,11 +50,11 @@ const SearchBar = ({
     [],
   );
   const handleInputChange = e => {
-    setResult(searchContext.search(e.target.value));
+    setResult(searchContext.search(`'${e.target.value}`));
     resetResultForceClosed();
   };
   useKeyBinding({ Escape: { handler: closeResultBox } });
-
+  //TODO: style SearchResult layout to 'fixed', and position align to bottom of SearchBar
   return (
     <Root
       css={rootStyles}>
@@ -68,8 +67,6 @@ const SearchBar = ({
           handleInputChange={handleInputChange}
           css={InputStyles}
         />
-        {/* TODO: style SearchResult layout to 'fixed', and position align to bottom of SearchBar */}
-
         <ButtonWrapper
           css={SearchIconWrapperStyles}>
           <SearchButton
